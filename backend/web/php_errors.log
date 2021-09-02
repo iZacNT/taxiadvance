@@ -1,0 +1,1449 @@
+[23-Aug-2021 04:51:54 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=a654728e3ee1eaf9d11ea383ca1ba7fa545caebf1288e8c30c70784449829feca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22iqkKdsJ0odCDAjFq5-iFGpUoI9lajvlc%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '49704',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629694314.737,
+    'REQUEST_TIME' => 1629694314,
+]
+[23-Aug-2021 04:58:26 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=a654728e3ee1eaf9d11ea383ca1ba7fa545caebf1288e8c30c70784449829feca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22iqkKdsJ0odCDAjFq5-iFGpUoI9lajvlc%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '49814',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629694706.629,
+    'REQUEST_TIME' => 1629694706,
+]
+[23-Aug-2021 05:00:29 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=a654728e3ee1eaf9d11ea383ca1ba7fa545caebf1288e8c30c70784449829feca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22iqkKdsJ0odCDAjFq5-iFGpUoI9lajvlc%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '49816',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629694829.167,
+    'REQUEST_TIME' => 1629694829,
+]
+[23-Aug-2021 05:01:38 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=0ee9eee2e3d32d26b8d9c6d8660fbaa5553625f659dfdfd022bebb2de05a72d4a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22vid5hsO9eSjCOmfXeyOSgeWOKGD0fi-c%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '49850',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629694898.44,
+    'REQUEST_TIME' => 1629694898,
+]
+[23-Aug-2021 05:26:03 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=9cf138865da5c26c8707dad4dbe1ac15f838074bcce1df2d67dc5d85ed1f9c8ea%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%221e8NgaRmPMzo9lhPY8ELskZrRfzhPxc7%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '50454',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629696363.99,
+    'REQUEST_TIME' => 1629696363,
+]
+[23-Aug-2021 05:26:33 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=9cf138865da5c26c8707dad4dbe1ac15f838074bcce1df2d67dc5d85ed1f9c8ea%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%221e8NgaRmPMzo9lhPY8ELskZrRfzhPxc7%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '50456',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629696393.703,
+    'REQUEST_TIME' => 1629696393,
+]
+[23-Aug-2021 05:48:15 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=e81fb0cc888c1819e7004b6f749e00432396b204b0a4180cf7dd216121c0da78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22PuJ3dSLXMtzM0RO7ecSI4k3VPcWQAtxZ%22%3B%7D; advanced=7trg9sb1hp3k81dsqfcatblsha',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51882',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629697695.831,
+    'REQUEST_TIME' => 1629697695,
+]
+[23-Aug-2021 05:48:54 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51896',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629697734.801,
+    'REQUEST_TIME' => 1629697734,
+]
+[23-Aug-2021 05:48:59 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51898',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629697739.504,
+    'REQUEST_TIME' => 1629697739,
+]
+[23-Aug-2021 05:49:51 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51906',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629697791.988,
+    'REQUEST_TIME' => 1629697791,
+]
+[23-Aug-2021 05:53:30 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51922',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698010.402,
+    'REQUEST_TIME' => 1629698010,
+]
+[23-Aug-2021 05:56:19 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51944',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698179.618,
+    'REQUEST_TIME' => 1629698179,
+]
+[23-Aug-2021 05:56:59 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51952',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698219.783,
+    'REQUEST_TIME' => 1629698219,
+]
+[23-Aug-2021 05:57:20 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51954',
+    'REDIRECT_URL' => '/admin/',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698240.423,
+    'REQUEST_TIME' => 1629698240,
+]
+[23-Aug-2021 05:57:35 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51956',
+    'REDIRECT_URL' => '/admin/site/error',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/site/error',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698255.754,
+    'REQUEST_TIME' => 1629698255,
+]
+[23-Aug-2021 05:57:44 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51958',
+    'REDIRECT_URL' => '/admin/site/error',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/site/error',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698264.228,
+    'REQUEST_TIME' => 1629698264,
+]
+[23-Aug-2021 05:58:01 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51962',
+    'REDIRECT_URL' => '/backend/web/index',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/index',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698281.219,
+    'REQUEST_TIME' => 1629698281,
+]
+[23-Aug-2021 05:58:06 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51964',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698286.431,
+    'REQUEST_TIME' => 1629698286,
+]
+[23-Aug-2021 05:58:29 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51966',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/index.php',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698309.799,
+    'REQUEST_TIME' => 1629698309,
+]
+[23-Aug-2021 05:58:55 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51968',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/index.php',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698335.91,
+    'REQUEST_TIME' => 1629698335,
+]
+[23-Aug-2021 05:58:57 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "site/index". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51970',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/index.php',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698337.012,
+    'REQUEST_TIME' => 1629698337,
+]
+[23-Aug-2021 05:59:42 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51974',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698382.516,
+    'REQUEST_TIME' => 1629698382,
+]
+[23-Aug-2021 05:59:46 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51976',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698386.469,
+    'REQUEST_TIME' => 1629698386,
+]
+[23-Aug-2021 05:59:47 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51978',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698387.937,
+    'REQUEST_TIME' => 1629698387,
+]
+[23-Aug-2021 05:59:59 UTC] An Error occurred while handling another error:
+yii\base\InvalidRouteException: Unable to resolve the request "site/error". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(109): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#2 [internal function]: yii\base\ErrorHandler->handleException()
+#3 {main}
+Previous exception:
+yii\base\InvalidRouteException: Unable to resolve the request "". in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Module.php:543
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+
+Next yii\web\NotFoundHttpException: Page not found. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Application.php:116
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#1 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#2 {main}
+$_SERVER = [
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; advanced=44cf6b7cd8ppgd6r85j6fv3263; _identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '51982',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/backend/web/',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1629698398.97,
+    'REQUEST_TIME' => 1629698398,
+]
+[01-Sep-2021 12:21:52 Asia/Yekaterinburg] An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverController.php on line 95. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#3 [internal function]: yii\base\ErrorHandler->handleException()
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverController.php on line 95. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_REFERER' => 'http://taxiadvance.loc/admin/driver',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_identity=e1122aa7c6e537923441da8351bf3cc19ab55bf8f9d5f27cd6f722709d0b01eea%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D; _csrf-frontend=8a1ab4382cc47d18bd0aefc74dee468a42ad70000f8a60f026bc52629e191d78a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%224sqxIYHRh_60BySWIxK8Q846HCW66AY2%22%3B%7D; _csrf-backend=9deb5eac94dffa5e1c0cf4926676f94af3801c10e414fec72ed09a5522634e19a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22o90iXid23m-mRfASDcGXKiNYzPhnq9t3%22%3B%7D; advanced=21ue3criu1tujol2og6gav33ff',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '34424',
+    'REDIRECT_URL' => '/admin/driver/2',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/driver/2',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1630480912.033,
+    'REQUEST_TIME' => 1630480912,
+]
