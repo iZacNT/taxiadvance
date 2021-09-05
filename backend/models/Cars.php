@@ -94,4 +94,9 @@ class Cars extends \yii\db\ActiveRecord
     public function getAllOwner(){
         return ArrayHelper::map(self::find()->distinct("name_owner")->all(), 'name_owner', 'name_owner');
     }
+
+    public function getAllMarks()
+    {
+        return self::find()->select('mark')->distinct()->asArray()->all();
+    }
 }

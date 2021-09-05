@@ -1447,3 +1447,4 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1630480912.033,
     'REQUEST_TIME' => 1630480912,
 ]
+[02-Sep-2021 17:27:36 Asia/Yekaterinburg] PHP Fatal error:  Cannot redeclare common\service\dayPlans\DayPlansService::createWorkingDay() in /var/www/taxiadvance.loc/public_html/common/service/dayPlans/DayPlansService.php on line 74
