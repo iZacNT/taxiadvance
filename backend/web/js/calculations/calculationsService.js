@@ -11,10 +11,20 @@ $(".calculations-index").on("click", '.markButton', function(){
 
         if(resultNotNull(resultAjax)){
             console.log(resultAjax);
+            $("#updateTarifs").one("click", function(){
+                updateTarifs(filial, mark);
+            });
+            $("#createTarifs").prop('style', "display:none");
+            $("#updateTarifs").prop('style', "display:block");
             clearDataFields();
             setDataToInput(resultAjax)
         }else{
             console.log("null");
+            $("#createTarifs").one("click", function(){
+                createTarifs(filial, mark);
+            });
+            $("#createTarifs").prop('style', "display:block");
+            $("#updateTarifs").prop('style', "display:none");
             clearDataFields();
         }
 
@@ -24,10 +34,6 @@ $(".calculations-index").on("click", '.markButton', function(){
 function clearDataFields(){
     $("input.dataItemCalculate").val("");
 }
-
-$("#createTarifs").on("click", function(){
-    createTarifs(1, "Поло");
-});
 
 function getDataTarifs(filial, carMark){
     let dayLessPlanDayGas = {
@@ -139,6 +145,16 @@ function createTarifs(filial, carMark)
     let data = getDataTarifs(filial, carMark);
     let result;
     sendAjax('/admin/calculation/create-tarifs-for-mark', data).done(function(data){
+        result = data
+    });
+    console.log(result);
+}
+
+function updateTarifs(filial, carMark)
+{
+    let data = getDataTarifs(filial, carMark);
+    let result;
+    sendAjax('/admin/calculation/update-tarifs-for-mark', data).done(function(data){
         result = data
     });
     console.log(result);

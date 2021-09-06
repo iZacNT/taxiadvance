@@ -262,4 +262,148 @@ class CalculationService
                 $calculation->plan = $this->constants::BIGGER_PLAN;
                 $calculation->save();
             }
+
+        public function updateDayLessPlan($dayLessPlan)
+        {
+            $this->updateDayLessPlanGas($dayLessPlan['dayLessPlanDayGas']);
+            $this->updateDayLessPlanGasoline($dayLessPlan['dayLessPlanDayGasoline']);
+        }
+
+            public function updateDayLessPlanGas($dayLessPlanGas)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GAS])
+                    ->andWhere(['period' => $this->constants::PERIOD_DAY])
+                    ->andWhere(['plan' => $this->constants::LESS_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $dayLessPlanGas['park'];
+                $calculation->calculation_driver = $dayLessPlanGas['driver'];
+                $calculation->save();
+            }
+            public function updateDayLessPlanGasoline($dayLessPlanGasoline)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GASOLINE])
+                    ->andWhere(['period' => $this->constants::PERIOD_DAY])
+                    ->andWhere(['plan' => $this->constants::LESS_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $dayLessPlanGasoline['park'];
+                $calculation->calculation_driver = $dayLessPlanGasoline['driver'];
+
+                $calculation->save();
+            }
+
+        public function updateNightLessPlan($nightLessPlan)
+        {
+            $this->updateNightLessPlanGas($nightLessPlan['nightLessPlanGas']);
+            $this->updateNightLessPlanGasoline($nightLessPlan['nightLessPlanGasoline']);
+        }
+
+            public function updateNightLessPlanGas($nightLessPlanGas)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GAS])
+                    ->andWhere(['period' => $this->constants::PERIOD_NIGHT])
+                    ->andWhere(['plan' => $this->constants::LESS_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $nightLessPlanGas['park'];
+                $calculation->calculation_driver = $nightLessPlanGas['driver'];
+                $calculation->save();
+            }
+            public function updateNightLessPlanGasoline($nightLessPlanGasoline)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GASOLINE])
+                    ->andWhere(['period' => $this->constants::PERIOD_NIGHT])
+                    ->andWhere(['plan' => $this->constants::LESS_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $nightLessPlanGasoline['park'];
+                $calculation->calculation_driver = $nightLessPlanGasoline['driver'];
+
+                $calculation->save();
+            }
+
+        public function updateDayBiggerPlan($dayBiggerPlan)
+        {
+            $this->updateDayBiggerPlanGas($dayBiggerPlan['dayBiggerPlanGas']);
+            $this->updateDayBiggerPlanGasoline($dayBiggerPlan['dayBiggerPlanGasoline']);
+        }
+
+            public function updateDayBiggerPlanGas($dayBiggerPlanGas)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GAS])
+                    ->andWhere(['period' => $this->constants::PERIOD_DAY])
+                    ->andWhere(['plan' => $this->constants::BIGGER_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $dayBiggerPlanGas['park'];
+                $calculation->calculation_driver = $dayBiggerPlanGas['driver'];
+                $calculation->save();
+            }
+            public function updateDayBiggerPlanGasoline($dayBiggerPlanGasoline)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GASOLINE])
+                    ->andWhere(['period' => $this->constants::PERIOD_DAY])
+                    ->andWhere(['plan' => $this->constants::BIGGER_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $dayBiggerPlanGasoline['park'];
+                $calculation->calculation_driver = $dayBiggerPlanGasoline['driver'];
+
+                $calculation->save();
+            }
+
+        public function updateNightBiggerPlan($nightBiggerPlan)
+        {
+            $this->updateNightBiggerPlanGas($nightBiggerPlan['nightBiggerPlanGas']);
+            $this->updateNightBiggerPlanGasoline($nightBiggerPlan['nightBiggerPlanGasoline']);
+        }
+
+            public function updateNightBiggerPlanGas($nightBiggerPlanGas)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GAS])
+                    ->andWhere(['period' => $this->constants::PERIOD_NIGHT])
+                    ->andWhere(['plan' => $this->constants::BIGGER_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $nightBiggerPlanGas['park'];
+                $calculation->calculation_driver = $nightBiggerPlanGas['driver'];
+                $calculation->save();
+            }
+            public function updateNightBiggerPlanGasoline($nightBiggerPlanGasoline)
+            {
+                $calculation = Calculation::find()
+                    ->where(['filial' => $this->filial])
+                    ->andWhere(['car_mark' => $this->carMark])
+                    ->andWhere(['fuel' => $this->constants::FUEL_GASOLINE])
+                    ->andWhere(['period' => $this->constants::PERIOD_NIGHT])
+                    ->andWhere(['plan' => $this->constants::BIGGER_PLAN])
+                    ->one();
+
+                $calculation->calculation_park = $nightBiggerPlanGasoline['park'];
+                $calculation->calculation_driver = $nightBiggerPlanGasoline['driver'];
+
+                $calculation->save();
+            }
 }

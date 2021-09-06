@@ -106,7 +106,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </tbody>
             </table>
 
-            <?php echo Html::button("Сохранить", ['class' => 'btn btn-success', 'id' => 'createTarifs'])?>
+            <?php echo Html::button("Сохранить", ['class' => 'btn btn-success', 'id' => 'createTarifs', 'style' => 'display: none'])?>
+            <?php echo Html::button("Изменить", ['class' => 'btn btn-success', 'id' => 'updateTarifs', 'style' => 'display: none'])?>
         </div>
     </div>
 
