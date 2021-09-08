@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use app\models\DriverTabel;
 use backend\models\Filials;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -65,7 +66,7 @@ class Cars extends \yii\db\ActiveRecord
             'name_owner' => 'Владелец',
             'fuel' => 'Топливо',
             'filial' => 'Филиал',
-            'fullNameMark' => 'Авто',
+            'fullNameMark' => 'Автомобиль',
             'filialData' => 'Филиал',
         ];
     }
@@ -98,5 +99,10 @@ class Cars extends \yii\db\ActiveRecord
     public function getAllMarks()
     {
         return self::find()->select('mark')->distinct()->asArray()->all();
+    }
+
+    public function getWorkDriverAtDay($car_id, $dateWorkDay)
+    {
+        return DriverTabel::find()->where(['car_id' => $car_id])->andWhere(['work_date' => $dateWorkDay])->one();
     }
 }

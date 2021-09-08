@@ -2,6 +2,7 @@
 
 namespace common\service\formatter;
 
+use Yii;
 use yii\i18n\Formatter;
 
 class expandedFormatter extends Formatter
@@ -50,5 +51,15 @@ class expandedFormatter extends Formatter
         if ($status == 3) {$result = '<p class="text-warning">'.$data->statusDriver[$status].'</p>';};
 
         return $result;
+    }
+
+    public function asBeginDay(int $date): int
+    {
+        return Yii::$app->formatter->asTimestamp(date("Y-m-d 00:00:00", $date));
+    }
+
+    public function asEndDay(int $date): int
+    {
+        return Yii::$app->formatter->asTimestamp(date("Y-m-d 23:59:59", $date));
     }
 }

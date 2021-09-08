@@ -11,7 +11,8 @@ $(".calculations-index").on("click", '.markButton', function(){
 
         if(resultNotNull(resultAjax)){
             console.log(resultAjax);
-            $("#updateTarifs").one("click", function(){
+            $("#updateTarifs").off("click.myClick");
+            $("#updateTarifs").on("click.myClick", function(){
                 updateTarifs(filial, mark);
             });
             $("#createTarifs").prop('style', "display:none");
@@ -20,7 +21,8 @@ $(".calculations-index").on("click", '.markButton', function(){
             setDataToInput(resultAjax)
         }else{
             console.log("null");
-            $("#createTarifs").one("click", function(){
+            $("#createTarifs").off("click.myClick");
+            $("#createTarifs").on("click.myClick", function(){
                 createTarifs(filial, mark);
             });
             $("#createTarifs").prop('style', "display:block");
