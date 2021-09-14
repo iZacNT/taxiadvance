@@ -66,6 +66,11 @@ class DriverTabel extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getCarInfo()
+    {
+        return $this->hasOne(Cars::className(),['id' => 'car_id']);
+    }
+
     public function getCarMark()
     {
         return (Cars::find()->where(['id' => $this->car_id])->one())->getFullNameMark();
@@ -97,7 +102,18 @@ class DriverTabel extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
 
+    public function getDriverShifts(int $driverId)
+    {
+        $startShift = Yii::$app->formatter->asBeginDay(time())-1;
+
+        return self::find()
+            ->where(['driver_id_day' => $driverId])
+            ->orWhere(['driver_id_night' => $driverId])
+            ->andWhere(['<','work_date', $startShift])
+            ->orderBy(['work_date' => SORT_DESC])
+            ->all();
     }
 
 }

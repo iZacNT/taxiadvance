@@ -113,4 +113,14 @@ class DayPlans extends \yii\db\ActiveRecord
     {
         return ($this->isWorking() && $this->isNight());
     }
+
+    public function getPlan(int $filial,int $period, int $typeDay,int $hours): int
+    {
+        $plan = self::find()
+            ->where(['filial' => $filial])
+            ->andWhere(['period' => $period])
+            ->andWhere(['name' => $typeDay])
+            ->one();
+        return ($hours == 12)? $plan->hours_12 : $plan->hours_16;
+    }
 }

@@ -17,7 +17,7 @@ class PrepareOrdersService
     public function prepareOrders(): ArrayDataProvider
     {
         $provider = new ArrayDataProvider([
-            'allModels' => $this->orders,
+            'allModels' => (!empty($this->orders)) ? $this->orders : [],
             'pagination' => [
                 'pageSize' => 250,
             ],

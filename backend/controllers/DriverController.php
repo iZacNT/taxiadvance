@@ -2,10 +2,17 @@
 
 namespace backend\controllers;
 
+use app\models\Calculation;
+use app\models\DayPlans;
+use app\models\DriverTabel;
+use backend\models\Cars;
 use backend\models\Driver;
 use backend\models\Settings;
 use backend\models\DriverSearch;
 use common\models\User;
+use common\service\constants\Constants;
+use common\service\driver\CalculationShiftParams;
+use common\service\driver\DriverBillingService;
 use common\service\driver\DriverDebt;
 use common\service\driver\DriverDeposit;
 use common\service\driver\DriverParams;
@@ -13,7 +20,6 @@ use common\service\driver\PrepareDriverService;
 use common\service\driver\PrepareOrdersService;
 use common\service\driver\PrepareTransactionService;
 use common\service\user\UserService;
-use common\service\yandex\params\ParamsSearchAllOrdersDriver;
 use common\service\yandex\params\ParamsSearchDriver;
 use common\service\yandex\YandexApi;
 use common\service\yandex\YandexService;
@@ -81,13 +87,14 @@ class DriverController extends Controller
         $debtDataProvider = $debtDriver->getAllDebt();
         $summDebt = $debtDriver->getSummDebt();
 
-        $depo = Yii::$app->formatter->asCurrency((new PrepareDriverService())->getDepoSumm(
+        $prepareDriverService = new PrepareDriverService();
+        $depo = ($prepareDriverService)->getDepoSumm(
             $summDeposit,
             $summDebt,
             0,
             5000,
             300,
-            100));
+            100);
 
         $settings = Settings::find()->one();
 
@@ -98,26 +105,50 @@ class DriverController extends Controller
             $servicePrepare = new PrepareOrdersService($allDriverOrders['orders']);
             $preparedOrders = $servicePrepare->prepareOrders();
             $summOrders = $servicePrepare->summOrders();
+        }else{
+            Yii::$app->session->setFlash("error", "Не удалось получить заказы Водителя. Обновите страницу!");
         }
 
-        $balanceDriverYandex = Yii::$app->formatter->asCurrency($serviceYandex->getBalanceFromYandex());
+        $balanceDriverYandex = round($serviceYandex->getBalanceFromYandex());
         $allTransactions = $serviceYandex->getDriverTransaction();
+
         if (!empty($allTransactions)){
             $servicePrepareTransactions = new PrepareTransactionService($allTransactions['transactions']);
-            $bonus = Yii::$app->formatter->asCurrency($servicePrepareTransactions->getBonusDriver());
+            $bonus = $servicePrepareTransactions->getBonusDriver();
+        }else{
+            $bonus = 0;
+            Yii::$app->session->setFlash("error", "Не удалось получить транзакции Водителя. Обновите страницу!");
         }
+
+        $driverTabel = (new DriverTabel())->getDriverShifts($driver->id);
+        $period = $prepareDriverService->getPeriodShift($driver->id, $driverTabel);
+        $carFuel = $prepareDriverService->getCarFuel($driverTabel);
+        $carFuelLabel = Constants::getFuel()[$carFuel];
+        $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $driverTabel);
+        $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
+        $car = $driverTabel[0]->carInfo->fullNameMark;
+        $mark = $driverTabel[0]->carInfo->mark;
+        $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , 2, $hours);
+        $carsMarks = (new Cars())->getAllMarks();
+        $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $mark);
 
         return $this->render('view', [
             'model' => $driver,
             'depositDataProvider' => $depositDataProvider,
-            'summDeposit' => $summDeposit,
+            'summDeposit' => $summDeposit, // Сумма депозитов Водителя
             'debtDataProvider' => $debtDataProvider,
-            'summDebt' => $summDebt,
-            'allOreders' => $preparedOrders,
-            'summOrders' => $summOrders,
-            'balanceYandex' => $balanceDriverYandex,
-            'bonus' => $bonus,
-            'depo' => $depo
+            'summDebt' => $summDebt, // Сумма Долгов Водителя
+            'allOreders' => $preparedOrders, //Все Транзакции Водителя с момента закрытия смены
+            'summOrders' => $summOrders, //Сумма заказов Водителя
+            'balanceYandex' => $balanceDriverYandex, // Баланс в Яндекс
+            'bonus' => $bonus, //Бонусы в Яндекс
+            'depo' => $depo, //Депо
+            'plan' => $dayPlan, // План
+            'carFuel' => $carFuelLabel, //Топливо используемого автомобиля
+            'car' => $car, //Марка модель Авто
+            'card' => $numberPhoneCard['card'], //Брал ли карту
+            'phone' => $numberPhoneCard['phone'], // Брал ли телефон
+            'generateTarifTable' => $generateTarifTable
         ]);
     }
 
@@ -170,7 +201,7 @@ class DriverController extends Controller
         }
 
         (!empty($model->shift_closing)) ? $shiftClosing = $model->shift_closing : $shiftClosing = time();
-        $model->stringShiftClosing = Yii::$app->formatter->asDatetime($shiftClosing, "yyyy-MM-dd HH:mm");
+        $model->stringShiftClosing = date("Y-m-d H:i", $shiftClosing);
 
         return $this->render('update', [
             'model' => $model,
@@ -231,6 +262,27 @@ class DriverController extends Controller
             $params
         );
         return json_encode($req->request());
+    }
+
+    public function actionCalculateShift()
+    {
+
+        $requestPost = Yii::$app->request->post();
+
+        $plan = (new DayPlans())->getPlan($requestPost['filial'], $requestPost['period'] , $requestPost['typeDay'], $requestPost['hours']);
+        $calculationShiftParams = new CalculationShiftParams($requestPost, $plan);
+        $billing = $calculationShiftParams->getGeneralAmount();
+
+        return json_encode($billing);
+    }
+
+    public function actionSaveBilling()
+    {
+        $requestPost = Yii::$app->request->post();
+
+        $billingService = new DriverBillingService($requestPost);
+
+        return json_encode($requestPost);
     }
 
 }

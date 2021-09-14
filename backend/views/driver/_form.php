@@ -19,11 +19,14 @@ use yii\widgets\ActiveForm;
     <div class="col-md-6">
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'status')->dropDownList($model->statusDriver, ['prompt' => 'Выберите статус']) ?>
             </div>
         </div>
         <div class="row">

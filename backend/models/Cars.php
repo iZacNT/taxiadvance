@@ -98,7 +98,7 @@ class Cars extends \yii\db\ActiveRecord
 
     public function getAllMarks()
     {
-        return self::find()->select('mark')->distinct()->asArray()->all();
+        return ArrayHelper::map(self::find()->select('mark')->distinct()->all(),'mark', 'mark' );
     }
 
     public function getWorkDriverAtDay($car_id, $dateWorkDay)

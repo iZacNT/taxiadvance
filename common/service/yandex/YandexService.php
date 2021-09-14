@@ -36,6 +36,7 @@ class YandexService
             $this->settings->yandex_api,
             $params
         ))->request();
+
     }
 
     public function getBalanceFromYandex(): float

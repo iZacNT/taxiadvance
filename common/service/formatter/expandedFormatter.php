@@ -62,4 +62,5 @@ class expandedFormatter extends Formatter
     {
         return Yii::$app->formatter->asTimestamp(date("Y-m-d 23:59:59", $date));
     }
+
 }

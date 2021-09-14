@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <a class="nav-link" id="custom-tabs-one-orders-tab" data-toggle="pill" href="#custom-tabs-one-orders" role="tab" aria-controls="custom-tabs-one-orders" aria-selected="false">Заказы: <?= \Yii::$app->formatter->asCurrency($summOrders);?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-one-calculations-tab" data-toggle="pill" href="#custom-tabs-one-calculations" role="tab" aria-controls="custom-tabs-one-calculations" aria-selected="false">Расчеты</a>
+                        <a class="nav-link" id="custom-tabs-one-calculations-tab" data-toggle="pill" href="#custom-tabs-one-calculations" role="tab" aria-controls="custom-tabs-one-calculations" aria-selected="false">РАСЧЕТ ТЕКУЩЕЙ СМЕНЫ</a>
                     </li>
                 </ul>
             </div>
@@ -221,12 +221,77 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php Pjax::begin([
                             'id' => "calculations"
                         ]); ?>
-                        Расчеты
-                        <pre>
-                        <?php  var_dump($balanceYandex);?>
-                        <?php  var_dump($bonus);?>
-                        <?php  var_dump($depo);?>
-                        </pre>
+                        <div class="row">
+                        <div class="col-md-6">
+                            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Наименование</th>
+                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Сумма</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Заказы с начала смены:</td>
+                                    <td><?= \Yii::$app->formatter->asCurrency($summOrders);?></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">План: <span id="planSumm"><?= \Yii::$app->formatter->asCurrency($plan);?></span></td>
+                                    <td><?=
+                                            Html::textInput('fromSummOrders', $summOrders, ['class' => 'form-control', 'id' => 'fromSummOrders'] )
+                                        ?></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Баланс на Яндекс:</td>
+                                    <td><?= $balanceYandex;?></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Бонусы на Яндекс:</td>
+                                    <td><?= $bonus;?></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Депо:</td>
+                                    <td><?= $depo;?></td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>
+                                    <td>
+                                       <?= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
+                                    </td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Мойка:</td>
+                                    <td>
+                                        <?= Html::textInput('carWash', 0, ['class' => 'form-control', 'id' => 'carWash'] ); ?>
+                                    </td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0"><strong><?= $carFuel;?>:</strong> (<?= $car;?>)<br>
+                                        № Карты: <?= $card?></td>
+                                    <td>
+                                        <?= Html::textInput('carFuel', 0, ['class' => 'form-control', 'id' => 'carFuel'] ); ?>
+                                    </td>
+                                </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Телефон: <?= $phone;?></td>
+                                    <td>
+                                        <?= Html::textInput('carPhone', 0, ['class' => 'form-control', 'id' => 'carPhone'] ); ?>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                                    <?= $generateTarifTable;?>
+                            <div class="row resultData">
+                                <div class="col-md-8" id="resultAjax">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" id="saveDataButton" class="btn btn-success btn-lg" style="height: 80px; display: none;">Сохранить расчет</button>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
                         <?php Pjax::end(); ?>
                     </div>
                 </div>
@@ -236,3 +301,16 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 </div>
+
+<?php
+$jsRaschet = <<< JS
+let filial = $model->filial;
+let balanceYandex = $balanceYandex;
+let bonusYandex = $bonus;
+let depo = $depo;
+let driverId = $model->id;
+JS;
+
+$this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
+$this->registerJsFile('@web/js/driver/calculateShift.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+?>​

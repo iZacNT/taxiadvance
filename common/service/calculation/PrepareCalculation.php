@@ -11,8 +11,8 @@ class PrepareCalculation
     public function prepareCarMarksList(array $marks)
     {
         $result = '';
-        foreach ($marks as $mark){
-            $result .= Html::button($mark['mark'],['class' => 'btn btn-info markButton', 'style' => 'font-size: 20px', 'data-mark' => $mark['mark']]);
+        foreach ($marks as $key => $value){
+            $result .= Html::button($key,['class' => 'btn btn-info markButton', 'style' => 'font-size: 20px', 'data-mark' => $value]);
         }
 
         return $result;
