@@ -78,7 +78,7 @@ use yii\widgets\ActiveForm;
                     'clientOptions' => [
                         'changeMonth' => true,
                         'changeYear' => true,
-                        'yearRange' => '1950:2050',
+                        'yearRange' => '2015:2050',
                     ]
                 ]) ?>
 

@@ -4,6 +4,11 @@ $(".resultData").on("click", "#saveDataButton", function (){
     sendAjax( '/admin/driver/save-billing',resultObject).done(function (data){
         resultAjax = data;
     })
+    if(resultAjax === true){
+        toastr.success('Смена сохранена!');
+    }else{
+        toastr.error('Смена уже сохранена, у Вас нет прав для ее изменения');
+    }
     console.log(resultAjax);
 });
 
@@ -30,11 +35,12 @@ function getData()
 function getResultAjaxData()
 {
     return {
-        summPark: $('#resultAjax').data('data-summ-park'),
+        summPark: $('#resultAjax').attr('data-summ-park'),
         summDriver: $('#resultAjax').attr('data-summ-driver'),
         percentPark: $('#resultAjax').attr('data-percent-park'),
         percentDriver: $('#resultAjax').attr('data-percent-driver'),
         plan: $('#resultAjax').attr('data-plan'),
+        compensation: $('#resultAjax').attr('data-compensation'),
         billing: $('#resultAjax').attr('data-billing'),
         driverId: driverId
     }
@@ -79,6 +85,7 @@ $("#calculateShift").on("click",function (){
     $('#resultAjax').attr('data-percent-driver', resultAjax.percentDriver);
     $('#resultAjax').attr('data-plan', resultAjax.plan);
     $('#resultAjax').attr('data-billing', resultAjax.billing);
+    $('#resultAjax').attr('data-compensation', resultAjax.compensation);
 
     console.log("Сумма парка: "+resultAjax.summPark);
     console.log("Сумма Водителя: "+resultAjax.summDriver);

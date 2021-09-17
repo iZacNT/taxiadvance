@@ -47,6 +47,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-one-calculations-tab" data-toggle="pill" href="#custom-tabs-one-calculations" role="tab" aria-controls="custom-tabs-one-calculations" aria-selected="false">РАСЧЕТ ТЕКУЩЕЙ СМЕНЫ</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-all-shifts-tab" data-toggle="pill" href="#custom-tabs-one-all-shifts" role="tab" aria-controls="custom-tabs-one-all-shifts" aria-selected="false">Все смены</a>
+                    </li>
                 </ul>
             </div>
             <div class="card-body">
@@ -293,6 +296,46 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         </div>
                         <?php Pjax::end(); ?>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-all-shifts" role="tabpanel" aria-labelledby="custom-tabs-one-all-shifts-tab">
+
+                        <?php Pjax::begin([
+                            'id' => "allShifts"
+                        ]); ?>
+                        <?php
+                        echo GridView::widget([
+                            'dataProvider' => $allShiftDataProvider,
+                            'columns' => [
+                                'date_billing:date',
+                                [
+                                    'attribute' => 'type_day',
+                                    'format' => 'raw',
+                                    'value' => function($data){
+                                        return \common\service\constants\Constants::getDayProperty()[$data->type_day];
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'period',
+                                    'format' => 'raw',
+                                    'value' => function($data){
+                                        return \common\service\constants\Constants::getPeriod()[$data->period];
+                                    }
+                                ],
+                                'balance_yandex:currency',
+                                'bonus_yandex:currency',
+                                'input_amount:currency:Общаяя',
+                                'depo',
+                                'debt_from_shift:currency',
+                                'car_wash:currency',
+                                'car_fuel_summ:currency',
+                                'car_phone_summ:currency',
+                                'summ_driver:currency:Водителю',
+                                'plan:currency'
+                            ],
+                        ]);
+                        ?>
+                        <?php Pjax::end(); ?>
+
                     </div>
                 </div>
             </div>

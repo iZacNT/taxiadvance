@@ -1501,3 +1501,5 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1631519254.764,
     'REQUEST_TIME' => 1631519254,
 ]
+[16-Sep-2021 13:56:51 Asia/Yekaterinburg] PHP Fatal error:  Cannot redeclare common\service\compensation\CompensationService::save() in /var/www/taxiadvance.loc/public_html/common/service/compensation/CompensationService.php on line 28
+[16-Sep-2021 13:57:28 Asia/Yekaterinburg] PHP Fatal error:  Cannot redeclare common\service\compensation\CompensationService::save() in /var/www/taxiadvance.loc/public_html/common/service/compensation/CompensationService.php on line 28

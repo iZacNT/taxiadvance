@@ -17,31 +17,32 @@
             </div>
         </div>
 
-        <!-- SidebarSearch Form -->
-        <!-- href be escaped -->
-        <!-- <div class="form-inline">
-            <div class="input-group" data-widget="sidebar-search">
-                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-sidebar">
-                        <i class="fas fa-search fa-fw"></i>
-                    </button>
-                </div>
-            </div>
-        </div> -->
-
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <?php
+
+            $items = [
+                ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => '/admin/site/index'],
+                ['label' => 'Автомобили', 'icon' => 'tachometer-alt', 'url' => '/admin/cars/index'],
+                ['label' => 'Водители', 'icon' => 'far fa-user', 'url' => '/admin/driver/index'],
+                ['label' => 'Табель', 'icon' => 'far fa-user', 'url' => '/admin/driver-tabel/index'],
+                ['label' => 'Касса', 'icon' => 'far fa-user', 'url' => '/admin/cash-register/index'],
+
+            ];
+            if (\backend\models\User::isSuperUser()) {
+                array_push($items, [
+                    'label' => 'Настройки',
+                    'icon' => 'tachometer-alt',
+                    'items' => [
+                        ['label' => 'Общие', 'icon' => 'far fa-user', 'url' => '/admin/settings/update'],
+                        ['label' => 'Планы', 'icon' => 'far fa-user', 'url' => '/admin/day-plans/index'],
+                        ['label' => 'Проценты', 'icon' => 'far fa-user', 'url' => '/admin/calculation/index'],
+                        ['label' => 'Компенсации', 'icon' => 'far fa-user', 'url' => '/admin/compensation/index'],
+                    ]
+                ]);
+            }
             echo \hail812\adminlte\widgets\Menu::widget([
-                'items' => [
-                    ['label' => 'Dashboard', 'icon' => 'tachometer-alt', 'url' => '/admin/site/index'],
-                    ['label' => 'Автомобили', 'icon' => 'tachometer-alt', 'url' => '/admin/cars/index'],
-                    ['label' => 'Водители', 'icon' => 'far fa-user', 'url' => '/admin/driver/index'],
-                    ['label' => 'Табель', 'icon' => 'far fa-user', 'url' => '/admin/driver-tabel/index'],
-                    ['label' => 'Планы', 'icon' => 'far fa-user', 'url' => '/admin/day-plans/index'],
-                    ['label' => 'Проценты', 'icon' => 'far fa-user', 'url' => '/admin/calculation/index'],
-                ],
+                'items' => $items,
             ]);
             ?>
         </nav>

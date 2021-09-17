@@ -2,7 +2,6 @@
 
 namespace backend\controllers;
 
-use app\models\Calculation;
 use app\models\DayPlans;
 use app\models\DriverTabel;
 use backend\models\Cars;
@@ -12,6 +11,7 @@ use backend\models\DriverSearch;
 use common\models\User;
 use common\service\constants\Constants;
 use common\service\driver\CalculationShiftParams;
+use common\service\driver\DriverAllShiftsService;
 use common\service\driver\DriverBillingService;
 use common\service\driver\DriverDebt;
 use common\service\driver\DriverDeposit;
@@ -78,6 +78,7 @@ class DriverController extends Controller
     public function actionView(int $id): string
     {
         $driver = $this->findModel($id);
+        $settings = Settings::find()->one();
 
         $driverDeposit = new DriverDeposit($id);
         $depositDataProvider = $driverDeposit->getAllDeposits();
@@ -87,16 +88,17 @@ class DriverController extends Controller
         $debtDataProvider = $debtDriver->getAllDebt();
         $summDebt = $debtDriver->getSummDebt();
 
+        $allShiftsDriver = new DriverAllShiftsService($id);
+        $allShiftDataProvider = $allShiftsDriver->getAllShifts();
+
         $prepareDriverService = new PrepareDriverService();
         $depo = ($prepareDriverService)->getDepoSumm(
             $summDeposit,
             $summDebt,
-            0,
-            5000,
-            300,
-            100);
-
-        $settings = Settings::find()->one();
+            $settings->depo_min,
+            $settings->depo_max,
+            $settings->les_summ,
+            $settings->more_summ);
 
         $serviceYandex = new YandexService($driver, $settings);
         $allDriverOrders = $serviceYandex->getAllOrders();
@@ -121,22 +123,25 @@ class DriverController extends Controller
         }
 
         $driverTabel = (new DriverTabel())->getDriverShifts($driver->id);
+
         $period = $prepareDriverService->getPeriodShift($driver->id, $driverTabel);
         $carFuel = $prepareDriverService->getCarFuel($driverTabel);
         $carFuelLabel = Constants::getFuel()[$carFuel];
         $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $driverTabel);
         $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
-        $car = $driverTabel[0]->carInfo->fullNameMark;
-        $mark = $driverTabel[0]->carInfo->mark;
-        $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , 2, $hours);
+        $carInfo = $prepareDriverService->getCarInfo($driverTabel);
+        $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , Constants::WORKING_DAY, $hours);
         $carsMarks = (new Cars())->getAllMarks();
-        $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $mark);
+        $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $carInfo['mark']);
+
+
 
         return $this->render('view', [
             'model' => $driver,
             'depositDataProvider' => $depositDataProvider,
             'summDeposit' => $summDeposit, // Сумма депозитов Водителя
             'debtDataProvider' => $debtDataProvider,
+            'allShiftDataProvider' => $allShiftDataProvider,
             'summDebt' => $summDebt, // Сумма Долгов Водителя
             'allOreders' => $preparedOrders, //Все Транзакции Водителя с момента закрытия смены
             'summOrders' => $summOrders, //Сумма заказов Водителя
@@ -145,7 +150,7 @@ class DriverController extends Controller
             'depo' => $depo, //Депо
             'plan' => $dayPlan, // План
             'carFuel' => $carFuelLabel, //Топливо используемого автомобиля
-            'car' => $car, //Марка модель Авто
+            'car' => $carInfo['car'], //Марка модель Авто
             'card' => $numberPhoneCard['card'], //Брал ли карту
             'phone' => $numberPhoneCard['phone'], // Брал ли телефон
             'generateTarifTable' => $generateTarifTable
@@ -278,11 +283,8 @@ class DriverController extends Controller
 
     public function actionSaveBilling()
     {
-        $requestPost = Yii::$app->request->post();
-
-        $billingService = new DriverBillingService($requestPost);
-
-        return json_encode($requestPost);
+        $billingService = new DriverBillingService(Yii::$app->request->post());
+        return json_encode($billingService->saveAmount());
     }
 
 }

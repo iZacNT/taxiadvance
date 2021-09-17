@@ -70,4 +70,9 @@ class User extends \yii\db\ActiveRecord
             'role' => Yii::t('app', 'Роль'),
         ];
     }
+
+    public static function isSuperUser()
+    {
+        return self::SUPER_ADMIN == Yii::$app->user->identity->role;
+    }
 }

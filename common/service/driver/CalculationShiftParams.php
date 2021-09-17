@@ -3,6 +3,7 @@
 namespace common\service\driver;
 
 use app\models\Calculation;
+use app\models\Compensation;
 use common\service\constants\Constants;
 use yii\db\ActiveQuery;
 
@@ -96,15 +97,29 @@ class CalculationShiftParams {
         $summDriver = ($this->fullAmountSumm/100)*$this->percentDriver;
 
         $billingAdditionally = $summPark+$this->getAdditionally();
-
+        $compensation = $this->getCompensations();
         return [
-            'billing' => round($billingAdditionally - $this->balanceYandex),
+            'billing' => round($billingAdditionally - $compensation - $this->balanceYandex),
             'additionaly' => round($this->getAdditionally()),
             'summPark' => round($summPark),
             'summDriver' => round($summDriver),
             'percentPark' => $this->percentPark,
             'percentDriver' => $this->percentDriver,
-            'plan' => $this->plan
+            'plan' => $this->plan,
+            'compensation' => $compensation
         ];
+    }
+
+    public function getCompensations(): int
+    {
+        $compensation = Compensation::find()->where(['<=','summ', $this->inputAmount])->orderBy(['summ' => SORT_DESC])->all();
+        if (!empty($compensation) && $this->filial == 2){
+            if ($this->period == Constants::PERIOD_NIGHT) {
+                return $compensation[0]->night;
+            }
+            return $compensation[0]->day;
+        }
+
+        return 0;
     }
 }

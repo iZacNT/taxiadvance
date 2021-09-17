@@ -10,6 +10,10 @@ use Yii;
  * @property int $id #
  * @property string|null $yandex_api Yandex API
  * @property string|null $yandex_client_id Client ID
+ * @property int|null $depo_min Min
+ * @property int|null $depo_max Max
+ * @property int|null $les_summ Less
+ * @property int|null $more_summ More
  */
 class Settings extends \yii\db\ActiveRecord
 {
@@ -27,6 +31,7 @@ class Settings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['depo_min', 'depo_max', 'les_summ', 'more_summ'], 'integer'],
             [['yandex_api', 'yandex_client_id'], 'string', 'max' => 255],
         ];
     }
@@ -37,9 +42,13 @@ class Settings extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => '#',
-            'yandex_api' => 'Yandex API',
-            'yandex_client_id' => 'Client ID',
+            'id' => 'ID',
+            'yandex_api' => 'Yandex Api',
+            'yandex_client_id' => 'Yandex Client ID',
+            'depo_min' => 'Depo Min',
+            'depo_max' => 'Depo Max',
+            'les_summ' => 'Les Summ',
+            'more_summ' => 'More Summ',
         ];
     }
 }

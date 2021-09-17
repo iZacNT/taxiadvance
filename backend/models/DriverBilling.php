@@ -28,7 +28,8 @@ use backend\models\Driver;
  * @property int|null $percent_driver Percent Driver
  * @property int|null $summ_park Summ Park
  * @property int|null $summ_driver Summ Driver
- * @property int|null $plan
+ * @property int|null $plan Plan
+ * @property int|null $compensations Compensations
  */
 class DriverBilling extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,7 @@ class DriverBilling extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['driver_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan'], 'integer'],
+            [['driver_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations'], 'integer'],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],
         ];
@@ -80,6 +81,7 @@ class DriverBilling extends \yii\db\ActiveRecord
             'summ_park' => 'Сумма парка',
             'summ_driver' => 'Сумма водителя',
             'plan' => 'План',
+            'compensations' => 'Компенсация'
         ];
     }
 

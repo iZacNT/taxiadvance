@@ -4,6 +4,7 @@
 namespace common\service\driver;
 
 
+use backend\models\Cars;
 use common\service\constants\Constants;
 use yii\helpers\Html;
 
@@ -32,19 +33,35 @@ class PrepareDriverService
 
     public function getPeriodShift(int $driverId,array $lastShift):int
     {
-        if($driverId == $lastShift[0]['driver_id_day']) {
-            return Constants::PERIOD_DAY;
-        }elseif ($driverId == $lastShift[0]['driver_id_night']){
-            return Constants::PERIOD_NIGHT;
+        if(!empty($lastShift)){
+            if($driverId == $lastShift[0]['driver_id_day']) {
+                return Constants::PERIOD_DAY;
+            }elseif ($driverId == $lastShift[0]['driver_id_night']){
+                return Constants::PERIOD_NIGHT;
+            }
         }
+        return Constants::PERIOD_DAY;
     }
 
-    public function getCarFuel($driverTabel)
+    public function getCarFuel($driverTabel):int
     {
-        return $driverTabel[0]->carInfo->fuel;
+        if (!empty($driverTabel)){
+            return $driverTabel[0]->carInfo->fuel;
+        }
+        return Constants::FUEL_GAS;
     }
 
-    public function getNumberCardPhone($period, $driverTabel)
+    public function getCarInfo($driverTabel):array
+    {
+        if(!empty($driverTabel)){
+            $car = $driverTabel[0]->carInfo->fullNameMark;
+            $mark = $driverTabel[0]->carInfo->mark;
+            return ['car' => $car, 'mark' => $mark];
+        }
+        return ['car' => "", 'mark' => current((new Cars())->getAllMarks())];
+    }
+
+    public function getNumberCardPhone($period, $driverTabel):array
     {
         $card="Не брал";
         $phone="Не брал";
@@ -83,7 +100,7 @@ class PrepareDriverService
         return 12;
     }
 
-    public function generateTarifTable(int $typeDay, int $period, int $carFuel, int $hours, $cars, $mark)
+    public function generateTarifTable(int $typeDay, int $period, int $carFuel, int $hours, $cars, $mark):string
     {
         $resPeriodWork = ($typeDay == Constants::WORKING_DAY)? "checked" : "";
         $resPeriodWeekend = ($typeDay == Constants::WEEKEND_DAY)? "checked" : "";
