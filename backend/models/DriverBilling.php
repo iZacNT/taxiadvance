@@ -89,4 +89,5 @@ class DriverBilling extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Driver::className(),['id' => 'driver_id']);
     }
+
 }

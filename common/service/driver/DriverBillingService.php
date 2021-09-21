@@ -3,6 +3,7 @@
 namespace common\service\driver;
 
 use app\models\DriverBilling;
+use backend\models\Driver;
 use Yii;
 
 class DriverBillingService
@@ -86,6 +87,10 @@ class DriverBillingService
             $driverBilling->plan = $this->plan;
             $driverBilling->compensations = $this->compensation;
             $driverBilling->save();
+
+            $driver = Driver::find()->where(['id' => $this->driverId])->one();
+            $driver->shift_closing = time();
+            $driver->save(false);
         }else{
             return false;
         }
