@@ -59,7 +59,7 @@ class Filials extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getAllFilials()
+    public static function getAllFilials()
     {
         return ArrayHelper::map(self::find()->all(), 'id', 'name');
     }

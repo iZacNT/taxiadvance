@@ -75,4 +75,14 @@ class User extends \yii\db\ActiveRecord
     {
         return self::SUPER_ADMIN == Yii::$app->user->identity->role;
     }
+
+    public static function isManager()
+    {
+        return self::MANAGER == Yii::$app->user->identity->role;
+    }
+
+    public static function isDriver()
+    {
+        return self::DRIVER == Yii::$app->user->identity->role;
+    }
 }

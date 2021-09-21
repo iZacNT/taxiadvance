@@ -55,12 +55,28 @@ class expandedFormatter extends Formatter
 
     public function asBeginDay(int $date): int
     {
-        return Yii::$app->formatter->asTimestamp(date("Y-m-d 00:00:00", $date));
+        return Yii::$app->formatter->asTimestamp(date("Y-m-d 00:00:00 +05", $date));
     }
 
     public function asEndDay(int $date): int
     {
-        return Yii::$app->formatter->asTimestamp(date("Y-m-d 23:59:59", $date));
+        return Yii::$app->formatter->asTimestamp(date("Y-m-d 23:59:59 +05", $date));
+    }
+
+    public function asNextShift():int
+    {
+        $dayShift = $this->asBeginDay(time())+(9*60*60);
+        $nightShift = $this->asBeginDay(time())+(21*60*60);
+
+        if ($dayShift > Yii::$app->formatter->asTimestamp(time())){
+            return $dayShift;
+        }
+
+        if ($nightShift < Yii::$app->formatter->asTimestamp(time())){
+            return $dayShift+(24*60*60);
+        }
+
+        return $nightShift;
     }
 
 }

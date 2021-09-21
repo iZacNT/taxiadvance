@@ -6,7 +6,6 @@ namespace common\service\calculation;
 
 use app\models\Calculation;
 use common\service\constants\Constants;
-use yii\db\ActiveQuery;
 
 class CalculationService
 {

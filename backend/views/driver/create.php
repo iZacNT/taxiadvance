@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-body">
                     <strong>Введите № водительского удостоверения</strong>
                     <div class="input-group mb-3">
-                        <input id="driverLicense" type="text" class="form-control rounded-0" value="9909151431">
+                        <input id="driverLicense" type="text" class="form-control rounded-0" placeholder="9909151431">
                         <span class="input-group-append">
                     <button type="button" class="btn btn-success btn-flat">Поиск</button>
                   </span>

@@ -62,7 +62,7 @@ class DriverTabel extends \yii\db\ActiveRecord
             'phone_night' => 'Телефон',
             'stringNameCar' => 'Автомобиль',
             'stringDriverDay' => 'Водитель на дневной период',
-            'stringDriverNight' => 'Водитель на дневной период'
+            'stringDriverNight' => 'Водитель на ночной период'
         ];
     }
 

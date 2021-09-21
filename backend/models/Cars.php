@@ -2,6 +2,7 @@
 
 namespace backend\models;
 
+use app\models\CarRepairs;
 use app\models\DriverTabel;
 use backend\models\Filials;
 use Yii;
@@ -27,6 +28,21 @@ use yii\helpers\ArrayHelper;
  */
 class Cars extends \yii\db\ActiveRecord
 {
+
+    const STATUS_WORK = 1;
+    const STATUS_REPAIR = 2;
+    const STATUS_SOLD = 3;
+    const STATUS_NO_ACTIVE = 4;
+
+    public function getStatusLabel():array
+    {
+        return [
+            self::STATUS_WORK => 'Работает',
+            self::STATUS_REPAIR => 'На ремонте',
+            self::STATUS_SOLD => 'Продан',
+            self::STATUS_NO_ACTIVE => 'Не работает',
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -43,6 +59,7 @@ class Cars extends \yii\db\ActiveRecord
         return [
             [['year', 'status', 'date_osago', 'date_dosago', 'date_kasko', 'fuel', 'filial'], 'integer'],
             [['mark', 'number', 'vin', 'comment', 'name_insurance', 'name_owner'], 'string', 'max' => 255],
+            [['status'], 'default', 'value' => self::STATUS_WORK],
         ];
     }
 
@@ -62,7 +79,7 @@ class Cars extends \yii\db\ActiveRecord
             'name_insurance' => 'Название страховой',
             'date_osago' => 'Осаго',
             'date_dosago' => 'Досаго',
-            'date_kaslo' => 'Каско',
+            'date_kasko' => 'Каско',
             'name_owner' => 'Владелец',
             'fuel' => 'Топливо',
             'filial' => 'Филиал',
@@ -77,6 +94,11 @@ class Cars extends \yii\db\ActiveRecord
     public function getFilialData(): \yii\db\ActiveQuery
     {
         return $this->hasOne(Filials::class,['id' => 'filial']);
+    }
+
+    public function getRepairs()
+    {
+        return $this->hasMany(CarRepairs::class,['car_id' => 'id']);
     }
 
     /**
@@ -105,4 +127,10 @@ class Cars extends \yii\db\ActiveRecord
     {
         return DriverTabel::find()->where(['car_id' => $car_id])->andWhere(['work_date' => $dateWorkDay])->one();
     }
+
+    public function isRepair():bool
+    {
+        return $this->status == self::STATUS_REPAIR;
+    }
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -10,38 +11,66 @@ use yii\widgets\ActiveForm;
 
 <div class="cars-form">
 
+    <div class="col-md-6">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'mark')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'year')->textInput() ?>
-
-    <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
+        <div class="form-group">
+            <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <?= $form->field($model, 'mark')->dropDownList($model->getAllMarks(),  ['prompt' => 'Выберите марку']) ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'year')->textInput() ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'number')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'fuel')->dropDownList(\common\service\constants\Constants::getFuel(), ['prompt' => 'Выберите топливо']) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'filial')->dropDownList($model->getAllFilials(), ['prompt' => 'Выберите филиал']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'status')->dropDownList($model->getStatusLabel(), ['prompt' => 'Выберите статус', "disabled" => ($model->isRepair()? "true":"false")]) ?>
+            </div>
+        </div>
 
     <?= $form->field($model, 'comment')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'name_insurance')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'date_osago')->textInput() ?>
-
-    <?= $form->field($model, 'date_dosago')->textInput() ?>
-
-    <?= $form->field($model, 'date_kasko')->textInput() ?>
-
-    <?= $form->field($model, 'name_owner')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'fuel')->textInput() ?>
-
-    <?= $form->field($model, 'filial')->textInput() ?>
+        <div class="row">
+            <div class="col-md-6">
+                <?= $form->field($model, 'name_insurance')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'name_owner')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <?= $form->field($model, 'date_osago')->textInput() ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'date_dosago')->textInput() ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'date_kasko')->textInput() ?>
+            </div>
+        </div>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
-
+    </div>
     <?php ActiveForm::end(); ?>
 
 </div>

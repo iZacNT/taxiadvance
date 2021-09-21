@@ -19,6 +19,10 @@ return [
                 'css' => ['toastr/toastr.min.css'],
                 'js' => ['toastr/toastr.min.js']
             ],
+            'charts' => [
+                'css' => ['chart.js/Chart.css'],
+                'js' => ['chart.js/Chart.js']
+            ],
         ]
     ]
 

@@ -1503,3 +1503,5 @@ $_SERVER = [
 ]
 [16-Sep-2021 13:56:51 Asia/Yekaterinburg] PHP Fatal error:  Cannot redeclare common\service\compensation\CompensationService::save() in /var/www/taxiadvance.loc/public_html/common/service/compensation/CompensationService.php on line 28
 [16-Sep-2021 13:57:28 Asia/Yekaterinburg] PHP Fatal error:  Cannot redeclare common\service\compensation\CompensationService::save() in /var/www/taxiadvance.loc/public_html/common/service/compensation/CompensationService.php on line 28
+[20-Sep-2021 12:52:38 Asia/Yekaterinburg] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Controller.php on line 157
+[20-Sep-2021 12:53:09 Asia/Yekaterinburg] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Controller.php on line 157

@@ -2,8 +2,10 @@
 
 namespace backend\controllers;
 
+use app\models\CarRepairs;
 use backend\models\Cars;
 use backend\models\CarsSearch;
+use common\service\car_repare\CarRepareService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -54,8 +56,19 @@ class CarsController extends Controller
      */
     public function actionView($id)
     {
+        $carRepares = new CarRepairs();
+        $dataProviderRepairs = $carRepares->getCarRepairs($id);
+        $hasRepair = $carRepares->hasActiveRepair($id);
+
+        $idRepair = 0;
+        if ($hasRepair){
+            $idRepair = (new CarRepareService($id))->activeRepair();
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'hasRepair' => $hasRepair,
+            'idRepair' => $idRepair,
+            'dataProviderRepairs' => $dataProviderRepairs
         ]);
     }
 
@@ -129,5 +142,31 @@ class CarsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionGoToRepair():bool
+    {
+        $car_id = \Yii::$app->request->post('car_id');
+        $car = $this->findModel($car_id);
+        $car->status = Cars::STATUS_REPAIR;
+        $car->save();
+
+        $service = new CarRepareService($car_id);
+        $service->openRepare();
+
+        return json_encode(true);
+    }
+
+    public function actionCloseRepair():bool
+    {
+        $car_id = \Yii::$app->request->post('car_id');
+        $car = $this->findModel($car_id);
+        $car->status = Cars::STATUS_WORK;
+        $car->save();
+
+        $service = new CarRepareService($car_id);
+        $service->closeRepare();
+
+        return json_encode(true);
     }
 }
