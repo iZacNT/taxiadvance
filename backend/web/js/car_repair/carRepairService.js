@@ -10,7 +10,7 @@ $("#goToRepair").on("click", function (){
         })
 
     console.log(resultAjax);
-    $.pjax.reload({container: "#carRepair", async:false});
+    location.reload();
     }
 
 });

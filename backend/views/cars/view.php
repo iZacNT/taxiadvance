@@ -29,7 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::button("Отправить в Ремонт", ['class' => 'btn btn-warning', 'id' => 'goToRepair'])?>
     </p>
 <?//= $hasRepair;die; ?>
-    <? if ($hasRepair){ ?>
+    <? $proof = 1;
+    if ($hasRepair){
+        $proof = 2; ?>
         <div class="col-md-12">
             <div class="card bg-warning">
                 <div class="card-header">
@@ -136,7 +138,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php
 $js = <<< JS
 let car_id = $model->id;
-if ($hasRepair){
+if ($proof === 2){
     $("#goToRepair").hide();
 }
 
