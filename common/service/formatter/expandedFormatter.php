@@ -2,6 +2,7 @@
 
 namespace common\service\formatter;
 
+use common\service\constants\Constants;
 use Yii;
 use yii\i18n\Formatter;
 
@@ -55,28 +56,44 @@ class expandedFormatter extends Formatter
 
     public function asBeginDay(int $date): int
     {
-        return Yii::$app->formatter->asTimestamp(date("Y-m-d 00:00:00 +05", $date));
+        Yii::debug("Get Begin - Day ".strtotime(date("Y-m-d 00:00:00", $date)) , __METHOD__);
+        return strtotime(date("Y-m-d 00:00:00", $date));
+
+
     }
 
     public function asEndDay(int $date): int
     {
-        return Yii::$app->formatter->asTimestamp(date("Y-m-d 23:59:59 +05", $date));
+        return strtotime(date("Y-m-d 23:59:59", $date));
     }
 
-    public function asNextShift():int
+    public function asCurrentShift():int
     {
         $dayShift = $this->asBeginDay(time())+(9*60*60);
         $nightShift = $this->asBeginDay(time())+(21*60*60);
 
-        if ($dayShift > Yii::$app->formatter->asTimestamp(time())){
+        if ($dayShift > time()){
+            Yii::debug("Ночная смена Предыдущего дня".Yii::$app->formatter->asDatetime($dayShift) , __METHOD__);
+            return $dayShift-(12*60*60);
+        }
+
+        if ($dayShift <= time() && $nightShift > time())
+        {
+            Yii::debug("Дневная смена".Yii::$app->formatter->asDatetime($dayShift) , __METHOD__);
             return $dayShift;
         }
 
-        if ($nightShift < Yii::$app->formatter->asTimestamp(time())){
-            return $dayShift+(24*60*60);
+        if ($nightShift < time()){
+            Yii::debug("Ночная смена".Yii::$app->formatter->asDatetime($dayShift) , __METHOD__);
+            return $nightShift;
         }
 
-        return $nightShift;
+        return 0;
+    }
+
+    public function asNextShift():int
+    {
+        return $this->asCurrentShift()+(12*60*60);
     }
 
 }

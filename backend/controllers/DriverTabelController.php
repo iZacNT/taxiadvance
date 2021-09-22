@@ -24,6 +24,7 @@ class DriverTabelController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $dateSearchFrom = (Yii::$app->formatter->asBeginDay(time()))-(24*60*60);
+        Yii::debug("Дата/Время начала поиска водителей в Табеле ".$dateSearchFrom." ".Yii::$app->formatter->asDatetime($dateSearchFrom) , __METHOD__);
 
         $prepareService = new PrepareDriverTabel($dateSearchFrom);
         $columns = $prepareService->generateColumns();
@@ -49,7 +50,7 @@ class DriverTabelController extends Controller
 
         if ($this->request->isPost) {
             if ($driverTabel->load($this->request->post())) {
-                $driverTabel->work_date = Yii::$app->formatter->asTimestamp($driverTabel->work_date);
+                $driverTabel->work_date = strtotime($driverTabel->work_date);
                 $driverTabel->save();
 
                 return $this->redirect(['view', 'id' => $driverTabel->id]);
@@ -93,7 +94,7 @@ class DriverTabelController extends Controller
             ->all();
 
         if ($this->request->isPost && $driverTabel->load($this->request->post())) {
-            $formattedDate = Yii::$app->formatter->asTimestamp($driverTabel->work_date);
+            $formattedDate = strtotime($driverTabel->work_date);
             if ($driverTabel->isValidDay($formattedDate, $driverTabel->car_id, $oldDate)){
                 $driverTabel->work_date = $formattedDate;
                 $driverTabel->save();

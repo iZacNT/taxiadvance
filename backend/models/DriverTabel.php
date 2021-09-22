@@ -106,7 +106,7 @@ class DriverTabel extends \yii\db\ActiveRecord
 
     public function getDriverShifts(int $driverId)
     {
-        $startShift = Yii::$app->formatter->asBeginDay(time())-1;
+        $startShift = Yii::$app->formatter->asBeginDay(time());
 
         return self::find()
             ->where(['driver_id_day' => $driverId])

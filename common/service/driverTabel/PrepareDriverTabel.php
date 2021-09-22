@@ -4,6 +4,9 @@
 namespace common\service\driverTabel;
 
 
+use app\models\CarRepairs;
+use common\service\constants\Constants;
+use Yii;
 use yii\helpers\Html;
 
 class PrepareDriverTabel
@@ -24,7 +27,7 @@ class PrepareDriverTabel
                 'attribute' => 'date-'.$date,
                 'header'=> date('d.m.Y', $date),
                 'headerOptions' => ['style' => 'font-size: 18px; font-weight: bold; text-align: center;'],
-                'contentOptions' => function ($data) use ($date) {
+                'contentOptions' => function () use ($date) {
                     return ['style' => 'text-align: center; height: 90px;vertical-align: middle;'
                         .$this->isToday($date)];
                 },
@@ -42,15 +45,23 @@ class PrepareDriverTabel
                     }else{
                         $row .= $this->prepareEmptyColumn();
                     }
-                    $row .= "<hr size='1' />";
+                    $row .= "<hr />";
                     if($this->isFullNightShift($work_drivers)){
                         $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName);
                     }else{
-                        $row .= $this->prepareEmptyColumn();
+                        if ($this->verifyStatusRepair($data->id, $date, true)){
+                            $row .= $this->prepareRepairColumn();
+                        }else{
+                            $row .= $this->prepareEmptyColumn();
+                        }
                     }
 
                 }else{
-                    $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
+                    if ($this->verifyStatusRepair($data->id, $date)){
+                        $row .= $this->prepareRepairColumn();
+                    }else{
+                        $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
+                    }
                 }
 
 
@@ -87,6 +98,33 @@ class PrepareDriverTabel
     public function prepareEmptyColumn()
     {
         return '<div style="font-size: 12px; color: red; font-weight: bold;">Не назначен</div>';
+    }
+
+    public function prepareRepairColumn()
+    {
+        return '<div style="font-size: 12px; color: red; font-weight: bold; text-transform: uppercase">На ремонте</div>';
+    }
+
+    /**
+     * Проверяем на Ремонте ли автомобиль в указанную дату
+     * @param $car_id int ID Авто
+     * @param $date int Дата/Время начала текущей смены
+     * @param $date bool Проверяем Весь день(false) или Ночной период(true)
+     * @return bool
+     */
+    public function verifyStatusRepair($car_id, $date, $period = false):bool
+    {
+        $repairs = CarRepairs::find()->where(['car_id' => $car_id])->all();
+        if($period) {
+            $date = \Yii::$app->formatter->asBeginDay($date)+(21*60*60);
+        }
+        Yii::debug('Дата проверки Ремонта'.Yii::$app->formatter->asDatetime($date), __METHOD__);
+        foreach ($repairs as $repair){
+            if ($repair->date_open_repair <= $date && empty($repair->date_close_repare) || $repair->date_close_repare > $date ){
+                return true;
+            }
+        }
+        return false;
     }
 
 }
