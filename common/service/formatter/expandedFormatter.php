@@ -8,6 +8,12 @@ use yii\i18n\Formatter;
 
 class expandedFormatter extends Formatter
 {
+
+    /**
+     * Transliterate Text
+     * @param $value
+     * @return string
+     */
     public function asTranslit($value): string
     {
         $converter = array(
@@ -56,7 +62,6 @@ class expandedFormatter extends Formatter
 
     public function asBeginDay(int $date): int
     {
-        Yii::debug("Get Begin - Day ".strtotime(date("Y-m-d 00:00:00", $date)) , __METHOD__);
         return strtotime(date("Y-m-d 00:00:00", $date));
 
 
@@ -73,18 +78,15 @@ class expandedFormatter extends Formatter
         $nightShift = $this->asBeginDay(time())+(21*60*60);
 
         if ($dayShift > time()){
-            Yii::debug("Ночная смена Предыдущего дня".Yii::$app->formatter->asDatetime($dayShift) , __METHOD__);
             return $dayShift-(12*60*60);
         }
 
         if ($dayShift <= time() && $nightShift > time())
         {
-            Yii::debug("Дневная смена".Yii::$app->formatter->asDatetime($dayShift) , __METHOD__);
             return $dayShift;
         }
 
         if ($nightShift < time()){
-            Yii::debug("Ночная смена".Yii::$app->formatter->asDatetime($dayShift) , __METHOD__);
             return $nightShift;
         }
 

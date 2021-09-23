@@ -5,7 +5,6 @@ namespace common\service\driverTabel;
 
 
 use app\models\CarRepairs;
-use common\service\constants\Constants;
 use Yii;
 use yii\helpers\Html;
 
@@ -43,7 +42,11 @@ class PrepareDriverTabel
                     if($this->isFullDayShift($work_drivers)){
                         $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName);
                     }else{
-                        $row .= $this->prepareEmptyColumn();
+                        if ($this->verifyStatusRepair($data->id, $date, false)){
+                            $row .= $this->prepareRepairColumn();
+                        }else{
+                            $row .= $this->prepareEmptyColumn();
+                        }
                     }
                     $row .= "<hr />";
                     if($this->isFullNightShift($work_drivers)){
@@ -63,7 +66,6 @@ class PrepareDriverTabel
                         $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
                     }
                 }
-
 
                 return $row;
                 }
@@ -109,7 +111,7 @@ class PrepareDriverTabel
      * Проверяем на Ремонте ли автомобиль в указанную дату
      * @param $car_id int ID Авто
      * @param $date int Дата/Время начала текущей смены
-     * @param $date bool Проверяем Весь день(false) или Ночной период(true)
+     * @param $period bool Проверяем Дневной период(false) или Ночной период(true)
      * @return bool
      */
     public function verifyStatusRepair($car_id, $date, $period = false):bool
@@ -118,7 +120,10 @@ class PrepareDriverTabel
         if($period) {
             $date = \Yii::$app->formatter->asBeginDay($date)+(21*60*60);
         }
-        Yii::debug('Дата проверки Ремонта'.Yii::$app->formatter->asDatetime($date), __METHOD__);
+        if(!$period) {
+            $date = \Yii::$app->formatter->asBeginDay($date)+(9*60*60);
+        }
+
         foreach ($repairs as $repair){
             if ($repair->date_open_repair <= $date && empty($repair->date_close_repare) || $repair->date_close_repare > $date ){
                 return true;

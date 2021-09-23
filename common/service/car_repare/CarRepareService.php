@@ -31,10 +31,20 @@ class CarRepareService
 
     public function closeRepare():void
     {
+        $nextShift = \Yii::$app->formatter->asNextShift();
         $repare = CarRepairs::find()->where(['car_id' => $this->car_id])->andWhere(['status' => CarRepairs::STATUS_OPEN_REPAIR])->one();
-        $repare->date_close_repare = \Yii::$app->formatter->asNextShift();
+        $repare->date_close_repare = $nextShift;
         $repare->status = CarRepairs::STATUS_CLOSE_REPAIR;
         $repare->save();
+
+        if($nextShift == (Yii::$app->formatter->asBeginDay(time())+(21*60*60))){
+            $driverTabel = new DriverTabel();
+            $driverTabel->car_id = $this->car_id;
+            $driverTabel->work_date = Yii::$app->formatter->asBeginDay(time());
+            $driverTabel->save();
+
+        }
+
     }
 
     /**
@@ -77,14 +87,11 @@ class CarRepareService
 
         $periodDay = null;
         $periodNight = null;
-        Yii::debug("Current Shift ".Yii::$app->formatter->asDatetime($currentShift) , __METHOD__);
 
         if ($nextShift == ($date+(21*60*60))){
             $shifts->driver_id_night = $periodNight;
             $shifts->save();
         }
-        Yii::debug("Day Shift ".$periodDay, __METHOD__);
-        Yii::debug("Night Shift ".$periodNight , __METHOD__);
     }
 
 }
