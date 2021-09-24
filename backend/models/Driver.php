@@ -59,7 +59,7 @@ class Driver extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'filial', 'stringShiftClosing'], 'required', 'message' => '{attribute} не может быть пустым'],
+            [['first_name', 'last_name', 'filial', 'stringShiftClosing', 'yandex_id'], 'required', 'message' => '{attribute} не может быть пустым'],
             [['commens'], 'string'],
             [['user_id','date_of_issue', 'status', 'filial', 'shift_closing'], 'integer'],
             [[ 'first_name', 'last_name', 'yandex_id', 'driving_license', 'passport', 'who_issued_it', 'phone', 'city', 'street', 'hous', 'corpus', 'appartament',
