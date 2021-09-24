@@ -49,7 +49,11 @@ class CalculationShiftParams {
      */
     public function getPlanType()
     {
-        return (($this->plan > $this->getFullAmountSummDriver()) ? Constants::BIGGER_PLAN : Constants::LESS_PLAN);
+        \Yii::debug("Планы ".$this->plan,__METHOD__);
+        \Yii::debug("Планы+бонус ".$this->getFullAmountSummDriver(),__METHOD__);
+        return (($this->plan > $this->getFullAmountSummDriver()) ? Constants::LESS_PLAN : Constants::BIGGER_PLAN);
+
+
     }
 
     /**
@@ -58,6 +62,7 @@ class CalculationShiftParams {
     public function getFullAmountSummDriver()
     {
         $this->fullAmountSumm = $this->inputAmount+$this->bonusYandex;
+        return $this->fullAmountSumm;
     }
 
     /**
@@ -72,6 +77,7 @@ class CalculationShiftParams {
             ->andWhere(['plan' => $this->getPlanType()])
             ->andWhere(['period' => $this->period])
             ->one();
+        \Yii::debug("Планы ".serialize($this->getPlanType()),__METHOD__);
         $this->percentPark = $calculation->calculation_park;
         $this->percentDriver = $calculation->calculation_driver;
     }
