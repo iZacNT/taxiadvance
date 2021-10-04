@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use backend\models\Driver;
+use backend\models\Manager;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
@@ -28,6 +30,10 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
+
+    const SUPER_ADMIN = 1;
+    const MANAGER = 2;
+    const DRIVER = 3;
 
 
     /**
@@ -209,5 +215,38 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public static function isSuperUser(): bool
+    {
+        return self::SUPER_ADMIN == Yii::$app->user->identity->role;
+    }
+
+    public static function isManager(): bool
+    {
+        return self::MANAGER == Yii::$app->user->identity->role;
+    }
+
+    public static function isDriver(): bool
+    {
+        return self::DRIVER == Yii::$app->user->identity->role;
+    }
+
+    /**
+     * @return int|mixed|null
+     */
+    public function getFilialUser()
+    {
+        $filial = null;
+
+        if ($this->isDriver()){
+            $filial = (Driver::find()->where(['user_id' => $this->id])->one())->filial;
+        }
+
+        if($this->isManager()){
+            $filial = (Manager::find()->where(['user_id' => $this->id])->one())->filial;
+        }
+
+        return $filial;
     }
 }

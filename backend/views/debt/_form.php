@@ -6,6 +6,7 @@
 
 use yii\helpers\Html;
 use yii\jui\DatePicker;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 
@@ -51,7 +52,27 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($debt, 'reason')->dropDownList($debt->debtReasons,['prompt' => 'Выберите основание']) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($debt, 'car_id')->textInput(['maxlength' => true]) ?>
+
+                <?
+                echo $form->field($debt, 'stringNameCar')
+                    ->widget(\yii\jui\AutoComplete::classname(), [
+                        //'value' => (!empty($model->floor) ? $model->floor : ''),
+                        'clientOptions' => [
+                            'source' => $cars,
+                            'minLength'=>'0',
+                            'autoFill'=>true,
+                            'select' => new JsExpression("function( event, ui ) {
+                        $('#debt-car_id').val(ui.item.id);
+                }")],
+                        'options'=>[
+                            'class'=>'form-control',
+                            'id' => 'autocompleteCar',
+                            'placeholder' => 'Автомобиль',
+                        ],
+
+                    ]);
+                ?>
+
             </div>
         </div>
 
@@ -117,6 +138,8 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 </div>
+
+<?= $form->field($debt, 'car_id')->hiddenInput()->label(""); ?>
 
     <?php ActiveForm::end(); ?>
 

@@ -12,6 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="deposit-create">
         <?= $this->render('_form', [
             'debt' => $debt,
-            'idDriver' => $idDriver
+            'idDriver' => $idDriver,
+            'cars' => $cars
         ]) ?>
     </div>

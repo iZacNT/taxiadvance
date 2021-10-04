@@ -139,6 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             return  $data->debtReasons[$data->reason];
                                     }
                                 ],
+                                'car.fullNameMark',
                                 'comment:ntext',
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'debt',

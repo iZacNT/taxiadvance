@@ -58,7 +58,7 @@ use yii\widgets\ActiveForm;
             <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         </div>
     </div>
-    <?= $form->field($deposit, 'created_at')->textInput(['maxlength' => true, 'class' => 'form-control changeDate']) ?>
+    <?= $form->field($deposit, 'created_at')->hiddenInput()->label("") ?>
 
     <?php ActiveForm::end(); ?>
 

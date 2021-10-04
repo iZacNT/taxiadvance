@@ -24,6 +24,8 @@ use Yii;
 class Debt extends \yii\db\ActiveRecord
 {
 
+
+
     public $debtReasons = [
         '0' => 'ДТП',
         '1' => 'Штраф ГИБДД',
@@ -35,6 +37,7 @@ class Debt extends \yii\db\ActiveRecord
     public $stringDateReason;
     public $stringDateDtp;
     public $stringDatePay;
+    public $stringNameCar;
 
     /**
      * {@inheritdoc}
@@ -81,8 +84,14 @@ class Debt extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getDriver()
+    public function getDriver(): \yii\db\ActiveQuery
     {
         return $this->hasOne(Driver::className(),['id' => 'driver_id']);
     }
+
+    public function getCar(): \yii\db\ActiveQuery
+    {
+        return $this->hasOne(Cars::className(),['id' => 'car_id']);
+    }
+
 }

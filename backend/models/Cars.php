@@ -109,7 +109,7 @@ class Cars extends \yii\db\ActiveRecord
         return (new Filials())->getAllFilials();
     }
 
-    public function getFullNameMark()
+    public function getFullNameMark(): string
     {
         return  $this->mark." ".$this->number;
     }
@@ -131,6 +131,20 @@ class Cars extends \yii\db\ActiveRecord
     public function isRepair():bool
     {
         return $this->status == self::STATUS_REPAIR;
+    }
+
+    /**
+     * @param null $filial
+     * @return array
+     */
+    public static function prepareCarsForAutocomplete($filial = null): array
+    {
+        return self::find()
+            ->select(['concat(mark, " ", number) as value', 'concat(mark, " ", number) as  label','id as id'])
+            ->where(['status' => self::STATUS_WORK])
+            ->andFilterWhere(['filial' => $filial])
+            ->asArray()
+            ->all();
     }
 
 }

@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\Cars;
 use backend\models\Debt;
 use common\service\driver\DriverDebt;
 use yii\web\Controller;
+use yii\web\Response;
 
 class DebtController extends Controller
 {
@@ -13,10 +15,12 @@ class DebtController extends Controller
     {
         $debt = new Debt();
 
+        $cars = Cars::prepareCarsForAutocomplete(\Yii::$app->user->identity->getFilialUser());
+
         if ($this->request->isPost) {
             if ($debt->load($this->request->post())) {
 
-                $driverDebt = (new DriverDebt($idDriver))->createDebt($debt);
+                (new DriverDebt($idDriver))->createDebt($debt);
 
                 return $this->redirect(['driver/view', 'id' => $idDriver]);
             }
@@ -27,23 +31,25 @@ class DebtController extends Controller
         return $this->render('create', [
             'debt' => $debt,
             'idDriver' => $idDriver,
+            'cars' => $cars
         ]);
     }
 
     /**
      * @param $id
-     * @return string|\yii\web\Response
+     * @return string|Response
      */
     public function actionUpdate($id)
     {
         $debt = Debt::find()
             ->where(['id' => $id])
             ->one();
+        $cars = Cars::prepareCarsForAutocomplete(\Yii::$app->user->identity->getFilialUser());
 
         if ($this->request->isPost && $debt->load($this->request->post())) {
 
             try {
-                $driverDebt = (new DriverDebt($idDriver))->updateDebt($debt);
+                (new DriverDebt($debt->driver_id))->updateDebt($debt);
             } catch (\Exception $exception){
                 throw new \DomainException($exception->getMessage());
             }
@@ -53,16 +59,16 @@ class DebtController extends Controller
 
         return $this->render('update', [
             'debt' => $debt,
+            'cars' => $cars
         ]);
     }
 
     /**
      * @param $id
-     * @return \yii\web\Response
+     * @return Response
      * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
      */
-    public function actionDelete($id)
+    public function actionDelete($id): Response
     {
         $model = Debt::find()->where(['id' => $id])->one();
         $idDriver = $model->driver_id;

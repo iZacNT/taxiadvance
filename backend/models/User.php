@@ -2,7 +2,9 @@
 
 namespace backend\models;
 
+use backend\models\Manager;
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "user".
@@ -71,18 +73,33 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function isSuperUser()
+    public static function isSuperUser(): bool
     {
         return self::SUPER_ADMIN == Yii::$app->user->identity->role;
     }
 
-    public static function isManager()
+    public static function isManager(): bool
     {
         return self::MANAGER == Yii::$app->user->identity->role;
     }
 
-    public static function isDriver()
+    public static function isDriver(): bool
     {
         return self::DRIVER == Yii::$app->user->identity->role;
+    }
+
+    public function getFilialUser(): int
+    {
+        $filial = '';
+
+        if ($this->isDriver()){
+            $filial = (Driver::find()->where(['user_id' => $this->id])->one())->filial;
+        }
+
+        if($this->isManager()){
+            $filial = (Manager::find()->where(['user_id' => $this->id])->one())->filial;
+        }
+
+        return $filial;
     }
 }
