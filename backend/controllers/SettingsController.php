@@ -3,7 +3,10 @@
 namespace backend\controllers;
 
 use backend\models\Settings;
-use backend\models\SettingsSearch;
+use backend\models\TransactionTypes;
+use common\service\settings\PrepareTransactionTypeService;
+use common\service\yandex\params\ParamsTransactionCategoryList;
+use common\service\yandex\YandexApi;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -40,14 +43,70 @@ class SettingsController extends Controller
      */
     public function actionUpdate()
     {
-        $model = $this->findModel(1);
+        $settings = $this->findModel(1);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
+        if ($this->request->isPost && $settings->load($this->request->post()) && $settings->save()) {
+            return $this->redirect(['update', 'id' => $settings->id]);
+        }
+        $transactionList = new ParamsTransactionCategoryList($settings->yandex_client_id);
+        $req = new YandexApi(
+            'https://fleet-api.taxi.yandex.net/v2/parks/transactions/categories/list',
+            $settings->yandex_client_id,
+            $settings->yandex_api,
+            $transactionList
+        );
+        $listTType = '';
+        if ($req)
+        {
+            $transactionService = new PrepareTransactionTypeService($req->request()['categories']);
+            $transactionService->verifyWithDBase();
+            $listTType = $transactionService->preparePreviewTransactionType();
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $settings,
+            'transactions' => $listTType
+        ]);
+    }
+
+    /**
+     * @throws NotFoundHttpException
+     */
+    public function actionUpdateTransactionType()
+    {
+
+        $settings = $this->findModel(1);
+
+
+        $types = \Yii::$app->request->post("transactionType");
+        if ($types){
+            TransactionTypes::updateAll(['summarize' => TransactionTypes::UN_SUMMARIZE]);
+            foreach($types as $key => $value){
+                $transactionTypes = TransactionTypes::find()->where(['type' => $value])->one();
+                $transactionTypes->summarize = TransactionTypes::SUMMARIZE;
+                $transactionTypes->save();
+                \Yii::debug(serialize($transactionTypes->errors), __METHOD__);
+            }
+        }
+
+        $transactionList = new ParamsTransactionCategoryList($settings->yandex_client_id);
+        $req = new YandexApi(
+            'https://fleet-api.taxi.yandex.net/v2/parks/transactions/categories/list',
+            $settings->yandex_client_id,
+            $settings->yandex_api,
+            $transactionList
+        );
+        $listTType = '';
+        if ($req)
+        {
+            $transactionService = new PrepareTransactionTypeService($req->request()['categories']);
+            $transactionService->verifyWithDBase();
+            $listTType = $transactionService->preparePreviewTransactionType();
+        }
+
+        return $this->render('update', [
+            'model' => $settings,
+            'transactions' => $listTType
         ]);
     }
 

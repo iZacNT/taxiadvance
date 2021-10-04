@@ -31,7 +31,8 @@ class YandexApi
         unset($this->query);
     }
 
-    public function request(){
+    public function request()
+    {
             $client = new Client(['requestConfig' => [
                 'format' => Client::FORMAT_JSON
             ],

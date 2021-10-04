@@ -116,7 +116,8 @@ class DriverController extends Controller
 
         if (!empty($allTransactions)){
             $servicePrepareTransactions = new PrepareTransactionService($allTransactions['transactions']);
-            $bonus = $servicePrepareTransactions->getBonusDriver();
+//            $bonus = $servicePrepareTransactions->getBonusDriver();
+            $bonus = $servicePrepareTransactions->getSumOfTransactionByType();
         }else{
             $bonus = 0;
             Yii::$app->session->setFlash("error", "Не удалось получить транзакции Водителя. Обновите страницу!");
