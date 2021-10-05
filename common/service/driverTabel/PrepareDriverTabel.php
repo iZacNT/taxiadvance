@@ -40,7 +40,7 @@ class PrepareDriverTabel
                     $row .= Html::a("<i class='far fa-eye' style='float: right; margin-right: 10px;'></i>",['view', 'id' => $work_drivers->id]);
                     $row .= "<br />";
                     if($this->isFullDayShift($work_drivers)){
-                        $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName);
+                        $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day);
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date, false)){
                             $row .= $this->prepareRepairColumn();
@@ -50,7 +50,7 @@ class PrepareDriverTabel
                     }
                     $row .= "<hr />";
                     if($this->isFullNightShift($work_drivers)){
-                        $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName);
+                        $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night);
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date, true)){
                             $row .= $this->prepareRepairColumn();
@@ -92,9 +92,10 @@ class PrepareDriverTabel
         return !empty($data->driver_id_night);
     }
 
-    public function prepareFullColumn($data)
+    public function prepareFullColumn($nameDriver, $driver_id): string
     {
-        return '<div style="font-size: 12px;">'.$data.'</div>';
+
+        return '<div style="font-size: 12px;">'.Html::a($nameDriver, ['/driver/view', 'id' => $driver_id]).'</div>';
     }
 
     public function prepareEmptyColumn()

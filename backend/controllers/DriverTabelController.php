@@ -22,8 +22,11 @@ class DriverTabelController extends Controller
     {
         $searchModel = new DriverTabelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         $dateSearchFrom = (Yii::$app->formatter->asBeginDay(time()))-(24*60*60);
+        if (Yii::$app->request->get("dateSearchFrom")){
+            $dateSearchFrom = strtotime(Yii::$app->request->get("dateSearchFrom"));
+
+        }
         Yii::debug("Дата/Время начала поиска водителей в Табеле ".$dateSearchFrom." ".Yii::$app->formatter->asDatetime($dateSearchFrom) , __METHOD__);
 
         $prepareService = new PrepareDriverTabel($dateSearchFrom);

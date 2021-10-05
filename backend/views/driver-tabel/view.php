@@ -33,10 +33,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'work_date:date',
             'fullDayDriverName.fullName:raw:Дневная смена',
             'card_day',
+            'sum_card_day:currency',
             'phone_day',
+            'sum_phone_day:currency',
             'fullNightDriverName.fullName:raw:Ночная смена',
             'card_night',
+            'sum_card_night:currency',
             'phone_night',
+            'sum_phone_night:currency'
         ],
     ]) ?>
 

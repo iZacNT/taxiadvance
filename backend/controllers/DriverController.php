@@ -144,7 +144,7 @@ class DriverController extends Controller
             'debtDataProvider' => $debtDataProvider,
             'allShiftDataProvider' => $allShiftDataProvider,
             'summDebt' => $summDebt, // Сумма Долгов Водителя
-            'allOreders' => $preparedOrders, //Все Транзакции Водителя с момента закрытия смены
+            'allOreders' => $preparedOrders, //Все Заказы Водителя с момента закрытия смены
             'summOrders' => $summOrders, //Сумма заказов Водителя
             'balanceYandex' => $balanceDriverYandex, // Баланс в Яндекс
             'bonus' => $bonus, //Бонусы в Яндекс
@@ -153,7 +153,9 @@ class DriverController extends Controller
             'carFuel' => $carFuelLabel, //Топливо используемого автомобиля
             'car' => $carInfo['car'], //Марка модель Авто
             'card' => $numberPhoneCard['card'], //Брал ли карту
+            'sum_card' => $numberPhoneCard['sum_card'], //Сумма взятая на бензин
             'phone' => $numberPhoneCard['phone'], // Брал ли телефон
+            'sum_phone' => $numberPhoneCard['sum_phone'], // Сумма взятая на телефон
             'generateTarifTable' => $generateTarifTable
         ]);
     }

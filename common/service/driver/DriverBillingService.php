@@ -3,6 +3,7 @@
 namespace common\service\driver;
 
 use app\models\DriverBilling;
+use backend\models\Deposit;
 use backend\models\Driver;
 use Yii;
 
@@ -56,6 +57,9 @@ class DriverBillingService
         $this->compensation = $requestPost['compensation'];
     }
 
+    /**
+     * @throws \yii\base\InvalidConfigException
+     */
     public function saveAmount():bool
     {
         $searchShift = DriverBilling::find()
@@ -91,6 +95,15 @@ class DriverBillingService
             $driver = Driver::find()->where(['id' => $this->driverId])->one();
             $driver->shift_closing = time();
             $driver->save(false);
+
+            if(!empty($this->depo)){
+                $deposit = new Deposit();
+                $deposit->driver_id = $this->driverId;
+                $deposit->contributed = $this->depo;
+                $deposit->created_at = time();
+                $deposit->comment = "Внесение от смены ".Yii::$app->formatter->asDatetime(time());
+                $deposit->save();
+            }
         }else{
             return false;
         }

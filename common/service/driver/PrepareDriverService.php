@@ -65,19 +65,25 @@ class PrepareDriverService
     {
         $card="Не брал";
         $phone="Не брал";
+        $sum_card = 0;
+        $sum_phone = 0;
 
         if ($period == Constants::PERIOD_DAY){
             if (!empty($driverTabel[0]->card_day)) $card = $driverTabel[0]->card_day;
             if (!empty($driverTabel[0]->phone_day)) $phone = $driverTabel[0]->phone_day;
+            if (!empty($driverTabel[0]->sum_card_day)) $sum_card = $driverTabel[0]->sum_card_day;
+            if (!empty($driverTabel[0]->sum_phone_day)) $sum_phone = $driverTabel[0]->sum_phone_day;
         }
 
         if ($period == Constants::PERIOD_NIGHT){
             if (!empty($driverTabel[0]->card_night)) $card = $driverTabel[0]->card_night;
             if (!empty($driverTabel[0]->card_night)) $phone = $driverTabel[0]->card_night;
+            if (!empty($driverTabel[0]->sum_card_night)) $sum_card = $driverTabel[0]->sum_card_night;
+            if (!empty($driverTabel[0]->sum_phone_night)) $sum_phone = $driverTabel[0]->sum_phone_night;
         }
 
 
-        return ['card' => $card, 'phone' => $phone];
+        return ['card' => $card,'sum_card' => $sum_card, 'phone' => $phone, 'sum_phone' => $sum_phone];
 
     }
 

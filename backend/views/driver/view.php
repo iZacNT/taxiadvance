@@ -1,5 +1,6 @@
 <?php
 
+use common\service\constants\Constants;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
@@ -273,13 +274,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="dtr-control sorting_1" tabindex="0"><strong><?= $carFuel;?>:</strong> (<?= $car;?>)<br>
                                         № Карты: <?= $card?></td>
                                     <td>
-                                        <?= Html::textInput('carFuel', 0, ['class' => 'form-control', 'id' => 'carFuel'] ); ?>
+                                        <?= Html::textInput('carFuel', $sum_card, ['class' => 'form-control', 'id' => 'carFuel'] ); ?>
                                     </td>
                                 </tr>
                                 <tr class="odd">
                                     <td class="dtr-control sorting_1" tabindex="0">Телефон: <?= $phone;?></td>
                                     <td>
-                                        <?= Html::textInput('carPhone', 0, ['class' => 'form-control', 'id' => 'carPhone'] ); ?>
+                                        <?= Html::textInput('carPhone', $sum_phone, ['class' => 'form-control', 'id' => 'carPhone'] ); ?>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -307,31 +308,30 @@ $this->params['breadcrumbs'][] = $this->title;
                         echo GridView::widget([
                             'dataProvider' => $allShiftDataProvider,
                             'columns' => [
-                                'date_billing:date',
+                                    [
+                                        'attribute' => 'date_billing',
+                                        'format' => 'raw',
+                                        'value' => function($data){
+                                            return "Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period]."<br />Дата: ".Yii::$app->formatter->asDate($data['date_billing']);
+                                        }
+                                    ],
                                 [
-                                    'attribute' => 'type_day',
+                                        'attribute' => 'yandex',
                                     'format' => 'raw',
+                                    'label' => 'Яндекс',
                                     'value' => function($data){
-                                        return \common\service\constants\Constants::getDayProperty()[$data->type_day];
+                            return "Баланс: ".Yii::$app->formatter->asCurrency($data['balance_yandex'])."<br />Бонус: ".Yii::$app->formatter->asCurrency($data['bonus_yandex']);
                                     }
                                 ],
-                                [
-                                    'attribute' => 'period',
-                                    'format' => 'raw',
-                                    'value' => function($data){
-                                        return \common\service\constants\Constants::getPeriod()[$data->period];
-                                    }
-                                ],
-                                'balance_yandex:currency',
-                                'bonus_yandex:currency',
-                                'input_amount:currency:Общаяя',
+                                'plan:currency',
                                 'depo',
                                 'debt_from_shift:currency',
                                 'car_wash:currency',
                                 'car_fuel_summ:currency',
                                 'car_phone_summ:currency',
                                 'summ_driver:currency:Водителю',
-                                'plan:currency'
+                                'input_amount:currency:Общаяя',
+
                             ],
                         ]);
                         ?>

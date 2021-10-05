@@ -18,6 +18,10 @@ use Yii;
  * @property int|null $driver_id_night Driver Night
  * @property int|null $card_night Card Night
  * @property int|null $phone_night Phone Night
+ * @property int $sum_card_day Сумма
+ * @property int $sum_phone_day Сумма
+ * @property int $sum_card_night Сумма
+ * @property int $sum_phone_night Сумма
  */
 class DriverTabel extends \yii\db\ActiveRecord
 {
@@ -40,7 +44,7 @@ class DriverTabel extends \yii\db\ActiveRecord
     {
         return [
             [['car_id', 'work_date'], 'required'],
-            [['id', 'car_id', 'work_date', 'driver_id_day', 'card_day', 'phone_day', 'driver_id_night', 'card_night', 'phone_night'], 'integer'],
+            [['id', 'car_id', 'work_date', 'driver_id_day', 'card_day', 'sum_card_day', 'sum_phone_day', 'sum_card_night', 'sum_phone_night', 'phone_day', 'driver_id_night', 'card_night', 'phone_night'], 'integer'],
             [['stringNameCar', 'stringDriverDay', 'stringDriverNight'],'safe'],
         ];
     }
@@ -61,8 +65,12 @@ class DriverTabel extends \yii\db\ActiveRecord
             'card_night' => 'Карта',
             'phone_night' => 'Телефон',
             'stringNameCar' => 'Автомобиль',
-            'stringDriverDay' => 'Водитель на дневной период',
-            'stringDriverNight' => 'Водитель на ночной период'
+            'stringDriverDay' => 'Дневной период',
+            'stringDriverNight' => 'Ночной период',
+            'sum_card_day' => 'Сумма',
+            'sum_phone_day' => 'Сумма',
+            'sum_card_night' => 'Сумма',
+            'sum_phone_night' => 'Сумма'
         ];
     }
 

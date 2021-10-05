@@ -6,6 +6,7 @@ $(".resultData").on("click", "#saveDataButton", function (){
     })
     if(resultAjax === true){
         toastr.success('Смена сохранена!');
+        location.reload();
     }else{
         toastr.error('Смена уже сохранена, у Вас нет прав для ее изменения');
     }
@@ -57,11 +58,12 @@ $("#calculateShift").on("click",function (){
     $("#planSumm").html(resultAjax.plan)
 
     if (resultAjax<0) {
+
         html = '<div class="info-box bg-gradient-success">\n' +
             '              <span class="info-box-icon"><i class="far fa-check-circle"></i></span>\n' +
             '\n' +
             '              <div class="info-box-content">\n' +
-            '                <span class="info-box-text" style="font-size: 22px;">Выдать водителю: '+resultAjax.billing+' руб.' +
+            '                <span class="info-box-text" style="font-size: 22px;">Выдать водителю: '+(resultAjax.billing*(-1))+' руб.' +
             '</span>\n' +
             '\n' +
             '              <!-- /.info-box-content -->\n' +

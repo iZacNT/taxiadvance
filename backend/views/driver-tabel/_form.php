@@ -66,7 +66,7 @@ use yii\widgets\ActiveForm;
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
 
             <?
             echo $form->field($driverTabel, 'stringDriverDay')
@@ -87,15 +87,21 @@ use yii\widgets\ActiveForm;
                 ]);
             ?>
         </div>
-        <div class="col-md-3">
-            <?= $form->field($driverTabel, 'card_day')->textInput() ?>
+        <div class="col-md-2">
+            <?= $form->field($driverTabel, 'card_day')->textInput(['placeholder' => '№']) ?>
         </div>
-        <div class="col-md-3">
-            <?= $form->field($driverTabel, 'phone_day')->textInput() ?>
+        <div class="col-md-2">
+            <?= $form->field($driverTabel, 'sum_card_day')->textInput(['placeholder' => 'Руб.']) ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($driverTabel, 'phone_day')->textInput(['placeholder' => '№']) ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($driverTabel, 'sum_phone_day')->textInput(['placeholder' => 'Руб.']) ?>
         </div>
     </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
 
                 <?
                 echo $form->field($driverTabel, 'stringDriverNight')
@@ -116,11 +122,17 @@ use yii\widgets\ActiveForm;
                     ]);
                 ?>
             </div>
-            <div class="col-md-3">
-                <?= $form->field($driverTabel, 'card_night')->textInput() ?>
+            <div class="col-md-2">
+                <?= $form->field($driverTabel, 'card_night')->textInput(['placeholder' => '№']) ?>
             </div>
-            <div class="col-md-3">
-                <?= $form->field($driverTabel, 'phone_night')->textInput() ?>
+            <div class="col-md-2">
+                <?= $form->field($driverTabel, 'sum_card_night')->textInput(['placeholder' => 'Руб.']) ?>
+            </div>
+            <div class="col-md-2">
+                <?= $form->field($driverTabel, 'phone_night')->textInput(['placeholder' => '№']) ?>
+            </div>
+            <div class="col-md-2">
+                <?= $form->field($driverTabel, 'sum_phone_night')->textInput(['placeholder' => 'Руб.']) ?>
             </div>
         </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -8,7 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="driver-tabel-search">
+<div class="driver-tabel-search col-md-3">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -18,27 +19,25 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'id') ?>
+    <?= DatePicker::widget([
+        'name'  => 'dateSearchFrom',
+        'language' => 'ru',
+        'dateFormat' => 'yyyy-MM-dd',
+        'options' => [
+            'placeholder' => Yii::$app->formatter->asDate(time(), "yyyy-MM-dd"),
+            'class' => 'form-control',
+            'autocomplete' => 'off'
+        ],
+        'clientOptions' => [
+            'changeMonth' => true,
+            'changeYear' => true,
+            'yearRange' => '2020:2050',
+        ]
+    ]) ?>
 
-    <?= $form->field($model, 'car_id') ?>
-
-    <?= $form->field($model, 'work_date') ?>
-
-    <?= $form->field($model, 'driver_id_day') ?>
-
-    <?= $form->field($model, 'card_day') ?>
-
-    <?php // echo $form->field($model, 'phone_day') ?>
-
-    <?php // echo $form->field($model, 'driver_id_night') ?>
-
-    <?php // echo $form->field($model, 'card_night') ?>
-
-    <?php // echo $form->field($model, 'phone_night') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="form-group mt-3">
+        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Сбросить', ['class' => 'btn btn-outline-secondary', 'onclick' => 'window.location.replace(window.location.pathname);']); ?>
     </div>
 
     <?php ActiveForm::end(); ?>

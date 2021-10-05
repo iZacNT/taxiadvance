@@ -66,4 +66,5 @@ class DriverTabelSearch extends Cars
 
         return $dataProvider;
     }
+
 }
