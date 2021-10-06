@@ -24,8 +24,8 @@ class PrepareDriverService
     {
         $depo = 0;
         $calculate = $deposits-$debt;
-        if ($calculate>=$min and $calculate<$max) { $depo = $more;}
-        if ($calculate > 5000) { $depo = 0;}
+        if ($calculate>=$min && $calculate<$max) { $depo = $more;}
+        if ($calculate > $max) { $depo = 0;}
         if ($calculate < $min ){ $depo = $less;}
 
         return $depo;
