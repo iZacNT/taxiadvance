@@ -106,6 +106,11 @@ class PrepareDriverService
         return 12;
     }
 
+    public function getCarId($driverTabel)
+    {
+        return (!empty($driverTabel[0]->car_id)) ? $driverTabel[0]->car_id : 0;
+    }
+
     public function generateTarifTable(int $typeDay, int $period, int $carFuel, int $hours, $cars, $mark):string
     {
         $resPeriodWork = ($typeDay == Constants::WORKING_DAY)? "checked" : "";

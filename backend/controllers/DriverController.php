@@ -129,6 +129,8 @@ class DriverController extends Controller
         $carFuel = $prepareDriverService->getCarFuel($driverTabel);
         $carFuelLabel = Constants::getFuel()[$carFuel];
         $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $driverTabel);
+        $carId = $prepareDriverService->getCarId($driverTabel);
+
         $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
         $carInfo = $prepareDriverService->getCarInfo($driverTabel);
         $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , Constants::WORKING_DAY, $hours);
@@ -152,6 +154,7 @@ class DriverController extends Controller
             'plan' => $dayPlan, // План
             'carFuel' => $carFuelLabel, //Топливо используемого автомобиля
             'car' => $carInfo['car'], //Марка модель Авто
+            'car_id' => $carId, // Car ID
             'card' => $numberPhoneCard['card'], //Брал ли карту
             'sum_card' => $numberPhoneCard['sum_card'], //Сумма взятая на бензин
             'phone' => $numberPhoneCard['phone'], // Брал ли телефон
@@ -284,6 +287,9 @@ class DriverController extends Controller
         return json_encode($billing);
     }
 
+    /**
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionSaveBilling()
     {
         $billingService = new DriverBillingService(Yii::$app->request->post());

@@ -31,6 +31,7 @@ class DriverBillingService
     private $summPark;
     private $summDriver;
     private $compensation;
+    private $car_id;
 
     public function __construct($requestPost)
     {
@@ -55,6 +56,7 @@ class DriverBillingService
         $this->summDriver = $requestPost['summDriver'];
         $this->plan = $requestPost['plan'];
         $this->compensation = $requestPost['compensation'];
+        $this->car_id = $requestPost['car_id'];
     }
 
     /**
@@ -90,6 +92,7 @@ class DriverBillingService
             $driverBilling->summ_driver = $this->summDriver;
             $driverBilling->plan = $this->plan;
             $driverBilling->compensations = $this->compensation;
+            $driverBilling->car_id = $this->car_id;
             $driverBilling->save();
 
             $driver = Driver::find()->where(['id' => $this->driverId])->one();

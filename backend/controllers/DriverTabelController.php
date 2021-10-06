@@ -8,9 +8,11 @@ use app\models\DriverTabel;
 use app\models\DriverTabelSearch;
 use backend\models\Cars;
 use backend\models\Driver;
+use backend\models\DriverTTabelSearch;
 use common\service\driverTabel\PrepareDriverTabel;
 use Throwable;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -22,6 +24,7 @@ class DriverTabelController extends Controller
     {
         $searchModel = new DriverTabelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         $dateSearchFrom = (Yii::$app->formatter->asBeginDay(time()))-(24*60*60);
         if (Yii::$app->request->get("dateSearchFrom")){
             $dateSearchFrom = strtotime(Yii::$app->request->get("dateSearchFrom"));

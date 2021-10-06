@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use backend\models\Cars;
 use backend\models\Driver;
 
 /**
@@ -30,13 +31,16 @@ use backend\models\Driver;
  * @property int|null $summ_driver Summ Driver
  * @property int|null $plan Plan
  * @property int|null $compensations Compensations
+ * @property-read \yii\db\ActiveQuery $carInfo
+ * @property-read \yii\db\ActiveQuery $driverInfo
+ * @property int $car_id [int]  Автомобиль
  */
 class DriverBilling extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
-    public static function tableName()
+    public static function tableName(): string
     {
         return 'driver_billing';
     }
@@ -44,10 +48,10 @@ class DriverBilling extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            [['driver_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations'], 'integer'],
+            [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations'], 'integer'],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],
         ];
@@ -56,7 +60,7 @@ class DriverBilling extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function attributeLabels()
+    public function attributeLabels(): array
     {
         return [
             'id' => '№',
@@ -81,13 +85,19 @@ class DriverBilling extends \yii\db\ActiveRecord
             'summ_park' => 'Сумма парка',
             'summ_driver' => 'Сумма водителя',
             'plan' => 'План',
-            'compensations' => 'Компенсация'
+            'compensations' => 'Компенсация',
+            'car_id' => 'Автомобиль'
         ];
     }
 
-    public function getDriverInfo()
+    public function getDriverInfo(): \yii\db\ActiveQuery
     {
         return $this->hasOne(Driver::className(),['id' => 'driver_id']);
+    }
+
+    public function getCarInfo(): \yii\db\ActiveQuery
+    {
+        return $this->hasOne(Cars::class, ['id' => 'car_id']);
     }
 
 }

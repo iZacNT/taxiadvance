@@ -323,6 +323,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             return "Баланс: ".Yii::$app->formatter->asCurrency($data['balance_yandex'])."<br />Бонус: ".Yii::$app->formatter->asCurrency($data['bonus_yandex']);
                                     }
                                 ],
+                                'carInfo.fullnameMark:raw:Авто',
                                 'plan:currency',
                                 'depo',
                                 'debt_from_shift:currency',
@@ -353,6 +354,7 @@ let balanceYandex = $balanceYandex;
 let bonusYandex = $bonus;
 let depo = $depo;
 let driverId = $model->id;
+let car_id = $car_id;
 JS;
 
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);

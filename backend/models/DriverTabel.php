@@ -26,6 +26,7 @@ use Yii;
 class DriverTabel extends \yii\db\ActiveRecord
 {
 
+
     public $stringNameCar;
     public $stringDriverDay;
     public $stringDriverNight;
@@ -81,7 +82,7 @@ class DriverTabel extends \yii\db\ActiveRecord
 
     public function getCarMark()
     {
-        return (Cars::find()->where(['id' => $this->car_id])->one())->getFullNameMark();
+        return $this->carInfo->fullNameMark;
     }
 
     public function getFullDayDriverName()
