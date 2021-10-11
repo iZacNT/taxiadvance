@@ -122,17 +122,19 @@ class DriverController extends Controller
             $bonus = 0;
             Yii::$app->session->setFlash("error", "Не удалось получить транзакции Водителя. Обновите страницу!");
         }
+        $driverTabel = new DriverTabel();
+        $driverTabelProviderAll = $prepareDriverService->getDriverTabel($driverTabel, $driver->id);
+        $currentShift = $prepareDriverService->getCurrentShift($driverTabel, $driver->id);
 
-        $driverTabel = (new DriverTabel())->getDriverShifts($driver->id);
-
-        $period = $prepareDriverService->getPeriodShift($driver->id, $driverTabel);
-        $carFuel = $prepareDriverService->getCarFuel($driverTabel);
+        $shiftID = $prepareDriverService->getCurrentShiftID($currentShift);
+        $period = $prepareDriverService->getPeriodShift($driver->id, $currentShift);
+        $carFuel = $prepareDriverService->getCarFuel($currentShift);
         $carFuelLabel = Constants::getFuel()[$carFuel];
-        $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $driverTabel);
-        $carId = $prepareDriverService->getCarId($driverTabel);
+        $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $currentShift);
+        $carId = $prepareDriverService->getCarId($currentShift);
 
         $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
-        $carInfo = $prepareDriverService->getCarInfo($driverTabel);
+        $carInfo = $prepareDriverService->getCarInfo($currentShift);
         $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , Constants::WORKING_DAY, $hours);
         $carsMarks = (new Cars())->getAllMarks();
         $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $carInfo['mark']);
@@ -145,6 +147,7 @@ class DriverController extends Controller
             'summDeposit' => $summDeposit, // Сумма депозитов Водителя
             'debtDataProvider' => $debtDataProvider,
             'allShiftDataProvider' => $allShiftDataProvider,
+            'driverTabelProviderAll' => $driverTabelProviderAll, //Все смены водителя в табеле
             'summDebt' => $summDebt, // Сумма Долгов Водителя
             'allOreders' => $preparedOrders, //Все Заказы Водителя с момента закрытия смены
             'summOrders' => $summOrders, //Сумма заказов Водителя
@@ -152,6 +155,7 @@ class DriverController extends Controller
             'bonus' => $bonus, //Бонусы в Яндекс
             'depo' => $depo, //Депо
             'plan' => $dayPlan, // План
+            'shiftID' => $shiftID,
             'carFuel' => $carFuelLabel, //Топливо используемого автомобиля
             'car' => $carInfo['car'], //Марка модель Авто
             'car_id' => $carId, // Car ID

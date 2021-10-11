@@ -21,6 +21,7 @@ function getData()
         bonusYandex: bonusYandex,
         depo: depo,
         car_id: car_id,
+        shift_id: shift_id,
         carMark: getCarMark(),
         fuel: getFuel(),
         typeDay: getTypeDay(),

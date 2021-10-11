@@ -28,6 +28,7 @@ use Yii;
  * @property integer|null $status Status
  * @property integer|null $filial Filial
  * @property integer|null $shift_closing Shift Closing
+ * @property int $current_shift [int]  Current_shift
  */
 class Driver extends \yii\db\ActiveRecord
 {
@@ -61,7 +62,7 @@ class Driver extends \yii\db\ActiveRecord
         return [
             [['first_name', 'last_name', 'filial', 'stringShiftClosing', 'yandex_id'], 'required', 'message' => '{attribute} не может быть пустым'],
             [['commens'], 'string'],
-            [['user_id','date_of_issue', 'status', 'filial', 'shift_closing'], 'integer'],
+            [['user_id','date_of_issue', 'status', 'filial', 'shift_closing', 'current_shift'], 'integer'],
             [[ 'first_name', 'last_name', 'yandex_id', 'driving_license', 'passport', 'who_issued_it', 'phone', 'city', 'street', 'hous', 'corpus', 'appartament',
                 'stringShiftClosing', 'stringDateIssused'], 'string', 'max' => 255],
             [['status'], 'default', 'value' => 3],
@@ -98,6 +99,7 @@ class Driver extends \yii\db\ActiveRecord
             'shift_closing' => 'Смена закрыта',
             'stringShiftClosing' => 'Последнее закрытие смены',
             'stringDateIssused' => 'Дата выдачи',
+            'current_shift' => 'Текущая смена',
         ];
     }
 

@@ -46,10 +46,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <a class="nav-link" id="custom-tabs-one-orders-tab" data-toggle="pill" href="#custom-tabs-one-orders" role="tab" aria-controls="custom-tabs-one-orders" aria-selected="false">Заказы: <?= \Yii::$app->formatter->asCurrency($summOrders);?></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-all-tabel-tab" data-toggle="pill" href="#custom-tabs-one-all-tabel" role="tab" aria-controls="custom-tabs-one-all-tabel" aria-selected="false">Все смены</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-one-calculations-tab" data-toggle="pill" href="#custom-tabs-one-calculations" role="tab" aria-controls="custom-tabs-one-calculations" aria-selected="false">РАСЧЕТ ТЕКУЩЕЙ СМЕНЫ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-one-all-shifts-tab" data-toggle="pill" href="#custom-tabs-one-all-shifts" role="tab" aria-controls="custom-tabs-one-all-shifts" aria-selected="false">Все смены</a>
+                        <a class="nav-link" id="custom-tabs-one-all-shifts-tab" data-toggle="pill" href="#custom-tabs-one-all-shifts" role="tab" aria-controls="custom-tabs-one-all-shifts" aria-selected="false">Все Расчеты</a>
                     </li>
                 </ul>
             </div>
@@ -221,6 +224,47 @@ $this->params['breadcrumbs'][] = $this->title;
                             ?>
                             <?php Pjax::end(); ?>
                     </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-all-tabel" role="tabpanel" aria-labelledby="custom-tabs-one-all-tabel-tab">
+
+                        <?php Pjax::begin([
+                            'id' => "allTabelDriver"
+                        ]); ?>
+                        <?php
+                        echo GridView::widget([
+                            'dataProvider' => $driverTabelProviderAll,
+                            'columns' => [
+                                'carInfo.fullNameMark',
+                                'work_date:date',
+                                [
+                                    'attribute' => 'card',
+                                    'format' => 'raw',
+                                    'value' => function($data) use ($model){
+                                        return ($data->driver_id_day == $model->id) ? $data->sum_card_day : $data->sum_card_night;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'phone',
+                                    'format' => 'raw',
+                                    'value' => function($data) use ($model){
+                                        return ($data->driver_id_day == $model->id) ? $data->sum_phone_day : $data->sum_phone_night;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'status',
+                                    'format' => 'raw',
+                                    'value' => function($data) use ($model){
+                                        return ($data->driver_id_day == $model->id) ? $data->labelStatusShift()[$data->status_day_shift] : $data->labelStatusShift()[$data->status_night_shift];
+                                    }
+                                ],
+                                ['class' => \yii\grid\ActionColumn::className(),
+                                    'controller' => 'driver-tabel',
+                                    'template' => '{update} &nbsp;&nbsp;{delete}']
+                            ],
+                        ]);
+                        ?>
+                        <?php Pjax::end(); ?>
+
+                    </div>
                     <div class="tab-pane fade" id="custom-tabs-one-calculations" role="tabpanel" aria-labelledby="custom-tabs-one-calculations-tab">
 
                         <?php Pjax::begin([
@@ -355,6 +399,7 @@ let bonusYandex = $bonus;
 let depo = $depo;
 let driverId = $model->id;
 let car_id = $car_id;
+let shift_id = $shiftID;
 JS;
 
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);

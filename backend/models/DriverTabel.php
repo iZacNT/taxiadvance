@@ -22,10 +22,22 @@ use Yii;
  * @property int $sum_phone_day Сумма
  * @property int $sum_card_night Сумма
  * @property int $sum_phone_night Сумма
+ * @property int $status_day_shift [int]
+ * @property int $status_night_shift [int]
  */
 class DriverTabel extends \yii\db\ActiveRecord
 {
 
+    const STATUS_SHIFT_OPEN = 1;
+    const STATUS_SHIFT_CLOSE = 2;
+
+    public function labelStatusShift(): array
+    {
+        return [
+            self::STATUS_SHIFT_OPEN => 'Открыта',
+            self::STATUS_SHIFT_CLOSE => 'Закрыта'
+        ];
+    }
 
     public $stringNameCar;
     public $stringDriverDay;
@@ -45,8 +57,11 @@ class DriverTabel extends \yii\db\ActiveRecord
     {
         return [
             [['car_id', 'work_date'], 'required'],
-            [['id', 'car_id', 'work_date', 'driver_id_day', 'card_day', 'sum_card_day', 'sum_phone_day', 'sum_card_night', 'sum_phone_night', 'phone_day', 'driver_id_night', 'card_night', 'phone_night'], 'integer'],
+            [['id', 'car_id', 'work_date', 'driver_id_day', 'card_day', 'sum_card_day', 'sum_phone_day',
+                'sum_card_night', 'sum_phone_night', 'phone_day', 'driver_id_night', 'card_night',
+                'phone_night', 'status_day_shift', 'status_night_shift'], 'integer'],
             [['stringNameCar', 'stringDriverDay', 'stringDriverNight'],'safe'],
+            [['status_day_shift', 'status_night_shift'], 'default', 'value' => self::STATUS_SHIFT_OPEN]
         ];
     }
 
@@ -111,18 +126,6 @@ class DriverTabel extends \yii\db\ActiveRecord
         }
 
         return true;
-    }
-
-    public function getDriverShifts(int $driverId)
-    {
-        $startShift = Yii::$app->formatter->asBeginDay(time());
-
-        return self::find()
-            ->where(['driver_id_day' => $driverId])
-            ->orWhere(['driver_id_night' => $driverId])
-            ->andWhere(['<','work_date', $startShift])
-            ->orderBy(['work_date' => SORT_DESC])
-            ->all();
     }
 
 }

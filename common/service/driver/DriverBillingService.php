@@ -3,6 +3,7 @@
 namespace common\service\driver;
 
 use app\models\DriverBilling;
+use app\models\DriverTabel;
 use backend\models\Deposit;
 use backend\models\Driver;
 use Yii;
@@ -32,6 +33,7 @@ class DriverBillingService
     private $summDriver;
     private $compensation;
     private $car_id;
+    private $shift_id;
 
     public function __construct($requestPost)
     {
@@ -57,6 +59,7 @@ class DriverBillingService
         $this->plan = $requestPost['plan'];
         $this->compensation = $requestPost['compensation'];
         $this->car_id = $requestPost['car_id'];
+        $this->shift_id = $requestPost['shift_id'];
     }
 
     /**
@@ -107,6 +110,24 @@ class DriverBillingService
                 $deposit->comment = "Внесение от смены ".Yii::$app->formatter->asDatetime(time());
                 $deposit->save();
             }
+
+            $driverShift = DriverTabel::find()->where(['id' => $this->shift_id])->one();
+            Yii::debug($this->driverId, __METHOD__);
+
+            Yii::debug($driverShift->toArray(), __METHOD__);
+            if($driverShift->driver_id_day == $this->driverId) {
+                $driverShift->status_day_shift = $driverShift::STATUS_SHIFT_CLOSE;
+                $driverShift->save();
+                Yii::debug("day", __METHOD__);
+
+            }
+            if($driverShift->driver_id_night == $this->driverId) {
+                $driverShift->status_night_shift = $driverShift::STATUS_SHIFT_CLOSE;
+                $driverShift->save();
+                Yii::debug("night", __METHOD__);
+
+            }
+
         }else{
             return false;
         }

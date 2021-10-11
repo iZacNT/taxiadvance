@@ -4,8 +4,10 @@
 namespace common\service\driver;
 
 
+use app\models\DriverTabel;
 use backend\models\Cars;
 use common\service\constants\Constants;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 
 class PrepareDriverService
@@ -31,37 +33,37 @@ class PrepareDriverService
         return $depo;
     }
 
-    public function getPeriodShift(int $driverId,array $lastShift):int
+    public function getPeriodShift(int $driverId,array $shift):int
     {
-        if(!empty($lastShift)){
-            if($driverId == $lastShift[0]['driver_id_day']) {
+        if(!empty($shift)){
+            if($driverId == $shift[0]['driver_id_day']) {
                 return Constants::PERIOD_DAY;
-            }elseif ($driverId == $lastShift[0]['driver_id_night']){
+            }elseif ($driverId == $shift[0]['driver_id_night']){
                 return Constants::PERIOD_NIGHT;
             }
         }
         return Constants::PERIOD_DAY;
     }
 
-    public function getCarFuel($driverTabel):int
+    public function getCarFuel($shifts):int
     {
-        if (!empty($driverTabel)){
-            return $driverTabel[0]->carInfo->fuel;
+        if (!empty($shifts)){
+            return $shifts[0]->carInfo->fuel;
         }
         return Constants::FUEL_GAS;
     }
 
-    public function getCarInfo($driverTabel):array
+    public function getCarInfo($shift):array
     {
-        if(!empty($driverTabel)){
-            $car = $driverTabel[0]->carInfo->fullNameMark;
-            $mark = $driverTabel[0]->carInfo->mark;
+        if(!empty($shift)){
+            $car = $shift[0]->carInfo->fullNameMark;
+            $mark = $shift[0]->carInfo->mark;
             return ['car' => $car, 'mark' => $mark];
         }
         return ['car' => "", 'mark' => current((new Cars())->getAllMarks())];
     }
 
-    public function getNumberCardPhone($period, $driverTabel):array
+    public function getNumberCardPhone($period, $shift):array
     {
         $card="Не брал";
         $phone="Не брал";
@@ -69,17 +71,17 @@ class PrepareDriverService
         $sum_phone = 0;
 
         if ($period == Constants::PERIOD_DAY){
-            if (!empty($driverTabel[0]->card_day)) $card = $driverTabel[0]->card_day;
-            if (!empty($driverTabel[0]->phone_day)) $phone = $driverTabel[0]->phone_day;
-            if (!empty($driverTabel[0]->sum_card_day)) $sum_card = $driverTabel[0]->sum_card_day;
-            if (!empty($driverTabel[0]->sum_phone_day)) $sum_phone = $driverTabel[0]->sum_phone_day;
+            if (!empty($shift[0]->card_day)) $card = $shift[0]->card_day;
+            if (!empty($shift[0]->phone_day)) $phone = $shift[0]->phone_day;
+            if (!empty($shift[0]->sum_card_day)) $sum_card = $shift[0]->sum_card_day;
+            if (!empty($shift[0]->sum_phone_day)) $sum_phone = $shift[0]->sum_phone_day;
         }
 
         if ($period == Constants::PERIOD_NIGHT){
-            if (!empty($driverTabel[0]->card_night)) $card = $driverTabel[0]->card_night;
-            if (!empty($driverTabel[0]->card_night)) $phone = $driverTabel[0]->card_night;
-            if (!empty($driverTabel[0]->sum_card_night)) $sum_card = $driverTabel[0]->sum_card_night;
-            if (!empty($driverTabel[0]->sum_phone_night)) $sum_phone = $driverTabel[0]->sum_phone_night;
+            if (!empty($shift[0]->card_night)) $card = $shift[0]->card_night;
+            if (!empty($shift[0]->card_night)) $phone = $shift[0]->card_night;
+            if (!empty($shift[0]->sum_card_night)) $sum_card = $shift[0]->sum_card_night;
+            if (!empty($shift[0]->sum_phone_night)) $sum_phone = $shift[0]->sum_phone_night;
         }
 
 
@@ -106,9 +108,9 @@ class PrepareDriverService
         return 12;
     }
 
-    public function getCarId($driverTabel)
+    public function getCarId($shift)
     {
-        return (!empty($driverTabel[0]->car_id)) ? $driverTabel[0]->car_id : 0;
+        return (!empty($shift[0]->car_id)) ? $shift[0]->car_id : 0;
     }
 
     public function generateTarifTable(int $typeDay, int $period, int $carFuel, int $hours, $cars, $mark):string
@@ -203,6 +205,32 @@ class PrepareDriverService
                                 </tr>
                                 </tfoot>
                             </table>';
+    }
+
+    public function getDriverTabel(DriverTabel $driverTabel, $driver_id): ActiveDataProvider
+    {
+        return new ActiveDataProvider([
+            'query' => $driverTabel::find()
+                ->where(['driver_id_day' => $driver_id])
+                ->orWhere(['driver_id_night' => $driver_id])
+                ->orderBy(['work_date' => SORT_DESC])
+        ]);
+    }
+
+    public function getCurrentShift(DriverTabel $driverTabel, int $driver_id): array
+    {
+        $allOpenShifts = $driverTabel::find()
+            ->where(['driver_id_day' => $driver_id, 'status_day_shift' => $driverTabel::STATUS_SHIFT_OPEN])
+            ->orWhere(['driver_id_night' => $driver_id, 'status_night_shift' => $driverTabel::STATUS_SHIFT_OPEN])
+            ->orderBy(['work_date' => SORT_ASC])
+            ->all();
+        \Yii::debug($allOpenShifts, __METHOD__);
+        return $allOpenShifts;
+    }
+
+    public function getCurrentShiftID(array $shift)
+    {
+        return (!empty($shift)) ? $shift[0]->id : 0;
     }
 
 }
