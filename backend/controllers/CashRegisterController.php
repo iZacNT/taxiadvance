@@ -142,6 +142,7 @@ class CashRegisterController extends Controller
         $cashRegister->date_time = time();
         $cashRegister->save();
 
+        $this->saveDifference(\Yii::$app->request->post("amount"));
         return json_encode(\Yii::$app->request->post());
     }
 
@@ -155,5 +156,26 @@ class CashRegisterController extends Controller
             $comment = "Наличных Меньше чем отражено в кассе, на: ".$amount;
         }
         return $comment;
+    }
+
+    public function saveDifference($amount):void
+    {
+        $typeCash=0;
+        $cashRegistry = new CashRegister();
+
+        if ($amount != 0){
+            if ($amount > 0){
+                $typeCash = $cashRegistry::TYPE_PRIHOD;
+            }
+            if ($amount < 0){
+                $typeCash = $cashRegistry::TYPE_RASHOD;
+            }
+
+            $cashRegistry->type_cash = $typeCash;
+            $cashRegistry->cash = $amount;
+            $cashRegistry->comment = "Разница между кассой и занесенными данными.";
+            $cashRegistry->date_time = time()+1;
+            $cashRegistry->save();
+        }
     }
 }

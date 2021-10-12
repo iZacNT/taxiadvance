@@ -18,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::button('Закрыть смену', ['class' => 'btn btn-warning closeCashRegistry']) ?>
     </p>
 
+    <?php Pjax::begin([
+        'id' => 'cashRegistryPjax'
+    ]); ?>
+
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -35,9 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <!-- ./col -->
     </div>
 
-    <?php Pjax::begin([
-            'id' => 'cashRegistryPjax'
-    ]); ?>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
