@@ -57,6 +57,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => '{delete}'
             ],
         ],
+        'pager' => [
+            'maxButtonCount' => 5,
+            'options' => ['class' => 'pagination pagination-sm'],
+            'linkContainerOptions' => ['class' => 'page-item'],
+            'linkOptions' => ['class' => 'page-link']
+        ],
     ]); ?>
 
     <?php Pjax::end(); ?>

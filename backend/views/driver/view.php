@@ -94,6 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
                             ],
+
                         ]) ?>
 
                     </div>
@@ -116,6 +117,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ['class' => \yii\grid\ActionColumn::className(),
                                         'controller' => 'deposit',
                                         'template' => '{update} &nbsp;&nbsp;{delete}']
+                                ],
+                                'pager' => [
+                                    'maxButtonCount' => 5,
+                                    'options' => ['class' => 'pagination pagination-sm'],
+                                    'linkContainerOptions' => ['class' => 'page-item'],
+                                    'linkOptions' => ['class' => 'page-link']
                                 ],
                             ]);
                        ?>
@@ -148,6 +155,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'debt',
                                     'template' => '{update} &nbsp;&nbsp;{delete}']
+                            ],
+                            'pager' => [
+                                'maxButtonCount' => 5,
+                                'options' => ['class' => 'pagination pagination-sm'],
+                                'linkContainerOptions' => ['class' => 'page-item'],
+                                'linkOptions' => ['class' => 'page-link']
                             ],
                         ]);
                         ?>
@@ -220,6 +233,12 @@ $this->params['breadcrumbs'][] = $this->title;
 //                                    'car.brand_model',
 //                                    'license.number',
                                     ],
+                                'pager' => [
+                                    'maxButtonCount' => 5,
+                                    'options' => ['class' => 'pagination pagination-sm'],
+                                    'linkContainerOptions' => ['class' => 'page-item'],
+                                    'linkOptions' => ['class' => 'page-link']
+                                ],
                             ]);
                             ?>
                             <?php Pjax::end(); ?>
@@ -259,6 +278,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'driver-tabel',
                                     'template' => '{update} &nbsp;&nbsp;{delete}']
+                            ],
+                            'pager' => [
+                                'maxButtonCount' => 5,
+                                'options' => ['class' => 'pagination pagination-sm'],
+                                'linkContainerOptions' => ['class' => 'page-item'],
+                                'linkOptions' => ['class' => 'page-link']
                             ],
                         ]);
                         ?>
@@ -377,6 +402,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'summ_driver:currency:Водителю',
                                 'input_amount:currency:Общаяя',
 
+                            ],
+                            'pager' => [
+                                'maxButtonCount' => 10,
+                                'options' => ['class' => 'pagination pagination-sm'],
+                                'linkContainerOptions' => ['class' => 'page-item'],
+                                'linkOptions' => ['class' => 'page-link']
                             ],
                         ]);
                         ?>
