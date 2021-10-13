@@ -73,10 +73,10 @@ class CashRegister extends \yii\db\ActiveRecord
             ->andWhere(['<>','type_cash', 4])
             ->all();
         foreach ($allRows as $row){
-            if($row->type_cash == 1){
+            if($row->type_cash == self::TYPE_PRIHOD){
                 $result += $row->cash;
             }
-            if($row->type_cash == 2){
+            if($row->type_cash == self::TYPE_RASHOD){
                 $result -= $row->cash;
             }
         }

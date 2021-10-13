@@ -30,6 +30,8 @@ class PrepareDriverService
         if ($calculate > $max) { $depo = 0;}
         if ($calculate < $min ){ $depo = $less;}
 
+        \Yii::debug("Сумма Депо: ".$depo);
+
         return $depo;
     }
 
@@ -37,8 +39,10 @@ class PrepareDriverService
     {
         if(!empty($shift)){
             if($driverId == $shift[0]['driver_id_day']) {
+                \Yii::debug("Дневной период");
                 return Constants::PERIOD_DAY;
             }elseif ($driverId == $shift[0]['driver_id_night']){
+                \Yii::debug("Ночной период");
                 return Constants::PERIOD_NIGHT;
             }
         }
@@ -224,7 +228,7 @@ class PrepareDriverService
             ->orWhere(['driver_id_night' => $driver_id, 'status_night_shift' => $driverTabel::STATUS_SHIFT_OPEN])
             ->orderBy(['work_date' => SORT_ASC])
             ->all();
-        \Yii::debug($allOpenShifts, __METHOD__);
+
         return $allOpenShifts;
     }
 

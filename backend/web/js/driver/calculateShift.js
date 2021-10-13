@@ -65,7 +65,7 @@ $("#calculateShift").on("click",function (){
             '              <span class="info-box-icon"><i class="far fa-check-circle"></i></span>\n' +
             '\n' +
             '              <div class="info-box-content">\n' +
-            '                <span class="info-box-text" style="font-size: 22px;">Выдать водителю: '+(resultAjax.billing*(-1))+' руб.' +
+            '                <span class="info-box-text" style="font-size: 22px;">'+(resultAjax.billing*(-1))+' руб.' +
             '</span>\n' +
             '\n' +
             '              <!-- /.info-box-content -->\n' +
@@ -75,7 +75,7 @@ $("#calculateShift").on("click",function (){
             '              <span class="info-box-icon"><i class="fas fa-exclamation-triangle"></i></span>\n' +
             '\n' +
             '              <div class="info-box-content">\n' +
-            '                <span class="info-box-text" style="font-size: 22px;">Получить с водителя: '+resultAjax.billing+' руб.</span>\n' +
+            '                <span class="info-box-text" style="font-size: 22px;">'+resultAjax.billing+' руб.</span>\n' +
             '\n' +
             '              <!-- /.info-box-content -->\n' +
             '            </div>';

@@ -142,7 +142,7 @@ class CashRegisterController extends Controller
         $cashRegister->date_time = time();
         $cashRegister->save();
 
-        $this->saveDifference(\Yii::$app->request->post("amount"));
+        //$this->saveDifference(\Yii::$app->request->post("amount"));
         return json_encode(\Yii::$app->request->post());
     }
 

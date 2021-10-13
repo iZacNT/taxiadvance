@@ -36,6 +36,8 @@ class PrepareOrdersService
             $summOrders += $order['price'];
         }
 
+        \Yii::debug("Сумма Заказов: ".$summOrders);
+
         return $summOrders;
     }
 

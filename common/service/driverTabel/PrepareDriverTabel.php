@@ -20,7 +20,7 @@ class PrepareDriverTabel
     public function generateColumns(): array
     {
         $columns = [];
-        for ($i=0; $i < 7; $i++) {
+        for ($i=0; $i < 5; $i++) {
             $date = $this->dateSearchFrom;
             array_push($columns, [
                 'attribute' => 'date-'.$date,
@@ -95,7 +95,7 @@ class PrepareDriverTabel
     public function prepareFullColumn($nameDriver, $driver_id): string
     {
 
-        return '<div style="font-size: 12px;">'.Html::a($nameDriver, ['/driver/view', 'id' => $driver_id]).'</div>';
+        return '<div style="font-size: 16px;">'.Html::a($nameDriver, ['/driver/view', 'id' => $driver_id]).'</div>';
     }
 
     public function prepareEmptyColumn()

@@ -47,6 +47,8 @@ class DriverDeposit
 
         $result = $summContributedGave[0]['contributedSum'] - $summContributedGave[0]['gaveSum'];
 
+        \Yii::debug("Сумма депозита: ".$result);
+
         return $result;
     }
 }

@@ -37,6 +37,9 @@ class DriverDebt
             ->asArray()
             ->all();
 
+        \Yii::debug("Сумма Долга: ".($summContributedGave[0]['detteSum'] - $summContributedGave[0]['backSum']));
+
+
         return $summContributedGave[0]['detteSum'] - $summContributedGave[0]['backSum'];
     }
 

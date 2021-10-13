@@ -121,6 +121,7 @@ class DayPlans extends \yii\db\ActiveRecord
             ->andWhere(['period' => $period])
             ->andWhere(['name' => $typeDay])
             ->one();
+
         return ($hours == 12)? $plan->hours_12 : $plan->hours_16;
     }
 }

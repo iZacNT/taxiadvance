@@ -57,6 +57,8 @@ class YandexService
                 $result = $balanceDriverYandex['driver_profiles'][0]["accounts"][0]["balance"];
             }
 
+            \Yii::debug("Баланс Яндекс: ".$result);
+
             return $result;
         }
 

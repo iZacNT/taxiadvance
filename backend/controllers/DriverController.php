@@ -130,12 +130,17 @@ class DriverController extends Controller
         $period = $prepareDriverService->getPeriodShift($driver->id, $currentShift);
         $carFuel = $prepareDriverService->getCarFuel($currentShift);
         $carFuelLabel = Constants::getFuel()[$carFuel];
+        \Yii::debug($carFuelLabel);
+
         $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $currentShift);
+        \Yii::debug($numberPhoneCard);
+
         $carId = $prepareDriverService->getCarId($currentShift);
 
         $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
         $carInfo = $prepareDriverService->getCarInfo($currentShift);
         $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , Constants::WORKING_DAY, $hours);
+        \Yii::debug($dayPlan);
         $carsMarks = (new Cars())->getAllMarks();
         $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $carInfo['mark']);
 
