@@ -27,6 +27,7 @@
                 ['label' => 'Водители', 'icon' => 'far fa-user', 'url' => '/admin/driver/index'],
                 ['label' => 'Табель', 'icon' => 'far fa-user', 'url' => '/admin/driver-tabel/index'],
                 ['label' => 'Касса', 'icon' => 'far fa-user', 'url' => '/admin/cash-register/index'],
+                ['label' => 'Штрафы ДПС', 'icon' => 'far fa-user', 'url' => '/admin/debt-fines/index'],
 
             ];
             if (\backend\models\User::isSuperUser()) {

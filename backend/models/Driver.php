@@ -184,4 +184,19 @@ class Driver extends \yii\db\ActiveRecord
         return $this->statusDriver;
     }
 
+    /**
+     * @param null $filial
+     * @return array
+     */
+    public static function prepareDriversForAutocomplete($filial = null): array
+    {
+        return self::find()
+            ->select(['concat(last_name, " ", first_name) as value', 'concat(last_name, " ", first_name) as  label','id as id'])
+            ->where(['status' => 1])
+            ->orWhere(['status' => 3])
+            ->andFilterWhere(['filial' => $filial])
+            ->asArray()
+            ->all();
+    }
+
 }

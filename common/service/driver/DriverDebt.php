@@ -43,7 +43,7 @@ class DriverDebt
         return $summContributedGave[0]['detteSum'] - $summContributedGave[0]['backSum'];
     }
 
-    public function createDebt(Debt $debt):void
+    public function createDebt($debt):void
     {
         try {
             $debt->driver_id = $this->idDriver;
