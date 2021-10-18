@@ -328,12 +328,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td><?= $depo;?></td>
                                 </tr>
                                 <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>
-                                    <td>
-                                       <?= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
-                                    </td>
-                                </tr>
-                                <tr class="odd">
                                     <td class="dtr-control sorting_1" tabindex="0">Мойка:</td>
                                     <td>
                                         <?= Html::textInput('carWash', 0, ['class' => 'form-control', 'id' => 'carWash'] ); ?>
@@ -357,6 +351,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         </div>
                         <div class="col-md-6">
                                     <?= $generateTarifTable;?>
+
+                            <table class="table table-responsive">
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>
+                                    <td>
+                                        <?= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
+                                    </td>
+                                </tr>
+                            </table>
                             <div class="row resultData">
                                 <div class="col-md-8" id="resultAjax">
                                 </div>

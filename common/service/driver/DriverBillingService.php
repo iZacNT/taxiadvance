@@ -2,6 +2,7 @@
 
 namespace common\service\driver;
 
+use app\models\CashRegister;
 use app\models\DriverBilling;
 use app\models\DriverTabel;
 use backend\models\Deposit;
@@ -83,7 +84,7 @@ class DriverBillingService
             $driverBilling->type_day = $this->typeDay;
             $driverBilling->input_amount = $this->inputAmount;
             $driverBilling->depo = $this->depo;
-            $driverBilling->debt_from_shift = $this->debtFromShift;
+            $driverBilling->debt_from_shift = 0;
             $driverBilling->car_wash = $this->carWash;
             $driverBilling->car_fuel_summ = $this->carFuelSumm;
             $driverBilling->car_phone_summ = $this->carPhoneSumm;
@@ -126,6 +127,15 @@ class DriverBillingService
                 $driverShift->save();
                 Yii::debug("night", __METHOD__);
 
+            }
+
+            if ($this->debtFromShift > 0 ) {
+                $cashRegistry = new CashRegister();
+                $cashRegistry->date_time = time();
+                $cashRegistry->type_cash = $cashRegistry::TYPE_DOLG_PO_SMENE;
+                $cashRegistry->cash = $this->debtFromShift;
+                $cashRegistry->comment = "Водитель: ".$driver->fullName;
+                $cashRegistry->save();
             }
 
         }else{

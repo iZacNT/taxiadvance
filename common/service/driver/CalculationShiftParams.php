@@ -21,7 +21,7 @@ class CalculationShiftParams {
     private $fullAmountSumm;
     private $balanceYandex;
     private $depo;
-    private $debtFromShift;
+//    private $debtFromShift;
     private $carWash;
     private $carFuelSumm;
     private $carPhoneSumm;
@@ -37,7 +37,7 @@ class CalculationShiftParams {
         $this->period = $requestPost['period'];
         $this->balanceYandex = $requestPost['balanceYandex'];
         $this->depo = $requestPost['depo'];
-        $this->debtFromShift = $requestPost['debtFromShift'];
+//        $this->debtFromShift = $requestPost['debtFromShift'];
         $this->carWash = $requestPost['carWash'];
         $this->carFuelSumm = $requestPost['carFuelSumm'];
         $this->carPhoneSumm = $requestPost['carPhoneSumm'];
@@ -88,7 +88,8 @@ class CalculationShiftParams {
      */
     public function getAdditionally()
     {
-        return $this->depo+$this->debtFromShift+$this->carWash+$this->carFuelSumm+$this->carPhoneSumm;
+        //return $this->depo+$this->debtFromShift+$this->carWash+$this->carFuelSumm+$this->carPhoneSumm;
+        return $this->depo+$this->carWash+$this->carFuelSumm+$this->carPhoneSumm;
     }
 
 
