@@ -210,27 +210,27 @@ $js = <<< JS
         success: function(msg){
             console.log(msg);
             $(".modal-title").text("Найденные Данные:");
-            if(msg.length > 1 ){
-                let html='<table class="table">\n' +
-                    '  <thead class="thead-light">\n' +
-                    '    <tr>\n' +
-                    '      <th scope="col">Имя</th>\n' +
-                    '      <th scope="col"></th>\n' +
-                    '    </tr>\n' +
-                    '  </thead>\n' +
+            if(msg.length >= 1 ){
+                let html='<table class="table">'+
+                    '  <thead class="thead-light">' +
+                    '    <tr>' +
+                    '      <th scope="col">Имя</th>' +
+                    '      <th scope="col"></th>' +
+                    '    </tr>' +
+                    '  </thead>' +
                     '  <tbody>';
                 msg.forEach(function(item, i, arr) {
 
-                    html += '<tr>\n' +
-                    '      <td>'+arr[i].last_name+' '+arr[i].first_name+'</td>\n' +
+                    html += '<tr>' +
+                    '      <td>'+arr[i].last_name+' '+arr[i].first_name+'</td>' +
                     '      <td><button class="btn btn-primary getDriver" ' +
                         'data-fname="'+arr[i].first_name+'" ' +
                         'data-lname="'+arr[i].last_name+'" ' +
                         'data-id="'+arr[i].id+'"' +
-                        '" >Выбрать</button></td>\n' +
+                        '" >Выбрать</button></td>' +
                     '    </tr>';
                 });
-                html += '</tbody>\n' +
+                html += '</tbody>'+
                     '</table>';
                 $('.modal-body').html(html)
 

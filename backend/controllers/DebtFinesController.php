@@ -148,21 +148,22 @@ class DebtFinesController extends Controller
         $date = \Yii::$app->request->post('date');
         $beginDate = \Yii::$app->formatter->asBeginDay($date);
         $endDate = \Yii::$app->formatter->asEndDay($date);
-
+        $result =['length' => 0];
         $driverData = DriverTabel::find()
             ->where(['car_id' => \Yii::$app->request->post('carId')])
             ->andWhere(['>=', 'work_date', $beginDate])
             ->andWhere(['<=', 'work_date', $endDate])
             ->one();
 
+        if ($driverData){
         $result = [
             'driver_day_id' => $driverData->driver_id_day,
-//            'fullname_driver_day' => $driverData->getFullDayDriverName()->last_name,
+            'fullname_driver_day' => $driverData->fullDayDriverName->last_name,
             'driver_night_id' => $driverData->driver_id_day,
-//            'fullname_driver_night' => $driverData->getFullNightDriverName()->last_name,
-
+            'fullname_driver_night' => $driverData->fullNightDriverName->last_name,
+            'length' => 1
         ];
-
+        }
         return json_encode($result);
     }
 }
