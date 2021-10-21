@@ -45,7 +45,7 @@ class DebtFines extends \yii\db\ActiveRecord
     {
         return [
             [['driver_id', 'dette', 'back', 'reason', 'car_id', 'date_reason', 'date_dtp', 'payable', 'date_pay'], 'integer'],
-            [['comment', 'stringDateReason', 'stringDateDtp', 'stringDatePay'. 'stringNameDriver'], 'string'],
+            [['comment', 'stringDateReason', 'stringDateDtp', 'stringDatePay', 'stringNameDriver'], 'string'],
             [['regulation', 'geo_dtp'], 'string', 'max' => 255],
         ];
     }

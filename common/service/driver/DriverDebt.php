@@ -63,7 +63,7 @@ class DriverDebt
         }
     }
 
-    public function updateDebt(Debt $debt):void
+    public function updateDebt($debt):void
     {
         try {
             if (!empty($debt->stringDateReason)) {

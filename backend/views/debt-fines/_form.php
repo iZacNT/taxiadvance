@@ -164,18 +164,18 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
-    <?= $form->field($debtFines, 'driver_id')->textInput() ?>
+    <?= $form->field($debtFines, 'driver_id')->hiddenInput()->label("") ?>
 
-    <?= $form->field($debtFines, 'car_id')->textInput() ?>
+    <?= $form->field($debtFines, 'car_id')->hiddenInput()->label("") ?>
 
-    <?= $form->field($debtFines, 'reason')->textInput() ?>
+    <?= $form->field($debtFines, 'reason')->hiddenInput()->label("") ?>
 
     <?php ActiveForm::end(); ?>
 
 </div>
 
-
 <?php
+
 $js = <<< JS
 
     function verifyData(value, message)
@@ -209,40 +209,27 @@ $js = <<< JS
         // },
         success: function(msg){
             console.log(msg);
-            $(".modal-title").text("Найденные Данные:");
+            $('#modalSave').hide();
+            $(".modal-title").text("Найденные Данные: "+msg.car_id+' от '+msg.date);
             if(msg.length >= 1 ){
-                let html='<table class="table">'+
-                    '  <thead class="thead-light">' +
-                    '    <tr>' +
-                    '      <th scope="col">Имя</th>' +
-                    '      <th scope="col"></th>' +
-                    '    </tr>' +
-                    '  </thead>' +
-                    '  <tbody>';
-                msg.forEach(function(item, i, arr) {
-
-                    html += '<tr>' +
-                    '      <td>'+arr[i].last_name+' '+arr[i].first_name+'</td>' +
-                    '      <td><button class="btn btn-primary getDriver" ' +
-                        'data-fname="'+arr[i].first_name+'" ' +
-                        'data-lname="'+arr[i].last_name+'" ' +
-                        'data-id="'+arr[i].id+'"' +
-                        '" >Выбрать</button></td>' +
-                    '    </tr>';
-                });
-                html += '</tbody>'+
-                    '</table>';
+                let html = '<div class="row">' +
+                prepareData(msg)+
+                 '</div>';
                 $('.modal-body').html(html)
-
-                $('.modal-body').on('click','.getDriver', function (){
-                    $("#driver-first_name").val($(this).data('fname'));
-                    $("#driver-last_name").val($(this).data('lname'));
-                    $("#driver-yandex_id").val($(this).data('id'));
-                    $("#driver-phone").val($(this).data('phone'));
-                    $("#driver-driving_license").val($(this).data('dlicense'));
-
+                $('.modal-body').on('click','.selectDriver', function (){
+                    $("#autocompleteDriver").val($(this).data('fullname'));
+                    $("#debtfines-driver_id").val($(this).data('id'));
                     $('#exampleModalCenter').modal('hide');
                 });
+                // $('.modal-body').on('click','.getDriver', function (){
+                //     $("#driver-first_name").val($(this).data('fname'));
+                //     $("#driver-last_name").val($(this).data('lname'));
+                //     $("#driver-yandex_id").val($(this).data('id'));
+                //     $("#driver-phone").val($(this).data('phone'));
+                //     $("#driver-driving_license").val($(this).data('dlicense'));
+                //
+                //     $('#exampleModalCenter').modal('hide');
+                // });
 
                 $('#exampleModalCenter').modal('show');
             }else{
@@ -252,6 +239,75 @@ $js = <<< JS
             // $('#loader').hide();
         }
     }); //ajax
+    }
+    
+    function prepareData(msg)
+    {
+        let disabledDay = '';
+        let disabledNight = '';
+        
+        if (msg.driver_day_id == null){ disabledDay = 'disabled'}
+        if (msg.driver_night_id == null){ disabledNight = 'disabled'}
+        let html = '<div class="col-md-6">'+
+            '<div class="card">'+
+              '<div class="card-header">'+
+                '<h3 class="card-title">'+
+                  'Дневная смена: '+
+                '</h3>'+
+              '</div>'+
+              <!-- /.card-header -->
+              '<div class="card-body">'+
+                '<dl>'+
+                  '<dt>Водитель: </dt>'+
+                  '<dd>'+msg.fullname_driver_day+'</dd>'+
+                  '<dt>Сумма за бензин: </dt>'+
+                  '<dd>'+msg.driver_sum_card_day+'</dd>'+
+                  '<dt>Телефон: </dt>'+
+                  '<dd>'+msg.driver_sum_card_day+'</dd>'+
+                  '<dt>Статус смены: </dt>'+
+                  '<dd>'+msg.driver_status_day_shift+'</dd>'+
+                  '<dt>Время закрытия смены: </dt>'+
+                  '<dd>'+msg.date_close_day_shift+'</dd>'+
+                  '<button class="btn btn-primary selectDriver" style="width: 100%"' +
+                   'data-id="'+msg.driver_day_id+'"' +
+                    ' data-fullname="'+msg.fullname_driver_day+'" '+disabledDay+'>Выбрать</button>'+
+                '</dl>'+
+              '</div>'+
+              <!-- /.card-body -->
+            '</div>'+
+            <!-- /.card -->
+          '</div>';
+        
+        html += '<div class="col-md-6">'+
+            '<div class="card">'+
+              '<div class="card-header">'+
+                '<h3 class="card-title">'+
+                  'Ночная смена: '+
+                '</h3>'+
+              '</div>'+
+              <!-- /.card-header -->
+              '<div class="card-body">'+
+                '<dl>'+
+                  '<dt>Водитель: </dt>'+
+                  '<dd>'+msg.fullname_driver_night+'</dd>'+
+                  '<dt>Сумма за бензин: </dt>'+
+                  '<dd>'+msg.driver_sum_card_night+'</dd>'+
+                  '<dt>Телефон: </dt>'+
+                  '<dd>'+msg.driver_sum_card_night+'</dd>'+
+                  '<dt>Статус смены: </dt>'+
+                  '<dd>'+msg.driver_status_night_shift+'</dd>'+
+                  '<dt>Время закрытия смены: </dt>'+
+                  '<dd>'+msg.date_close_night_shift+'</dd>'+
+                  '<button class="btn btn-primary selectDriver" style="width: 100%"' +
+                   'data-id="'+msg.driver_night_id+'"' +
+                    ' data-fullname="'+msg.fullname_driver_night+'" '+disabledNight+'>Выбрать</button>'+
+                '</dl>'+
+              '</div>'+
+              <!-- /.card-body -->
+            '</div>'+
+            <!-- /.card -->
+          '</div>';
+        return html;
     }
     
     $(".debt-fines-form").on("click", '#findDriver', findDriverData);

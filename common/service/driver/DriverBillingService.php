@@ -118,12 +118,14 @@ class DriverBillingService
             Yii::debug($driverShift->toArray(), __METHOD__);
             if($driverShift->driver_id_day == $this->driverId) {
                 $driverShift->status_day_shift = $driverShift::STATUS_SHIFT_CLOSE;
+                $driverShift->date_close_day_shift = time();
                 $driverShift->save();
                 Yii::debug("day", __METHOD__);
 
             }
             if($driverShift->driver_id_night == $this->driverId) {
                 $driverShift->status_night_shift = $driverShift::STATUS_SHIFT_CLOSE;
+                $driverShift->date_close_night_shift = time();
                 $driverShift->save();
                 Yii::debug("night", __METHOD__);
 

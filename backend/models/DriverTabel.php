@@ -24,6 +24,8 @@ use Yii;
  * @property int $sum_phone_night Сумма
  * @property int $status_day_shift [int]
  * @property int $status_night_shift [int]
+ * @property int $date_close_day_shift [int]
+ * @property int $date_close_night_shift [int]
  */
 class DriverTabel extends \yii\db\ActiveRecord
 {
@@ -31,7 +33,7 @@ class DriverTabel extends \yii\db\ActiveRecord
     const STATUS_SHIFT_OPEN = 1;
     const STATUS_SHIFT_CLOSE = 2;
 
-    public function labelStatusShift(): array
+    public static function labelStatusShift(): array
     {
         return [
             self::STATUS_SHIFT_OPEN => 'Открыта',
@@ -59,7 +61,7 @@ class DriverTabel extends \yii\db\ActiveRecord
             [['car_id', 'work_date'], 'required'],
             [['id', 'car_id', 'work_date', 'driver_id_day', 'card_day', 'sum_card_day', 'sum_phone_day',
                 'sum_card_night', 'sum_phone_night', 'phone_day', 'driver_id_night', 'card_night',
-                'phone_night', 'status_day_shift', 'status_night_shift'], 'integer'],
+                'phone_night', 'status_day_shift', 'status_night_shift', 'date_close_day_shift', 'date_close_night_shift'], 'integer'],
             [['stringNameCar', 'stringDriverDay', 'stringDriverNight'],'safe'],
             [['status_day_shift', 'status_night_shift'], 'default', 'value' => self::STATUS_SHIFT_OPEN]
         ];
@@ -86,7 +88,9 @@ class DriverTabel extends \yii\db\ActiveRecord
             'sum_card_day' => 'Сумма',
             'sum_phone_day' => 'Сумма',
             'sum_card_night' => 'Сумма',
-            'sum_phone_night' => 'Сумма'
+            'sum_phone_night' => 'Сумма',
+            'date_close_day_shift' => 'Время закрытия смены',
+            'date_close_night_shift' => 'Время закрытия смены'
         ];
     }
 

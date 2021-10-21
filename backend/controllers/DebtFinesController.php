@@ -60,7 +60,7 @@ class DebtFinesController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'debtFines' => $this->findModel($id),
         ]);
     }
 
@@ -77,9 +77,9 @@ class DebtFinesController extends Controller
         if ($this->request->isPost) {
             if ($debtFines->load($this->request->post())) {
 
-                (new DriverDebt(\Yii::$app->request->post('driver_id')))->createDebt($debtFines);
+                (new DriverDebt($debtFines->driver_id))->createDebt($debtFines);
 
-                return $this->redirect(['view', 'id' => \Yii::$app->request->post('id')]);
+                return $this->redirect(['view', 'id' => $debtFines->id]);
             }
         } else {
             $debtFines->loadDefaultValues();
@@ -102,14 +102,31 @@ class DebtFinesController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $debtFines = $this->findModel($id);
+        $cars = Cars::prepareCarsForAutocomplete(\Yii::$app->user->identity->getFilialUser());
+        $drivers = Driver::prepareDriversForAutocomplete();
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost && $debtFines->load($this->request->post())) {
+
+            try {
+                (new DriverDebt($debtFines->driver_id))->updateDebt($debtFines);
+            } catch (\Exception $exception){
+                throw new \DomainException($exception->getMessage());
+            }
+
+            return $this->redirect(['view', 'id' => $debtFines->id]);
         }
 
+        $debtFines->stringDateReason = date('Y-m-d', $debtFines->date_reason);
+        $debtFines->stringDateDtp = date('Y-m-d', $debtFines->date_dtp);
+        $debtFines->stringDatePay = date('Y-m-d', $debtFines->date_pay);
+        $debtFines->stringNameCar = $debtFines->carInfo->fullNameMark;
+        $debtFines->stringNameDriver = $debtFines->driverInfo->fullName;
+
         return $this->render('update', [
-            'model' => $model,
+            'debtFines' => $debtFines,
+            'drivers' => $drivers,
+            'cars' => $cars,
         ]);
     }
 
@@ -148,7 +165,25 @@ class DebtFinesController extends Controller
         $date = \Yii::$app->request->post('date');
         $beginDate = \Yii::$app->formatter->asBeginDay($date);
         $endDate = \Yii::$app->formatter->asEndDay($date);
-        $result =['length' => 0];
+        $result =[
+            'date' => \Yii::$app->formatter->asDate($date),
+            'car_id' => \Yii::$app->request->post('carId'),
+            'driver_day_id' => null,
+            'fullname_driver_day' => 'Не назначен',
+            'driver_sum_card_day' => 0,
+            'driver_phone_day' => null,
+            'driver_status_day_shift' => '-',
+            'date_close_day_shift' => '-',
+
+            'driver_night_id' => null,
+            'fullname_driver_night' => 'Не назначен',
+            'driver_sum_card_night' => 0,
+            'driver_phone_night' => null,
+            'driver_status_night_shift' => "-",
+            'date_close_night_shift' => '-',
+
+            'length' => 0
+        ];
         $driverData = DriverTabel::find()
             ->where(['car_id' => \Yii::$app->request->post('carId')])
             ->andWhere(['>=', 'work_date', $beginDate])
@@ -156,13 +191,27 @@ class DebtFinesController extends Controller
             ->one();
 
         if ($driverData){
-        $result = [
-            'driver_day_id' => $driverData->driver_id_day,
-            'fullname_driver_day' => $driverData->fullDayDriverName->last_name,
-            'driver_night_id' => $driverData->driver_id_day,
-            'fullname_driver_night' => $driverData->fullNightDriverName->last_name,
-            'length' => 1
-        ];
+            $result['car_id'] = (Cars::find()->where(['id' => $driverData->car_id])->one())->fullNameMark;
+
+            if ($driverData->driver_id_day){
+                $result['driver_day_id'] = $driverData->driver_id_day;
+                $result['fullname_driver_day'] = (Driver::find()->where(['id' => $driverData->driver_id_day])->one())->fullName;
+                $result['driver_sum_card_day'] = $driverData->sum_card_day;
+                $result['driver_phone_day'] = $driverData->phone_day;
+                $result['driver_status_day_shift'] = DriverTabel::labelStatusShift()[$driverData->status_day_shift];
+                $result['date_close_day_shift'] = ($driverData->date_close_day_shift == 0) ? "Не закрыта" : \Yii::$app->formatter->asDatetime($driverData->date_close_day_shift);
+
+            }
+
+            if ($driverData->driver_id_night){
+                $result['driver_night_id'] = $driverData->driver_id_night;
+                $result['fullname_driver_night'] = (Driver::find()->where(['id' => $driverData->driver_id_night])->one())->fullName;
+                $result['driver_sum_card_night'] = $driverData->sum_card_night;
+                $result['driver_phone_night'] = $driverData->phone_night;
+                $result['driver_status_night_shift'] = DriverTabel::labelStatusShift()[$driverData->status_night_shift];
+                $result['date_close_night_shift'] = ($driverData->date_close_night_shift == 0) ? "Не закрыта" : \Yii::$app->formatter->asDatetime($driverData->date_close_night_shift);
+            }
+            $result['length'] = 1;
         }
         return json_encode($result);
     }
