@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             'carInfo.fullNameMark',
             'date_reason:date',
-            'dette',
-            'back',
+            'dette:currency',
+            'back:currency',
             'comment:ntext',
             //'car_id',
             //'date_reason',
@@ -45,6 +45,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{delete}'],
+        ],
+        'pager' => [
+            'maxButtonCount' => 10,
+            'options' => ['class' => 'pagination pagination-sm'],
+            'linkContainerOptions' => ['class' => 'page-item'],
+            'linkOptions' => ['class' => 'page-link']
         ],
     ]); ?>
 
