@@ -31,6 +31,8 @@ class PrepareDriverTabel
                         .$this->isToday($date)];
                 },
                 'format' => 'raw',
+                'filter' => Html::button("Поиск", ['class' => 'btn btn-primary searchDate', 'data-date' => $date]),
+                'filterOptions' => ['class' => 'text-center'],
                 'value' => function($data) use ($date){
 
                     $work_drivers = $data->getWorkDriverAtDay($data->id, $date);

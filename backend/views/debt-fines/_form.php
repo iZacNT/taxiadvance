@@ -221,15 +221,6 @@ $js = <<< JS
                     $("#debtfines-driver_id").val($(this).data('id'));
                     $('#exampleModalCenter').modal('hide');
                 });
-                // $('.modal-body').on('click','.getDriver', function (){
-                //     $("#driver-first_name").val($(this).data('fname'));
-                //     $("#driver-last_name").val($(this).data('lname'));
-                //     $("#driver-yandex_id").val($(this).data('id'));
-                //     $("#driver-phone").val($(this).data('phone'));
-                //     $("#driver-driving_license").val($(this).data('dlicense'));
-                //
-                //     $('#exampleModalCenter').modal('hide');
-                // });
 
                 $('#exampleModalCenter').modal('show');
             }else{

@@ -36,7 +36,7 @@ use yii\widgets\ActiveForm;
     ]) ?>
 
     <div class="form-group mt-3">
-        <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary']) ?>
+        <?= Html::submitButton('Выбрат дату', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Сбросить', ['class' => 'btn btn-outline-secondary', 'onclick' => 'window.location.replace(window.location.pathname);']); ?>
     </div>
 

@@ -24,6 +24,7 @@ class DriverTabelController extends Controller
     {
         $searchModel = new DriverTabelSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $drivers = Driver::prepareDriversForAutocomplete();
 
         $dateSearchFrom = (Yii::$app->formatter->asBeginDay(time()))-(24*60*60);
         if (Yii::$app->request->get("dateSearchFrom")){
@@ -38,7 +39,8 @@ class DriverTabelController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'columns' => $columns
+            'columns' => $columns,
+            'drivers' => $drivers
         ]);
     }
 
@@ -160,5 +162,56 @@ class DriverTabelController extends Controller
         return $this->render('view', [
             'driverTabel' => $this->findModel($id),
         ]);
+    }
+
+    public function actionSearchDriverByDateAndFio()
+    {
+        $response = [
+            'full_name' => '-',
+            'phone' => 0,
+            'card' => 0,
+            'status_shift' => '-',
+            'close_shift' => '-',
+            'length' => 0
+        ];
+        $requestData = Yii::$app->request->post();
+        $date = $requestData['date'];
+        $driver_id = $requestData['driver_id'];
+        $beginDate = \Yii::$app->formatter->asBeginDay($date);
+        $endDate = \Yii::$app->formatter->asEndDay($date);
+        $driverData = DriverTabel::find()
+            ->where(['driver_id_day' => $requestData["driver_id"]])
+            ->orWhere(['driver_id_night' => $requestData["driver_id"]])
+            ->andWhere(['>=', 'work_date', $beginDate])
+            ->andWhere(['<=', 'work_date', $endDate])
+            ->one();
+        if ($driverData){
+            $response = [
+                'id' => $driver_id,
+                'car' => $driverData->carInfo->fullNameMark,
+                'full_name' => ($driver_id == $driverData->driver_id_day)? $driverData->fullDayDriverName->fullName : $driverData->fullNightDriverName->fullname,
+                'phone' => ($driver_id == $driverData->driver_id_day) ?
+                    (!$driverData->phone_day) ? "Нет" : $driverData->phone_day
+                    :
+                    (!$driverData->phone_night)? "Нет" : $driverData->phone_night,
+                'card' => ($driver_id == $driverData->driver_id_day) ?
+                    (!$driverData->sum_card_day) ? Yii::$app->formatter->asCurrency(0): Yii::$app->formatter->asCurrency($driverData->sum_card_day)
+                    :
+                    (!$driverData->sum_card_night) ? Yii::$app->formatter->asCurrency(0): Yii::$app->formatter->asCurrency($driverData->sum_card_night) ,
+                'shift' => ($driver_id == $driverData->driver_id_day)? "Дневная" : "Ночная",
+                'status_shift' => ($driver_id == $driverData->driver_id_day) ?
+                    $driverData::labelStatusShift()[$driverData->status_day_shift]
+                    :
+                    $driverData::labelStatusShift()[$driverData->status_night_shift],
+                'close_shift' => ($driver_id == $driverData->driver_id_day) ?
+                    (!$driverData->date_close_day_shift) ? "-" : Yii::$app->formatter->asDatetime($driverData->date_close_day_shift)
+                    :
+                    (!$driverData->date_close_night_shift) ? "-" : Yii::$app->formatter->asDatetime($driverData->date_close_night_shift),
+
+                'length' => 1
+                ];
+        }
+
+        return json_encode($response);
     }
 }
