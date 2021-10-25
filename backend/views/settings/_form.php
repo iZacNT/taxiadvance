@@ -60,6 +60,17 @@ use yii\widgets\ActiveForm;
             </div>
             <!-- /.card -->
         </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <?= $form->field($model, 'phone_sum')->textInput(['maxlength' => true]) ?>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+
         </div>
 
     </div>

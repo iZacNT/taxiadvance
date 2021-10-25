@@ -334,8 +334,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     </td>
                                 </tr>
                                 <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0"><strong><?= $carFuel;?>:</strong> (<?= $car;?>)<br>
-                                        № Карты: <?= $card?></td>
+                                    <td class="dtr-control sorting_1" tabindex="0"><strong><?= $carFuel;?>:</strong> (<?= $car;?>)</td>
                                     <td>
                                         <?= Html::textInput('carFuel', $sum_card, ['class' => 'form-control', 'id' => 'carFuel'] ); ?>
                                     </td>

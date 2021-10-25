@@ -9,6 +9,7 @@ use app\models\DriverTabelSearch;
 use backend\models\Cars;
 use backend\models\Driver;
 use backend\models\DriverTTabelSearch;
+use backend\models\Settings;
 use common\service\driverTabel\PrepareDriverTabel;
 use Throwable;
 use Yii;
@@ -47,18 +48,53 @@ class DriverTabelController extends Controller
     public function actionCreate()
     {
         $driverTabel = new DriverTabel();
+        if (\Yii::$app->request->get("workDate")){
+            $driverTabel->work_date = Yii::$app->formatter->asDate(\Yii::$app->request->get("workDate"),"yyyy-MM-dd");
+
+        }else{
+            $driverTabel->work_date = Yii::$app->formatter->asDate(time(),"yyyy-MM-dd");
+        }
+
+        /*********************** drivers at day array ************************/
+        $beginDate = \Yii::$app->formatter->asBeginDay(strtotime($driverTabel->work_date));
+        $endDate = \Yii::$app->formatter->asEndDay(strtotime($driverTabel->work_date));
+        $qDay = DriverTabel::find()->select('driver_id_day as id_driver')->where(['>=', 'work_date', $beginDate])
+            ->andWhere(['<=', 'work_date', $endDate])->asArray()->all();
+        $qNight = DriverTabel::find()->select('driver_id_night as id_driver')->where(['>=', 'work_date', $beginDate])
+            ->andWhere(['<=', 'work_date', $endDate])->asArray()->all();
+        $workDrivers = [];
+        foreach ($qDay as $item){
+            array_push($workDrivers, $item['id_driver']);
+        }
+        foreach ($qNight as $item){
+            array_push($workDrivers, $item['id_driver']);
+        }
+        Yii::debug($workDrivers, __METHOD__);
+        /******************** end drivers at day array ***********************/
+
         $cars = Cars::find()
             ->select(['concat(mark, " ", number) as value', 'concat(mark, " ", number) as  label','id as id'])
             ->asArray()
             ->all();
         $drivers = Driver::find()
             ->select(['concat(last_name, " ", first_name) as value', 'concat(last_name, " ", first_name) as  label','id as id'])
+            ->where(['not in','id', $workDrivers])
             ->asArray()
             ->all();
+
+        $phone_sum = (Settings::find()->select('phone_sum')->one())->phone_sum;
 
         if ($this->request->isPost) {
             if ($driverTabel->load($this->request->post())) {
                 $driverTabel->work_date = strtotime($driverTabel->work_date);
+                if ($driverTabel->phone_day){
+                    $driverTabel->sum_phone_day = $phone_sum;
+                }
+
+                if ($driverTabel->phone_night){
+                    $driverTabel->sum_phone_night = $phone_sum;
+                }
+
                 $driverTabel->save();
 
                 return $this->redirect(['view', 'id' => $driverTabel->id]);
@@ -67,10 +103,6 @@ class DriverTabelController extends Controller
             $driverTabel->loadDefaultValues();
         }
 
-        if (\Yii::$app->request->get("workDate")){
-            $driverTabel->work_date = Yii::$app->formatter->asDate(\Yii::$app->request->get("workDate"),"yyyy-MM-dd");
-
-        }
         if (\Yii::$app->request->get("carId")){
             $driverTabel->car_id = \Yii::$app->request->get("carId");
             foreach($cars as $car){
@@ -97,11 +129,24 @@ class DriverTabelController extends Controller
             ->select(['concat(last_name, " ", first_name) as value', 'concat(last_name, " ", first_name) as  label','id as id'])
             ->asArray()
             ->all();
+        $phone_sum = (Settings::find()->select('phone_sum')->one())->phone_sum;
 
         if ($this->request->isPost && $driverTabel->load($this->request->post())) {
             $formattedDate = strtotime($driverTabel->work_date);
             if ($driverTabel->isValidDay($formattedDate, $driverTabel->car_id, $oldDate)){
                 $driverTabel->work_date = $formattedDate;
+                if ($driverTabel->phone_day){
+                    $driverTabel->sum_phone_day = $phone_sum;
+                }else{
+                    $driverTabel->sum_phone_day = '';
+                }
+
+                if ($driverTabel->phone_night){
+                    $driverTabel->sum_phone_night = $phone_sum;
+                }else{
+                    $driverTabel->sum_phone_night = '';
+                }
+
                 $driverTabel->save();
             }else{
                 Yii::$app->session->setFlash("error", 'На дату <strong>'.$driverTabel->work_date.'</strong> для Автомобиля <strong>'.$driverTabel->stringNameCar.'</strong> уже назначены водители!');
@@ -191,22 +236,22 @@ class DriverTabelController extends Controller
                 'car' => $driverData->carInfo->fullNameMark,
                 'full_name' => ($driver_id == $driverData->driver_id_day)? $driverData->fullDayDriverName->fullName : $driverData->fullNightDriverName->fullname,
                 'phone' => ($driver_id == $driverData->driver_id_day) ?
-                    (!$driverData->phone_day) ? "Нет" : $driverData->phone_day
+                    (empty($driverData->phone_day)) ? "Нет" : $driverData->phone_day
                     :
-                    (!$driverData->phone_night)? "Нет" : $driverData->phone_night,
+                    (empty($driverData->phone_night))? "Нет" : $driverData->phone_night,
                 'card' => ($driver_id == $driverData->driver_id_day) ?
-                    (!$driverData->sum_card_day) ? Yii::$app->formatter->asCurrency(0): Yii::$app->formatter->asCurrency($driverData->sum_card_day)
+                    (empty($driverData->sum_card_day)) ? Yii::$app->formatter->asCurrency(0): Yii::$app->formatter->asCurrency($driverData->sum_card_day)
                     :
-                    (!$driverData->sum_card_night) ? Yii::$app->formatter->asCurrency(0): Yii::$app->formatter->asCurrency($driverData->sum_card_night) ,
+                    (empty($driverData->sum_card_night)) ? Yii::$app->formatter->asCurrency(0): Yii::$app->formatter->asCurrency($driverData->sum_card_night) ,
                 'shift' => ($driver_id == $driverData->driver_id_day)? "Дневная" : "Ночная",
                 'status_shift' => ($driver_id == $driverData->driver_id_day) ?
                     $driverData::labelStatusShift()[$driverData->status_day_shift]
                     :
                     $driverData::labelStatusShift()[$driverData->status_night_shift],
                 'close_shift' => ($driver_id == $driverData->driver_id_day) ?
-                    (!$driverData->date_close_day_shift) ? "-" : Yii::$app->formatter->asDatetime($driverData->date_close_day_shift)
+                    (empty($driverData->date_close_day_shift)) ? "-" : Yii::$app->formatter->asDatetime($driverData->date_close_day_shift)
                     :
-                    (!$driverData->date_close_night_shift) ? "-" : Yii::$app->formatter->asDatetime($driverData->date_close_night_shift),
+                    (empty($driverData->date_close_night_shift)) ? "-" : Yii::$app->formatter->asDatetime($driverData->date_close_night_shift),
 
                 'length' => 1
                 ];

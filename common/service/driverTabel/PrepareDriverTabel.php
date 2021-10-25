@@ -42,7 +42,7 @@ class PrepareDriverTabel
                     $row .= Html::a("<i class='far fa-eye' style='float: right; margin-right: 10px;'></i>",['view', 'id' => $work_drivers->id]);
                     $row .= "<br />";
                     if($this->isFullDayShift($work_drivers)){
-                        $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day);
+                        $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day, $work_drivers->date_close_day_shift);
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date, false)){
                             $row .= $this->prepareRepairColumn();
@@ -52,7 +52,7 @@ class PrepareDriverTabel
                     }
                     $row .= "<hr />";
                     if($this->isFullNightShift($work_drivers)){
-                        $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night);
+                        $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night, $work_drivers->date_close_night_shift);
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date, true)){
                             $row .= $this->prepareRepairColumn();
@@ -94,10 +94,14 @@ class PrepareDriverTabel
         return !empty($data->driver_id_night);
     }
 
-    public function prepareFullColumn($nameDriver, $driver_id): string
+    public function prepareFullColumn($nameDriver, $driver_id, $close_shift): string
     {
+        $icon = '';
+        if ($close_shift){
+            $icon = '<i class="fas fa-wallet" style="font-weight: bold; color: green"></i> ';
+        }
 
-        return '<div style="font-size: 16px;">'.Html::a($nameDriver, ['/driver/view', 'id' => $driver_id]).'</div>';
+        return '<div style="font-size: 16px;">'.$icon.Html::a($nameDriver, ['/driver/view', 'id' => $driver_id]).'</div>';
     }
 
     public function prepareEmptyColumn()

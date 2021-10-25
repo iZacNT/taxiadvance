@@ -14,6 +14,7 @@ use Yii;
  * @property int|null $depo_max Max
  * @property int|null $les_summ Less
  * @property int|null $more_summ More
+ * @property int $phone_sum [int]
  */
 class Settings extends \yii\db\ActiveRecord
 {
@@ -31,8 +32,9 @@ class Settings extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['depo_min', 'depo_max', 'les_summ', 'more_summ'], 'integer'],
+            [['depo_min', 'depo_max', 'les_summ', 'more_summ', 'phone_sum'], 'integer'],
             [['yandex_api', 'yandex_client_id'], 'string', 'max' => 255],
+            [['phone_sum'], 'default', 'value' => 100],
         ];
     }
 
@@ -49,6 +51,7 @@ class Settings extends \yii\db\ActiveRecord
             'depo_max' => 'Depo Max',
             'les_summ' => 'Les Summ',
             'more_summ' => 'More Summ',
+            'phone_sum' => 'Сумма за использование телефона'
         ];
     }
 }
