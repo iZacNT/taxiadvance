@@ -135,25 +135,29 @@ class CashRegisterController extends Controller
 
     public function actionSaveCashRegister(){
 
+        $cashNal = \Yii::$app->request->post("cashNal");
+        $cashInRegister = \Yii::$app->request->post("cashInRegister");
+        $amount = $cashNal-$cashInRegister;
+
         $cashRegister = new CashRegister();
         $cashRegister->type_cash = \Yii::$app->request->post("type_cash");
-        $cashRegister->cash = \Yii::$app->request->post("cash");
-        $cashRegister->comment = $this->getComment(\Yii::$app->request->post("amount")) ;
+        $cashRegister->cash = $cashNal;
+        $cashRegister->comment = $this->getComment($cashNal, $amount) ;
         $cashRegister->date_time = time();
         $cashRegister->save();
 
-        //$this->saveDifference(\Yii::$app->request->post("amount"));
+        //$this->saveDifference(\Yii::$app->request->post("amount")); //Добавление разницы в таблицу Касса
         return json_encode(\Yii::$app->request->post());
     }
 
-    public function getComment($amount):string
+    public function getComment($cashNal, $amount):string
     {
         $comment = "Суммы в кассе и наличные сходятся!";
         if ($amount > 0){
-            $comment = "Наличных больше чем отражено в кассе, на: ".$amount;
+            $comment = "Наличных: ".$cashNal.". Больше чем отражено в кассе, на: ".$amount;
         }
         if ($amount < 0){
-            $comment = "Наличных Меньше чем отражено в кассе, на: ".$amount;
+            $comment = "Наличных: ".$cashNal.". Меньше чем отражено в кассе, на: ".$amount*(-1);
         }
         return $comment;
     }
