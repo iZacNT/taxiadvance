@@ -142,8 +142,14 @@ class CashRegisterController extends Controller
         $cashRegister = new CashRegister();
         $cashRegister->type_cash = \Yii::$app->request->post("type_cash");
         $cashRegister->cash = $cashNal;
-        $cashRegister->comment = $this->getComment($cashNal, $amount) ;
+        $cashRegister->comment = $this->getComment($cashNal, $amount);
         $cashRegister->date_time = time();
+
+        \Yii::debug($cashNal,__METHOD__);
+        \Yii::debug($cashInRegister,__METHOD__);
+        \Yii::debug($amount,__METHOD__);
+        \Yii::debug($this->getComment($cashNal, $amount),__METHOD__);
+
         $cashRegister->save();
 
         //$this->saveDifference(\Yii::$app->request->post("amount")); //Добавление разницы в таблицу Касса
