@@ -1,6 +1,8 @@
 $(".resultData").on("click", "#saveDataButton", function (){
     let resultAjax;
-    let resultObject = $.extend({}, getData(), getResultAjaxData());
+    let data = getData();
+    data.debtFromShift = $("#debtFromShift").val();
+    let resultObject = $.extend({}, data, getResultAjaxData());
     sendAjax( '/admin/driver/save-billing',resultObject).done(function (data){
         resultAjax = data;
     })
@@ -28,7 +30,7 @@ function getData()
         period: getPeriod(),
         hours: getHours(),
         inputAmount: getInputAmount(),
-        debtFromShift: getDebtFromShift(),
+        debtFromShift: 0,
         carWash: getCarWash(),
         carFuelSumm: getCarFuelSumm(),
         carPhoneSumm: getCarPhoneSumm()
@@ -59,27 +61,22 @@ $("#calculateShift").on("click",function (){
 
     $("#planSumm").html(resultAjax.plan)
 
-    if (resultAjax<0) {
+    html = '<div class="info-box bg-info">\n' +
+        '              <span class="info-box-icon"><i class="fas fa-hand-holding-usd" style="font-size: 35px;"></i></span>' +
+        '              <div class="info-box-content">' +
+        '                <span class="info-box-number" style="font-size: 35px;">'+resultAjax.billing+' руб.</span>' +
+        '                <div class="progress">' +
+        '                  <div class="progress-bar" style="width: 100%"></div>' +
+        '                </div>' +
+        '                <span class="progress-description">' +
+        '                <label for="debtFromShift">Долг по смене:</label>' +
+        '                  <input type="text" id="debtFromShift" name="debtFromShift" value="0" class="form-control">' +
+        '                </span>' +
+        '              </div>' +
+        '              <!-- /.info-box-content -->' +
+        '            </div>'
 
-        html = '<div class="info-box bg-gradient-success">\n' +
-            '              <span class="info-box-icon"><i class="far fa-check-circle"></i></span>\n' +
-            '\n' +
-            '              <div class="info-box-content">\n' +
-            '                <span class="info-box-text" style="font-size: 22px;">'+(resultAjax.billing*(-1))+' руб.' +
-            '</span>\n' +
-            '\n' +
-            '              <!-- /.info-box-content -->\n' +
-            '            </div>';
-    }else{
-        html = '<div class="info-box bg-danger">\n' +
-            '              <span class="info-box-icon"><i class="fas fa-exclamation-triangle"></i></span>\n' +
-            '\n' +
-            '              <div class="info-box-content">\n' +
-            '                <span class="info-box-text" style="font-size: 22px;">'+resultAjax.billing+' руб.</span>\n' +
-            '\n' +
-            '              <!-- /.info-box-content -->\n' +
-            '            </div>';
-    }
+
     $("#resultAjax").html(html);
     $("#saveDataButton").show();
 

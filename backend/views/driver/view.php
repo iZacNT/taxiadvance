@@ -351,14 +351,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="col-md-6">
                                     <?= $generateTarifTable;?>
 
-                            <table class="table table-responsive">
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>
-                                    <td>
-                                        <?= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
-                                    </td>
-                                </tr>
-                            </table>
+<!--                            <table class="table table-responsive">-->
+<!--                                <tr class="odd">-->
+<!--                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>-->
+<!--                                    <td>-->
+<!--                                        --><?//= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </table>-->
                             <div class="row resultData">
                                 <div class="col-md-8" id="resultAjax">
                                 </div>
@@ -397,8 +397,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'carInfo.fullnameMark:raw:Авто',
                                 'plan:currency',
                                 'depo',
-                                'debt_from_shift:currency',
-                                'car_wash:currency',
+//                                'debt_from_shift:currency',
+//                                'car_wash:currency',
                                 'car_fuel_summ:currency',
                                 'car_phone_summ:currency',
                                 'summ_driver:currency:Водителю',

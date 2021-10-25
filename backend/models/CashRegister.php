@@ -21,7 +21,7 @@ class CashRegister extends \yii\db\ActiveRecord
     const TYPE_DOLG_PO_SMENE = 3;
     const TYPE_CLOSED = 4;
 
-    public function getTypeCash()
+    public static function getTypeCash()
     {
         return [
             self::TYPE_PRIHOD => 'Приход',
