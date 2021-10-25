@@ -160,10 +160,10 @@ class CashRegisterController extends Controller
     {
         $comment = "Суммы в кассе и наличные сходятся!";
         if ($amount > 0){
-            $comment = "Наличных: ".$cashNal.". Больше чем отражено в кассе, на: ".$amount;
+            $comment = "Наличных: ".$cashNal."руб. Больше чем отражено в кассе, на: ".$amount;
         }
         if ($amount < 0){
-            $comment = "Наличных: ".$cashNal.". Меньше чем отражено в кассе, на: ".$amount*(-1);
+            $comment = "Наличных: ".$cashNal."руб. Меньше чем отражено в кассе, на: ".$amount*(-1);
         }
         return $comment;
     }
