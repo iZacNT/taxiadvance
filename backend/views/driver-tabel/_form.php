@@ -90,11 +90,28 @@ use yii\widgets\ActiveForm;
 <!--        <div class="col-md-2">-->
 <!--            --><?//= $form->field($driverTabel, 'card_day')->textInput(['placeholder' => '№']) ?>
 <!--        </div>-->
-        <div class="col-md-2">
+        <div class="col-md-3">
             <?= $form->field($driverTabel, 'sum_card_day')->textInput(['placeholder' => 'Руб.']) ?>
         </div>
-        <div class="col-md-2">
-            <?= $form->field($driverTabel, 'phone_day')->textInput(['placeholder' => '№']) ?>
+        <div class="col-md-3">
+            <?
+            echo $form->field($driverTabel, 'stringPhoneDay')
+                ->widget(\yii\jui\AutoComplete::classname(), [
+                    'clientOptions' => [
+                        'source' => $freePhones,
+                        'minLength'=>'0',
+                        'autoFill'=>true,
+                        'select' => new JsExpression("function( event, ui ) {
+                        $('#drivertabel-phone_day').val(ui.item.id);
+                }")],
+                    'options'=>[
+                        'class'=>'form-control',
+                        'id' => 'autocompletePhoneDay',
+                        'placeholder' => 'Телефон',
+                    ],
+
+                ]);
+            ?>
         </div>
 <!--        <div class="col-md-2">-->
 <!--            --><?//= $form->field($driverTabel, 'sum_phone_day')->textInput(['placeholder' => 'Руб.']) ?>
@@ -125,11 +142,28 @@ use yii\widgets\ActiveForm;
 <!--            <div class="col-md-2">-->
 <!--                --><?//= $form->field($driverTabel, 'card_night')->textInput(['placeholder' => '№']) ?>
 <!--            </div>-->
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <?= $form->field($driverTabel, 'sum_card_night')->textInput(['placeholder' => 'Руб.']) ?>
             </div>
-            <div class="col-md-2">
-                <?= $form->field($driverTabel, 'phone_night')->textInput(['placeholder' => '№']) ?>
+            <div class="col-md-3">
+                <?
+                echo $form->field($driverTabel, 'stringPhoneNight')
+                    ->widget(\yii\jui\AutoComplete::classname(), [
+                        'clientOptions' => [
+                            'source' => $freePhones,
+                            'minLength'=>'0',
+                            'autoFill'=>true,
+                            'select' => new JsExpression("function( event, ui ) {
+                        $('#drivertabel-phone_night').val(ui.item.id);
+                }")],
+                        'options'=>[
+                            'class'=>'form-control',
+                            'id' => 'autocompletePhoneNight',
+                            'placeholder' => 'Телефон',
+                        ],
+
+                    ]);
+                ?>
             </div>
 <!--            <div class="col-md-2">-->
 <!--                --><?//= $form->field($driverTabel, 'sum_phone_night')->textInput(['placeholder' => 'Руб.']) ?>
@@ -143,6 +177,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($driverTabel, 'car_id')->hiddenInput()->label("") ?>
         <?= $form->field($driverTabel, 'driver_id_day')->hiddenInput()->label("")  ?>
         <?= $form->field($driverTabel, 'driver_id_night')->hiddenInput()->label("") ?>
+        <?= $form->field($driverTabel, 'phone_day')->textInput(['placeholder' => '№']) ?>
+        <?= $form->field($driverTabel, 'phone_night')->textInput(['placeholder' => '№']) ?>
+
+
 
 
         <?php ActiveForm::end(); ?>

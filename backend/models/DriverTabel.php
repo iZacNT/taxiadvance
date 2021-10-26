@@ -4,6 +4,7 @@ namespace app\models;
 
 use backend\models\Cars;
 use backend\models\Driver;
+use backend\models\Phones;
 use Yii;
 
 /**
@@ -44,6 +45,8 @@ class DriverTabel extends \yii\db\ActiveRecord
     public $stringNameCar;
     public $stringDriverDay;
     public $stringDriverNight;
+    public $stringPhoneDay;
+    public $stringPhoneNight;
     /**
      * {@inheritdoc}
      */
@@ -62,7 +65,7 @@ class DriverTabel extends \yii\db\ActiveRecord
             [['id', 'car_id', 'work_date', 'driver_id_day', 'card_day', 'sum_card_day', 'sum_phone_day',
                 'sum_card_night', 'sum_phone_night', 'phone_day', 'driver_id_night', 'card_night',
                 'phone_night', 'status_day_shift', 'status_night_shift', 'date_close_day_shift', 'date_close_night_shift'], 'integer'],
-            [['stringNameCar', 'stringDriverDay', 'stringDriverNight'],'safe'],
+            [['stringNameCar', 'stringDriverDay', 'stringDriverNight', 'stringPhoneDay', 'stringPhoneNight'],'safe'],
             [['status_day_shift', 'status_night_shift'], 'default', 'value' => self::STATUS_SHIFT_OPEN]
         ];
     }
@@ -90,7 +93,9 @@ class DriverTabel extends \yii\db\ActiveRecord
             'sum_card_night' => 'Сумма',
             'sum_phone_night' => 'Сумма',
             'date_close_day_shift' => 'Время закрытия смены',
-            'date_close_night_shift' => 'Время закрытия смены'
+            'date_close_night_shift' => 'Время закрытия смены',
+            'stringPhoneDay' => '№ Тел.',
+            'stringPhoneNight' => '№ Тел.'
         ];
     }
 
@@ -112,6 +117,16 @@ class DriverTabel extends \yii\db\ActiveRecord
     public function getFullNightDriverName()
     {
         return $this->hasOne(Driver::className(),['id' => 'driver_id_night']);
+    }
+
+    public function getFullPhoneDayInfo()
+    {
+        return $this->hasOne(Phones::className(),['id' => 'phone_day']);
+    }
+
+    public function getFullPhoneNightInfo()
+    {
+        return $this->hasOne(Phones::className(),['id' => 'phone_night']);
     }
 
     public function isValidDay($date,$car_id, $oldDate)

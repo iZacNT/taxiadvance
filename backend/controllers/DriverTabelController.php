@@ -9,8 +9,10 @@ use app\models\DriverTabelSearch;
 use backend\models\Cars;
 use backend\models\Driver;
 use backend\models\DriverTTabelSearch;
+use backend\models\Phones;
 use backend\models\Settings;
 use common\service\driverTabel\PrepareDriverTabel;
+use frontend\models\ContactForm;
 use Throwable;
 use Yii;
 use yii\data\ActiveDataProvider;
@@ -55,22 +57,10 @@ class DriverTabelController extends Controller
             $driverTabel->work_date = Yii::$app->formatter->asDate(time(),"yyyy-MM-dd");
         }
 
-        /*********************** drivers at day array ************************/
         $beginDate = \Yii::$app->formatter->asBeginDay(strtotime($driverTabel->work_date));
         $endDate = \Yii::$app->formatter->asEndDay(strtotime($driverTabel->work_date));
-        $qDay = DriverTabel::find()->select('driver_id_day as id_driver')->where(['>=', 'work_date', $beginDate])
-            ->andWhere(['<=', 'work_date', $endDate])->asArray()->all();
-        $qNight = DriverTabel::find()->select('driver_id_night as id_driver')->where(['>=', 'work_date', $beginDate])
-            ->andWhere(['<=', 'work_date', $endDate])->asArray()->all();
-        $workDrivers = [];
-        foreach ($qDay as $item){
-            array_push($workDrivers, $item['id_driver']);
-        }
-        foreach ($qNight as $item){
-            array_push($workDrivers, $item['id_driver']);
-        }
-        Yii::debug($workDrivers, __METHOD__);
-        /******************** end drivers at day array ***********************/
+        $workDrivers = $this->getWorksDriversAtDay($beginDate, $endDate);
+        $busyPhones = $this->getBusyPhones($beginDate, $endDate);
 
         $cars = Cars::find()
             ->select(['concat(mark, " ", number) as value', 'concat(mark, " ", number) as  label','id as id'])
@@ -81,6 +71,8 @@ class DriverTabelController extends Controller
             ->where(['not in','id', $workDrivers])
             ->asArray()
             ->all();
+
+        $freePhones = Phones::preparePhonesForAutocomplete($busyPhones);
 
         $phone_sum = (Settings::find()->select('phone_sum')->one())->phone_sum;
 
@@ -115,7 +107,8 @@ class DriverTabelController extends Controller
         return $this->render('create', [
             'driverTabel' => $driverTabel,
             'cars' => $cars,
-            'drivers' => $drivers
+            'drivers' => $drivers,
+            'freePhones' => $freePhones
         ]);
     }
 
@@ -258,5 +251,37 @@ class DriverTabelController extends Controller
         }
 
         return json_encode($response);
+    }
+
+    private function getWorksDriversAtDay(int $beginDate, int $endDate): array
+    {
+        $qDay = DriverTabel::find()->select('driver_id_day as id_driver')->where(['>=', 'work_date', $beginDate])
+            ->andWhere(['<=', 'work_date', $endDate])->asArray()->all();
+        $qNight = DriverTabel::find()->select('driver_id_night as id_driver')->where(['>=', 'work_date', $beginDate])
+            ->andWhere(['<=', 'work_date', $endDate])->asArray()->all();
+        $workDrivers = [];
+        foreach ($qDay as $item){
+            array_push($workDrivers, $item['id_driver']);
+        }
+        foreach ($qNight as $item){
+            array_push($workDrivers, $item['id_driver']);
+        }
+        Yii::debug($workDrivers, __METHOD__);
+        return $workDrivers;
+    }
+
+    private function getBusyPhones($beginDate, $endDate): array
+    {
+        $bPhones = DriverTabel::find()
+            ->select('id')
+            ->where(['>=', 'work_date', $beginDate])
+            ->andWhere(['<=', 'work_date', $endDate])
+            ->asArray()
+            ->all();
+        $phones = [];
+        foreach ($bPhones as $item){
+            array_push($phones, $item['id']);
+        }
+        return $phones;
     }
 }
