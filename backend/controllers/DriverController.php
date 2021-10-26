@@ -186,6 +186,7 @@ class DriverController extends Controller
                 $paramsDriver = (new DriverParams($driver))->generateParams();
                 $user = (new UserService)->create(new User(), $paramsDriver);
                 $driver->shift_closing = strtotime($driver->stringShiftClosing);
+                $driver->birth_date = strtotime($driver->stringBirthDay);
                 $driver->user_id = $user->id;
                 $driver->save();
 
@@ -215,6 +216,7 @@ class DriverController extends Controller
         if ($this->request->isPost && $model->load($this->request->post())) {
 
             $model->shift_closing = strtotime($model->stringShiftClosing);
+            $model->birth_date = strtotime($model->stringBirthDay);
             $model->save();
 
             return $this->redirect(['view', 'id' => $model->id]);
@@ -222,6 +224,7 @@ class DriverController extends Controller
 
         (!empty($model->shift_closing)) ? $shiftClosing = $model->shift_closing : $shiftClosing = time();
         $model->stringShiftClosing = date("Y-m-d H:i", $shiftClosing);
+        $model->stringBirthDay = (!empty($model->birth_date)) ? Yii::$app->formatter->asDate($model->birth_date, "yyyy-MM-dd"): '';
 
         return $this->render('update', [
             'model' => $model,

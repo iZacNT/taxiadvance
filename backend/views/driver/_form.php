@@ -20,13 +20,34 @@ use yii\widgets\ActiveForm;
 
         <div class="row">
             <div class="col-md-4">
-                <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
-            </div>
-            <div class="col-md-4">
                 <?= $form->field($model, 'last_name')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-4">
+                <?= $form->field($model, 'first_name')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-4">
+                <?= $form->field($model, 'patronymic')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <?= $form->field($model, 'status')->dropDownList($model->statusDriver, ['prompt' => 'Выберите статус']) ?>
+            </div>
+            <div class="col-md-6">
+                <?= $form->field($model, 'stringBirthDay')->widget(\yii\jui\DatePicker::classname(), [
+                    'options' => [
+                        'placeholder' => Yii::$app->formatter->asDate((!empty($model->birth_date)) ? $model->birth_date : time(), "yyyy-MM-dd"),
+                        'class'=> 'form-control',
+                        'autocomplete'=>'off'
+                    ],
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        'yearRange' => '1970:2050',
+                    ]
+                ]) ?>
             </div>
         </div>
         <div class="row">

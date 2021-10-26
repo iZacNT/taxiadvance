@@ -28,12 +28,15 @@ use Yii;
  * @property integer|null $status Status
  * @property integer|null $filial Filial
  * @property integer|null $shift_closing Shift Closing
+ * @property string $patronymic [varchar(255)]  Patronymic
+ * @property int $birth_date [int]  Birth date
  */
 class Driver extends \yii\db\ActiveRecord
 {
 
     public $stringShiftClosing;
     public $stringDateIssused;
+    public $stringBirthDay;
 
     /**
      * @var string[] Status Driver
@@ -59,11 +62,11 @@ class Driver extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'filial', 'stringShiftClosing', 'yandex_id'], 'required', 'message' => '{attribute} не может быть пустым'],
+            [['first_name', 'last_name', 'patronymic', 'birth_date', 'filial', 'stringShiftClosing', 'yandex_id'], 'required', 'message' => '{attribute} не может быть пустым'],
             [['commens'], 'string'],
-            [['user_id','date_of_issue', 'status', 'filial', 'shift_closing'], 'integer'],
-            [[ 'first_name', 'last_name', 'yandex_id', 'driving_license', 'passport', 'who_issued_it', 'phone', 'city', 'street', 'hous', 'corpus', 'appartament',
-                'stringShiftClosing', 'stringDateIssused'], 'string', 'max' => 255],
+            [['user_id', 'birth_date', 'date_of_issue', 'status', 'filial', 'shift_closing'], 'integer'],
+            [[ 'first_name', 'last_name', 'patronymic', 'yandex_id', 'driving_license', 'passport', 'who_issued_it', 'phone', 'city', 'street', 'hous', 'corpus', 'appartament',
+                'stringShiftClosing', 'stringDateIssused', 'stringBirthDay'], 'string', 'max' => 255],
             [['status'], 'default', 'value' => 3],
             [['shift_closing'], 'default', 'value' => time()],
         ];
@@ -79,6 +82,8 @@ class Driver extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'first_name' => 'Имя',
             'last_name' => 'Фамилия',
+            'patronymic' => 'Отчество',
+            'birth_date' => 'Дата рождения',
             'yandex_id' => 'Yandex ID',
             'driving_license' => 'В/У',
             'commens' => 'Комментарий',

@@ -68,9 +68,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'label' => 'ФИО',
                                     'format' => 'raw',
                                     'value' => function($data){
-                                        return $data->getFullName();
+                                        return $data->getFullName()." ".$data->patronymic;
                                     }
                                 ],
+                                'birth_date:date',
                                 'phone',
                                 'filialData.name',
                                 [
@@ -327,7 +328,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="dtr-control sorting_1" tabindex="0">Депо:</td>
                                     <td><?= $depo;?></td>
                                 </tr>
-                                <tr class="odd">
+                                <tr class="odd" style="display: none">
                                     <td class="dtr-control sorting_1" tabindex="0">Мойка:</td>
                                     <td>
                                         <?= Html::textInput('carWash', 0, ['class' => 'form-control', 'id' => 'carWash'] ); ?>
