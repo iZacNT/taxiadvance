@@ -77,8 +77,6 @@ class DriverBillingService
 
             $driver = Driver::find()->where(['id' => $this->driverId])->one();
             $this->saveDriverShiftTime($driver);
-
-
             if(!empty($this->depo)){
                 $this->saveDeposit(
                     $this->driverId,

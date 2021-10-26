@@ -229,6 +229,10 @@ class PrepareDriverService
             ->orderBy(['work_date' => SORT_ASC])
             ->all();
 
+        if (empty($allOpenShifts)){
+            \Yii::$app->session->setFlash('dangerShiftInTabel', 'Нет открытой смены в Табеле!!!');
+        }
+
         return $allOpenShifts;
     }
 
