@@ -46,6 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         <a class="nav-link" id="custom-tabs-one-orders-tab" data-toggle="pill" href="#custom-tabs-one-orders" role="tab" aria-controls="custom-tabs-one-orders" aria-selected="false">Заказы: <?= \Yii::$app->formatter->asCurrency($summOrders);?></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-one-transactions-tab" data-toggle="pill" href="#custom-tabs-one-transactions" role="tab" aria-controls="custom-tabs-one-transactions" aria-selected="false">Транзакции</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="custom-tabs-one-all-tabel-tab" data-toggle="pill" href="#custom-tabs-one-all-tabel" role="tab" aria-controls="custom-tabs-one-all-tabel" aria-selected="false">Все смены</a>
                     </li>
                     <li class="nav-item">
@@ -174,16 +177,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php
                             echo GridView::widget([
                                 'dataProvider' => $allOreders,
-                                'options'=>['style' => 'white-space:nowrap;'],
+                             //   'options'=>['style' => 'white-space:nowrap;'],
                                 'columns' => [
                                     [
                                             'attribute' => 'address_from.address',
                                         'label' => 'Адрес заказа',
-                                        'contentOptions' => ['style' => 'width:150px;  min-width:150px;'],
+                                        'contentOptions' => ['style' => 'min-width:150px; max-width:350px;'],
                                     ],
                                     [
                                         'attribute' => 'booked_at',
-                                        'label' => 'Адрес заказа',
+                                        'label' => 'Дата',
                                         'format' => 'datetime'
                                     ],
 //                                    [
@@ -243,6 +246,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]);
                             ?>
                             <?php Pjax::end(); ?>
+                    </div>
+                    <div class="tab-pane fade" id="custom-tabs-one-transactions" role="tabpanel" aria-labelledby="custom-tabs-one-transactions-tab">
+                        <?= $amountTransactionByAllType;?>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-one-all-tabel" role="tabpanel" aria-labelledby="custom-tabs-one-all-tabel-tab">
 

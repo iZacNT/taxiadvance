@@ -118,6 +118,7 @@ class DriverController extends Controller
             $servicePrepareTransactions = new PrepareTransactionService($allTransactions['transactions']);
 //            $bonus = $servicePrepareTransactions->getBonusDriver();
             $bonus = $servicePrepareTransactions->getSumOfTransactionByType();
+            $amountTransactionByAllType = $servicePrepareTransactions->prepareHtmlTransactionByType();
         }else{
             $bonus = 0;
             Yii::$app->session->setFlash("error", "Не удалось получить транзакции Водителя. Обновите страницу!");
@@ -168,7 +169,8 @@ class DriverController extends Controller
             'sum_card' => $numberPhoneCard['sum_card'], //Сумма взятая на бензин
             'phone' => $numberPhoneCard['phone'], // Брал ли телефон
             'sum_phone' => $numberPhoneCard['sum_phone'], // Сумма взятая на телефон
-            'generateTarifTable' => $generateTarifTable
+            'generateTarifTable' => $generateTarifTable,
+            'amountTransactionByAllType' => $amountTransactionByAllType
         ]);
     }
 
