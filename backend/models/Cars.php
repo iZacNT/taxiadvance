@@ -3,6 +3,7 @@
 namespace backend\models;
 
 use app\models\CarRepairs;
+use app\models\CarSharing;
 use app\models\DriverTabel;
 use backend\models\Filials;
 use Yii;
@@ -33,6 +34,7 @@ class Cars extends \yii\db\ActiveRecord
     const STATUS_REPAIR = 2;
     const STATUS_SOLD = 3;
     const STATUS_NO_ACTIVE = 4;
+    const STATUS_SHARING = 5;
 
     public function getStatusLabel():array
     {
@@ -41,6 +43,7 @@ class Cars extends \yii\db\ActiveRecord
             self::STATUS_REPAIR => 'На ремонте',
             self::STATUS_SOLD => 'Продан',
             self::STATUS_NO_ACTIVE => 'Не работает',
+            self::STATUS_SHARING => 'Аренда',
         ];
     }
     /**
@@ -96,9 +99,14 @@ class Cars extends \yii\db\ActiveRecord
         return $this->hasOne(Filials::class,['id' => 'filial']);
     }
 
-    public function getRepairs()
+    public function getRepairs(): \yii\db\ActiveQuery
     {
         return $this->hasMany(CarRepairs::class,['car_id' => 'id']);
+    }
+
+    public function getSharing(): \yii\db\ActiveQuery
+    {
+        return $this->hasMany(CarSharing::class, ['car_id' => 'id']);
     }
 
     /**
@@ -137,12 +145,29 @@ class Cars extends \yii\db\ActiveRecord
      * @param null $filial
      * @return array
      */
-    public static function prepareCarsForAutocomplete($filial = null): array
+    public static function prepareCarsForAutocomplete($date,$filial = null): array
     {
+        $carSharingArray = [];
+        $carsWithSharing = CarSharing::find()
+            ->select('car_id')
+            ->where(['<=', 'date_start', strtotime($date)])
+            ->andWhere(['>=', 'date_stop', strtotime($date)])
+            ->distinct()
+            ->asArray()
+            ->all();
+        foreach($carsWithSharing as $item)
+            {
+                array_push($carSharingArray, $item['car_id']);
+            }
+
+        Yii::debug("Дата ".strtotime($date), __METHOD__);
+        Yii::debug($carsWithSharing, __METHOD__);
+
         return self::find()
             ->select(['concat(mark, " ", number) as value', 'concat(mark, " ", number) as  label','id as id'])
             ->where(['status' => self::STATUS_WORK])
             ->andFilterWhere(['filial' => $filial])
+            ->andWhere(['not in', 'id', $carSharingArray])
             ->asArray()
             ->all();
     }

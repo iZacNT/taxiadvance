@@ -41,7 +41,7 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'vin')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($model, 'status')->dropDownList($model->getStatusLabel(), ['prompt' => 'Выберите статус', "disabled" => ($model->isRepair()? "true":"false")]) ?>
+                <?= $form->field($model, 'status')->dropDownList($model->getStatusLabel(), ['prompt' => 'Выберите статус']) ?>
             </div>
         </div>
 

@@ -26,6 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+        <?= Html::a("Сдать в аренду",['car-sharing/create','id' => $model->id], ['class' => 'btn btn-warning'])?>
         <?= Html::button("Отправить в Ремонт", ['class' => 'btn btn-warning', 'id' => 'goToRepair'])?>
     </p>
 <?//= $hasRepair;die; ?>
@@ -48,10 +49,22 @@ $this->params['breadcrumbs'][] = $this->title;
     <? } ?>
 
     <div class="card card-primary card-tabs">
+        <?php
+            if (Yii::$app->session->hasFlash("error")){
+                echo '<div class="alert alert-warning alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                  '.Yii::$app->session->getFlash('error').'
+                </div>';
+            }
+        ?>
         <div class="card-header p-0 pt-1">
             <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill" href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home" aria-selected="true">Автомобиль</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-one-sharing-tab" data-toggle="pill" href="#custom-tabs-one-sharing" role="tab" aria-controls="custom-tabs-one-sharing" aria-selected="false">Аренда</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill" href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile" aria-selected="false">Ремонты</a>
@@ -101,6 +114,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) ?>
 
                 </div>
+                <div class="tab-pane fade" id="custom-tabs-one-sharing" role="tabpanel" aria-labelledby="custom-tabs-one-sharing-tab">
+
+                    <? Pjax::begin([
+                        'id' => 'carSharing'
+                    ])?>
+                    <?= GridView::widget([
+                        'dataProvider' => $dataProviderSharing,
+//                        'filterModel' => $searchModel,
+                        'columns' => [
+                            ['class' => 'yii\grid\SerialColumn'],
+                            'date_start:date',
+                            'date_stop:date',
+                            'comments',
+                            ['class' => 'yii\grid\ActionColumn',
+                                'controller' => 'car-sharing'
+                            ]
+
+                        ],
+                    ]); ?>
+
+                    <? Pjax::end()?>
+                </div>
                 <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel" aria-labelledby="custom-tabs-one-profile-tab">
 
                     <? Pjax::begin([
@@ -120,9 +155,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return $data->getStatusLabel()[$data->status];
                                 }
                             ],
-//                            ['class' => 'yii\grid\ActionColumn',
-//                                'template' => '{delete}'
-//                            ],
+
                         ],
                     ]); ?>
 

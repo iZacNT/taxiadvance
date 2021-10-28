@@ -3,9 +3,12 @@
 namespace backend\controllers;
 
 use app\models\CarRepairs;
+use app\models\CarSharing;
 use backend\models\Cars;
 use backend\models\CarsSearch;
 use common\service\car_repare\CarRepareService;
+use common\service\car_sharing\CarSharingService;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,19 +59,23 @@ class CarsController extends Controller
      */
     public function actionView($id)
     {
-        $carRepares = new CarRepairs();
-        $dataProviderRepairs = $carRepares->getCarRepairs($id);
-        $hasRepair = $carRepares->hasActiveRepair($id);
+        $car = $this->findModel($id);
+        $carRepairService = new CarRepareService($id);
+        $carSharingService = new CarSharingService($id);
+        $dataProviderRepairs = $carRepairService->getAllRepairsForDataProvider();
+        $dataProviderSharing = $carSharingService->getAllSharingForDataProvider();
+        $hasRepair = $carRepairService->hasActiveRepair();
 
         $idRepair = 0;
         if ($hasRepair){
             $idRepair = (new CarRepareService($id))->activeRepair();
         }
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $car,
             'hasRepair' => $hasRepair,
             'idRepair' => $idRepair,
-            'dataProviderRepairs' => $dataProviderRepairs
+            'dataProviderRepairs' => $dataProviderRepairs,
+            'dataProviderSharing' => $dataProviderSharing
         ]);
     }
 

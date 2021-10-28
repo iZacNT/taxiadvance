@@ -62,10 +62,8 @@ class DriverTabelController extends Controller
         $workDrivers = $this->getWorksDriversAtDay($beginDate, $endDate);
         $busyPhones = $this->getBusyPhones($beginDate, $endDate);
 
-        $cars = Cars::find()
-            ->select(['concat(mark, " ", number) as value', 'concat(mark, " ", number) as  label','id as id'])
-            ->asArray()
-            ->all();
+        $cars = Cars::prepareCarsForAutocomplete($driverTabel->work_date,\Yii::$app->user->identity->getFilialUser());
+
         $drivers = Driver::find()
             ->select(['concat(last_name, " ", first_name) as value', 'concat(last_name, " ", first_name) as  label','id as id'])
             ->where(['not in','id', $workDrivers])
@@ -117,7 +115,7 @@ class DriverTabelController extends Controller
         $driverTabel = $this->findModel($id);
         $oldDate = $driverTabel->work_date;
 
-        $cars = Cars::prepareCarsForAutocomplete(\Yii::$app->user->identity->getFilialUser());
+        $cars = Cars::prepareCarsForAutocomplete($driverTabel->work_date,\Yii::$app->user->identity->getFilialUser());
         $drivers = Driver::find()
             ->select(['concat(last_name, " ", first_name) as value', 'concat(last_name, " ", first_name) as  label','id as id'])
             ->asArray()

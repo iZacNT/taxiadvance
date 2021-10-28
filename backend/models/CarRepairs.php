@@ -75,16 +75,4 @@ class CarRepairs extends \yii\db\ActiveRecord
         return $this->hasOne(Cars::className(), ['id' => 'car_id']);
     }
 
-    public function getCarRepairs($car_id):ActiveDataProvider
-    {
-        return new ActiveDataProvider([
-            'query' => self::find()->where(['car_id' => $car_id])
-        ]);
-    }
-
-    public function hasActiveRepair($id):bool
-    {
-        $activeRepair = CarRepairs::find()->where(['car_id' => $id])->andWhere(['status' => CarRepairs::STATUS_OPEN_REPAIR])->one();
-        return (bool)$activeRepair;
-    }
 }

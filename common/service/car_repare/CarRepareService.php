@@ -6,6 +6,7 @@ namespace common\service\car_repare;
 use app\models\CarRepairs;
 use app\models\DriverTabel;
 use Yii;
+use yii\data\ActiveDataProvider;
 
 class CarRepareService
 {
@@ -92,6 +93,20 @@ class CarRepareService
             $shifts->driver_id_night = $periodNight;
             $shifts->save();
         }
+    }
+
+
+    public function getAllRepairsForDataProvider(): ActiveDataProvider
+    {
+        return new ActiveDataProvider([
+            'query' => CarRepairs::find()->where(['car_id' => $this->car_id])
+        ]);
+    }
+
+    public function hasActiveRepair(): bool
+    {
+        $activeRepair = CarRepairs::find()->where(['car_id' => $this->car_id])->andWhere(['status' => CarRepairs::STATUS_OPEN_REPAIR])->one();
+        return (bool)$activeRepair;
     }
 
 }

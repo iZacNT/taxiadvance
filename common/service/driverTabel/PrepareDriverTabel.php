@@ -5,6 +5,8 @@ namespace common\service\driverTabel;
 
 
 use app\models\CarRepairs;
+use app\models\CarSharing;
+use backend\models\Cars;
 use Yii;
 use yii\helpers\Html;
 
@@ -44,8 +46,10 @@ class PrepareDriverTabel
                     if($this->isFullDayShift($work_drivers)){
                         $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day, $work_drivers->date_close_day_shift);
                     }else{
-                        if ($this->verifyStatusRepair($data->id, $date, false)){
+                        if ($this->verifyStatusRepair($data->id, $date, false)) {
                             $row .= $this->prepareRepairColumn();
+                        }else if($this->verifyStatusCarSharing($data->id,$date)){
+                            $row .= $this->prepareCarSharingColumn();
                         }else{
                             $row .= $this->prepareEmptyColumn();
                         }
@@ -56,6 +60,8 @@ class PrepareDriverTabel
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date, true)){
                             $row .= $this->prepareRepairColumn();
+                        }else if($this->verifyStatusCarSharing($data->id, $date)){
+                            $row .= $this->prepareCarSharingColumn();
                         }else{
                             $row .= $this->prepareEmptyColumn();
                         }
@@ -64,6 +70,8 @@ class PrepareDriverTabel
                 }else{
                     if ($this->verifyStatusRepair($data->id, $date)){
                         $row .= $this->prepareRepairColumn();
+                    }else if($this->verifyStatusCarSharing($data->id, $date)){
+                        $row .= $this->prepareCarSharingColumn();
                     }else{
                         $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
                     }
@@ -114,6 +122,11 @@ class PrepareDriverTabel
         return '<div style="font-size: 12px; color: red; font-weight: bold; text-transform: uppercase">На ремонте</div>';
     }
 
+    public function prepareCarSharingColumn()
+    {
+        return '<div style="font-size: 12px; color: red; font-weight: bold; text-transform: uppercase">Аренда</div>';
+    }
+
     /**
      * Проверяем на Ремонте ли автомобиль в указанную дату
      * @param $car_id int ID Авто
@@ -133,6 +146,19 @@ class PrepareDriverTabel
 
         foreach ($repairs as $repair){
             if ($repair->date_open_repair <= $date && empty($repair->date_close_repare) || $repair->date_close_repare > $date ){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private function verifyStatusCarSharing($car_id, $date): bool
+    {
+
+        $carSharings = CarSharing::find()->where(['car_id' => $car_id])->all();
+        foreach($carSharings as $carSharing)
+        {
+            if ($carSharing->date_start <= $date && $date <= $carSharing->date_stop){
                 return true;
             }
         }
