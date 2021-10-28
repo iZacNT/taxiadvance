@@ -129,7 +129,7 @@ class PrepareTransactionService
 
     public function prepareHtmlTransactionByType()
     {
-        $html = '<div class="row"><div class="col-md-6">';
+        $html = '<div class="col-md-6">';
         $allCategoriesWithAmount = $this->amountAllCategoriesInTransaction();
         foreach ($allCategoriesWithAmount as $item)
         {
@@ -147,7 +147,7 @@ class PrepareTransactionService
               </div>
             </div></div>';
         }
-        $html .= "</div></div>";
+        $html .= "</div>";
 
         return $html;
     }
@@ -169,6 +169,34 @@ class PrepareTransactionService
                     </a>
                   </li>';
         }
+        return $html;
+    }
+
+    public function prepareTableTransaction()
+    {
+        $html = '<div class="col-md-6"><h3>Все транзакции за период:</h3><table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th style="width: 10px">Адрес</th>
+                      <th>Тип</th>
+                      <th>Название</th>
+                      <th style="width: 40px">Сумма</th>
+                    </tr>
+                  </thead>
+                  <tbody>';
+        foreach($this->transactions as $transaction){
+            $html .='<tr>
+                      <td>'.$transaction['description'].'</td>
+                      <td>'.$transaction['category_id'].'</td>
+                      <td>
+                        '.$transaction['category_name'].'
+                      </td>
+                      <td>'.\Yii::$app->formatter->asCurrency($transaction['amount']).'</td>
+                    </tr>';
+        }
+        $html .= '</tbody>
+                </table></div>';
+
         return $html;
     }
 }

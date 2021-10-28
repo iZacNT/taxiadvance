@@ -248,7 +248,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php Pjax::end(); ?>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-one-transactions" role="tabpanel" aria-labelledby="custom-tabs-one-transactions-tab">
+                        <div class="row">
                         <?= $amountTransactionByAllType;?>
+                        <?= $amountTableTransaction;?>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-one-all-tabel" role="tabpanel" aria-labelledby="custom-tabs-one-all-tabel-tab">
 
