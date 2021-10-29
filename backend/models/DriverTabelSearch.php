@@ -48,6 +48,9 @@ class DriverTabelSearch extends Cars
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 150,
+            ],
         ]);
 
         $this->load($params);

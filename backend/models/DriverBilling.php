@@ -20,7 +20,7 @@ use backend\models\Driver;
  * @property int|null $input_amount Input Amount
  * @property int|null $depo depo
  * @property int|null $debt_from_shift Debt from Shift
- * @property int|null $car_wash Car Wash
+ * @property int|null $car_wash Неустойка (возмещение опоздания, проткнутые колеса, недозоправка и тд)
  * @property int|null $car_fuel_summ Car Fuel Summ
  * @property int|null $car_phone_summ Car Phone Summ
  * @property int|null $hours Hours
@@ -75,7 +75,7 @@ class DriverBilling extends \yii\db\ActiveRecord
             'input_amount' => 'Сумма для расчета',
             'depo' => 'Депо',
             'debt_from_shift' => 'Долг по смене',
-            'car_wash' => 'Мойка',
+            'car_wash' => 'Неустойка',
             'car_fuel_summ' => 'Топливо',
             'car_phone_summ' => 'Телефон',
             'hours' => 'Часы работы',

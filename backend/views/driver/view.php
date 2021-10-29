@@ -337,8 +337,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="dtr-control sorting_1" tabindex="0">Депо:</td>
                                     <td><?= $depo;?></td>
                                 </tr>
-                                <tr class="odd" style="display: none">
-                                    <td class="dtr-control sorting_1" tabindex="0">Мойка:</td>
+                                <tr class="odd" >
+                                    <td class="dtr-control sorting_1" tabindex="0">Неустойка:</td>
                                     <td>
                                         <?= Html::textInput('carWash', 0, ['class' => 'form-control', 'id' => 'carWash'] ); ?>
                                     </td>

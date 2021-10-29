@@ -115,12 +115,18 @@ class DriverTabelController extends Controller
         $driverTabel = $this->findModel($id);
         $oldDate = $driverTabel->work_date;
 
+        $beginDate = \Yii::$app->formatter->asBeginDay(strtotime($driverTabel->work_date));
+        $endDate = \Yii::$app->formatter->asEndDay(strtotime($driverTabel->work_date));
+        $busyPhones = $this->getBusyPhones($beginDate, $endDate);
+
         $cars = Cars::prepareCarsForAutocomplete($driverTabel->work_date,\Yii::$app->user->identity->getFilialUser());
         $drivers = Driver::find()
             ->select(['concat(last_name, " ", first_name) as value', 'concat(last_name, " ", first_name) as  label','id as id'])
             ->asArray()
             ->all();
         $phone_sum = (Settings::find()->select('phone_sum')->one())->phone_sum;
+
+        $freePhones = Phones::preparePhonesForAutocomplete($busyPhones);
 
         if ($this->request->isPost && $driverTabel->load($this->request->post())) {
             $formattedDate = strtotime($driverTabel->work_date);
@@ -157,7 +163,8 @@ class DriverTabelController extends Controller
         return $this->render('update', [
             'driverTabel' => $driverTabel,
             'cars' => $cars,
-            'drivers' => $drivers
+            'drivers' => $drivers,
+            'freePhones' => $freePhones
         ]);
     }
 

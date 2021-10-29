@@ -13,6 +13,13 @@ use yii\helpers\Html;
 class PrepareDriverService
 {
 
+    private $driver_id;
+
+    public function __construct($id)
+    {
+        $this->driver_id = $id;
+    }
+
     /**
      * @param int $deposits Deposit
      * @param int $debt Debt
@@ -35,13 +42,13 @@ class PrepareDriverService
         return $depo;
     }
 
-    public function getPeriodShift(int $driverId,array $shift):int
+    public function getPeriodShift(array $shift):int
     {
         if(!empty($shift)){
-            if($driverId == $shift[0]['driver_id_day']) {
+            if($this->driver_id == $shift[0]['driver_id_day']) {
                 \Yii::debug("Дневной период");
                 return Constants::PERIOD_DAY;
-            }elseif ($driverId == $shift[0]['driver_id_night']){
+            }elseif ($this->driver_id == $shift[0]['driver_id_night']){
                 \Yii::debug("Ночной период");
                 return Constants::PERIOD_NIGHT;
             }
@@ -96,18 +103,18 @@ class PrepareDriverService
     public function getCountHoursFromOrders($allDriverOrders): int
     {
 
-        if (!empty($allDriverOrders)){
-        $firstOrderTime = "";
-        foreach($allDriverOrders as $order){
-            if (array_key_exists('ended_at', $order)){
-                $firstOrderTime = $order['ended_at'];
-                break;
+        if ($allDriverOrders){
+            $firstOrderTime = "";
+            foreach($allDriverOrders as $order){
+                if (array_key_exists('ended_at', $order)){
+                    $firstOrderTime = $order['ended_at'];
+                    break;
+                }
             }
-        }
-        $lastOrdertime = $allDriverOrders[array_key_last($allDriverOrders)]['ended_at'];
-        $hours = strtotime($firstOrderTime)-strtotime($lastOrdertime);
+            $lastOrdertime = $allDriverOrders[array_key_last($allDriverOrders)]['ended_at'];
+            $hours = strtotime($firstOrderTime)-strtotime($lastOrdertime);
 
-        return ($hours/(60*60)>12)? 16 : 12;
+            return ($hours/(60*60)>12)? 16 : 12;
         }
         return 12;
     }
@@ -211,21 +218,31 @@ class PrepareDriverService
                             </table>';
     }
 
-    public function getDriverTabel(DriverTabel $driverTabel, $driver_id): ActiveDataProvider
+    public function getDriverTabel(): ActiveDataProvider
     {
         return new ActiveDataProvider([
-            'query' => $driverTabel::find()
-                ->where(['driver_id_day' => $driver_id])
-                ->orWhere(['driver_id_night' => $driver_id])
+            'query' => DriverTabel::find()
+                ->where(['driver_id_day' => $this->driver_id])
+                ->orWhere(['driver_id_night' => $this->driver_id])
                 ->orderBy(['work_date' => SORT_DESC])
         ]);
     }
 
-    public function getCurrentShift(DriverTabel $driverTabel, int $driver_id): array
+    public function getAllShiftArray(): array
     {
-        $allOpenShifts = $driverTabel::find()
-            ->where(['driver_id_day' => $driver_id, 'status_day_shift' => $driverTabel::STATUS_SHIFT_OPEN])
-            ->orWhere(['driver_id_night' => $driver_id, 'status_night_shift' => $driverTabel::STATUS_SHIFT_OPEN])
+        return DriverTabel::find()
+            ->where(['driver_id_day' => $this->driver_id])
+            ->orWhere(['driver_id_night' => $this->driver_id])
+            ->orderBy(['work_date' => SORT_DESC])
+            ->asArray()
+            ->all();
+    }
+
+    public function getCurrentShift(): array
+    {
+        $allOpenShifts = DriverTabel::find()
+            ->where(['driver_id_day' => $this->driver_id, 'status_day_shift' => DriverTabel::STATUS_SHIFT_OPEN])
+            ->orWhere(['driver_id_night' => $this->driver_id, 'status_night_shift' => DriverTabel::STATUS_SHIFT_OPEN])
             ->orderBy(['work_date' => SORT_ASC])
             ->all();
 

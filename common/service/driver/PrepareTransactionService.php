@@ -184,15 +184,19 @@ class PrepareTransactionService
                     </tr>
                   </thead>
                   <tbody>';
-        foreach($this->transactions as $transaction){
-            $html .='<tr>
-                      <td>'.$transaction['description'].'</td>
-                      <td>'.$transaction['category_id'].'</td>
-                      <td>
-                        '.$transaction['category_name'].'
-                      </td>
-                      <td>'.\Yii::$app->formatter->asCurrency($transaction['amount']).'</td>
-                    </tr>';
+        if ($this->transactions){
+            foreach($this->transactions as $transaction){
+                $html .='<tr>
+                          <td>'.$transaction['description'].'</td>
+                          <td>'.$transaction['category_id'].'</td>
+                          <td>
+                            '.$transaction['category_name'].'
+                          </td>
+                          <td>'.\Yii::$app->formatter->asCurrency($transaction['amount']).'</td>
+                        </tr>';
+            }
+        }else{
+            $html .= '<tr><td colspan="4">Ни чего не найдено.</td></tr>';
         }
         $html .= '</tbody>
                 </table></div>';

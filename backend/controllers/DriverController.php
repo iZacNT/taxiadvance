@@ -91,7 +91,7 @@ class DriverController extends Controller
         $allShiftsDriver = new DriverAllShiftsService($id);
         $allShiftDataProvider = $allShiftsDriver->getAllShifts();
 
-        $prepareDriverService = new PrepareDriverService();
+        $prepareDriverService = new PrepareDriverService($id);
         $depo = ($prepareDriverService)->getDepoSumm(
             $summDeposit,
             $summDebt,
@@ -113,7 +113,7 @@ class DriverController extends Controller
 
         $balanceDriverYandex = round($serviceYandex->getBalanceFromYandex());
         $allTransactions = $serviceYandex->getDriverTransaction();
-
+        $amountTransactionByAllType = "";
         if (!empty($allTransactions)){
             $servicePrepareTransactions = new PrepareTransactionService($allTransactions['transactions']);
 //            $bonus = $servicePrepareTransactions->getBonusDriver();
@@ -124,12 +124,12 @@ class DriverController extends Controller
             $bonus = 0;
             Yii::$app->session->setFlash("error", "Не удалось получить транзакции Водителя. Обновите страницу!");
         }
-        $driverTabel = new DriverTabel();
-        $driverTabelProviderAll = $prepareDriverService->getDriverTabel($driverTabel, $driver->id);
-        $currentShift = $prepareDriverService->getCurrentShift($driverTabel, $driver->id);
+
+        $driverTabelProviderAll = $prepareDriverService->getDriverTabel();
+        $currentShift = $prepareDriverService->getCurrentShift();
 
         $shiftID = $prepareDriverService->getCurrentShiftID($currentShift);
-        $period = $prepareDriverService->getPeriodShift($driver->id, $currentShift);
+        $period = $prepareDriverService->getPeriodShift($currentShift);
         $carFuel = $prepareDriverService->getCarFuel($currentShift);
         $carFuelLabel = Constants::getFuel()[$carFuel];
         \Yii::debug($carFuelLabel);
