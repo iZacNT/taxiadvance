@@ -46,7 +46,7 @@ class PrepareDriverTabel
                     if($this->isFullDayShift($work_drivers)){
                         $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day, $work_drivers->date_close_day_shift);
                     }else{
-                        if ($this->verifyStatusRepair($data->id, $date, false)) {
+                        if ($this->verifyStatusRepair($data->id, $date)) {
                             $row .= $this->prepareRepairColumn();
                         }else if($this->verifyStatusCarSharing($data->id,$date)){
                             $row .= $this->prepareCarSharingColumn();
@@ -58,7 +58,7 @@ class PrepareDriverTabel
                     if($this->isFullNightShift($work_drivers)){
                         $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night, $work_drivers->date_close_night_shift);
                     }else{
-                        if ($this->verifyStatusRepair($data->id, $date, true)){
+                        if ($this->verifyStatusRepair($data->id, $date)){
                             $row .= $this->prepareRepairColumn();
                         }else if($this->verifyStatusCarSharing($data->id, $date)){
                             $row .= $this->prepareCarSharingColumn();
@@ -134,18 +134,12 @@ class PrepareDriverTabel
      * @param $period bool Проверяем Дневной период(false) или Ночной период(true)
      * @return bool
      */
-    public function verifyStatusRepair($car_id, $date, $period = false):bool
+    public function verifyStatusRepair($car_id, $date):bool
     {
         $repairs = CarRepairs::find()->where(['car_id' => $car_id])->all();
-        if($period) {
-            $date = \Yii::$app->formatter->asBeginDay($date)+(21*60*60);
-        }
-        if(!$period) {
-            $date = \Yii::$app->formatter->asBeginDay($date)+(9*60*60);
-        }
 
         foreach ($repairs as $repair){
-            if ($repair->date_open_repair <= $date && empty($repair->date_close_repare) || $repair->date_close_repare > $date ){
+            if ($repair->date_open_repair <= $date && (empty($repair->date_close_repare) || $repair->date_close_repare >= $date )){
                 return true;
             }
         }

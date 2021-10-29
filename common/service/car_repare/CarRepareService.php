@@ -19,34 +19,27 @@ class CarRepareService
 
     public function openRepare():void
     {
-        $currentShift = \Yii::$app->formatter->asCurrentShift();
+        $currentShift = \Yii::$app->formatter->asBeginDay(time());
         $repare = new CarRepairs();
         $repare->car_id = $this->car_id;
-        $repare->date_open_repair = Yii::$app->formatter->asNextShift();
+        $repare->date_open_repair = $currentShift;
         $repare->status = CarRepairs::STATUS_OPEN_REPAIR;
         $repare->save();
 
         $this->deleteAllShiftFromNextDay($currentShift,$this->car_id);
-        $this->deleteShiftsFromPeriod($currentShift,$this->car_id);
+        //$this->deleteShiftsFromPeriod($currentShift,$this->car_id);
     }
 
     public function closeRepare():void
     {
-        $nextShift = \Yii::$app->formatter->asNextShift();
+        $currentShift = \Yii::$app->formatter->asBeginDay(time());;
         $repare = CarRepairs::find()->where(['car_id' => $this->car_id])->andWhere(['status' => CarRepairs::STATUS_OPEN_REPAIR])->one();
-        $repare->date_close_repare = $nextShift;
+        $repare->date_close_repare = $currentShift;
         $repare->status = CarRepairs::STATUS_CLOSE_REPAIR;
         $repare->save();
 
-        if($nextShift == (Yii::$app->formatter->asBeginDay(time())+(21*60*60))){
-            $driverTabel = new DriverTabel();
-            $driverTabel->car_id = $this->car_id;
-            $driverTabel->work_date = Yii::$app->formatter->asBeginDay(time());
-            $driverTabel->save();
-
-        }
-
     }
+
 
     /**
      * Return id CarsRepair

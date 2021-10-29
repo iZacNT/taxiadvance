@@ -155,8 +155,8 @@ class CarsController extends Controller
     {
         $car_id = \Yii::$app->request->post('car_id');
         $car = $this->findModel($car_id);
-        $car->status = Cars::STATUS_REPAIR;
-        $car->save();
+        //$car->status = Cars::STATUS_REPAIR;
+        //$car->save();
 
         $service = new CarRepareService($car_id);
         $service->openRepare();
