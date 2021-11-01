@@ -93,6 +93,18 @@ class expandedFormatter extends Formatter
         return 0;
     }
 
+    public function currentPeriod(): int
+    {
+        $dayShift = $this->asBeginDay(time())+(9*60*60);
+        $nightShift = $this->asBeginDay(time())+(21*60*60);
+
+        if (time() >= $dayShift && time() < $nightShift){
+            return Constants::PERIOD_DAY;
+        }
+
+        return Constants::PERIOD_NIGHT;
+    }
+
     public function asNextShift():int
     {
         return $this->asCurrentShift()+(12*60*60);

@@ -69,24 +69,13 @@ class CarSharingController extends Controller
      */
     public function actionCreate()
     {
+
         $model = new CarSharing();
         $car_id = \Yii::$app->request->get("id");
         $carSharingService = new CarSharingService($car_id);
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-
-                $model->date_start = strtotime($model->stringDateStart);
-                $model->date_stop = strtotime($model->stringDateStop);
-                    if (!$carSharingService->isValidDate($model->date_start)){
-                        \Yii::$app->session->setFlash("error", "Не правильная дата начала аренды. Автомобиль уже находится в аренде на ".$model->stringDateStart);
-                        return $this->redirect(['cars/view', 'id' => $model->car_id]);
-                    }
-                    if (!$carSharingService->isValidDate($model->date_stop)){
-                    \Yii::$app->session->setFlash("error", "Не правильная дата окончания аренды. Автомобиль уже находится в аренде на ".$model->stringDateStop);
-                    return $this->redirect(['cars/view', 'id' => $model->car_id]);
-                    }
-                //$carSharingService->setCarStatusSharing();
-                $model->save();
+                $carSharingService->createSharing($model);
                 return $this->redirect(['cars/view', 'id' => $model->car_id]);
             }
         } else {

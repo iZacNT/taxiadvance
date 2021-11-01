@@ -147,7 +147,15 @@ class PrepareDriverTabel
 
         foreach ($repairs as $repair){
             if ($repair->date_open_repair <= $date && (empty($repair->date_close_repare) || $repair->date_close_repare >= $date )){
-                return true;
+                $periodDay = $date+(9*60*60);
+                $periodNight = $date+(21*60*60);
+
+                if ($repair->date_open_repair <= $periodDay && (empty($repair->date_close_repare) || $repair->date_close_repare >= $periodDay))
+                {return true;}
+                if ($repair->date_open_repair <= $periodNight && (empty($repair->date_close_repare) || $repair->date_close_repare >= $periodNight))
+                {return true;}
+
+                return false;
             }
         }
         return false;
@@ -159,9 +167,15 @@ class PrepareDriverTabel
         $carSharings = CarSharing::find()->where(['car_id' => $car_id])->all();
         foreach($carSharings as $carSharing)
         {
-            if ($carSharing->date_start <= $date && $date <= $carSharing->date_stop){
-                return true;
-            }
+            $periodDay = $date+(9*60*60);
+            $periodNight = $date+(21*60*60);
+
+            if ($carSharing->date_start <= $periodDay && (empty($carSharing->date_stop) || $carSharing->date_stop >= $periodDay))
+            {return true;}
+            if ($carSharing->date_start <= $periodNight && (empty($carSharing->date_stop) || $carSharing->date_stop >= $periodNight))
+            {return true;}
+
+            return false;
         }
         return false;
     }
