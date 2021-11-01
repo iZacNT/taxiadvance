@@ -34,6 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- /.card -->
         </div>
         <!-- /.col (left) -->
+        <div class="col-md-6">
+            <?php
+                if (Yii::$app->session->hasFlash('error')){
+                    echo '<div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                  <h5><i class="icon fas fa-ban"></i> Ошибка!</h5>
+                  '.Yii::$app->session->getFlash("error").'
+                </div>';
+                }
+            ?>
+        </div>
     </div>
     <?= $this->render('_form', [
         'model' => $model,

@@ -41,13 +41,14 @@ $("#searchDriver").on("click", 'button.btn', function(){
                 msg.driver_profiles.forEach(function(item, i, arr) {
 
                     html += '<tr>\n' +
-                    '      <td>'+arr[i].driver_profile.last_name+' '+arr[i].driver_profile.first_name+'</td>\n' +
+                    '      <td>'+arr[i].driver_profile.last_name+' '+arr[i].driver_profile.first_name+' '+arr[i].driver_profile.middle_name+'</td>\n' +
                     '      <td>'+arr[i].driver_profile.id+'</td>\n' +
                     '      <td>'+arr[i].driver_profile.work_status+'</td>\n' +
                     '      <td>'+arr[i].driver_profile.comment+'</td>\n' +
                     '      <td><button class="btn btn-primary getDriver" ' +
                         'data-fname="'+arr[i].driver_profile.first_name+'" ' +
                         'data-lname="'+arr[i].driver_profile.last_name+'" ' +
+                        'data-mname="'+arr[i].driver_profile.middle_name+'" ' +
                         'data-id="'+arr[i].driver_profile.id+'"' +
                         'data-phone="'+arr[i].driver_profile.phones[0]+'" ' +
                         'data-dlicense="'+arr[i].driver_profile.driver_license.normalized_number+'" >Выбрать</button></td>\n' +
@@ -60,6 +61,7 @@ $("#searchDriver").on("click", 'button.btn', function(){
                 $('.modal-body').on('click','.getDriver', function (){
                     $("#driver-first_name").val($(this).data('fname'));
                     $("#driver-last_name").val($(this).data('lname'));
+                    $("#driver-patronymic").val($(this).data('mname'));
                     $("#driver-yandex_id").val($(this).data('id'));
                     $("#driver-phone").val($(this).data('phone'));
                     $("#driver-driving_license").val($(this).data('dlicense'));
@@ -71,6 +73,7 @@ $("#searchDriver").on("click", 'button.btn', function(){
             }else{
                 $("#driver-first_name").val(msg.driver_profiles[0].driver_profile.first_name);
                 $("#driver-last_name").val(msg.driver_profiles[0].driver_profile.last_name);
+                $("#driver-patronymic").val(msg.driver_profiles[0].driver_profile.middle_name);
                 $("#driver-yandex_id").val(msg.driver_profiles[0].driver_profile.id);
                 $("#driver-phone").val(msg.driver_profiles[0].driver_profile.phones[0]);
                 $("#driver-driving_license").val(msg.driver_profiles[0].driver_profile.driver_license.normalized_number);

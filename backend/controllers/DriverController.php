@@ -23,6 +23,7 @@ use common\service\user\UserService;
 use common\service\yandex\params\ParamsSearchDriver;
 use common\service\yandex\YandexApi;
 use common\service\yandex\YandexService;
+use phpDocumentor\Reflection\Types\Boolean;
 use Throwable;
 use Yii;
 use yii\db\StaleObjectException;
@@ -186,15 +187,26 @@ class DriverController extends Controller
         $driver = new Driver();
 
         if ($this->request->isPost) {
-            if ($driver->load($this->request->post()) && $driver->validate()) {
-                $paramsDriver = (new DriverParams($driver))->generateParams();
-                $user = (new UserService)->create(new User(), $paramsDriver);
-                $driver->shift_closing = strtotime($driver->stringShiftClosing);
-                $driver->birth_date = strtotime($driver->stringBirthDay);
-                $driver->user_id = $user->id;
-                $driver->save();
+            if ($driver->load($this->request->post())) {
+                $paramsDriver = new DriverParams($driver);
+                $params = $paramsDriver->generateParams();
+                $userService = new UserService;
+                $user = $userService->searchUserByUsername($params['username']);
+                if (!$user){
+                    $user = $userService->create(new User(), $params);
+                    $paramsDriver->createDriver($driver, $user);
 
-                return $this->redirect(['view', 'id' => $driver->id]);
+                    return $this->redirect(['view', 'id' => $driver->id]);
+                }else{
+                    if ($paramsDriver->searchDriverByIdUser($user->id)){
+                        Yii::$app->session->setFlash('error', 'Водитель уже существует!');
+                        return $this->redirect(['create']);
+                    }else{
+                        $paramsDriver->createDriver($driver, $user);
+
+                        return $this->redirect(['view', 'id' => $driver->id]);
+                    }
+                }
             }
         } else {
             $driver->loadDefaultValues();

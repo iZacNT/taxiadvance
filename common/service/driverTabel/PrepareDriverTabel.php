@@ -44,7 +44,7 @@ class PrepareDriverTabel
                     $row .= Html::a("<i class='far fa-eye' style='float: right; margin-right: 10px;'></i>",['view', 'id' => $work_drivers->id]);
                     $row .= "<br />";
                     if($this->isFullDayShift($work_drivers)){
-                        $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day, $work_drivers->date_close_day_shift);
+                        $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day, $work_drivers->date_close_day_shift, $work_drivers->sum_card_day, $work_drivers->phone_day);
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date)) {
                             $row .= $this->prepareRepairColumn();
@@ -56,7 +56,7 @@ class PrepareDriverTabel
                     }
                     $row .= "<hr />";
                     if($this->isFullNightShift($work_drivers)){
-                        $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night, $work_drivers->date_close_night_shift);
+                        $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night, $work_drivers->date_close_night_shift,  $work_drivers->sum_card_night, $work_drivers->phone_night);
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date)){
                             $row .= $this->prepareRepairColumn();
@@ -102,9 +102,16 @@ class PrepareDriverTabel
         return !empty($data->driver_id_night);
     }
 
-    public function prepareFullColumn($nameDriver, $driver_id, $close_shift): string
+    public function prepareFullColumn($nameDriver, $driver_id, $close_shift, $card_money, $phone): string
     {
         $icon = '';
+        if($card_money) {
+            $icon .= '<i class="fas fa-gas-pump"></i> ';
+        }
+        if($phone) {
+            $icon .= '<i class="fas fa-mobile-alt"></i> ';
+        }
+
         if ($close_shift){
             $icon = '<i class="fas fa-wallet" style="font-weight: bold; color: green"></i> ';
         }

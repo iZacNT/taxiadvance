@@ -31,7 +31,7 @@
                 ['label' => 'Телефоны', 'icon' => 'far fa-user', 'url' => '/admin/phones/index'],
 
             ];
-            if (\backend\models\User::isSuperUser()) {
+            if (\common\models\User::isSuperUser()) {
                 array_push($items, [
                     'label' => 'Настройки',
                     'icon' => 'tachometer-alt',

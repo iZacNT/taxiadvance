@@ -19,4 +19,10 @@ class UserService
             $user->refresh();
         return $user;
     }
+
+    public function searchUserByUsername($username)
+    {
+        $user = User::find()->where(['username' => $username])->one();
+        return $user;
+    }
 }
