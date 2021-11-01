@@ -37,12 +37,16 @@ class DriverTabelController extends Controller
         Yii::debug("Дата/Время начала поиска водителей в Табеле ".$dateSearchFrom." ".Yii::$app->formatter->asDatetime($dateSearchFrom) , __METHOD__);
 
         $prepareService = new PrepareDriverTabel($dateSearchFrom);
-        $columns = $prepareService->generateColumns();
+        $columns = $prepareService->generateColumns($dateSearchFrom);
+        $columnsDay = $prepareService->generateColumnsDay($dateSearchFrom);
+        $columnsNight = $prepareService->generateColumnsNight($dateSearchFrom);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'columns' => $columns,
+            'columnsDay' => $columnsDay,
+            'columnsNight' => $columnsNight,
             'drivers' => $drivers
         ]);
     }

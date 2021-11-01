@@ -19,11 +19,11 @@ class PrepareDriverTabel
         $this->dateSearchFrom = $dateSearchFrom;
     }
 
-    public function generateColumns(): array
+    public function generateColumns($dateSearchFrom): array
     {
         $columns = [];
         for ($i=0; $i < 5; $i++) {
-            $date = $this->dateSearchFrom;
+            $date = $dateSearchFrom;
             array_push($columns, [
                 'attribute' => 'date-'.$date,
                 'header'=> date('d.m.Y', $date),
@@ -80,7 +80,117 @@ class PrepareDriverTabel
                 return $row;
                 }
             ]);
-            $this->dateSearchFrom += (24*60*60);
+            $dateSearchFrom += (24*60*60);
+        } //for
+
+        return $columns;
+    } //function
+
+    public function generateColumnsDay($dateSearchFrom): array
+    {
+        $columns = [];
+        for ($i=0; $i < 5; $i++) {
+            $date = $dateSearchFrom;
+            array_push($columns, [
+                'attribute' => 'date-'.$date,
+                'header'=> date('d.m.Y', $date),
+                'headerOptions' => ['style' => 'font-size: 18px; font-weight: bold; text-align: center;'],
+                'contentOptions' => function () use ($date) {
+                    return ['style' => 'text-align: center; height: 90px;vertical-align: middle;'
+                        .$this->isToday($date)];
+                },
+                'format' => 'raw',
+                'filter' => Html::button("Поиск", ['class' => 'btn btn-primary searchDate', 'data-date' => $date]),
+                'filterOptions' => ['class' => 'text-center'],
+                'value' => function($data) use ($date){
+
+                    $work_drivers = $data->getWorkDriverAtDay($data->id, $date);
+                    $row = "";
+                    if ($work_drivers){
+                        $row .= Html::a("<i class='fas fa-user-edit' style='float: right;'></i>",['update', 'id' => $work_drivers->id]);
+                        $row .= Html::a("<i class='far fa-eye' style='float: right; margin-right: 10px;'></i>",['view', 'id' => $work_drivers->id]);
+                        $row .= "<br />";
+                        if($this->isFullDayShift($work_drivers)){
+                            $row .= $this->prepareFullColumn($work_drivers->fullDayDriverName->fullName, $work_drivers->driver_id_day, $work_drivers->date_close_day_shift, $work_drivers->sum_card_day, $work_drivers->phone_day);
+                        }else{
+                            if ($this->verifyStatusRepair($data->id, $date)) {
+                                $row .= $this->prepareRepairColumn();
+                            }else if($this->verifyStatusCarSharing($data->id,$date)){
+                                $row .= $this->prepareCarSharingColumn();
+                            }else{
+                                $row .= $this->prepareEmptyColumn();
+                            }
+                        }
+                    }else{
+                        if ($this->verifyStatusRepair($data->id, $date)){
+                            $row .= $this->prepareRepairColumn();
+                        }else if($this->verifyStatusCarSharing($data->id, $date)){
+                            $row .= $this->prepareCarSharingColumn();
+                        }else{
+                            $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
+                        }
+                    }
+
+                    return $row;
+                }
+            ]);
+            $dateSearchFrom += (24*60*60);
+        } //for
+
+        return $columns;
+    } //function
+
+    public function generateColumnsNight($dateSearchFrom): array
+    {
+        $columns = [];
+        for ($i=0; $i < 5; $i++) {
+            $date = $dateSearchFrom;
+            array_push($columns, [
+                'attribute' => 'date-'.$date,
+                'header'=> date('d.m.Y', $date),
+                'headerOptions' => ['style' => 'font-size: 18px; font-weight: bold; text-align: center;'],
+                'contentOptions' => function () use ($date) {
+                    return ['style' => 'text-align: center; height: 90px;vertical-align: middle;'
+                        .$this->isToday($date)];
+                },
+                'format' => 'raw',
+                'filter' => Html::button("Поиск", ['class' => 'btn btn-primary searchDate', 'data-date' => $date]),
+                'filterOptions' => ['class' => 'text-center'],
+                'value' => function($data) use ($date){
+
+                    $work_drivers = $data->getWorkDriverAtDay($data->id, $date);
+                    $row = "";
+                    if ($work_drivers){
+                        $row .= Html::a("<i class='fas fa-user-edit' style='float: right;'></i>",['update', 'id' => $work_drivers->id]);
+                        $row .= Html::a("<i class='far fa-eye' style='float: right; margin-right: 10px;'></i>",['view', 'id' => $work_drivers->id]);
+                        $row .= "<br />";
+
+                        if($this->isFullNightShift($work_drivers)){
+                            $row .= $this->prepareFullColumn($work_drivers->fullNightDriverName->fullName, $work_drivers->driver_id_night, $work_drivers->date_close_night_shift,  $work_drivers->sum_card_night, $work_drivers->phone_night);
+                        }else{
+                            if ($this->verifyStatusRepair($data->id, $date)){
+                                $row .= $this->prepareRepairColumn();
+                            }else if($this->verifyStatusCarSharing($data->id, $date)){
+                                $row .= $this->prepareCarSharingColumn();
+                            }else{
+                                $row .= $this->prepareEmptyColumn();
+                            }
+                        }
+
+                    }else{
+                        if ($this->verifyStatusRepair($data->id, $date)){
+                            $row .= $this->prepareRepairColumn();
+                        }else if($this->verifyStatusCarSharing($data->id, $date)){
+                            $row .= $this->prepareCarSharingColumn();
+                        }else{
+                            $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
+                        }
+                    }
+
+                    return $row;
+                }
+            ]);
+            $dateSearchFrom += (24*60*60);
         } //for
 
         return $columns;

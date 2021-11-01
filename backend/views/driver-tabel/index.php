@@ -22,6 +22,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 <li class="nav-item">
                     <a class="nav-link active" id="custom-tabs-one-home-tabel" data-toggle="pill" href="#custom-tabs-one-tabel" role="tab" aria-controls="custom-tabs-one-tabel" aria-selected="true">Табель</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-one-home-tabel-day" data-toggle="pill" href="#custom-tabs-one-tabel-day" role="tab" aria-controls="custom-tabs-one-tabel-day" aria-selected="true">Дневные</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-one-home-tabel-night" data-toggle="pill" href="#custom-tabs-one-tabel-night" role="tab" aria-controls="custom-tabs-one-tabel-night" aria-selected="true">Ночные</a>
+                </li>
             </ul>
         </div>
         <div class="card-body">
@@ -45,6 +51,65 @@ $this->params['breadcrumbs'][] = $this->title;
                                 }
                             ],
                         ],$columns),
+                        'pager' => [
+                            'maxButtonCount' => 5,
+                            'options' => ['class' => 'pagination pagination-sm'],
+                            'linkContainerOptions' => ['class' => 'page-item'],
+                            'linkOptions' => ['class' => 'page-link']
+                        ],
+
+                    ]); ?>
+
+                    <?php Pjax::end(); ?>
+                </div>
+                <div class="tab-pane fade show" id="custom-tabs-one-tabel-day" role="tabpanel" aria-labelledby="custom-tabs-one-home-tabel-day">
+                    <?php Pjax::begin([
+                        'id' => 'tabelDay'
+                    ]); ?>
+                    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+
+                    <?= GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'filterModel' => $searchModel,
+
+
+                        'columns' => array_merge([
+                            [
+                                'attribute' => 'fullNameMark',
+                                'value' => function($data){
+                                    return $data->getFullNameMark();
+                                }
+                            ],
+                        ],$columnsDay),
+                        'pager' => [
+                            'maxButtonCount' => 5,
+                            'options' => ['class' => 'pagination pagination-sm'],
+                            'linkContainerOptions' => ['class' => 'page-item'],
+                            'linkOptions' => ['class' => 'page-link']
+                        ],
+
+                    ]); ?>
+
+                    <?php Pjax::end(); ?>
+                </div>
+                <div class="tab-pane fade show" id="custom-tabs-one-tabel-night" role="tabpanel" aria-labelledby="custom-tabs-one-home-tabel-night">
+                    <?php Pjax::begin([
+                        'id' => 'tabelNight'
+                    ]); ?>
+                    <?php  echo $this->render('_search', ['model' => $searchModel]); ?>
+
+                    <?= GridView::widget([
+                        'dataProvider' => $dataProvider,
+                        'filterModel' => $searchModel,
+
+                        'columns' => array_merge([
+                            [
+                                'attribute' => 'fullNameMark',
+                                'value' => function($data){
+                                    return $data->getFullNameMark();
+                                }
+                            ],
+                        ],$columnsNight),
                         'pager' => [
                             'maxButtonCount' => 5,
                             'options' => ['class' => 'pagination pagination-sm'],
