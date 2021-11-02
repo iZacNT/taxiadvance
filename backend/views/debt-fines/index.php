@@ -24,20 +24,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
 
-            ['attribute' => 'driverInfo.fullName',
+            ['attribute' => 'driverFullName',
                 'format' => 'raw',
                 'value' => function($data){
                     return Html::a($data->driverInfo->fullName,['view', 'id' => $data->id],['style' => 'font-size: 18px; font-weight:bold;'])."<br />".Html::a('Редактировать',['update', 'id' => $data->id],['class' => 'text-green']);
                 }
                 ],
-            'carInfo.fullNameMark',
+            'carFullName',
             'date_reason:date',
+            'regulation',
             'dette:currency',
             'back:currency',
             'comment:ntext',
             //'car_id',
             //'date_reason',
-            //'regulation',
             //'geo_dtp',
             //'date_dtp',
             //'payable',

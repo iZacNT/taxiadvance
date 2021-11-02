@@ -11,6 +11,9 @@ use backend\models\DebtFines;
  */
 class DebtFinesSearch extends DebtFines
 {
+    public $carFullName;
+    public $driverFullName;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +21,7 @@ class DebtFinesSearch extends DebtFines
     {
         return [
             [['id', 'driver_id', 'dette', 'back', 'reason', 'car_id', 'date_reason', 'date_dtp', 'payable', 'date_pay'], 'integer'],
-            [['comment', 'regulation', 'geo_dtp'], 'safe'],
+            [['comment', 'regulation', 'geo_dtp', 'carFullName', 'driverFullName'], 'safe'],
         ];
     }
 
@@ -49,11 +52,32 @@ class DebtFinesSearch extends DebtFines
             'sort' => ['defaultOrder'=>['id'=>SORT_DESC]]
         ]);
 
+        $dataProvider->setSort([
+            'attributes' => [
+                'date_reason',
+                'regulation',
+                'dette',
+                'back',
+                'comment',
+                'driverFullName' => [
+                    'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC, 'patronymic' => SORT_ASC],
+                    'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC, 'patronymic' => SORT_DESC],
+                    'default' => SORT_ASC
+                ],
+                'carFullName' => [
+                    'asc' => ['mark' => SORT_ASC, 'number' => SORT_ASC],
+                    'desc' => ['mark' => SORT_DESC, 'number' => SORT_DESC],
+                ]
+            ]
+        ]);
+
         $this->load($params);
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith(['driverInfo']);
+            $query->joinWith(['carInfo']);
             return $dataProvider;
         }
 
@@ -74,6 +98,14 @@ class DebtFinesSearch extends DebtFines
         $query->andFilterWhere(['like', 'comment', $this->comment])
             ->andFilterWhere(['like', 'regulation', $this->regulation])
             ->andFilterWhere(['like', 'geo_dtp', $this->geo_dtp]);
+
+        $query->joinWith(['carInfo' => function ($q) {
+            $q->where('cars.mark LIKE "%' .$this->carFullName. '%" OR cars.number LIKE "%'.$this->carFullName.'%"');
+        }]);
+
+        $query->joinWith(['driverInfo' => function ($q) {
+            $q->where('driver.first_name LIKE "%' .$this->driverFullName. '%" OR driver.last_name LIKE "%'.$this->driverFullName.'%" OR driver.patronymic LIKE "%'.$this->driverFullName.'%"');
+        }]);
 
         return $dataProvider;
     }

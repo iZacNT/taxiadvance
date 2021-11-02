@@ -73,7 +73,9 @@ class DebtFines extends \yii\db\ActiveRecord
             'stringDateReason' => 'Дата нарушения',
             'stringNameCar' => 'Автомобиль',
             'stringDateDtp' => 'Дата нарушения',
-            'stringDatePay' => 'Дата оплаты'
+            'stringDatePay' => 'Дата оплаты',
+            'carFullName' => 'Автомобиль',
+            'driverFullName' => 'Водитель'
         ];
     }
 
@@ -82,8 +84,16 @@ class DebtFines extends \yii\db\ActiveRecord
         return $this->hasOne(Driver::class,['id' => 'driver_id']);
     }
 
+    public function getDriverFullName() {
+        return $this->driverInfo->fullName;
+    }
+
     public function getCarInfo(): \yii\db\ActiveQuery
     {
         return $this->hasOne(Cars::class,['id' => 'car_id']);
+    }
+
+    public function getCarFullName() {
+        return $this->carInfo->fullNameMark;
     }
 }
