@@ -38,6 +38,9 @@ class DriverParams implements UserParamsInterface
         $driver->birth_date = strtotime($driver->stringBirthDay);
         $driver->user_id = $user->id;
         $driver->save();
+
+        Yii::debug($driver->stringBirthDay, __METHOD__);
+        Yii::debug($driver->birth_date, __METHOD__);
         Yii::debug($driver->errors, __METHOD__);
     }
 

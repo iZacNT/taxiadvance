@@ -194,8 +194,9 @@ class DriverController extends Controller
                 $user = $userService->searchUserByUsername($params['username']);
                 if (!$user){
                     $user = $userService->create(new User(), $params);
+                    $user->refresh();
                     $paramsDriver->createDriver($driver, $user);
-
+                    $driver->refresh();
                     return $this->redirect(['view', 'id' => $driver->id]);
                 }else{
                     if ($paramsDriver->searchDriverByIdUser($user->id)){
@@ -203,7 +204,7 @@ class DriverController extends Controller
                         return $this->redirect(['create']);
                     }else{
                         $paramsDriver->createDriver($driver, $user);
-
+                        $driver->refresh();
                         return $this->redirect(['view', 'id' => $driver->id]);
                     }
                 }

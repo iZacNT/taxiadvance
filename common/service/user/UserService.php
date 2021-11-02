@@ -16,13 +16,11 @@ class UserService
             $user->generateAuthKey();
             $user->generateEmailVerificationToken();
             $user->save();
-            $user->refresh();
         return $user;
     }
 
     public function searchUserByUsername($username)
     {
-        $user = User::find()->where(['username' => $username])->one();
-        return $user;
+        return User::find()->where(['username' => $username])->one();
     }
 }
