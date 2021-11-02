@@ -141,7 +141,6 @@ class PrepareDriverService
         if(array_key_exists('default',$currentShift)){
             $paramsButton['disabled'] = "";
         }
-        var_dump(array_key_exists('default',$currentShift));
 
         return '<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                                 <thead>
