@@ -70,10 +70,11 @@ class DriverBillingService
     {
         $searchShift = DriverBilling::find()
             ->where(['driver_id' => $this->driverId])
-            ->andWhere(['date_billing' => Yii::$app->formatter->asBeginDay(time())])
+            ->andWhere(['shift_id' => $this->shift_id])
             ->one();
+        $idBilling = null;
         if (empty($searchShift)){
-            $this->saveDriverBilling();
+            $idBilling = $this->saveDriverBilling();
 
             $driver = Driver::find()->where(['id' => $this->driverId])->one();
             $this->saveDriverShiftTime($driver);
@@ -87,21 +88,25 @@ class DriverBillingService
             }
 
             $driverShift = DriverTabel::find()->where(['id' => $this->shift_id])->one();
+            if ($driverShift){
+                if($driverShift->driver_id_day == $this->driverId) {
+                    $driverShift->status_day_shift = $driverShift::STATUS_SHIFT_CLOSE;
+                    $driverShift->billing_id_day = $idBilling;
+                    $driverShift->date_close_day_shift = time();
+                    $driverShift->save();
+                    Yii::debug("day", __METHOD__);
 
-            if($driverShift->driver_id_day == $this->driverId) {
-                $driverShift->status_day_shift = $driverShift::STATUS_SHIFT_CLOSE;
-                $driverShift->date_close_day_shift = time();
-                $driverShift->save();
-                Yii::debug("day", __METHOD__);
+                }
+                if($driverShift->driver_id_night == $this->driverId) {
+                    $driverShift->status_night_shift = $driverShift::STATUS_SHIFT_CLOSE;
+                    $driverShift->billing_id_night = $idBilling;
+                    $driverShift->date_close_night_shift = time();
+                    $driverShift->save();
+                    Yii::debug("night", __METHOD__);
 
+                }
             }
-            if($driverShift->driver_id_night == $this->driverId) {
-                $driverShift->status_night_shift = $driverShift::STATUS_SHIFT_CLOSE;
-                $driverShift->date_close_night_shift = time();
-                $driverShift->save();
-                Yii::debug("night", __METHOD__);
 
-            }
 
             $this->saveToCashRegister(
                 time(),
@@ -127,31 +132,35 @@ class DriverBillingService
 
     public function saveDriverBilling()
     {
-        $driverBilling = new DriverBilling();
-        $driverBilling->driver_id = $this->driverId;
-        $driverBilling->date_billing = Yii::$app->formatter->asBeginDay(time());
-        $driverBilling->period = $this->period;
-        $driverBilling->balance_yandex = $this->balanceYandex;
-        $driverBilling->bonus_yandex = $this->bonusYandex;
-        $driverBilling->car_mark = $this->carMark;
-        $driverBilling->fuel = $this->fuel;
-        $driverBilling->type_day = $this->typeDay;
-        $driverBilling->input_amount = $this->inputAmount;
-        $driverBilling->depo = $this->depo;
-        $driverBilling->debt_from_shift = 0;
-        $driverBilling->car_wash = $this->carWash;
-        $driverBilling->car_fuel_summ = $this->carFuelSumm;
-        $driverBilling->car_phone_summ = $this->carPhoneSumm;
-        $driverBilling->hours = $this->hours;
-        $driverBilling->billing = $this->billing;
-        $driverBilling->percent_park = $this->percentPark;
-        $driverBilling->percent_driver = $this->percentDriver;
-        $driverBilling->summ_park = $this->summPark;
-        $driverBilling->summ_driver = $this->summDriver;
-        $driverBilling->plan = $this->plan;
-        $driverBilling->compensations = $this->compensation;
-        $driverBilling->car_id = $this->car_id;
-        Yii::debug("Сохранение Биллинга: ".$driverBilling->save(), __METHOD__);
+            $driverBilling = new DriverBilling();
+            $driverBilling->driver_id = $this->driverId;
+            $driverBilling->date_billing = Yii::$app->formatter->asBeginDay(time());
+            $driverBilling->period = $this->period;
+            $driverBilling->balance_yandex = $this->balanceYandex;
+            $driverBilling->bonus_yandex = $this->bonusYandex;
+            $driverBilling->car_mark = $this->carMark;
+            $driverBilling->fuel = $this->fuel;
+            $driverBilling->type_day = $this->typeDay;
+            $driverBilling->input_amount = $this->inputAmount;
+            $driverBilling->depo = $this->depo;
+            $driverBilling->debt_from_shift = 0;
+            $driverBilling->car_wash = $this->carWash;
+            $driverBilling->car_fuel_summ = $this->carFuelSumm;
+            $driverBilling->car_phone_summ = $this->carPhoneSumm;
+            $driverBilling->hours = $this->hours;
+            $driverBilling->billing = $this->billing;
+            $driverBilling->percent_park = $this->percentPark;
+            $driverBilling->percent_driver = $this->percentDriver;
+            $driverBilling->summ_park = $this->summPark;
+            $driverBilling->summ_driver = $this->summDriver;
+            $driverBilling->plan = $this->plan;
+            $driverBilling->compensations = $this->compensation;
+            $driverBilling->car_id = $this->car_id;
+            $driverBilling->shift_id = $this->shift_id;
+            Yii::debug("Сохранение Биллинга: ".$driverBilling->save(), __METHOD__);
+            $driverBilling->refresh();
+
+        return $driverBilling->id;
     }
 
     public function saveToCashRegister(int $date,int $type, int $cash, string $comment):void

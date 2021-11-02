@@ -14,16 +14,21 @@ class DriverAllShiftsService
         $this->id = $id;
     }
 
-    public function getAllShifts(): ActiveDataProvider
+    public function getAllShiftsDataProvider(): ActiveDataProvider
     {
         return new ActiveDataProvider([
-            'query' => DriverBilling::find()->where(['driver_id' => $this->id]),
+            'query' => $this->getAllShifts(),
             'sort' => [
                 'defaultOrder' => [
                     'date_billing' => SORT_DESC,
                 ]
             ],
         ]);
+    }
+
+    public function getAllShifts()
+    {
+        return DriverBilling::find()->where(['driver_id' => $this->id]);
     }
 
 }

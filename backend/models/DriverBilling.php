@@ -34,6 +34,7 @@ use backend\models\Driver;
  * @property-read \yii\db\ActiveQuery $carInfo
  * @property-read \yii\db\ActiveQuery $driverInfo
  * @property int $car_id [int]  Автомобиль
+ * @property int $shift_id [int]  № Смены
  */
 class DriverBilling extends \yii\db\ActiveRecord
 {
@@ -51,7 +52,7 @@ class DriverBilling extends \yii\db\ActiveRecord
     public function rules(): array
     {
         return [
-            [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations'], 'integer'],
+            [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations', 'shift_id'], 'integer'],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],
         ];

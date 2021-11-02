@@ -262,6 +262,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         echo GridView::widget([
                             'dataProvider' => $driverTabelProviderAll,
                             'columns' => [
+                                    'id',
                                 'carInfo.fullNameMark',
                                 'work_date:date',
                                 [
@@ -285,6 +286,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return ($data->driver_id_day == $model->id) ? $data->labelStatusShift()[$data->status_day_shift] : $data->labelStatusShift()[$data->status_night_shift];
                                     }
                                 ],
+                                [
+                                    'attribute' => 'billing',
+                                    'format' => 'raw',
+                                    'value' => function($data) use ($model){
+                                        return ($data->driver_id_day == $model->id) ? $data->billing_id_day : $data->billing_id_night;
+                                    }
+                                ],
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'driver-tabel',
                                     'template' => '{update} &nbsp;&nbsp;{delete}']
@@ -305,78 +313,111 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php Pjax::begin([
                             'id' => "calculations"
                         ]); ?>
-                        <div class="row">
-                        <div class="col-md-6">
-                            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
-                                <thead>
-                                <tr role="row">
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Наименование</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Сумма</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Заказы с начала смены:</td>
-                                    <td><?= \Yii::$app->formatter->asCurrency($summOrders);?></td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">План: <span id="planSumm"><?= \Yii::$app->formatter->asCurrency($plan);?></span></td>
-                                    <td><?=
-                                            Html::textInput('fromSummOrders', $summOrders, ['class' => 'form-control', 'id' => 'fromSummOrders'] )
-                                        ?></td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Баланс на Яндекс:</td>
-                                    <td><?= $balanceYandex;?></td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Бонусы на Яндекс:</td>
-                                    <td><?= $bonus;?></td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Депо:</td>
-                                    <td><?= $depo;?></td>
-                                </tr>
-                                <tr class="odd" >
-                                    <td class="dtr-control sorting_1" tabindex="0">Неустойка:</td>
-                                    <td>
-                                        <?= Html::textInput('carWash', 0, ['class' => 'form-control', 'id' => 'carWash'] ); ?>
-                                    </td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0"><strong><?= $carFuel;?>:</strong> (<?= $car;?>)</td>
-                                    <td>
-                                        <?= Html::textInput('carFuel', $sum_card, ['class' => 'form-control', 'id' => 'carFuel'] ); ?>
-                                    </td>
-                                </tr>
-                                <tr class="odd">
-                                    <td class="dtr-control sorting_1" tabindex="0">Телефон: <?= $phone;?></td>
-                                    <td>
-                                        <?= Html::textInput('carPhone', $sum_phone, ['class' => 'form-control', 'id' => 'carPhone'] ); ?>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-6">
-                                    <?= $generateTarifTable;?>
 
-<!--                            <table class="table table-responsive">-->
-<!--                                <tr class="odd">-->
-<!--                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>-->
-<!--                                    <td>-->
-<!--                                        --><?//= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
-<!--                                    </td>-->
-<!--                                </tr>-->
-<!--                            </table>-->
-                            <div class="row resultData">
-                                <div class="col-md-8" id="resultAjax">
-                                </div>
-                                <div class="col-md-4">
-                                    <button type="button" id="saveDataButton" class="btn btn-success btn-lg" style="height: 80px; display: none;">Сохранить расчет</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Расчет ведется по смене:
+                                <table id="example1" class="table table-bordered" role="grid">
+                                    <tr>
+                                        <td>
+                                            <?= $currentShift['id_shift']?>
+                                        </td>
+                                        <td>
+                                            <?= Yii::$app->formatter->asDate($currentShift['work_date'])?>
+                                        </td>
+                                        <td>
+                                            <?= Constants::getPeriod()[$currentShift['period']]?>
+                                        </td>
+                                        <td>
+                                            <?= $currentShift['car_full_name']?>
+                                        </td>
+                                        <td>
+                                            <?= $currentShift['car_fuel_label']?>
+                                        </td>
+                                        <td>
+                                            <?= Yii::$app->formatter->asCurrency($currentShift['sum_card'])?>
+                                        </td>
+                                        <td>
+                                            <?= Yii::$app->formatter->asCurrency($currentShift['sum_phone'])?>
+                                        </td>
+                                        <td>
+                                            <?= $currentShift['status_shift']?>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <hr>
+                            </div>
+                            <div class="col-md-6">
+                                <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
+                                    <thead>
+                                    <tr role="row">
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Наименование</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Сумма</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">Заказы с начала смены:</td>
+                                        <td><?= \Yii::$app->formatter->asCurrency($summOrders);?></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">План: <span id="planSumm"><?= \Yii::$app->formatter->asCurrency($plan);?></span></td>
+                                        <td><?=
+                                                Html::textInput('fromSummOrders', $summOrders, ['class' => 'form-control', 'id' => 'fromSummOrders'] )
+                                            ?></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">Баланс на Яндекс:</td>
+                                        <td><?= $balanceYandex;?></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">Бонусы на Яндекс:</td>
+                                        <td><?= $bonus;?></td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">Депо:</td>
+                                        <td><?= $depo;?></td>
+                                    </tr>
+                                    <tr class="odd" >
+                                        <td class="dtr-control sorting_1" tabindex="0">Неустойка:</td>
+                                        <td>
+                                            <?= Html::textInput('carWash', 0, ['class' => 'form-control', 'id' => 'carWash'] ); ?>
+                                        </td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0"><strong><?= $carFuel;?>:</strong> (<?= $car;?>)</td>
+                                        <td>
+                                            <?= Html::textInput('carFuel', $sum_card, ['class' => 'form-control', 'id' => 'carFuel'] ); ?>
+                                        </td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td class="dtr-control sorting_1" tabindex="0">Телефон: <?= $phone;?></td>
+                                        <td>
+                                            <?= Html::textInput('carPhone', $sum_phone, ['class' => 'form-control', 'id' => 'carPhone'] ); ?>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                        <?= $generateTarifTable;?>
+
+    <!--                            <table class="table table-responsive">-->
+    <!--                                <tr class="odd">-->
+    <!--                                    <td class="dtr-control sorting_1" tabindex="0">Долг по смене:</td>-->
+    <!--                                    <td>-->
+    <!--                                        --><?//= Html::textInput('debtFromShift', 0, ['class' => 'form-control', 'id' => 'debtFromShift'] ); ?>
+    <!--                                    </td>-->
+    <!--                                </tr>-->
+    <!--                            </table>-->
+                                <div class="row resultData">
+                                    <div class="col-md-8" id="resultAjax">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" id="saveDataButton" class="btn btn-success btn-lg" style="height: 80px; display: none;">Сохранить расчет</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </div>
                         <?php Pjax::end(); ?>
                     </div>
@@ -393,7 +434,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'attribute' => 'date_billing',
                                         'format' => 'raw',
                                         'value' => function($data){
-                                            return "Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period]."<br />Дата: ".Yii::$app->formatter->asDate($data['date_billing']);
+                                            return "<strong>ID:</strong>".$data->id."&nbsp;&nbsp;&nbsp;&nbsp;<strong>".Yii::$app->formatter->asDate($data['date_billing'])."</strong><br />Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period];
                                         }
                                     ],
                                 [
@@ -443,6 +484,8 @@ let depo = $depo;
 let driverId = $model->id;
 let car_id = $car_id;
 let shift_id = $shiftID;
+
+
 JS;
 
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);

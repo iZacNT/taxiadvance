@@ -89,8 +89,8 @@ class DriverController extends Controller
         $debtDataProvider = $debtDriver->getAllDebt();
         $summDebt = $debtDriver->getSummDebt();
 
-        $allShiftsDriver = new DriverAllShiftsService($id);
-        $allShiftDataProvider = $allShiftsDriver->getAllShifts();
+        $allShiftsDriverService = new DriverAllShiftsService($id);
+        $allShiftDataProvider = $allShiftsDriverService->getAllShiftsDataProvider();
 
         $prepareDriverService = new PrepareDriverService($id);
         $depo = ($prepareDriverService)->getDepoSumm(
@@ -115,6 +115,7 @@ class DriverController extends Controller
         $balanceDriverYandex = round($serviceYandex->getBalanceFromYandex());
         $allTransactions = $serviceYandex->getDriverTransaction();
         $amountTransactionByAllType = "";
+        $amountTableTransaction = "";
         if (!empty($allTransactions)){
             $servicePrepareTransactions = new PrepareTransactionService($allTransactions['transactions']);
 //            $bonus = $servicePrepareTransactions->getBonusDriver();
@@ -127,25 +128,34 @@ class DriverController extends Controller
         }
 
         $driverTabelProviderAll = $prepareDriverService->getDriverTabel();
-        $currentShift = $prepareDriverService->getCurrentShift();
+        //$currentShift = $prepareDriverService->getCurrentShift();
 
-        $shiftID = $prepareDriverService->getCurrentShiftID($currentShift);
-        $period = $prepareDriverService->getPeriodShift($currentShift);
-        $carFuel = $prepareDriverService->getCarFuel($currentShift);
-        $carFuelLabel = Constants::getFuel()[$carFuel];
-        \Yii::debug($carFuelLabel);
+        $currentShift = $prepareDriverService->getCurrentShiftFromArray();
+
+        //$shiftID = $prepareDriverService->getCurrentShiftID($currentShift);
+        $shiftID = $currentShift['id_shift'];
+
+        //$period = $prepareDriverService->getPeriodShift($currentShift);
+        $period = $currentShift['period'];
+
+//        $carFuel = $prepareDriverService->getCarFuel($currentShift);
+        $carFuel = $currentShift['car_fuel'];
+
+//        $carFuelLabel = Constants::getFuel()[$carFuel];
+        $carFuelLabel = $currentShift['car_fuel_label'];
 
         $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $currentShift);
         \Yii::debug($numberPhoneCard);
 
-        $carId = $prepareDriverService->getCarId($currentShift);
+        $carId = $currentShift['car_id'];
 
         $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
-        $carInfo = $prepareDriverService->getCarInfo($currentShift);
+//        $carInfo = $prepareDriverService->getCarInfo($currentShift);
+
         $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , Constants::WORKING_DAY, $hours);
         \Yii::debug($dayPlan);
         $carsMarks = (new Cars())->getAllMarks();
-        $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $carInfo['mark']);
+        $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $currentShift);
 
 
 
@@ -163,9 +173,10 @@ class DriverController extends Controller
             'bonus' => $bonus, //Бонусы в Яндекс
             'depo' => $depo, //Депо
             'plan' => $dayPlan, // План
+            'currentShift' => $currentShift,
             'shiftID' => $shiftID,
             'carFuel' => $carFuelLabel, //Топливо используемого автомобиля
-            'car' => $carInfo['car'], //Марка модель Авто
+            'car' => $currentShift['car_full_name'], //Марка модель Авто
             'car_id' => $carId, // Car ID
             'card' => $numberPhoneCard['card'], //Брал ли карту
             'sum_card' => $numberPhoneCard['sum_card'], //Сумма взятая на бензин

@@ -81,20 +81,10 @@ class PrepareDriverService
         $sum_card = 0;
         $sum_phone = 0;
 
-        if ($period == Constants::PERIOD_DAY){
-            if (!empty($shift[0]->card_day)) $card = $shift[0]->card_day;
-            if (!empty($shift[0]->phone_day)) $phone = $shift[0]->phone_day;
-            if (!empty($shift[0]->sum_card_day)) $sum_card = $shift[0]->sum_card_day;
-            if (!empty($shift[0]->sum_phone_day)) $sum_phone = $shift[0]->sum_phone_day;
-        }
-
-        if ($period == Constants::PERIOD_NIGHT){
-            if (!empty($shift[0]->card_night)) $card = $shift[0]->card_night;
-            if (!empty($shift[0]->card_night)) $phone = $shift[0]->card_night;
-            if (!empty($shift[0]->sum_card_night)) $sum_card = $shift[0]->sum_card_night;
-            if (!empty($shift[0]->sum_phone_night)) $sum_phone = $shift[0]->sum_phone_night;
-        }
-
+            if (!empty($shift['card'])) $card = $shift['card'];
+            if (!empty($shift['phone_day'])) $phone = $shift['phone_day'];
+            if (!empty($shift['sum_card_day'])) $sum_card = $shift['sum_card_day'];
+            if (!empty($shift['sum_phone_day'])) $sum_phone = $shift['sum_phone_day'];
 
         return ['card' => $card,'sum_card' => $sum_card, 'phone' => $phone, 'sum_phone' => $sum_phone];
 
@@ -124,7 +114,7 @@ class PrepareDriverService
         return (!empty($shift[0]->car_id)) ? $shift[0]->car_id : 0;
     }
 
-    public function generateTarifTable(int $typeDay, int $period, int $carFuel, int $hours, $cars, $mark):string
+    public function generateTarifTable(int $typeDay, int $period, int $carFuel, int $hours, $cars, $currentShift):string
     {
         $resPeriodWork = ($typeDay == Constants::WORKING_DAY)? "checked" : "";
         $resPeriodWeekend = ($typeDay == Constants::WEEKEND_DAY)? "checked" : "";
@@ -139,10 +129,19 @@ class PrepareDriverService
             'prompt' => 'Выберите марку Авто',
             'id' => 'carMarkName',
             'options' => [
-                $mark => ['selected' => true]
+                $currentShift['car_mark'] => ['selected' => true]
             ],
         ];
 
+        $paramsButton = [
+            'class' => 'btn btn-primary',
+            'id' => 'calculateShift',
+        ];
+
+        if(array_key_exists('default',$currentShift)){
+            $paramsButton['disabled'] = "";
+        }
+        var_dump(array_key_exists('default',$currentShift));
 
         return '<table id="example2" class="table table-bordered table-hover dataTable dtr-inline" role="grid" aria-describedby="example2_info">
                                 <thead>
@@ -211,7 +210,7 @@ class PrepareDriverService
                                     <h3 id="loader" class="card-title float-right" style="display: none;"><i class="fas fa-2x fa-sync-alt fa-spin" style="font-size: 18px"></i> Поиск...</h3>
                                     </th>
                                     <th rowspan="1" colspan="1">'.
-                                        Html::button('Расчитать',['class' => 'btn btn-primary', 'id' => 'calculateShift'])
+                                        Html::button('Расчитать',$paramsButton)
                                     .'</th>
                                 </tr>
                                 </tfoot>
@@ -256,6 +255,112 @@ class PrepareDriverService
     public function getCurrentShiftID(array $shift)
     {
         return (!empty($shift)) ? $shift[0]->id : 0;
+    }
+
+    public function validateCurrentShift(array $currentShift): array
+    {
+        if (empty($currentShift)){
+            \Yii::$app->session->setFlash('dangerShiftInTabel', 'Нет открытых смен в Табеле на Текущий момент!!! Для более точного расчета необходимо добавить смену!<br><br>'.Html::a('Перейти в табель', ['driver-tabel/index'],['class' => 'btn btn-danger']));
+            array_push($currentShift,[
+                'id_shift' => 0,
+                'car_id' => 0,
+                'car_full_name' => 'Авто Не известен',
+                'car_mark' => 'Поло',
+                'car_fuel' => Constants::FUEL_GAS,
+                'car_fuel_label' => Constants::getFuel()[Constants::FUEL_GAS],
+                'work_date' => time(),
+                'period' => Constants::PERIOD_DAY,
+                'card' => null,
+                'sum_card' => 0,
+                'phone' => null,
+                'sum_phone' => 0,
+                'status_shift' => DriverTabel::labelStatusShift()[DriverTabel::STATUS_SHIFT_OPEN],
+                'date_close_shift' => 0,
+                'default' => 'yes'
+            ]);
+        }
+
+        return $currentShift;
+    }
+
+    public function getAllShiftsInArray(): array
+    {
+        $driverShift = [];
+        $shifts = DriverTabel::find()
+            ->where(['driver_id_day' => $this->driver_id])
+            ->orWhere(['driver_id_night' => $this->driver_id])
+            ->orderBy(['work_date' => SORT_DESC])
+            ->all();
+        foreach($shifts as $shift){
+            if ($shift->driver_id_day ==  $this->driver_id){
+                $driverShift =$this->addRowInArrayDay( $shift, $driverShift);
+            }
+            if ($shift->driver_id_night ==  $this->driver_id){
+                $driverShift = $this->addRowInArrayNight( $shift, $driverShift);
+            }
+        }
+
+        return $driverShift;
+    }
+
+    public function getCurrentShiftFromArray()
+    {
+        $openShiftsArray = [];
+        $allShifts = $this->getAllShiftsInArray();
+        foreach($allShifts as $shift){
+            if($shift['work_date'] < time()){
+                array_push($openShiftsArray, $shift);
+            }
+        }
+        asort($openShiftsArray);
+
+
+        $openShiftsArray = $this->validateCurrentShift($openShiftsArray);
+        \Yii::debug($openShiftsArray, __METHOD__);
+    return $openShiftsArray[0];
+    }
+
+    private function addRowInArrayDay(DriverTabel $shift, array $driverShift): array
+    {
+        array_push($driverShift,[
+            'id_shift' =>$shift->id,
+            'car_id' => $shift->car_id,
+            'car_full_name' => $shift->carInfo->fullNameMark,
+            'car_mark' => $shift->carInfo->mark,
+            'car_fuel' => $shift->carInfo->fuel,
+            'car_fuel_label' => Constants::getFuel()[$shift->carInfo->fuel],
+            'work_date' => $shift->work_date,
+            'period' => Constants::PERIOD_DAY,
+            'card' => $shift->card_day,
+            'sum_card' => $shift->sum_card_day,
+            'phone' => $shift->phone_day,
+            'sum_phone' => $shift->sum_phone_day,
+            'status_shift' => DriverTabel::labelStatusShift()[$shift->status_day_shift],
+            'date_close_shift' => $shift->date_close_day_shift,
+        ]);
+        return $driverShift;
+    }
+
+    private function addRowInArrayNight(DriverTabel $shift, array $driverShift): array
+    {
+        array_push($driverShift,[
+            'id_shift' =>$shift->id,
+            'car_id' => $shift->car_id,
+            'car_full_name' => $shift->carInfo->fullNameMark,
+            'car_mark' => $shift->carInfo->mark,
+            'car_fuel' => $shift->carInfo->fuel,
+            'car_fuel_label' => Constants::getFuel()[$shift->carInfo->fuel],
+            'work_date' => $shift->work_date,
+            'period' => Constants::PERIOD_NIGHT,
+            'card' => $shift->card_night,
+            'sum_card' => $shift->sum_card_night,
+            'phone' => $shift->phone_night,
+            'sum_phone' => $shift->sum_phone_night,
+            'status_shift' => DriverTabel::labelStatusShift()[$shift->status_night_shift],
+            'date_close_shift' => $shift->date_close_night_shift,
+        ]);
+
+        return $driverShift;
     }
 
 }
