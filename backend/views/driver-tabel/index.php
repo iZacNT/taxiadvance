@@ -135,6 +135,19 @@ $jsRaschet = <<< JS
 let drivers = $drv;
 JS;
 
+$css= <<< CSS
+
+table thead {
+    position: sticky; 
+    top: 0;
+    background: #ffffff;  
+}
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "myStyles" );
+
+
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
 $this->registerJsFile('@web/js/driver-tabel/searchDriverDataInTabel.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>

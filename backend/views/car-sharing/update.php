@@ -5,17 +5,16 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\CarSharing */
 
-$this->title = 'Update Car Sharing: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Car Sharings', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Изменить аренду от: ' . Yii::$app->formatter->asDate($model->date_stop);
+$this->params['breadcrumbs'][] = ['label' => 'Аренда Автомобилей', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Изменить';
 ?>
 <div class="car-sharing-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
+        'drivers' => $drivers
     ]) ?>
 
 </div>

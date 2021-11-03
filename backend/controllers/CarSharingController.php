@@ -5,6 +5,7 @@ namespace backend\controllers;
 use app\models\CarSharing;
 use backend\models\Cars;
 use backend\models\CarSharingSearch;
+use backend\models\Driver;
 use common\service\car_repare\CarRepareService;
 use common\service\car_sharing\CarSharingService;
 use yii\web\Controller;
@@ -71,6 +72,9 @@ class CarSharingController extends Controller
     {
 
         $model = new CarSharing();
+
+        $drivers = Driver::prepareDriversForAutocomplete();
+
         $car_id = \Yii::$app->request->get("id");
         $carSharingService = new CarSharingService($car_id);
         if ($this->request->isPost) {
@@ -86,6 +90,7 @@ class CarSharingController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'drivers' => $drivers
         ]);
     }
 
@@ -100,7 +105,7 @@ class CarSharingController extends Controller
     {
         $model = $this->findModel($id);
         $carSharingService = new CarSharingService($model->car_id);
-
+        $drivers = Driver::prepareDriversForAutocomplete();
         if ($this->request->isPost && $model->load($this->request->post())) {
 
             $model->date_start = strtotime($model->stringDateStart);
@@ -110,11 +115,18 @@ class CarSharingController extends Controller
             return $this->redirect(['cars/view', 'id' => $model->car_id]);
         }
 
+        foreach($drivers as $driver){
+            if ($driver['id'] == $model->driver_id){
+                $model->stringNameDriver = $driver['label'];
+            }
+        }
+
         $model->stringDateStart = (!empty($model->date_start)) ? \Yii::$app->formatter->asDate($model->date_start, "yyyy-MM-dd"): '';
         $model->stringDateStop = (!empty($model->date_stop)) ? \Yii::$app->formatter->asDate($model->date_stop, "yyyy-MM-dd"): '';
 
         return $this->render('update', [
             'model' => $model,
+            'drivers' => $drivers
         ]);
     }
 

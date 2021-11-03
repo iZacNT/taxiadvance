@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -47,6 +48,27 @@ use yii\widgets\ActiveForm;
                     ]
                 ]) ?>
             </div>
+            <div class="col-md-12">
+                <?
+                echo $form->field($model, 'stringNameDriver')
+                    ->widget(\yii\jui\AutoComplete::classname(), [
+                        //'value' => (!empty($model->floor) ? $model->floor : ''),
+                        'clientOptions' => [
+                            'source' => $drivers,
+                            'minLength'=>'0',
+                            'autoFill'=>true,
+                            'select' => new JsExpression("function( event, ui ) {
+                        $('#carsharing-driver_id').val(ui.item.id);
+                }")],
+                        'options'=>[
+                            'class'=>'form-control',
+                            'id' => 'autocompleteCar',
+                            'placeholder' => 'ФИО Водителя',
+                        ],
+
+                    ]);
+                ?>
+            </div>
         </div>
 
     <?= $form->field($model, 'comments')->textarea(['rows' => 4]) ?>
@@ -56,6 +78,7 @@ use yii\widgets\ActiveForm;
     </div>
 
         <?= $form->field($model, 'car_id')->hiddenInput()->label("") ?>
+        <?= $form->field($model, 'driver_id')->textInput()->label("") ?>
 
         <?php ActiveForm::end(); ?>
 

@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use backend\models\Driver;
 use Yii;
 use yii\data\ActiveDataProvider;
 
@@ -13,12 +14,14 @@ use yii\data\ActiveDataProvider;
  * @property int|null $date_start
  * @property int|null $date_stop
  * @property string|null $comments
+ * @property int $driver_id [int]
  */
 class CarSharing extends \yii\db\ActiveRecord
 {
 
     public $stringDateStart;
     public $stringDateStop;
+    public $stringNameDriver;
 
     /**
      * {@inheritdoc}
@@ -34,8 +37,8 @@ class CarSharing extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['car_id', 'date_start', 'date_stop'], 'integer'],
-            [['stringDateStart', 'stringDateStop'], 'string'],
+            [['car_id', 'date_start', 'date_stop', 'driver_id'], 'integer'],
+            [['stringDateStart', 'stringDateStop', 'stringNameDriver'], 'string'],
             [['comments'], 'string', 'max' => 255],
         ];
     }
@@ -53,6 +56,8 @@ class CarSharing extends \yii\db\ActiveRecord
             'comments' => 'Комментарии',
             'stringDateStart' => 'Дата начала',
             'stringDateStop' => 'Дата окончания',
+            'driver_id' => 'Водитель',
+            'stringNameDriver' => 'Водитель'
         ];
     }
 
@@ -61,5 +66,10 @@ class CarSharing extends \yii\db\ActiveRecord
         return new ActiveDataProvider([
             'query' => self::find()->where(['car_id' => $car_id])
         ]);
+    }
+
+    public function getDriverInfo(): \yii\db\ActiveQuery
+    {
+        return $this->hasOne(Driver::class,['id' => 'driver_id']);
     }
 }
