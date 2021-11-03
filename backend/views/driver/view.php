@@ -323,7 +323,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             <?= $currentShift['id_shift']?>
                                         </td>
                                         <td>
-                                            <?= Yii::$app->formatter->asDate($currentShift['work_date'])?>
+                                            <?= Yii::$app->formatter->asDateTime($currentShift['work_date'])?>
                                         </td>
                                         <td>
                                             <?= Constants::getPeriod()[$currentShift['period']]?>

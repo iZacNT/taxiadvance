@@ -321,6 +321,7 @@ class PrepareDriverService
 
     private function addRowInArrayDay(DriverTabel $shift, array $driverShift): array
     {
+        $fullTimeShift = $shift->work_date + (9*60*60);
         array_push($driverShift,[
             'id_shift' =>$shift->id,
             'car_id' => $shift->car_id,
@@ -328,7 +329,7 @@ class PrepareDriverService
             'car_mark' => $shift->carInfo->mark,
             'car_fuel' => $shift->carInfo->fuel,
             'car_fuel_label' => Constants::getFuel()[$shift->carInfo->fuel],
-            'work_date' => $shift->work_date,
+            'work_date' => $fullTimeShift,
             'period' => Constants::PERIOD_DAY,
             'card' => $shift->card_day,
             'sum_card' => $shift->sum_card_day,
@@ -342,6 +343,8 @@ class PrepareDriverService
 
     private function addRowInArrayNight(DriverTabel $shift, array $driverShift): array
     {
+        $fullTimeShift = $shift->work_date + (21*60*60);
+
         array_push($driverShift,[
             'id_shift' =>$shift->id,
             'car_id' => $shift->car_id,
@@ -349,7 +352,7 @@ class PrepareDriverService
             'car_mark' => $shift->carInfo->mark,
             'car_fuel' => $shift->carInfo->fuel,
             'car_fuel_label' => Constants::getFuel()[$shift->carInfo->fuel],
-            'work_date' => $shift->work_date,
+            'work_date' => $fullTimeShift,
             'period' => Constants::PERIOD_NIGHT,
             'card' => $shift->card_night,
             'sum_card' => $shift->sum_card_night,
