@@ -33,7 +33,7 @@ class PrepareDriverTabel
                         .$this->isToday($date)];
                 },
                 'format' => 'raw',
-                'filter' => Html::button("Поиск", ['class' => 'btn btn-primary searchDate', 'data-date' => $date]),
+                'filter' => '<div class="btn-group"> '.Html::button('<i class="fas fa-search"></i>', ['class' => 'btn btn-default searchDate', 'data-date' => $date, 'data-toggle' => "tooltip", 'data-placement'=>"top", 'title'=>"Поиск водителя ".Yii::$app->formatter->asDate($date).' числа']).Html::button('<i class="fas fa-chart-area"></i>', ['class' => 'btn btn-default statDate', 'data-date' => $date, 'data-toggle' => "tooltip", 'data-placement'=>"top", 'title'=>"Статистика ".Yii::$app->formatter->asDate($date).' числа']).'</div>',
                 'filterOptions' => ['class' => 'text-center'],
                 'value' => function($data) use ($date){
 
@@ -48,7 +48,7 @@ class PrepareDriverTabel
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date)) {
                             $row .= $this->prepareRepairColumn();
-                        }else if($this->verifyStatusCarSharing($data->id,$date)){
+                        }else if($this->verifyStatusCarSharing($data->id,$date+(9*60*60))){
                             $row .= $this->prepareCarSharingColumn();
                         }else{
                             $row .= $this->prepareEmptyColumn();
@@ -60,7 +60,7 @@ class PrepareDriverTabel
                     }else{
                         if ($this->verifyStatusRepair($data->id, $date)){
                             $row .= $this->prepareRepairColumn();
-                        }else if($this->verifyStatusCarSharing($data->id, $date)){
+                        }else if($this->verifyStatusCarSharing($data->id, $date+(21*60*60))){
                             $row .= $this->prepareCarSharingColumn();
                         }else{
                             $row .= $this->prepareEmptyColumn();
@@ -115,7 +115,7 @@ class PrepareDriverTabel
                         }else{
                             if ($this->verifyStatusRepair($data->id, $date)) {
                                 $row .= $this->prepareRepairColumn();
-                            }else if($this->verifyStatusCarSharing($data->id,$date)){
+                            }else if($this->verifyStatusCarSharing($data->id,$date+(9*60*60))){
                                 $row .= $this->prepareCarSharingColumn();
                             }else{
                                 $row .= $this->prepareEmptyColumn();
@@ -170,7 +170,7 @@ class PrepareDriverTabel
                         }else{
                             if ($this->verifyStatusRepair($data->id, $date)){
                                 $row .= $this->prepareRepairColumn();
-                            }else if($this->verifyStatusCarSharing($data->id, $date)){
+                            }else if($this->verifyStatusCarSharing($data->id, $date+(21*60*60))){
                                 $row .= $this->prepareCarSharingColumn();
                             }else{
                                 $row .= $this->prepareEmptyColumn();
@@ -229,17 +229,17 @@ class PrepareDriverTabel
         return '<div style="font-size: 16px;">'.$icon.Html::a($nameDriver, ['/driver/view', 'id' => $driver_id]).'</div>';
     }
 
-    public function prepareEmptyColumn()
+    public function prepareEmptyColumn(): string
     {
         return '<div style="font-size: 12px; color: red; font-weight: bold;">Не назначен</div>';
     }
 
-    public function prepareRepairColumn()
+    public function prepareRepairColumn(): string
     {
         return '<div style="font-size: 12px; color: red; font-weight: bold; text-transform: uppercase">На ремонте</div>';
     }
 
-    public function prepareCarSharingColumn()
+    public function prepareCarSharingColumn(): string
     {
         return '<div style="font-size: 12px; color: red; font-weight: bold; text-transform: uppercase">Аренда</div>';
     }
@@ -277,15 +277,10 @@ class PrepareDriverTabel
         $carSharings = CarSharing::find()->where(['car_id' => $car_id])->all();
         foreach($carSharings as $carSharing)
         {
-            $periodDay = $date+(9*60*60);
-            $periodNight = $date+(21*60*60);
 
-            if ($carSharing->date_start <= $periodDay && (empty($carSharing->date_stop) || $carSharing->date_stop >= $periodDay))
-            {return true;}
-            if ($carSharing->date_start <= $periodNight && (empty($carSharing->date_stop) || $carSharing->date_stop >= $periodNight))
+            if ($carSharing->date_start <= $date && (empty($carSharing->date_stop) || $carSharing->date_stop > $date))
             {return true;}
 
-            return false;
         }
         return false;
     }

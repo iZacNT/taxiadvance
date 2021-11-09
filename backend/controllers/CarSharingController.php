@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use app\models\CarSharing;
+use app\models\DriverTabel;
 use backend\models\Cars;
 use backend\models\CarSharingSearch;
 use backend\models\Driver;
@@ -110,6 +111,7 @@ class CarSharingController extends Controller
 
             $model->date_start = strtotime($model->stringDateStart);
             $model->date_stop = strtotime($model->stringDateStop);
+            $this->insertShiftInTabel($model->date_stop, $model->car_id);
 
             $model->save();
             return $this->redirect(['cars/view', 'id' => $model->car_id]);
@@ -161,4 +163,21 @@ class CarSharingController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    private function insertShiftInTabel($date_stop, $car_id)
+    {
+        $beginDay = \Yii::$app->formatter->asBeginDay($date_stop);
+        $dayPeriod = $beginDay+(9*60*60);
+        $nightPeriod = $beginDay+(21*60*60);
+
+        if(!DriverTabel::find()->where(['car_id' => $car_id])->andWhere(['work_date' => $date_stop])->one()){
+            if ($date_stop > $dayPeriod && $date_stop <= $nightPeriod){
+                $shift = new DriverTabel();
+                $shift->work_date = $beginDay;
+                $shift->car_id = $car_id;
+                $shift->save();
+            }
+        }
+    }
+
 }

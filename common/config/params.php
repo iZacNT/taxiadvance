@@ -9,6 +9,7 @@ return [
     'cookieDomain' => 'example.com',
     'frontendHostInfo' => 'taxiadvance.loc',
     'backendHostInfo' => 'taxiadvance.loc',
+    'bsVersion' => '4.x',
     'hail812/yii2-adminlte3' => [
         'pluginMap' => [
             'sweetalert2' => [

@@ -124,8 +124,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //                        'filterModel' => $searchModel,
                         'columns' => [
                             ['class' => 'yii\grid\SerialColumn'],
-                            'date_start:date',
-                            'date_stop:date',
+                            'date_start:datetime',
+                            'date_stop:datetime',
                             'comments',
                             ['class' => 'yii\grid\ActionColumn',
                                 'controller' => 'car-sharing'

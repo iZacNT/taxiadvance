@@ -74,7 +74,7 @@ class PrepareDriverService
         return ['car' => "", 'mark' => current((new Cars())->getAllMarks())];
     }
 
-    public function getNumberCardPhone($period, $shift):array
+    public function getNumberCardPhone($shift):array
     {
         $card="Не брал";
         $phone="Не брал";
@@ -82,9 +82,9 @@ class PrepareDriverService
         $sum_phone = 0;
 
             if (!empty($shift['card'])) $card = $shift['card'];
-            if (!empty($shift['phone_day'])) $phone = $shift['phone_day'];
-            if (!empty($shift['sum_card_day'])) $sum_card = $shift['sum_card_day'];
-            if (!empty($shift['sum_phone_day'])) $sum_phone = $shift['sum_phone_day'];
+            if (!empty($shift['phone'])) $phone = $shift['phone'];
+            if (!empty($shift['sum_card'])) $sum_card = $shift['sum_card'];
+            if (!empty($shift['sum_phone'])) $sum_phone = $shift['sum_phone'];
 
         return ['card' => $card,'sum_card' => $sum_card, 'phone' => $phone, 'sum_phone' => $sum_phone];
 

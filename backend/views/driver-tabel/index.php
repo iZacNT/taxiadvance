@@ -150,4 +150,5 @@ $this->registerCss($css, ["type" => "text/css"], "myStyles" );
 
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
 $this->registerJsFile('@web/js/driver-tabel/searchDriverDataInTabel.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('@web/js/driver-tabel/getStatisticByDay.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>

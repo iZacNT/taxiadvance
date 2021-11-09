@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '28b75548c394241f5ba41a015117f2b08404f83b',
+    'reference' => 'ac1da8ef5839fe62faee858feb33d751968c1804',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -235,6 +235,25 @@
       array (
       ),
       'reference' => '3c82edef9a2db36b1fa074725978183fd2999516',
+    ),
+    'kartik-v/yii2-krajee-base' => 
+    array (
+      'pretty_version' => 'v3.0.1',
+      'version' => '3.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'bbf7b58b0000f44834c18c0f2eed13a0a7d04c09',
+    ),
+    'kartik-v/yii2-widget-datetimepicker' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '1.5.x-dev',
+      ),
+      'reference' => '881985a5e482a4e37d1901c7857912ba5af3f298',
     ),
     'myclabs/deep-copy' => 
     array (
@@ -804,7 +823,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '28b75548c394241f5ba41a015117f2b08404f83b',
+      'reference' => 'ac1da8ef5839fe62faee858feb33d751968c1804',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (

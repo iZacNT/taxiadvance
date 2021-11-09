@@ -12,6 +12,7 @@ use backend\models\DriverTTabelSearch;
 use backend\models\Phones;
 use backend\models\Settings;
 use common\service\driverTabel\PrepareDriverTabel;
+use common\service\driverTabel\StatistycDriverTabel;
 use frontend\models\ContactForm;
 use Throwable;
 use Yii;
@@ -292,5 +293,11 @@ class DriverTabelController extends Controller
             array_push($phones, $item['id']);
         }
         return $phones;
+    }
+
+    public function actionGenerateStatisticByDay()
+    {
+        $dateStat = Yii::$app->request->post("date");
+        return json_encode((new StatistycDriverTabel())->generateStatisticByDay($dateStat));
     }
 }

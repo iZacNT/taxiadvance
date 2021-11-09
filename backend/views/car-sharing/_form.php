@@ -1,5 +1,6 @@
 <?php
 
+use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
@@ -17,36 +18,25 @@ use yii\widgets\ActiveForm;
 
         <div class="row">
             <div class="col-md-6">
-                <?= $form->field($model, 'stringDateStart')->widget(\yii\jui\DatePicker::classname(), [
-                    'options' => [
-                        'placeholder' => Yii::$app->formatter->asDate((!empty($model->date_start)) ? $model->date_start : time(), "yyyy-MM-dd"),
-                        'class'=> 'form-control',
-                        'autocomplete'=>'off'
-                    ],
-                    'language' => 'ru',
-                    'dateFormat' => 'yyyy-MM-dd',
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '2020:2050',
+                <?= $form->field($model, 'stringDateStart')->widget(DateTimePicker::classname(), [
+                    'options' => ['placeholder' => 'Выбирите дату начала'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-mm-yyyy hh:ii'
                     ]
-                ]) ?>
+                ]);
+                ?>
+
             </div>
             <div class="col-md-6">
-                <?= $form->field($model, 'stringDateStop')->widget(\yii\jui\DatePicker::classname(), [
-                    'options' => [
-                        'placeholder' => Yii::$app->formatter->asDate((!empty($model->date_stop)) ? $model->date_stop : time(), "yyyy-MM-dd"),
-                        'class'=> 'form-control',
-                        'autocomplete'=>'off'
-                    ],
-                    'language' => 'ru',
-                    'dateFormat' => 'yyyy-MM-dd',
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '2020:2050',
+                <?= $form->field($model, 'stringDateStop')->widget(DateTimePicker::classname(), [
+                    'options' => ['placeholder' => 'Выбирите дату окончания'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-mm-yyyy hh:ii'
                     ]
-                ]) ?>
+                ]);
+                ?>
             </div>
             <div class="col-md-12">
                 <?

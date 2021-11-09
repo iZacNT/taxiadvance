@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Html::activeDropDownList($searchModel, 'type_cash',$searchModel->getTypeCash() ,['class'=>'form-control','prompt' => 'Выбирите тип']),
                 'format' => 'raw',
                 'value' => function($data){
-                    if (\backend\models\User::isSuperUser()) {
+                    if (\common\models\User::isSuperUser()) {
                         return Html::a($data->getTypeCash()[$data->type_cash], ['view', 'id' => $data->id],['style' => 'font-size: 18px; font-weight:bold'])."<br>".Html::a("Редактировать", ['update', 'id' => $data->id],['class' => 'text-green']);
                     }
                     return Html::a($data->getTypeCash()[$data->type_cash], ['view', 'id' => $data->id],['style' => 'font-size: 18px; font-weight:bold']);

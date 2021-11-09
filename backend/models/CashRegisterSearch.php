@@ -17,7 +17,8 @@ class CashRegisterSearch extends CashRegister
     public function rules()
     {
         return [
-            [['id', 'type_cash', 'cash', 'comment'], 'integer'],
+            [['id', 'type_cash', 'cash'], 'integer'],
+            [['comment'], 'string'],
             [['date_time'], 'safe'],
         ];
     }
@@ -62,9 +63,11 @@ class CashRegisterSearch extends CashRegister
             'id' => $this->id,
             'type_cash' => $this->type_cash,
             'cash' => $this->cash,
-            'comment' => $this->comment,
+//            'comment' => $this->comment,
         ])
         ->andFilterWhere(['>=', 'date_time', \Yii::$app->formatter->asTimestamp($this->date_time)]);
+
+        $query->andWhere('comment LIKE "%'.$this->comment.'%"');
 
         return $dataProvider;
     }
