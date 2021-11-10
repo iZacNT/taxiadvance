@@ -144,7 +144,7 @@ class DriverController extends Controller
 //        $carFuelLabel = Constants::getFuel()[$carFuel];
         $carFuelLabel = $currentShift['car_fuel_label'];
 
-        $numberPhoneCard = $prepareDriverService->getNumberCardPhone($period, $currentShift);
+        $numberPhoneCard = $prepareDriverService->getNumberCardPhone($currentShift);
         \Yii::debug($numberPhoneCard);
 
         $carId = $currentShift['car_id'];
