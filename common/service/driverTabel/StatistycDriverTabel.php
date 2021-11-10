@@ -223,7 +223,7 @@ class StatistycDriverTabel
             $result['inRepair']['dayRepare'] = $this->inRepair($shift->car_id, $shift->work_date+(9*60*60), $result['inRepair']['dayRepare']);
             $result['inShared']['dayShared'] = $this->inShared($shift->car_id, $shift->work_date+(9*60*60), $result['inShared']['dayShared']);
             $mergeCars = array_merge($result['inRepair']['dayRepare'], $result['inShared']['dayShared']);
-            $result['inEmpty']['dayEmpty'] = $this->inEmpty($shift->car_id, $mergeCars, $result['inShared']['dayShared']);
+            $result['inEmpty']['dayEmpty'] = $this->inEmpty($shift->car_id, $mergeCars, $result['inEmpty']['dayEmpty']);
         }
         if(empty($shift->driver_id_night)){
             $result['inRepair']['nightRepare'] = $this->inRepair($shift->car_id, $shift->work_date+(21*60*60), $result['inRepair']['nightRepare']);

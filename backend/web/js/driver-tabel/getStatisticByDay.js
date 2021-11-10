@@ -1,4 +1,4 @@
-$('.statDate').on('click', function (){
+$('.driver-tabel-index').on('click', '.statDate', function (){
     let data = {
         date: $(this).data('date')
     }
