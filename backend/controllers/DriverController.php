@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use app\models\DayPlans;
+use app\models\DriverBilling;
 use app\models\DriverTabel;
 use backend\models\Cars;
 use backend\models\Driver;
@@ -128,29 +129,14 @@ class DriverController extends Controller
         }
 
         $driverTabelProviderAll = $prepareDriverService->getDriverTabel();
-        //$currentShift = $prepareDriverService->getCurrentShift();
-
         $currentShift = $prepareDriverService->getCurrentShiftFromArray();
-
-        //$shiftID = $prepareDriverService->getCurrentShiftID($currentShift);
         $shiftID = $currentShift['id_shift'];
-
-        //$period = $prepareDriverService->getPeriodShift($currentShift);
         $period = $currentShift['period'];
-
-//        $carFuel = $prepareDriverService->getCarFuel($currentShift);
         $carFuel = $currentShift['car_fuel'];
-
-//        $carFuelLabel = Constants::getFuel()[$carFuel];
         $carFuelLabel = $currentShift['car_fuel_label'];
-
         $numberPhoneCard = $prepareDriverService->getNumberCardPhone($currentShift);
-        \Yii::debug($numberPhoneCard);
-
         $carId = $currentShift['car_id'];
-
         $hours = $prepareDriverService->getCountHoursFromOrders($allDriverOrders['orders']);
-//        $carInfo = $prepareDriverService->getCarInfo($currentShift);
 
         $dayPlan = (new DayPlans())->getPlan($driver->filial, $period , Constants::WORKING_DAY, $hours);
         \Yii::debug($dayPlan);
@@ -319,6 +305,7 @@ class DriverController extends Controller
     {
 
         $requestPost = Yii::$app->request->post();
+        Yii::debug($requestPost, __METHOD__);
 
         $plan = (new DayPlans())->getPlan($requestPost['filial'], $requestPost['period'] , $requestPost['typeDay'], $requestPost['hours']);
         $calculationShiftParams = new CalculationShiftParams($requestPost, $plan);
@@ -334,6 +321,18 @@ class DriverController extends Controller
     {
         $billingService = new DriverBillingService(Yii::$app->request->post());
         return json_encode($billingService->saveAmount());
+    }
+
+    public function actionVerifyBilling(): bool
+    {
+        $user_id = Yii::$app->request->post("user_id");
+        $model_id = Yii::$app->request->post("model_id");
+
+        $model = DriverBilling::find()->where(['id' => $model_id])->one();
+        $model->verify = $user_id;
+        $model->save();
+
+        return true;
     }
 
 }

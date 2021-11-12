@@ -4,6 +4,7 @@ namespace app\models;
 
 use backend\models\Cars;
 use backend\models\Driver;
+use common\models\User;
 
 /**
  * This is the model class for table "driver_billing".
@@ -35,6 +36,7 @@ use backend\models\Driver;
  * @property-read \yii\db\ActiveQuery $driverInfo
  * @property int $car_id [int]  Автомобиль
  * @property int $shift_id [int]  № Смены
+ * @property int $verify [int]  Проверена
  */
 class DriverBilling extends \yii\db\ActiveRecord
 {
@@ -52,7 +54,10 @@ class DriverBilling extends \yii\db\ActiveRecord
     public function rules(): array
     {
         return [
-            [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount', 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing', 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations', 'shift_id'], 'integer'],
+            [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount',
+                'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing',
+                'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations',
+                'shift_id', 'verify'], 'integer'],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],
         ];
@@ -87,7 +92,8 @@ class DriverBilling extends \yii\db\ActiveRecord
             'summ_driver' => 'Сумма водителя',
             'plan' => 'План',
             'compensations' => 'Компенсация',
-            'car_id' => 'Автомобиль'
+            'car_id' => 'Автомобиль',
+            'verify' => 'Проверена'
         ];
     }
 
@@ -99,6 +105,21 @@ class DriverBilling extends \yii\db\ActiveRecord
     public function getCarInfo(): \yii\db\ActiveQuery
     {
         return $this->hasOne(Cars::class, ['id' => 'car_id']);
+    }
+
+    public function getDriverTabelShift(): \yii\db\ActiveQuery
+    {
+        return $this->hasOne(DriverTabel::class,['id' => 'shift_id']);
+    }
+
+    public function getShiftBilling(): string
+    {
+        return (!empty($this->driverTabelShift->work_date)) ? \Yii::$app->formatter->asDate($this->driverTabelShift->work_date) : \Yii::$app->formatter->asDate($this->date_billing);
+    }
+
+    public function getVerifuUser()
+    {
+        return $this->hasOne(User::class,['id' => 'verify']);
     }
 
 }

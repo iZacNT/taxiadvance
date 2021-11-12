@@ -367,8 +367,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ?></td>
                                     </tr>
                                     <tr class="odd">
-                                        <td class="dtr-control sorting_1" tabindex="0">Баланс на Яндекс:</td>
-                                        <td><?= $balanceYandex;?></td>
+                                        <td class="dtr-control sorting_1" tabindex="0">Баланс на Яндекс: <?
+                                                if($balanceYandex < 0){
+                                                    echo "<span style='color:red; font-weight: bold'>".$balanceYandex."</span>";
+                                                }
+                                         ?></td>
+                                        <td><?
+                                            if($balanceYandex < 0){
+                                                echo 0;
+                                                $balanceYandex = 0;
+                                            }else{
+                                                echo $balanceYandex;
+                                            }
+
+                                            ?></td>
                                     </tr>
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">Бонусы на Яндекс:</td>
@@ -431,10 +443,16 @@ $this->params['breadcrumbs'][] = $this->title;
                             'dataProvider' => $allShiftDataProvider,
                             'columns' => [
                                     [
+                                        'class' => \common\service\columns\VerifyColumn::className(),
+                                        'attribute' => 'verify',
+                                        'format' => 'raw',
+                                        'label' => ''
+                                    ],
+                                    [
                                         'attribute' => 'date_billing',
                                         'format' => 'raw',
                                         'value' => function($data){
-                                            return "<strong>ID:</strong>".$data->id."&nbsp;&nbsp;&nbsp;&nbsp;<strong>".Yii::$app->formatter->asDate($data['date_billing'])."</strong><br />Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period];
+                                            return "<strong>ID:</strong>".$data->id."&nbsp;&nbsp;&nbsp;&nbsp;<strong>".$data->shiftBilling."</strong><br />Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period];
                                         }
                                     ],
                                 [
@@ -447,13 +465,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                                 'carInfo.fullnameMark:raw:Авто',
                                 'plan:currency',
-                                'depo',
+                                'depo:currency',
 //                                'debt_from_shift:currency',
 //                                'car_wash:currency',
                                 'car_fuel_summ:currency',
                                 'car_phone_summ:currency',
                                 'summ_driver:currency:Водителю',
                                 'input_amount:currency:Общаяя',
+                                'shift_id:raw:№Смены'
 
                             ],
                             'pager' => [
@@ -489,5 +508,6 @@ let shift_id = $shiftID;
 JS;
 
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
+$this->registerJsFile('@web/js/verifyBillingData.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('@web/js/driver/calculateShift.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>​
