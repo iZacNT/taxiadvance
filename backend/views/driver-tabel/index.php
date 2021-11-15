@@ -46,8 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => array_merge([
                             [
                                 'attribute' => 'fullNameMark',
+                                'format' => 'raw',
                                 'value' => function($data){
-                                    return $data->getFullNameMark();
+                                    return Html::a($data->getFullNameMark(), ['cars/view', 'id' => $data->id], ['style' => 'font-size: 18px; font-weight: bold']);
                                 }
                             ],
                         ],$columns),
@@ -76,8 +77,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => array_merge([
                             [
                                 'attribute' => 'fullNameMark',
+                                'format' => 'raw',
                                 'value' => function($data){
-                                    return $data->getFullNameMark();
+                                    return Html::a($data->getFullNameMark(), ['cars/view', 'id' => $data->id], ['style' => 'font-size: 18px; font-weight: bold']);
                                 }
                             ],
                         ],$columnsDay),
@@ -105,8 +107,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         'columns' => array_merge([
                             [
                                 'attribute' => 'fullNameMark',
+                                'format' => 'raw',
                                 'value' => function($data){
-                                    return $data->getFullNameMark();
+                                    return Html::a($data->getFullNameMark(), ['cars/view', 'id' => $data->id], ['style' => 'font-size: 18px; font-weight: bold']);
                                 }
                             ],
                         ],$columnsNight),
