@@ -40,6 +40,7 @@
                         ['label' => 'Планы', 'icon' => 'far fa-user', 'url' => '/admin/day-plans/index'],
                         ['label' => 'Проценты', 'icon' => 'far fa-user', 'url' => '/admin/calculation/index'],
                         ['label' => 'Компенсации', 'icon' => 'far fa-user', 'url' => '/admin/compensation/index'],
+                        ['label' => 'Менеджеры/Операторы', 'icon' => 'far fa-user', 'url' => '/admin/manager/index'],
                     ]
                 ]);
             }
