@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="driver-view">
 
-    <p>
+    <p class="buttons-group">
         <?= Html::a('Добавить водителя', ['create'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Все водители', ['index'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -444,9 +444,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'columns' => [
                                     [
                                         'class' => \common\service\columns\VerifyColumn::className(),
+                                        'contentOptions'=>['style'=>'text-align: center;'],
                                         'attribute' => 'verify',
                                         'format' => 'raw',
-                                        'label' => ''
+                                        'label' => '№ смены'
                                     ],
                                     [
                                         'attribute' => 'date_billing',
@@ -455,6 +456,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                             return "<strong>ID:</strong>".$data->id."&nbsp;&nbsp;&nbsp;&nbsp;<strong>".$data->shiftBilling."</strong><br />Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period];
                                         }
                                     ],
+                                'carInfo.fullnameMark:raw:Авто',
+                                'plan:currency',
+                                'input_amount:currency:Общаяя',
                                 [
                                         'attribute' => 'yandex',
                                     'format' => 'raw',
@@ -463,16 +467,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             return "Баланс: ".Yii::$app->formatter->asCurrency($data['balance_yandex'])."<br />Бонус: ".Yii::$app->formatter->asCurrency($data['bonus_yandex']);
                                     }
                                 ],
-                                'carInfo.fullnameMark:raw:Авто',
-                                'plan:currency',
-                                'depo:currency',
-//                                'debt_from_shift:currency',
-//                                'car_wash:currency',
                                 'car_fuel_summ:currency',
                                 'car_phone_summ:currency',
-                                'summ_driver:currency:Водителю',
-                                'input_amount:currency:Общаяя',
-                                'shift_id:raw:№Смены'
+                                'depo:currency',
+
+//                                'debt_from_shift:currency',
+//                                'car_wash:currency',
+//                                'summ_driver:currency:Водителю',
+                                'billing:currency:Выручка',
 
                             ],
                             'pager' => [
@@ -506,6 +508,36 @@ let shift_id = $shiftID;
 
 
 JS;
+
+$css= <<< CSS
+.content-header{
+    z-index: 1000;
+    position: sticky; 
+    top: 0px;
+    background: #ffffff;  
+}
+.buttons-group{
+    z-index: 999;
+    position: sticky; 
+    top: 75px;
+    background: #ffffff;  
+}
+.card-header{
+z-index: 998;
+    position: sticky; 
+    top: 115px;
+    background: #ffffff;  
+}
+
+#allShifts table thead {
+    position: sticky; 
+    top: 160px;
+    background: #ffffff;  
+}
+
+CSS;
+
+$this->registerCss($css, ["type" => "text/css"], "myStyles" );
 
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
 $this->registerJsFile('@web/js/verifyBillingData.js', ['depends' => [\yii\web\JqueryAsset::className()]]);

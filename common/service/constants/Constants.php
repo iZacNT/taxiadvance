@@ -20,7 +20,7 @@ class Constants
     {
         return [
             self::WEEKEND_DAY => 'Выходной',
-            self::WORKING_DAY => 'Рабочий',
+            self::WORKING_DAY => 'Будний',
 
         ];
     }
