@@ -70,7 +70,7 @@ class PrepareDriverTabel
                 }else{
                     if ($this->verifyStatusRepair($data->id, $date)){
                         $row .= $this->prepareRepairColumn();
-                    }else if($this->verifyStatusCarSharing($data->id, $date)){
+                    }else if($this->verifyStatusCarSharing($data->id, $date+(9*60*60))){
                         $row .= $this->prepareCarSharingColumn();
                     }else{
                         $row .= Html::a("<i class='fas fa-user-plus'></i>",['create', 'carId' => $data->id, 'workDate' => $date]);
@@ -273,7 +273,6 @@ class PrepareDriverTabel
 
     private function verifyStatusCarSharing($car_id, $date): bool
     {
-
         $carSharings = CarSharing::find()->where(['car_id' => $car_id])->all();
         foreach($carSharings as $carSharing)
         {
