@@ -1,8 +1,11 @@
 <?php
 
 use common\service\constants\Constants;
+use kartik\daterange\DateRangePicker;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\jui\AutoComplete;
+use yii\web\JsExpression;
 use yii\widgets\DetailView;
 use yii\widgets\Pjax;
 
@@ -255,6 +258,54 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="tab-pane fade" id="custom-tabs-one-all-tabel" role="tabpanel" aria-labelledby="custom-tabs-one-all-tabel-tab">
 
+                        <div class="row">
+                            <div class="col-md-2">
+                            <?
+                            echo AutoComplete::widget([
+                                'name' => 'car',
+                                'clientOptions' => [
+                                    'source' => $carsOnWork,
+                                    'select'=>new JsExpression('function(event, ui) {
+                                         $("#addShifts").attr("data-car-id", ui.item.id)
+                                    }'),
+                                ],
+                                'options' => ['class' => 'form-control inputNotNull', 'placeholder' => 'Aвтомобиль']
+                            ]);
+                            ?>
+                            </div>
+                            <div class="col-md-3">
+                                <?php
+                                $addon = <<< HTML
+<span class="input-group-text">
+    <i class="fas fa-calendar-alt"></i>
+</span>
+HTML;
+                                echo '<div class="input-group drp-container">';
+                                echo DateRangePicker::widget([
+                                        'name'=>'range',
+                                        'id' => 'dateRange',
+                                        'options' => [
+                                            'class' => 'form-control inputNotNull',
+                                            'placeholder' => 'Диапозон Дат'
+                                        ],
+                                        'convertFormat'=>true,
+                                        'useWithAddon'=>true,
+                                        'pluginOptions'=>[
+                                            'locale'=>[
+                                                'format'=>'d-m-Y',
+                                                'separator'=>' до ',
+                                            ],
+                                            'opens'=>'left'
+                                        ]
+                                    ]) . $addon;
+                                echo '</div>';
+                                ?>
+                            </div>
+                        <div class="col-md-2">
+                            <?= Html::button("Назначить", ['class' => 'btn btn-primary', 'id' => 'addShifts', 'data-driver-id' => $model->id, 'data-car-id' => '', 'disabled' => 'true'])?>
+                        </div>
+                        </div>
+                        <br>
                         <?php Pjax::begin([
                             'id' => "allTabelDriver"
                         ]); ?>
@@ -542,4 +593,5 @@ $this->registerCss($css, ["type" => "text/css"], "myStyles" );
 $this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
 $this->registerJsFile('@web/js/verifyBillingData.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 $this->registerJsFile('@web/js/driver/calculateShift.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$this->registerJsFile('@web/js/driver/rangeShifts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
 ?>​

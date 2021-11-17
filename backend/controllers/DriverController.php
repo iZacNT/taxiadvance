@@ -19,6 +19,7 @@ use common\service\driver\DriverDeposit;
 use common\service\driver\DriverParams;
 use common\service\driver\PrepareDriverService;
 use common\service\driver\PrepareOrdersService;
+use common\service\driver\PrepareRangeShift;
 use common\service\driver\PrepareTransactionService;
 use common\service\user\UserService;
 use common\service\yandex\params\ParamsSearchDriver;
@@ -81,7 +82,7 @@ class DriverController extends Controller
     {
         $driver = $this->findModel($id);
         $settings = Settings::find()->one();
-
+        $carsOnWork = Cars::prepareCarsForAutocomplete(Yii::$app->formatter->asBeginDay(time()));
         $driverDeposit = new DriverDeposit($id);
         $depositDataProvider = $driverDeposit->getAllDeposits();
         $summDeposit = $driverDeposit->getSummDeposit();
@@ -170,7 +171,8 @@ class DriverController extends Controller
             'sum_phone' => $numberPhoneCard['sum_phone'], // Сумма взятая на телефон
             'generateTarifTable' => $generateTarifTable,
             'amountTransactionByAllType' => $amountTransactionByAllType,
-            'amountTableTransaction' => $amountTableTransaction
+            'amountTableTransaction' => $amountTableTransaction,
+            'carsOnWork' => $carsOnWork //Все работающие машины для Autocomplete
         ]);
     }
 
@@ -335,4 +337,14 @@ class DriverController extends Controller
         return true;
     }
 
+    public function actionVerifyRangeShift(): string
+    {
+        Yii::debug(Yii::$app->request->post(),__METHOD__);
+        return (new PrepareRangeShift())->prepareRangeShifts(Yii::$app->request->post());
+    }
+
+    public function actionSaveRangeShift()
+    {
+        return json_encode((new PrepareRangeShift())->saveRange(Yii::$app->request->post()));
+    }
 }

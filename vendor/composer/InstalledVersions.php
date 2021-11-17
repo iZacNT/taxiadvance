@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'ac1da8ef5839fe62faee858feb33d751968c1804',
+    'reference' => 'b945a0221d3abf403977fc9abaf035ef4d6e11d2',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -261,6 +261,16 @@ private static $installed = array (
       array (
       ),
       'reference' => '3c82edef9a2db36b1fa074725978183fd2999516',
+    ),
+    'kartik-v/yii2-date-range' => 
+    array (
+      'pretty_version' => 'dev-master',
+      'version' => 'dev-master',
+      'aliases' => 
+      array (
+        0 => '1.7.x-dev',
+      ),
+      'reference' => '7d80d6e2598e252487fe1acf911b8cb43f45e3b1',
     ),
     'kartik-v/yii2-krajee-base' => 
     array (
@@ -849,7 +859,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'ac1da8ef5839fe62faee858feb33d751968c1804',
+      'reference' => 'b945a0221d3abf403977fc9abaf035ef4d6e11d2',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (

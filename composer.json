@@ -23,7 +23,8 @@
       "ext-json": "*",
         "yiisoft/yii2-jui": "^2.0",
       "ext-mbstring": "*",
-        "kartik-v/yii2-widget-datetimepicker": "dev-master"
+        "kartik-v/yii2-widget-datetimepicker": "dev-master",
+        "kartik-v/yii2-date-range": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
