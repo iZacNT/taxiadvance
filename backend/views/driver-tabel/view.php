@@ -35,10 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'sum_card_day:currency',
             'fullPhoneDayInfo.fullInfo:raw:Информация о телефоне',
             'sum_phone_day:currency',
+            'comment_day',
             'fullNightDriverName.fullName:raw:Ночная смена',
             'sum_card_night:currency',
             'fullPhoneNightInfo.fullInfo:raw:Информация о телефоне',
-            'sum_phone_night:currency'
+            'sum_phone_night:currency',
+            'comment_night',
         ],
     ]) ?>
 

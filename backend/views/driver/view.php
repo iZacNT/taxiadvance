@@ -313,37 +313,22 @@ HTML;
                         echo GridView::widget([
                             'dataProvider' => $driverTabelProviderAll,
                             'columns' => [
-                                    'id',
-                                'carInfo.fullNameMark',
-                                'work_date:date',
+                                'id_shift:raw:№ Смены',
+                                'car_full_name:raw:Авто',
+                                'car_fuel_label:raw:Топливо',
+                                'work_date:date:Дата',
                                 [
-                                    'attribute' => 'card',
-                                    'format' => 'raw',
-                                    'value' => function($data) use ($model){
-                                        return ($data->driver_id_day == $model->id) ? $data->sum_card_day : $data->sum_card_night;
+                                    'attribute' => 'period',
+                                    'label' => 'Период',
+                                    'value' => function($data){
+                                        return Constants::getPeriod()[$data['period']];
                                     }
                                 ],
-                                [
-                                    'attribute' => 'phone',
-                                    'format' => 'raw',
-                                    'value' => function($data) use ($model){
-                                        return ($data->driver_id_day == $model->id) ? $data->sum_phone_day : $data->sum_phone_night;
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'status',
-                                    'format' => 'raw',
-                                    'value' => function($data) use ($model){
-                                        return ($data->driver_id_day == $model->id) ? $data->labelStatusShift()[$data->status_day_shift] : $data->labelStatusShift()[$data->status_night_shift];
-                                    }
-                                ],
-                                [
-                                    'attribute' => 'billing',
-                                    'format' => 'raw',
-                                    'value' => function($data) use ($model){
-                                        return ($data->driver_id_day == $model->id) ? $data->billing_id_day : $data->billing_id_night;
-                                    }
-                                ],
+                                'sum_card:currency:Карта',
+                                'sum_phone:currency:Телефон',
+                                'status_shift:raw:Статус',
+                                'date_close_shift:datetime:Дата закрытия',
+                                'comment:raw:Комментарий',
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'driver-tabel',
                                     'template' => '{update} &nbsp;&nbsp;{delete}']
@@ -390,6 +375,9 @@ HTML;
                                         </td>
                                         <td>
                                             <?= Yii::$app->formatter->asCurrency($currentShift['sum_phone'])?>
+                                        </td>
+                                        <td>
+                                            <?= $currentShift['comment']?>
                                         </td>
                                         <td>
                                             <?= $currentShift['status_shift']?>

@@ -113,6 +113,9 @@ use yii\widgets\ActiveForm;
                 ]);
             ?>
         </div>
+        <div class="col-md-12">
+            <?= $form->field($driverTabel, 'comment_day')->textarea(['rows' => 2]) ?>
+        </div>
 <!--        <div class="col-md-2">-->
 <!--            --><?//= $form->field($driverTabel, 'sum_phone_day')->textInput(['placeholder' => 'Руб.']) ?>
 <!--        </div>-->
@@ -165,6 +168,9 @@ use yii\widgets\ActiveForm;
                     ]);
                 ?>
             </div>
+            <div class="col-md-12">
+                <?= $form->field($driverTabel, 'comment_night')->textarea(['rows' => 2]) ?>
+            </div>
 <!--            <div class="col-md-2">-->
 <!--                --><?//= $form->field($driverTabel, 'sum_phone_night')->textInput(['placeholder' => 'Руб.']) ?>
 <!--            </div>-->
@@ -177,8 +183,8 @@ use yii\widgets\ActiveForm;
         <?= $form->field($driverTabel, 'car_id')->hiddenInput()->label("") ?>
         <?= $form->field($driverTabel, 'driver_id_day')->hiddenInput()->label("")  ?>
         <?= $form->field($driverTabel, 'driver_id_night')->hiddenInput()->label("") ?>
-        <?= $form->field($driverTabel, 'phone_day')->textInput(['placeholder' => '№']) ?>
-        <?= $form->field($driverTabel, 'phone_night')->textInput(['placeholder' => '№']) ?>
+        <?= $form->field($driverTabel, 'phone_day')->hiddenInput()->label("") ?>
+        <?= $form->field($driverTabel, 'phone_night')->hiddenInput()->label("") ?>
 
 
 

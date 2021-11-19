@@ -29,6 +29,8 @@ use Yii;
  * @property int $date_close_night_shift [int]
  * @property int $billing_id_day [int]
  * @property int $billing_id_night [int]
+ * @property string $comment_day [varchar(255)]
+ * @property string $comment_night [varchar(255)]
  */
 class DriverTabel extends \yii\db\ActiveRecord
 {
@@ -68,6 +70,7 @@ class DriverTabel extends \yii\db\ActiveRecord
                 'sum_card_night', 'sum_phone_night', 'phone_day', 'driver_id_night', 'card_night',
                 'phone_night', 'status_day_shift', 'status_night_shift', 'date_close_day_shift', 'date_close_night_shift',
                 'billing_id_day', 'billing_id_night'], 'integer'],
+            [['comment_day','comment_night'], 'string'],
             [['stringNameCar', 'stringDriverDay', 'stringDriverNight', 'stringPhoneDay', 'stringPhoneNight'],'safe'],
             [['status_day_shift', 'status_night_shift'], 'default', 'value' => self::STATUS_SHIFT_OPEN]
         ];
@@ -98,7 +101,9 @@ class DriverTabel extends \yii\db\ActiveRecord
             'date_close_day_shift' => 'Время закрытия смены',
             'date_close_night_shift' => 'Время закрытия смены',
             'stringPhoneDay' => '№ Тел.',
-            'stringPhoneNight' => '№ Тел.'
+            'stringPhoneNight' => '№ Тел.',
+            'comment_day' => 'Комментарий',
+            'comment_night' => 'Комментарий',
         ];
     }
 

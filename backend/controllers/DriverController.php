@@ -129,7 +129,7 @@ class DriverController extends Controller
             Yii::$app->session->setFlash("error", "Не удалось получить транзакции Водителя. Обновите страницу!");
         }
 
-        $driverTabelProviderAll = $prepareDriverService->getDriverTabel();
+        $driverTabelProviderAll = $prepareDriverService->getDriverTabelArray();
         $currentShift = $prepareDriverService->getCurrentShiftFromArray();
         $shiftID = $currentShift['id_shift'];
         $period = $currentShift['period'];

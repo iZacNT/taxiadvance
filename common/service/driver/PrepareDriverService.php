@@ -8,6 +8,7 @@ use app\models\DriverTabel;
 use backend\models\Cars;
 use common\service\constants\Constants;
 use yii\data\ActiveDataProvider;
+use yii\data\ArrayDataProvider;
 use yii\helpers\Html;
 
 class PrepareDriverService
@@ -226,6 +227,13 @@ class PrepareDriverService
         ]);
     }
 
+    public function getDriverTabelArray(): ArrayDataProvider
+    {
+        return new ArrayDataProvider([
+            'allModels' => $this->getAllShiftsInArray()
+        ]);
+    }
+
     public function getAllShiftArray(): array
     {
         return DriverTabel::find()
@@ -275,6 +283,7 @@ class PrepareDriverService
                 'sum_phone' => 0,
                 'status_shift' => DriverTabel::labelStatusShift()[DriverTabel::STATUS_SHIFT_OPEN],
                 'date_close_shift' => 0,
+                'comment' => "",
                 'default' => 'yes'
             ]);
         }
@@ -337,6 +346,7 @@ class PrepareDriverService
             'sum_phone' => $shift->sum_phone_day,
             'status_shift' => DriverTabel::labelStatusShift()[$shift->status_day_shift],
             'date_close_shift' => $shift->date_close_day_shift,
+            'comment' => $shift->comment_day,
         ]);
         return $driverShift;
     }
@@ -360,6 +370,7 @@ class PrepareDriverService
             'sum_phone' => $shift->sum_phone_night,
             'status_shift' => DriverTabel::labelStatusShift()[$shift->status_night_shift],
             'date_close_shift' => $shift->date_close_night_shift,
+            'comment' => $shift->comment_night,
         ]);
 
         return $driverShift;
