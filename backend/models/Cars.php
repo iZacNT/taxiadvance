@@ -6,6 +6,7 @@ use app\models\CarRepairs;
 use app\models\CarSharing;
 use app\models\DriverTabel;
 use backend\models\Filials;
+use common\service\constants\Constants;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -63,6 +64,7 @@ class Cars extends \yii\db\ActiveRecord
             [['year', 'status', 'date_osago', 'date_dosago', 'date_kasko', 'fuel', 'filial'], 'integer'],
             [['mark', 'number', 'vin', 'comment', 'name_insurance', 'name_owner'], 'string', 'max' => 255],
             [['status'], 'default', 'value' => self::STATUS_WORK],
+            [['fuel'], 'default', 'value' => Constants::FUEL_GAS],
         ];
     }
 

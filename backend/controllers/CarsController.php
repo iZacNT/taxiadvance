@@ -8,6 +8,7 @@ use backend\models\Cars;
 use backend\models\CarsSearch;
 use common\service\car_repare\CarRepareService;
 use common\service\car_sharing\CarSharingService;
+use common\service\constants\Constants;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -95,6 +96,8 @@ class CarsController extends Controller
         } else {
             $model->loadDefaultValues();
         }
+
+        $model->fuel = Constants::FUEL_GAS;
 
         return $this->render('create', [
             'model' => $model,
