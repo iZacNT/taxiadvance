@@ -2,16 +2,18 @@
 
 namespace backend\controllers;
 
-use backend\models\Phones;
-use backend\models\PhonesSearch;
+use backend\models\CarRepairs;
+use backend\models\CarRepairsSearch;
+use backend\models\Cars;
+use common\service\constants\Constants;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PhonesController implements the CRUD actions for Phones model.
+ * CarRepairsController implements the CRUD actions for CarRepairs model.
  */
-class PhonesController extends Controller
+class CarRepairsController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +34,12 @@ class PhonesController extends Controller
     }
 
     /**
-     * Lists all Phones models.
+     * Lists all CarRepairs models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PhonesSearch();
+        $searchModel = new CarRepairsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +49,7 @@ class PhonesController extends Controller
     }
 
     /**
-     * Displays a single Phones model.
+     * Displays a single CarRepairs model.
      * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,16 +62,20 @@ class PhonesController extends Controller
     }
 
     /**
-     * Creates a new Phones model.
+     * Creates a new CarRepairs model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Phones();
-
+        $model = new CarRepairs();
+        $cars = Cars::prepareCarsForAutocomplete(\Yii::$app->user->identity->getFilialUser());
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
+            if ($model->load($this->request->post())) {
+                $model->date_open_repair = strtotime($model->stringDateOpenRepair);
+                $model->date_close_repare = ($model->stringDateCloseRepair)? strtotime($model->stringDateCloseRepair): null;
+
+                $model->save();
                 return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
@@ -78,11 +84,12 @@ class PhonesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'cars' => $cars
         ]);
     }
 
     /**
-     * Updates an existing Phones model.
+     * Updates an existing CarRepairs model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return mixed
@@ -92,18 +99,36 @@ class PhonesController extends Controller
     {
         $model = $this->findModel($id);
 
+        $cars = Cars::prepareCarsForAutocomplete(\Yii::$app->user->identity->getFilialUser());
+
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            \Yii::debug($this->request->post(),__METHOD__);
+            $model->date_open_repair = strtotime($model->stringDateOpenRepair);
+            $model->date_close_repare = ($model->stringDateCloseRepair)? strtotime($model->stringDateCloseRepair): null;
+
+            if (empty($model->date_close_repare) && $model->status == CarRepairs::STATUS_CLOSE_REPAIR){
+                $model->date_close_repare = time();
+            }
+
             return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        $model->stringDateOpenRepair = ($model->date_open_repair)? \Yii::$app->formatter->asDatetime($model->date_open_repair) : null;
+        $model->stringDateCloseRepair = ($model->date_close_repare)? \Yii::$app->formatter->asDatetime($model->date_close_repare) : null;
+
+        foreach($cars as $car){
+            if ($car['id'] == $model->car_id){
+                $model->stringNameCar = $car['label'];
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'cars' => $cars
         ]);
     }
 
     /**
-     * Deletes an existing Phones model.
+     * Deletes an existing CarRepairs model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return mixed
@@ -117,15 +142,15 @@ class PhonesController extends Controller
     }
 
     /**
-     * Finds the Phones model based on its primary key value.
+     * Finds the CarRepairs model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Phones the loaded model
+     * @return CarRepairs the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Phones::findOne($id)) !== null) {
+        if (($model = CarRepairs::findOne($id)) !== null) {
             return $model;
         }
 

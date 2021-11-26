@@ -1,23 +1,19 @@
 <?php
 
-use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CashRegister */
+/* @var $model backend\models\CarRepairs */
 
-$this->title = $model->getTypeCash()[$model->type_cash];;
-$this->params['breadcrumbs'][] = ['label' => 'Касса', 'url' => ['index']];
+$this->title = $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Ремонты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="cash-register-view col-md-6">
+<div class="car-repairs-view">
 
     <p>
-        <?= Html::a('Добавить запись', ['create'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Все записи', ['index'], ['class' => 'btn btn-success']) ?>
-        <?  if (User::isSuperUser()) {?>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -26,21 +22,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <? } ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'id',
             [
-                'attribute' => 'type_cash',
+                'attribute' => 'car_id',
                 'format' => 'raw',
                 'value' => function($data){
-                    return $data->getTypeCash()[$data->type_cash];
+                    return Html::a($data->carFullName, ['cars/view', 'id' => $data->car_id]);
                 }
             ],
-            'cash',
-            'comment',
+            'date_open_repair:datetime',
+            'date_close_repare:datetime',
+            'statusType'
         ],
     ]) ?>
 

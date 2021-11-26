@@ -2,25 +2,22 @@
 
 namespace backend\models;
 
-use backend\models\Cars;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use backend\models\SettingsTo;
 
 /**
- * DriverTabelSearch represents the model behind the search form of `app\models\DriverTabel`.
+ * SettingsToSearch represents the model behind the search form of `app\models\SettingsTo`.
  */
-class DriverTabelSearch extends Cars
+class SettingsToSearch extends SettingsTo
 {
-
-    public $fullNameMark;
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['fullNameMark'], 'safe'],
+            [['id', 'inspection', 'inspection_gas', 'inspection_grm', 'inspection_gearbox', 'inspection_camber'], 'integer'],
         ];
     }
 
@@ -42,15 +39,12 @@ class DriverTabelSearch extends Cars
      */
     public function search($params)
     {
-        $query = Cars::find();
+        $query = SettingsTo::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 150,
-            ],
         ]);
 
         $this->load($params);
@@ -62,12 +56,15 @@ class DriverTabelSearch extends Cars
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(
-            ['like', 'mark', $this->fullNameMark]
-            )
-        ->orFilterWhere(['like', 'number', $this->fullNameMark]);
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'inspection' => $this->inspection,
+            'inspection_gas' => $this->inspection_gas,
+            'inspection_grm' => $this->inspection_grm,
+            'inspection_gearbox' => $this->inspection_gearbox,
+            'inspection_camber' => $this->inspection_camber,
+        ]);
 
         return $dataProvider;
     }
-
 }

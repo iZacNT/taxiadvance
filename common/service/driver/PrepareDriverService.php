@@ -4,7 +4,7 @@
 namespace common\service\driver;
 
 
-use app\models\DriverTabel;
+use backend\models\DriverTabel;
 use backend\models\Cars;
 use common\service\constants\Constants;
 use yii\data\ActiveDataProvider;

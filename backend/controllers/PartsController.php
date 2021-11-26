@@ -2,16 +2,17 @@
 
 namespace backend\controllers;
 
-use backend\models\Phones;
-use backend\models\PhonesSearch;
+use backend\models\Cars;
+use backend\models\Parts;
+use backend\models\PartsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PhonesController implements the CRUD actions for Phones model.
+ * PartsController implements the CRUD actions for Parts model.
  */
-class PhonesController extends Controller
+class PartsController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,12 +33,12 @@ class PhonesController extends Controller
     }
 
     /**
-     * Lists all Phones models.
+     * Lists all Parts models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PhonesSearch();
+        $searchModel = new PartsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -47,7 +48,7 @@ class PhonesController extends Controller
     }
 
     /**
-     * Displays a single Phones model.
+     * Displays a single Parts model.
      * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -60,13 +61,14 @@ class PhonesController extends Controller
     }
 
     /**
-     * Creates a new Phones model.
+     * Creates a new Parts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Phones();
+        $model = new Parts();
+        $carMarks = (new Cars())->getAllMarks();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -78,11 +80,12 @@ class PhonesController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'carMarks' => $carMarks
         ]);
     }
 
     /**
-     * Updates an existing Phones model.
+     * Updates an existing Parts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return mixed
@@ -91,19 +94,20 @@ class PhonesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $carMarks = (new Cars())->getAllMarks();
+        
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            \Yii::debug($this->request->post(),__METHOD__);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'carMarks' => $carMarks,
         ]);
     }
 
     /**
-     * Deletes an existing Phones model.
+     * Deletes an existing Parts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return mixed
@@ -117,15 +121,15 @@ class PhonesController extends Controller
     }
 
     /**
-     * Finds the Phones model based on its primary key value.
+     * Finds the Parts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Phones the loaded model
+     * @return Parts the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Phones::findOne($id)) !== null) {
+        if (($model = Parts::findOne($id)) !== null) {
             return $model;
         }
 

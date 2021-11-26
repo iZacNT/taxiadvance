@@ -3,8 +3,8 @@
 namespace common\service\car_repare;
 
 
-use app\models\CarRepairs;
-use app\models\DriverTabel;
+use backend\models\CarRepairs;
+use backend\models\DriverTabel;
 use common\service\constants\Constants;
 use Yii;
 use yii\data\ActiveDataProvider;

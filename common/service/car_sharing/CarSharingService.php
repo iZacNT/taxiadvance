@@ -1,8 +1,8 @@
 <?php
 namespace common\service\car_sharing;
 
-use app\models\CarSharing;
-use app\models\DriverTabel;
+use backend\models\CarSharing;
+use backend\models\DriverTabel;
 use backend\models\Cars;
 use common\service\constants\Constants;
 use Yii;

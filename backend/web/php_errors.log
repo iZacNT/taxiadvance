@@ -1509,3 +1509,10 @@ $_SERVER = [
 [01-Nov-2021 14:12:43 Asia/Yekaterinburg] PHP Fatal error:  Cannot redeclare common\service\driverTabel\PrepareDriverTabel::generateColumns() in /var/www/taxiadvance.loc/public_html/common/service/driverTabel/PrepareDriverTabel.php on line 143
 [16-Nov-2021 12:50:04 Asia/Yekaterinburg] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194312 bytes) in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2-debug/src/LogTarget.php on line 134
 [16-Nov-2021 12:50:33 Asia/Yekaterinburg] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 4194312 bytes) in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2-debug/src/LogTarget.php on line 134
+[22-Nov-2021 13:34:12 Asia/Yekaterinburg] PHP Fatal error:  Cannot use empty array elements in arrays in /var/www/taxiadvance.loc/public_html/backend/models/CarRepairs.php on line 71
+[23-Nov-2021 10:19:44 Asia/Yekaterinburg] PHP Fatal error:  Declaration of backend\models\PartsSearch::rules() must be compatible with backend\models\Parts::rules(): array in /var/www/taxiadvance.loc/public_html/backend/models/PartsSearch.php on line 17
+[24-Nov-2021 11:36:35 Asia/Yekaterinburg] PHP Fatal error:  Cannot use backend\models\Cars as Cars because the name is already in use in /var/www/taxiadvance.loc/public_html/backend/models/CarsSearch.php on line 8
+[24-Nov-2021 11:42:38 Asia/Yekaterinburg] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/log/Logger.php on line 162
+[24-Nov-2021 15:10:09 Asia/Yekaterinburg] PHP Fatal error:  Cannot use empty array elements in arrays in /var/www/taxiadvance.loc/public_html/backend/views/cars/index.php on line 50
+[25-Nov-2021 11:03:06 Asia/Yekaterinburg] PHP Fatal error:  Cannot use empty array elements in arrays in /var/www/taxiadvance.loc/public_html/backend/views/cars/index.php on line 53
+[25-Nov-2021 11:03:15 Asia/Yekaterinburg] PHP Fatal error:  Cannot use empty array elements in arrays in /var/www/taxiadvance.loc/public_html/backend/views/cars/index.php on line 53

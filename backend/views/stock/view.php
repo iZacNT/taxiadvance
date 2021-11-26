@@ -1,23 +1,21 @@
 <?php
 
-use common\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CashRegister */
+/* @var $model backend\models\Stock */
 
-$this->title = $model->getTypeCash()[$model->type_cash];;
-$this->params['breadcrumbs'][] = ['label' => 'Касса', 'url' => ['index']];
+$this->title = $model->partName;
+$this->params['breadcrumbs'][] = ['label' => 'Склад', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="cash-register-view col-md-6">
+<div class="stock-view">
 
     <p>
-        <?= Html::a('Добавить запись', ['create'], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Все записи', ['index'], ['class' => 'btn btn-success']) ?>
-        <?  if (User::isSuperUser()) {?>
+        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Склад', ['index'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -26,21 +24,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <? } ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
+            'id',
+            'partName',
+            'count',
             [
-                'attribute' => 'type_cash',
-                'format' => 'raw',
+                'attribute' => 'type',
                 'value' => function($data){
-                    return $data->getTypeCash()[$data->type_cash];
+                    return $data->typeStock[$data->type];
                 }
             ],
-            'cash',
-            'comment',
+            'date:datetime',
         ],
     ]) ?>
 

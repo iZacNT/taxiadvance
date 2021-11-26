@@ -29,10 +29,13 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <?= $form->field($model, 'mileage')->textInput(['maxlength' => true]) ?>
+            </div>
+            <div class="col-md-4">
                 <?= $form->field($model, 'fuel')->dropDownList(\common\service\constants\Constants::getFuel(), ['prompt' => 'Выберите топливо']) ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <?= $form->field($model, 'filial')->dropDownList($model->getAllFilials(), ['prompt' => 'Выберите филиал']) ?>
             </div>
         </div>
@@ -66,7 +69,39 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($model, 'date_kasko')->textInput() ?>
             </div>
         </div>
-
+        <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Технический осмотр</h3>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'inspection')->textInput() ?>
+                        </div>
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'inspection_gas')->textInput() ?>
+                        </div>
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'inspection_grm')->textInput() ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'inspection_gearbox')->textInput() ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= $form->field($model, 'inspection_camber')->textInput() ?>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+        </div>
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>

@@ -2,17 +2,15 @@
 
 namespace backend\models;
 
-use backend\models\Cars;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use backend\models\Parts;
 
 /**
- * DriverTabelSearch represents the model behind the search form of `app\models\DriverTabel`.
+ * PartsSearch represents the model behind the search form of `app\models\Parts`.
  */
-class DriverTabelSearch extends Cars
+class PartsSearch extends Parts
 {
-
-    public $fullNameMark;
 
     /**
      * {@inheritdoc}
@@ -20,7 +18,8 @@ class DriverTabelSearch extends Cars
     public function rules()
     {
         return [
-            [['fullNameMark'], 'safe'],
+            [['id'], 'integer'],
+            [['name_part', 'mark'], 'safe'],
         ];
     }
 
@@ -42,15 +41,12 @@ class DriverTabelSearch extends Cars
      */
     public function search($params)
     {
-        $query = Cars::find();
+        $query = Parts::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => [
-                'pageSize' => 150,
-            ],
         ]);
 
         $this->load($params);
@@ -62,12 +58,13 @@ class DriverTabelSearch extends Cars
         }
 
         // grid filtering conditions
-        $query->andFilterWhere(
-            ['like', 'mark', $this->fullNameMark]
-            )
-        ->orFilterWhere(['like', 'number', $this->fullNameMark]);
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'name_part', $this->name_part])
+            ->andFilterWhere(['like', 'mark', $this->mark]);
 
         return $dataProvider;
     }
-
 }

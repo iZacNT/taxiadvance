@@ -29,6 +29,15 @@
                 ['label' => 'Касса', 'icon' => 'far fa-user', 'url' => '/admin/cash-register/index'],
                 ['label' => 'Штрафы ДПС', 'icon' => 'far fa-user', 'url' => '/admin/debt-fines/index'],
                 ['label' => 'Телефоны', 'icon' => 'far fa-user', 'url' => '/admin/phones/index'],
+                [
+                    'label' => 'Гараж',
+                    'icon' => 'tachometer-alt',
+                    'items' => [
+                        ['label' => 'Склад', 'icon' => 'far fa-user', 'url' => '/admin/stock/index'],
+                        ['label' => 'Детали', 'icon' => 'far fa-user', 'url' => '/admin/parts/index'],
+                        ['label' => 'Ремонты', 'icon' => 'far fa-user', 'url' => '/admin/car-repairs/index'],
+                    ]
+                ]
 
             ];
             if (\common\models\User::isSuperUser()) {
@@ -41,6 +50,7 @@
                         ['label' => 'Проценты', 'icon' => 'far fa-user', 'url' => '/admin/calculation/index'],
                         ['label' => 'Компенсации', 'icon' => 'far fa-user', 'url' => '/admin/compensation/index'],
                         ['label' => 'Менеджеры/Операторы', 'icon' => 'far fa-user', 'url' => '/admin/manager/index'],
+                        ['label' => 'Технический осмотр', 'icon' => 'far fa-user', 'url' => ['/settings-to/update', 'id' => '1']],
                     ]
                 ]);
             }

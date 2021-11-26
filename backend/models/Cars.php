@@ -2,12 +2,14 @@
 
 namespace backend\models;
 
-use app\models\CarRepairs;
-use app\models\CarSharing;
-use app\models\DriverTabel;
+use backend\models\CarRepairs;
+use backend\models\CarSharing;
+use backend\models\DriverTabel;
 use backend\models\Filials;
 use common\service\constants\Constants;
 use Yii;
+use yii\db\ActiveQuery;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -27,6 +29,12 @@ use yii\helpers\ArrayHelper;
  * @property string|null $name_owner Владелец
  * @property int|null $fuel Fuel
  * @property int|null $filial
+ * @property int $mileage [int]  Пробег
+ * @property int $inspection [int]  Тех. осмотр
+ * @property int $inspection_gas [int]  Газ
+ * @property int $inspection_grm [int]  ГРМ
+ * @property int $inspection_gearbox [int]  Коробка передач
+ * @property int $inspection_camber [int]  Развал/Схождение
  */
 class Cars extends \yii\db\ActiveRecord
 {
@@ -55,14 +63,22 @@ class Cars extends \yii\db\ActiveRecord
         return 'cars';
     }
 
+    public function attributes()
+    {
+        // add distance attribute (will work for json output)
+        return array_merge(parent::attributes(), ['inspection_to', 'inspection_grm_to',
+            'inspection_gas_to', 'inspection_gearbox_to', 'inspection_camber_to']);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['year', 'status', 'date_osago', 'date_dosago', 'date_kasko', 'fuel', 'filial'], 'integer'],
-            [['mark', 'number', 'vin', 'comment', 'name_insurance', 'name_owner'], 'string', 'max' => 255],
+            [['year', 'status', 'date_osago', 'date_dosago', 'date_kasko', 'fuel', 'filial', 'mileage',
+                'inspection', 'inspection_grm', 'inspection_gas', 'inspection_gearbox', 'inspection_camber'], 'integer'],
+            [['mark', 'number', 'vin', 'comment', 'name_insurance', 'name_owner', 'inspection_to'], 'string', 'max' => 255],
             [['status'], 'default', 'value' => self::STATUS_WORK],
             [['fuel'], 'default', 'value' => Constants::FUEL_GAS],
         ];
@@ -90,6 +106,13 @@ class Cars extends \yii\db\ActiveRecord
             'filial' => 'Филиал',
             'fullNameMark' => 'Автомобиль',
             'filialData' => 'Филиал',
+            'mileage' => 'Пробег',
+            'inspection_to' => 'Тех. осмотр',
+            'inspection_grm_to' => 'ГРМ',
+            'inspection_gas_to'=> 'Газ',
+            'inspection_gearbox_to' => 'К/П',
+            'inspection_camber_to' => 'Развал',
+
         ];
     }
 
@@ -172,6 +195,23 @@ class Cars extends \yii\db\ActiveRecord
             ->andWhere(['not in', 'id', $carSharingArray])
             ->asArray()
             ->all();
+    }
+
+    /**
+     * @param integer $mileageType Значение вычисляемого поля
+     * @param integer $mileageTypeCurrentData Текущее значение поля
+     * @return string[]
+     */
+    public function generateContentOptionCalcData(int $mileageType, int $mileageTypeCurrentData): array
+    {
+        if ($mileageType > 0 && $mileageType <= 1000){
+            return ['style' => 'background-color: #FF7F50; color: #fff', 'data-toggle'=>"tooltip" ,'data-placement'=>"right", 'title'=> "Т.О. делали на: ".$mileageTypeCurrentData];
+        }
+        if ($mileageType <= 0){
+            return ['style' => 'background-color: #FF0000; color: #fff', 'data-toggle'=>"tooltip" ,'data-placement'=>"right", 'title'=> "Т.О. делали на: ".$mileageTypeCurrentData];
+        }
+        return ['data-toggle'=>"tooltip" ,'data-placement'=>"right", 'title'=> "Т.О. делали на: ".$mileageTypeCurrentData];
+
     }
 
 }
