@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
-use app\models\DayPlans;
-use app\models\DriverBilling;
-use app\models\DriverTabel;
+use backend\models\DayPlans;
+use backend\models\DriverBilling;
+use backend\models\DriverTabel;
 use backend\models\Cars;
 use backend\models\Driver;
 use backend\models\Settings;
@@ -86,7 +86,6 @@ class DriverController extends Controller
         $driverDeposit = new DriverDeposit($id);
         $depositDataProvider = $driverDeposit->getAllDeposits();
         $summDeposit = $driverDeposit->getSummDeposit();
-
         $debtDriver = new DriverDebt($id);
         $debtDataProvider = $debtDriver->getAllDebt();
         $summDebt = $debtDriver->getSummDebt();
@@ -116,6 +115,7 @@ class DriverController extends Controller
 
         $balanceDriverYandex = round($serviceYandex->getBalanceFromYandex());
         $allTransactions = $serviceYandex->getDriverTransaction();
+
         $amountTransactionByAllType = "";
         $amountTableTransaction = "";
         if (!empty($allTransactions)){
@@ -143,8 +143,6 @@ class DriverController extends Controller
         \Yii::debug($dayPlan);
         $carsMarks = (new Cars())->getAllMarks();
         $generateTarifTable = $prepareDriverService->generateTarifTable(2, $period,$carFuel, $hours, $carsMarks, $currentShift);
-
-
 
         return $this->render('view', [
             'model' => $driver,

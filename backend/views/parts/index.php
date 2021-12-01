@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name_part',
             'mark',
+            'sumPartsOnStock',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

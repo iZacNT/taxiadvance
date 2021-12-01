@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Settings */
+/* @var $model backend\models\Settings */
 
 $this->title = 'Общие настройки: ';
 $this->params['breadcrumbs'][] = ['label' => 'Общие настройки', 'url' => ['update']];

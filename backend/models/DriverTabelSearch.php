@@ -7,7 +7,7 @@ use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
 /**
- * DriverTabelSearch represents the model behind the search form of `app\models\DriverTabel`.
+ * DriverTabelSearch represents the model behind the search form of `backend\models\DriverTabel`.
  */
 class DriverTabelSearch extends Cars
 {

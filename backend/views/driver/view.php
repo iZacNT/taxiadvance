@@ -154,7 +154,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'reason',
                                     'format' => 'raw',
                                     'value' => function($data){
-                                            return  $data->debtReasons[$data->reason];
+//                                            return  ($data->debtReasons[$data->reason])?? $data->debtReasons[$data->reason];
                                     }
                                 ],
                                 'car.fullNameMark',
@@ -423,7 +423,7 @@ HTML;
                                     </tr>
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">Бонусы на Яндекс:</td>
-                                        <td><?= $bonus;?></td>
+                                        <td><input type="text" class="form-control" id="yaBonus" value="<?= $bonus;?>"></td>
                                     </tr>
                                     <tr class="odd">
                                         <td class="dtr-control sorting_1" tabindex="0">Депо:</td>
@@ -539,7 +539,7 @@ HTML;
 $jsRaschet = <<< JS
 let filial = $model->filial;
 let balanceYandex = $balanceYandex;
-let bonusYandex = $bonus;
+// let bonusYandex = $bonus;
 let depo = $depo;
 let driverId = $model->id;
 let car_id = $car_id;

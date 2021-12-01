@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\models\CarRepairs */
 
-$this->title = 'Create Car Repairs';
-$this->params['breadcrumbs'][] = ['label' => 'Car Repairs', 'url' => ['index']];
+$this->title = 'Добавить ремонт';
+$this->params['breadcrumbs'][] = ['label' => 'Ремонты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="car-repairs-create">

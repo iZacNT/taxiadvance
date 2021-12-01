@@ -4,7 +4,7 @@
 namespace common\service\calculation;
 
 
-use app\models\Calculation;
+use backend\models\Calculation;
 use common\service\constants\Constants;
 
 class CalculationService

@@ -4,7 +4,7 @@
 namespace backend\controllers;
 
 
-use app\models\DayPlans;
+use backend\models\DayPlans;
 use backend\models\Filials;
 use common\service\dayPlans\PrepareDayPlans;
 use yii\web\Controller;

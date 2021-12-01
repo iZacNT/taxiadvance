@@ -6,13 +6,18 @@ $(".resultData").on("click", "#saveDataButton", function (){
     sendAjax( '/admin/driver/save-billing',resultObject).done(function (data){
         resultAjax = data;
     })
-    if(resultAjax === true){
-        toastr.success('Смена сохранена!');
-        location.reload();
-    }else{
-        toastr.error('Смена уже сохранена, у Вас нет прав для ее изменения');
+    if(resultAjax){
+        $.each(resultAjax, function (key,data){
+                if(data['result'] === 'true'){
+                    toastr.success(data['message']).delay(5000);
+                    console.log(data['message'])
+                }else{
+                    toastr.error(data['message']).delay(5000);
+                    console.log(data['message'])
+                }
+        })
+         location.reload();
     }
-    console.log(resultAjax);
 });
 
 function getData()
@@ -20,7 +25,7 @@ function getData()
     return {
         filial: filial,
         balanceYandex: balanceYandex,
-        bonusYandex: bonusYandex,
+        bonusYandex: getYaBonus(),
         depo: depo,
         car_id: car_id,
         shift_id: shift_id,
@@ -94,6 +99,12 @@ $("#calculateShift").on("click",function (){
     console.log("% Водителя: "+resultAjax.percentDriver);
     console.log(">>>>>>>>>>Расчитали");
 });
+
+function getYaBonus()
+{
+    console.log("Расчитываем от бонуса: "+$('#yaBonus').val());
+    return validateData($('#yaBonus').val(), "Введите правильный бонус!");
+}
 
 function getCarPhoneSumm()
 {

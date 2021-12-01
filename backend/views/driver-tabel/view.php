@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $driverTabel app\models\DriverTabel */
+/* @var $driverTabel backend\models\DriverTabel */
 
 $this->title = $driverTabel->carMark." ". Yii::$app->formatter->asDate($driverTabel->work_date);
 $this->params['breadcrumbs'][] = ['label' => 'Табель', 'url' => ['index']];

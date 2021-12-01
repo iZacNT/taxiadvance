@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CashRegister */
+/* @var $model backend\models\CashRegister */
 
 $this->title = $model->getTypeCash()[$model->type_cash];;
 $this->params['breadcrumbs'][] = ['label' => 'Касса', 'url' => ['index']];

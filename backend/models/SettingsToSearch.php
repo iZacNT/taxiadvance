@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\SettingsTo;
 
 /**
- * SettingsToSearch represents the model behind the search form of `app\models\SettingsTo`.
+ * SettingsToSearch represents the model behind the search form of `backend\models\SettingsTo`.
  */
 class SettingsToSearch extends SettingsTo
 {

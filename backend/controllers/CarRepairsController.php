@@ -5,7 +5,9 @@ namespace backend\controllers;
 use backend\models\CarRepairs;
 use backend\models\CarRepairsSearch;
 use backend\models\Cars;
+use backend\models\Stock;
 use common\service\constants\Constants;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -56,8 +58,14 @@ class CarRepairsController extends Controller
      */
     public function actionView($id)
     {
+
+        $dataProviderStock = new ActiveDataProvider([
+            'query' => Stock::find()->where(['repair_id' => $id])
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProviderStock' => $dataProviderStock
         ]);
     }
 

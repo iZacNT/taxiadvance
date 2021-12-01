@@ -4,10 +4,10 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\CarSharing;
+use backend\models\CarSharing;
 
 /**
- * CarSharingSearch represents the model behind the search form of `app\models\CarSharing`.
+ * CarSharingSearch represents the model behind the search form of `backend\models\CarSharing`.
  */
 class CarSharingSearch extends CarSharing
 {

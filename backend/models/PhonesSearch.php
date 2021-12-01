@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Phones;
 
 /**
- * PhonesSearch represents the model behind the search form of `app\models\Phones`.
+ * PhonesSearch represents the model behind the search form of `backend\models\Phones`.
  */
 class PhonesSearch extends Phones
 {

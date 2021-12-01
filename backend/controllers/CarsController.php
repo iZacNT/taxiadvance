@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\CarRepairs;
-use app\models\CarSharing;
+use backend\models\CarSharing;
 use backend\models\Cars;
 use backend\models\CarsSearch;
 use common\service\car_repare\CarRepareService;

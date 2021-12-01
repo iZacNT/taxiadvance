@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use app\models\CashRegister;
+use backend\models\CashRegister;
 use backend\models\CashRegisterSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

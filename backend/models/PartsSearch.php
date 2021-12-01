@@ -5,9 +5,11 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\Parts;
+use yii\data\ArrayDataProvider;
+use yii\db\Expression;
 
 /**
- * PartsSearch represents the model behind the search form of `app\models\Parts`.
+ * PartsSearch represents the model behind the search form of `backend\models\Parts`.
  */
 class PartsSearch extends Parts
 {
@@ -19,7 +21,7 @@ class PartsSearch extends Parts
     {
         return [
             [['id'], 'integer'],
-            [['name_part', 'mark'], 'safe'],
+            [['name_part', 'mark', 'sumPartsOnStock', 'count_in_stock'], 'safe'],
         ];
     }
 
@@ -37,33 +39,38 @@ class PartsSearch extends Parts
      *
      * @param array $params
      *
-     * @return ActiveDataProvider
+     * @return ArrayDataProvider
      */
     public function search($params)
     {
-        $query = Parts::find();
-
+        $query = Parts::find()->all();
         // add conditions that should always apply here
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
+        $dataProvider = new ArrayDataProvider([
+            'allModels' => $query,
+            'sort' => [ // подключаем сортировку
+                'attributes' => ['name_part', 'mark', 'sumPartsOnStock'],
+            ],
+            'pagination' => [ //постраничная разбивка
+                'pageSize' => 25, // 10 новостей на странице
+            ],
         ]);
 
         $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
+//        if (!$this->validate()) {
+//            // uncomment the following line if you do not want to return any records when validation fails
+//            // $query->where('0=1');
+//            return $dataProvider;
+//        }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-        ]);
-
-        $query->andFilterWhere(['like', 'name_part', $this->name_part])
-            ->andFilterWhere(['like', 'mark', $this->mark]);
+//        // grid filtering conditions
+//        $query->andFilterWhere([
+//            'id' => $this->id,
+//        ]);
+//
+//        $query->andFilterWhere(['like', 'name_part', $this->name_part])
+//            ->andFilterWhere(['like', 'mark', $this->mark]);
 
         return $dataProvider;
     }

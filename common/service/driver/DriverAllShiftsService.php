@@ -2,7 +2,7 @@
 
 namespace common\service\driver;
 
-use app\models\DriverBilling;
+use backend\models\DriverBilling;
 use yii\data\ActiveDataProvider;
 
 class DriverAllShiftsService

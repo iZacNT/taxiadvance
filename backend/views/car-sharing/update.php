@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CarSharing */
+/* @var $model backend\models\CarSharing */
 
 $this->title = 'Изменить аренду от: ' . Yii::$app->formatter->asDate($model->date_stop);
 $this->params['breadcrumbs'][] = ['label' => 'Аренда Автомобилей', 'url' => ['index']];

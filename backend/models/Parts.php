@@ -53,4 +53,14 @@ class Parts extends \yii\db\ActiveRecord
         return new PartsQuery(get_called_class());
     }
 
+    public function getAllStockInfo(): \yii\db\ActiveQuery
+    {
+        return $this->hasMany(Stock::class,['part_name' => 'id']);
+    }
+
+    public function getSumPartsOnStock()
+    {
+        return Stock::getSumOnePart($this->id);
+    }
+
 }

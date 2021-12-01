@@ -2,8 +2,8 @@
 
 namespace common\service\driver;
 
-use app\models\Calculation;
-use app\models\Compensation;
+use backend\models\Calculation;
+use backend\models\Compensation;
 use common\service\constants\Constants;
 use yii\db\ActiveQuery;
 

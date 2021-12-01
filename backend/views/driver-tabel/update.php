@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DriverTabel */
+/* @var $model backend\models\DriverTabel */
 
 $this->title = $driverTabel->carMark." ".Yii::$app->formatter->asDate($driverTabel->work_date, 'yyyy-MM-dd');
 $this->params['breadcrumbs'][] = ['label' => 'Табель', 'url' => ['index']];

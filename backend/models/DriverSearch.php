@@ -7,7 +7,7 @@ use yii\data\ActiveDataProvider;
 use backend\models\Driver;
 
 /**
- * DriverSearch represents the model behind the search form of `app\models\Driver`.
+ * DriverSearch represents the model behind the search form of `backend\models\Driver`.
  */
 class DriverSearch extends Driver
 {

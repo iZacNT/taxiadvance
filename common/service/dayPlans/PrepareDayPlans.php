@@ -6,7 +6,7 @@ namespace common\service\dayPlans;
 
 
 
-use app\models\DayPlans;
+use backend\models\DayPlans;
 use yii\base\BaseObject;
 
 class PrepareDayPlans

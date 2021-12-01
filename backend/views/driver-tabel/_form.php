@@ -6,7 +6,7 @@ use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DriverTabel */
+/* @var $model backend\models\DriverTabel */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

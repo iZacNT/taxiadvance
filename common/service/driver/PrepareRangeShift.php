@@ -2,7 +2,7 @@
 
 namespace common\service\driver;
 
-use app\models\DriverTabel;
+use backend\models\DriverTabel;
 use common\service\constants\Constants;
 use yii\helpers\Html;
 

@@ -3,7 +3,7 @@
 namespace common\service\compensation;
 
 
-use app\models\Compensation;
+use backend\models\Compensation;
 
 class CompensationService
 {

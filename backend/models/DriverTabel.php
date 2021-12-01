@@ -30,6 +30,12 @@ use Yii;
  * @property int $billing_id_day [int]
  * @property int $billing_id_night [int]
  * @property string $comment_day [varchar(255)]
+ * @property-read mixed $fullNightDriverName
+ * @property-read mixed $fullDayDriverName
+ * @property-read mixed $carInfo
+ * @property-read mixed $carMark
+ * @property-read mixed $fullPhoneNightInfo
+ * @property-read mixed $fullPhoneDayInfo
  * @property string $comment_night [varchar(255)]
  */
 class DriverTabel extends \yii\db\ActiveRecord

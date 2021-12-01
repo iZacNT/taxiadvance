@@ -40,8 +40,8 @@ class Stock extends \yii\db\ActiveRecord
         return [
             [['stringNamePart', 'part_name', 'type',], 'required'],
             [['date'], 'default', 'value' => time()],
-            [['count', 'type', 'date', 'repair_id'], 'integer'],
-            [['part_name', 'comment', 'stringNamePart', 'invoice', 'stringNameRepair'], 'string', 'max' => 255],
+            [['part_name','count', 'type', 'date', 'repair_id'], 'integer'],
+            [['comment', 'stringNamePart', 'invoice', 'stringNameRepair'], 'string', 'max' => 255],
         ];
     }
 
@@ -76,8 +76,23 @@ class Stock extends \yii\db\ActiveRecord
         return $this->partInfo->name_part." (".$this->partInfo->mark.")";
     }
 
-    public function getRepairInfo()
+    public function getRepairInfo(): \yii\db\ActiveQuery
     {
         return $this->hasOne(CarRepairs::class,['id' => 'repair_id']);
+    }
+
+    public static function getSumOnePart($id)
+    {
+         $parFullStory = self::find()->where(['part_name' => $id])->all();
+         $sum = 0;
+         foreach($parFullStory as $partRow){
+             if($partRow->type == 1){
+                 $sum+=$partRow->count;
+             }else{
+                 $sum-=$partRow->count;
+             }
+         }
+
+         return $sum;
     }
 }

@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use app\models\DriverTabel;
+use backend\models\DriverTabel;
 use backend\models\Cars;
 use backend\models\DebtFines;
 use backend\models\DebtFinesSearch;

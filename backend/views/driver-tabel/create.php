@@ -2,7 +2,7 @@
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DriverTabel */
+/* @var $model backend\models\DriverTabel */
 
 $this->title = 'Добавить смену';
 $this->params['breadcrumbs'][] = ['label' => 'Табель', 'url' => ['index']];

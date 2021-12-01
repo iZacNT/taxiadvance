@@ -5,7 +5,7 @@ use yii\jui\DatePicker;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\DriverTabelSearch */
+/* @var $model backend\models\DriverTabelSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

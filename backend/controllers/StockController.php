@@ -124,6 +124,32 @@ class StockController extends Controller
         ]);
     }
 
+    public function actionUpdateFromRepair($id,$repair_id)
+    {
+        $model = $this->findModel($id);
+        $carsParts = Parts::find()->allArrayPartsForAutoComplete();
+        $openRepairs = CarRepairs::getOpenRepairsForAutocomplete();
+
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['car-repairs/view', 'id' => $repair_id]);
+        }
+
+        foreach($carsParts as $part){
+            if ($part['id'] == $model->part_name){
+                $model->stringNamePart = $part['label'];
+            }
+        }
+
+        if($model->type == 2){
+            $model->stringNameRepair = $model->repairInfo->id.": ".$model->repairInfo->car->fullNameMark." ".Yii::$app->formatter->asDate($model->repairInfo->date_open_repair);
+        }
+        return $this->render('update', [
+            'model' => $model,
+            'carsParts' => $carsParts,
+            'openRepairs' => $openRepairs,
+        ]);
+    }
+
     /**
      * Deletes an existing Stock model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

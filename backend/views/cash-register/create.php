@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CashRegister */
+/* @var $model backend\models\CashRegister */
 
 $this->title = 'Добавить приход/расход';
 $this->params['breadcrumbs'][] = ['label' => 'Касса', 'url' => ['index']];

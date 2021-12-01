@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\CarSharing */
+/* @var $model backend\models\CarSharing */
 
 $this->title = 'Сдать автомобиль в аренду';
 $this->params['breadcrumbs'][] = ['label' => 'Аренда', 'url' => ['cars/view', 'id' => $model->car_id]];
