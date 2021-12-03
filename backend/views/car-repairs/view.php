@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'id' => 'carRepairsPjax'
                         ]); ?>
                         <p>
-                            <?= Html::button('Добавить деталь', ['class' => 'btn btn-primary', 'id' => 'addParts']) ?>
+                            <?= Html::button('Добавить деталь', ['class' => 'btn btn-primary', 'id' => 'addParts', 'data-mark' => $model->car->mark, 'data-id-repair' => $model->id]) ?>
                         </p>
 
                         <?= GridView::widget([
@@ -101,5 +101,11 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 <?php
-$this->registerJsFile('@web/js/car_repair/appParts.js', ['depends' => [\yii\web\JqueryAsset::className()]]);
+$parts = json_encode($parts);
+$jsRaschet = <<< JS
+let parts = $parts;
+JS;
+
+$this->registerJs( $jsRaschet, $position = yii\web\View::POS_END);
+$this->registerJsFile('@web/js/car_repair/appParts.js', ['depends' => [yii\jui\JuiAsset::className()]]);
 ?>​

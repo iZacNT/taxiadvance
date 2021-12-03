@@ -5,8 +5,10 @@ namespace backend\controllers;
 use backend\models\CarRepairs;
 use backend\models\CarRepairsSearch;
 use backend\models\Cars;
+use backend\models\Parts;
 use backend\models\Stock;
 use common\service\constants\Constants;
+use common\service\stock\StockService;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -58,14 +60,17 @@ class CarRepairsController extends Controller
      */
     public function actionView($id)
     {
-
+        $model = $this->findModel($id);
+        $parts = (new Parts())->getPartsByMark($model->car->mark);
+        \Yii::debug($parts, __METHOD__);
         $dataProviderStock = new ActiveDataProvider([
             'query' => Stock::find()->where(['repair_id' => $id])
         ]);
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
-            'dataProviderStock' => $dataProviderStock
+            'model' => $model,
+            'dataProviderStock' => $dataProviderStock,
+            'parts' => $parts
         ]);
     }
 
@@ -163,5 +168,25 @@ class CarRepairsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionSavePartsForRepair()
+    {
+        $parts = \Yii::$app->request->post("data");
+        $resultArr = [];
+        foreach($parts as $part){
+            $stock = (new StockService())->create(
+                $part['name_parts'],
+                $part['count'],
+                2,
+                $part['id_repair']
+            );
+            if ($stock->errors){
+                $resultArr[] = ['type' => 'false' ,'message' => "Деталь не добавлена"];
+            }else{
+                $resultArr[] = ['type' => 'true' ,'message' => $stock->partInfo->name_part . ": " . $stock->count . "шт. добавлено к Ремонту"];
+            }
+        }
+        return json_encode($resultArr);
     }
 }

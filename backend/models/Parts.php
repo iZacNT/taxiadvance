@@ -13,6 +13,7 @@ use Yii;
  */
 class Parts extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -61,6 +62,24 @@ class Parts extends \yii\db\ActiveRecord
     public function getSumPartsOnStock()
     {
         return Stock::getSumOnePart($this->id);
+    }
+
+    public function getPartsByMark($mark){
+
+            $partArr = [];
+            $parts =  self::find()->where(['mark' => $mark])->all();
+            foreach($parts as $part){
+                if($part->sumPartsOnStock > 0)
+                    array_push($partArr,[
+                        'label' => $part->name_part." (Остаток:".$part->sumPartsOnStock." шт.)",
+                        'value' => $part->name_part,
+                        'id' => $part->id,
+                        'count' => $part->sumPartsOnStock
+                    ]);
+            }
+            \Yii::debug($partArr, __METHOD__);
+
+            return $partArr;
     }
 
 }
