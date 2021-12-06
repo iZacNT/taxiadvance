@@ -7,6 +7,7 @@ use backend\models\Parts;
 use backend\models\Stock;
 use backend\models\StockSearch;
 use Yii;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -163,6 +164,19 @@ class StockController extends Controller
 
         return $this->redirect(['index']);
     }
+
+
+    /**
+     * @throws \Throwable
+     * @throws StaleObjectException
+     * @throws NotFoundHttpException
+     */
+    public function actionDeleteFromRepair($id, $repair): \yii\web\Response
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['car-repairs/view', 'id' => $repair]);
+    }
+
 
     /**
      * Finds the Stock model based on its primary key value.

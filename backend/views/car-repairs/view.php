@@ -83,6 +83,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'date:datetime',
                                 [
                                     'class' => 'yii\grid\ActionColumn',
+                                    'urlCreator' => function ($action, $model, $key, $index) {
+                                            return \yii\helpers\Url::to(["stock/delete-from-repair", 'id' => $model->id, 'repair' => $model->repair_id]);
+                                    },
                                     'template' => '{delete}'
                                 ],
                             ],

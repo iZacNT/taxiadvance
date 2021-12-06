@@ -78,7 +78,8 @@ $('.car-repairs-view').on('click', '#addParts', function(){
                 }
             })
         }
-
+        $.pjax.reload({container: "#carRepairsPjax", async:false});
+        $('#exampleModalCenter').modal('hide');
         console.log(resultAjax);
     });
 });
