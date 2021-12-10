@@ -29,6 +29,7 @@
                 ['label' => 'Касса', 'icon' => 'far fa-user', 'url' => '/admin/cash-register/index'],
                 ['label' => 'Штрафы ДПС', 'icon' => 'far fa-user', 'url' => '/admin/debt-fines/index'],
                 ['label' => 'Телефоны', 'icon' => 'far fa-user', 'url' => '/admin/phones/index'],
+                ['label' => 'Биллинг', 'icon' => 'far fa-user', 'url' => '/admin/driver-billing/index'],
                 [
                     'label' => 'Гараж',
                     'icon' => 'tachometer-alt',

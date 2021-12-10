@@ -38,6 +38,7 @@ use common\models\User;
  * @property int $car_id [int]  Автомобиль
  * @property int $shift_id [int]  № Смены
  * @property int $verify [int]  Проверена
+ * @property int $rolling [int]  Накат за смену
  */
 class DriverBilling extends \yii\db\ActiveRecord
 {
@@ -52,13 +53,13 @@ class DriverBilling extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount',
                 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing',
                 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations',
-                'shift_id', 'verify'], 'integer'],
+                'shift_id', 'verify', 'rolling'], 'integer'],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],
         ];
@@ -94,7 +95,8 @@ class DriverBilling extends \yii\db\ActiveRecord
             'plan' => 'План',
             'compensations' => 'Компенсация',
             'car_id' => 'Автомобиль',
-            'verify' => 'Проверена'
+            'verify' => 'Проверена',
+            'rolling' => 'Накат за смену'
         ];
     }
 
@@ -121,6 +123,13 @@ class DriverBilling extends \yii\db\ActiveRecord
     public function getVerifuUser()
     {
         return $this->hasOne(User::class,['id' => 'verify']);
+    }
+
+    public function getSumWithAdditionally(): array
+    {
+        $sumPark = (($this->input_amount+$this->bonus_yandex)/100)*$this->percent_park;
+        $billingAdditionally = $sumPark+$this->depo+$this->car_wash+$this->car_fuel_summ+$this->car_phone_summ;
+        return ['sum_park' => round($sumPark), 'additional' => round($billingAdditionally)];
     }
 
 }

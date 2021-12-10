@@ -495,7 +495,7 @@ HTML;
                                             return "<strong>ID:</strong>".$data->id."&nbsp;&nbsp;&nbsp;&nbsp;<strong>".$data->shiftBilling."</strong><br />Тип: ".Constants::getDayProperty()[$data->type_day]."<br />Период: ".Constants::getPeriod()[$data->period];
                                         }
                                     ],
-                                'carInfo.fullnameMark:raw:Авто',
+                                'carInfo.fullNameMark:raw:Авто',
                                 'plan:currency',
                                 'input_amount:currency:Общаяя',
                                 [
