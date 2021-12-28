@@ -12,6 +12,7 @@ use Yii;
  * @property int|null $cash Cash
  * @property int|null $comment Comments
  * @property int|null $date_time Comments
+ * @property int $in_calc [int]  Расчитывать
  */
 class CashRegister extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,8 @@ class CashRegister extends \yii\db\ActiveRecord
         return [
             [['type_cash', 'cash'], 'required'],
             [['date_time'], 'default', 'value' => time()],
-            [['type_cash', 'cash', 'date_time'], 'integer'],
+            [['in_calc'], 'default', 'value' => 1],
+            [['type_cash', 'cash', 'date_time', 'in_calc'], 'integer'],
             [['comment'], 'string']
         ];
     }
@@ -62,6 +64,7 @@ class CashRegister extends \yii\db\ActiveRecord
             'cash' => 'Сумма',
             'comment' => 'Комментарий',
             'date_time' => 'Дата/Время',
+            'in_calc' => 'В расчет',
         ];
     }
 
@@ -71,12 +74,34 @@ class CashRegister extends \yii\db\ActiveRecord
         $allRows = self::find()
             ->where(['<>','type_cash', 3])
             ->andWhere(['<>','type_cash', 4])
+            ->andWhere(['like', 'in_calc', 1])
             ->all();
         foreach ($allRows as $row){
             if($row->type_cash == self::TYPE_PRIHOD){
                 $result += $row->cash;
             }
             if($row->type_cash == self::TYPE_RASHOD){
+                $result -= $row->cash;
+            }
+        }
+        return $result;
+    }
+
+    public function getSummInCashRegisterWithDolg()
+    {
+        $result = 0;
+        $allRows = self::find()
+            ->where(['<>','type_cash', 4])
+            ->andWhere(['like', 'in_calc', 1])
+            ->all();
+        foreach ($allRows as $row){
+            if($row->type_cash == self::TYPE_PRIHOD){
+                $result += $row->cash;
+            }
+            if($row->type_cash == self::TYPE_RASHOD){
+                $result -= $row->cash;
+            }
+            if($row->type_cash == self::TYPE_DOLG_PO_SMENE){
                 $result -= $row->cash;
             }
         }

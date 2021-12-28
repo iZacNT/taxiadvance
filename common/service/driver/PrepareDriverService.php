@@ -339,6 +339,7 @@ class PrepareDriverService
     private function addRowInArrayDay(DriverTabel $shift, array $driverShift): array
     {
         $fullTimeShift = $shift->work_date + (9*60*60);
+        \Yii::debug($shift->car_id, __METHOD__);
         array_push($driverShift,[
             'id_shift' =>$shift->id,
             'car_id' => $shift->car_id,

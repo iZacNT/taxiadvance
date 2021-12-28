@@ -118,8 +118,12 @@ class DebtFinesController extends Controller
         }
 
         $debtFines->stringDateReason = date('Y-m-d', $debtFines->date_reason);
-        $debtFines->stringDateDtp = date('Y-m-d', $debtFines->date_dtp);
-        $debtFines->stringDatePay = date('Y-m-d', $debtFines->date_pay);
+
+        $debtFines->stringDateDtp = (!empty($debtFines->date_dtp))? date('d-m-Y h:i', $debtFines->date_dtp) : "";
+
+        if (!empty($debtFines->stringDatePay)){
+            $debtFines->stringDatePay = date('Y-m-d', $debtFines->date_pay);
+        }
         $debtFines->stringNameCar = $debtFines->carInfo->fullNameMark;
         $debtFines->stringNameDriver = $debtFines->driverInfo->fullName;
 

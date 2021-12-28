@@ -4,6 +4,7 @@
 /* @var $debt \backend\models\Debt */
 /* @var $idDriver  */
 
+use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\jui\DatePicker;
 use yii\web\JsExpression;
@@ -70,7 +71,7 @@ use yii\widgets\ActiveForm;
                             'placeholder' => 'Автомобиль',
                         ],
 
-                    ]);
+                    ])->label("Автомобиль");
                 ?>
 
             </div>
@@ -91,21 +92,16 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($debt, 'geo_dtp')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($debt, 'stringDateDtp')->widget(\yii\jui\DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'yyyy-MM-dd',
-                    'options' => [
-                        'placeholder' => Yii::$app->formatter->asDate(
-                            (!empty($debt->date_dtp))? $debt->date_dtp : time(), "yyyy-MM-dd"),
-                        'class'=> 'form-control',
-                        'autocomplete'=>'off'
-                    ],
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '2020:2050',
+                <?
+                echo $form->field($debt, 'stringDateDtp')->widget(DateTimePicker::classname(), [
+                    'options' => ['placeholder' => 'Enter event time ...'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'todayBtn' => true,
+                        'format' => 'dd-mm-yyyy hh:ii'
                     ]
-                ]) ?>
+                ]);
+                ?>
             </div>
         </div>
         <div class="row">

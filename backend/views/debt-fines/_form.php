@@ -1,5 +1,6 @@
 <?php
 
+use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
@@ -118,21 +119,16 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($debtFines, 'geo_dtp')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?= $form->field($debtFines, 'stringDateDtp')->widget(\yii\jui\DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'yyyy-MM-dd',
-                    'options' => [
-                        'placeholder' => Yii::$app->formatter->asDate(
-                            (!empty($debtFines->date_dtp))? $debtFines->date_dtp : time(), "yyyy-MM-dd"),
-                        'class'=> 'form-control',
-                        'autocomplete'=>'off'
-                    ],
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '2020:2050',
+                <?
+                echo $form->field($debtFines, 'stringDateDtp')->widget(DateTimePicker::classname(), [
+                    'options' => ['placeholder' => 'Enter event time ...'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'todayBtn' => true,
+                        'format' => 'dd-mm-yyyy hh:ii'
                     ]
-                ]) ?>
+                ]);
+                ?>
             </div>
         </div>
 

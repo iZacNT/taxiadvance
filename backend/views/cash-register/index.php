@@ -36,6 +36,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
+        <!-- ./col --> <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3><?= Yii::$app->formatter->asCurrency($cashRegistryWithDolg);?></h3>
+
+                    <p>С долгом по смене: </p>
+                </div>
+                <div class="icon">
+                    <i class="fas fa-cash-register"></i>
+                </div>
+            </div>
+        </div>
         <!-- ./col -->
     </div>
 
@@ -58,8 +71,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter' => Html::activeDropDownList($searchModel, 'type_cash',$searchModel->getTypeCash() ,['class'=>'form-control','prompt' => 'Выбирите тип']),
                 'format' => 'raw',
                 'value' => function($data){
+                    $infoCalc = '<i class="far fa-window-close" style="color: red"></i>';
+                if ($data->in_calc == 1){
+                    $infoCalc = '<i class="far fa-check-circle" style="color: green"></i>';
+                }
                     if (\common\models\User::isSuperUser()) {
-                        return Html::a($data->getTypeCash()[$data->type_cash], ['view', 'id' => $data->id],['style' => 'font-size: 18px; font-weight:bold'])."<br>".Html::a("Редактировать", ['update', 'id' => $data->id],['class' => 'text-green']);
+                        return $infoCalc." ".Html::a($data->getTypeCash()[$data->type_cash], ['view', 'id' => $data->id],['style' => 'font-size: 18px; font-weight:bold'])."<br>".Html::a("Редактировать", ['update', 'id' => $data->id],['class' => 'text-green']);
                     }
                     return Html::a($data->getTypeCash()[$data->type_cash], ['view', 'id' => $data->id],['style' => 'font-size: 18px; font-weight:bold']);
                 }

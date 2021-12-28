@@ -147,17 +147,25 @@ $this->params['breadcrumbs'][] = $this->title;
                             'dataProvider' => $debtDataProvider,
                             'columns' => [
 //                                'id',
-                                'regulation',
-                                'dette:currency',
-                                'back:currency',
-                                'date_reason:date',
                                 [
                                     'attribute' => 'reason',
                                     'format' => 'raw',
                                     'value' => function($data){
-                                            return  (!empty($data->debtReasons[$data->reason]))? $data->debtReasons[$data->reason]: "-";
+                                        return  (!empty($data->debtReasons[$data->reason]))? $data->debtReasons[$data->reason]: "-";
                                     }
                                 ],
+                                [
+                                        'attribute' => 'regulation',
+                                    'format' => 'raw',
+                                    'value' => function($data){
+                                        return (!empty($data->regulation)) ? $data->regulation."<br>
+                                               <span style='font-size: 13px; font-weight: lighter'>".Yii::$app->formatter->asDatetime($data->date_dtp)."</span>" : "-";
+                                    }
+                                ],
+                                'dette:currency',
+                                'back:currency',
+                                'date_reason:date',
+
                                 'car.fullNameMark',
                                 'comment:ntext',
                                 ['class' => \yii\grid\ActionColumn::className(),

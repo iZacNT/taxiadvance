@@ -37,14 +37,17 @@ class CashRegisterController extends Controller
      */
     public function actionIndex()
     {
-        $cashRegistry = (new CashRegister())->getSummInCashRegister();
+        $cr = new CashRegister();
+        $cashRegistry = $cr->getSummInCashRegister();
+        $cashRegistryWithDolg = $cr->getSummInCashRegisterWithDolg();
         $searchModel = new CashRegisterSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'cashRegistry' => $cashRegistry
+            'cashRegistry' => $cashRegistry,
+            'cashRegistryWithDolg' => $cashRegistryWithDolg
         ]);
     }
 

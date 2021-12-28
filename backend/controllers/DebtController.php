@@ -63,6 +63,11 @@ class DebtController extends Controller
                 \Yii::debug($debt->stringNameCar, __METHOD__);
             }
         }
+        $debt->stringDateDtp = (!empty($debt->date_dtp))? date('d-m-Y h:i', $debt->date_dtp) : date('d-m-Y h:i', time());
+        if (!empty($debt->stringDatePay)){
+            $debt->stringDatePay = date('Y-m-d', $debt->date_pay);
+        }
+
 
         return $this->render('update', [
             'debt' => $debt,

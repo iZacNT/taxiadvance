@@ -76,7 +76,7 @@ $("#calculateShift").on("click",function (){
         '                  <div class="progress-bar" style="width: 100%"></div>' +
         '                </div>' +
         '                <span class="progress-description">' +
-        '                <label for="debtFromShift">Долг по смене:</label>' +
+        '                <label for="debtFromShift">Долг по смене(СУММА ОТ ВОДИТЕЛЯ):</label>' +
         '                  <input type="text" id="debtFromShift" name="debtFromShift" value="0" class="form-control">' +
         '                </span>' +
         '              </div>' +

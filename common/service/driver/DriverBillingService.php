@@ -162,7 +162,7 @@ class DriverBillingService
                     $this->saveToCashRegister(
                         time()+1,
                         CashRegister::TYPE_DOLG_PO_SMENE,
-                        $this->debtFromShift,
+                        ($this->billing - $this->debtFromShift),
                         "Водитель: ".$driver->fullName
                     );
                     array_push($resultAnswer, [

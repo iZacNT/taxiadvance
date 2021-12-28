@@ -139,9 +139,6 @@ $this->params['breadcrumbs'][] = $this->title;
 //                'value' => 'filialData.name'
 //            ],
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template' => '{delete}'
-            ],
         ],
         'pager' => [
             'maxButtonCount' => 5,
