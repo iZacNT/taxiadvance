@@ -19,13 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Создать', ['create'], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Все Автомобили', ['index'], ['class' => 'btn btn-success']) ?>
         <?= Html::a('Изменить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
         <?= Html::a("Сдать в аренду",['car-sharing/create','id' => $model->id], ['class' => 'btn btn-warning'])?>
         <?= Html::button("Отправить в Ремонт", ['class' => 'btn btn-warning', 'id' => 'goToRepair'])?>
     </p>

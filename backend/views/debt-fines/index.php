@@ -32,7 +32,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
             'carFullName',
             'date_reason:date',
-            'regulation',
+            [
+                'attribute' => 'regulation',
+                'format' => 'raw',
+                'value' => function($data){
+                    return (!empty($data->regulation)) ? $data->regulation."<br>
+                                               <span style='font-size: 13px; font-weight: lighter'>".Yii::$app->formatter->asDatetime($data->date_dtp)."</span>" : "-";
+                }
+            ],
             'dette:currency',
             'back:currency',
             'comment:ntext',
