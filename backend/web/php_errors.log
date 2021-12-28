@@ -1539,3 +1539,5 @@ $_SERVER = [
 [30-Nov-2021 13:22:53 Asia/Yekaterinburg] PHP Fatal error:  Cannot declare class backend\models\DriverTabel, because the name is already in use in /var/www/taxiadvance.loc/public_html/backend/models/DriverTabel.php on line 0
 [09-Dec-2021 09:48:22 Asia/Yekaterinburg] PHP Fatal error:  Declaration of backend\models\DriverBillingSearch::rules() must be compatible with backend\models\DriverBilling::rules(): array in /var/www/taxiadvance.loc/public_html/backend/models/DriverBillingSearch.php on line 17
 [28-Dec-2021 09:59:01 Asia/Yekaterinburg] PHP Fatal error:  Constant expression contains invalid operations in /var/www/taxiadvance.loc/public_html/backend/models/DriverBillingSearch.php on line 16
+[28-Dec-2021 16:01:14 Asia/Yekaterinburg] PHP Fatal error:  Can't use function return value in write context in /var/www/taxiadvance.loc/public_html/backend/models/PartsSearch.php on line 53
+[28-Dec-2021 16:01:14 Asia/Yekaterinburg] PHP Fatal error:  Can't use function return value in write context in /var/www/taxiadvance.loc/public_html/backend/models/PartsSearch.php on line 53

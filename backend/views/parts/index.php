@@ -33,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             'mark',
-            'sumPartsOnStock',
+            'sumPartsOnStock:raw:Количество',
         ],
     ]); ?>
 

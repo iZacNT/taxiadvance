@@ -13,6 +13,7 @@ use yii\db\Expression;
  */
 class PartsSearch extends Parts
 {
+    public $sumPartsOnStock;
 
     /**
      * {@inheritdoc}
@@ -43,20 +44,44 @@ class PartsSearch extends Parts
      */
     public function search($params)
     {
-        $query = Parts::find()->all();
+
+        $this->load($params);
+
+
+        $query = Parts::find();
         // add conditions that should always apply here
 
+        $allData = $query->all();
+
+        if($this->name_part){
+            $allData=array_filter($allData, function ($element){
+                return $element->name_part == $this->name_part;
+            });
+        }
+
+        if($this->mark){
+            $allData=array_filter($allData, function ($element){
+                return $element->mark == $this->mark;
+            });
+        }
+
+        if($this->sumPartsOnStock){
+            $allData=array_filter($allData, function ($element){
+                return intval($element->sumPartsOnStock) > $this->sumPartsOnStock;
+            });
+
+        }
+
         $dataProvider = new ArrayDataProvider([
-            'allModels' => $query,
+            'allModels' => $allData,
             'sort' => [ // подключаем сортировку
                 'attributes' => ['name_part', 'mark', 'sumPartsOnStock'],
             ],
             'pagination' => [ //постраничная разбивка
-                'pageSize' => 25, // 10 новостей на странице
+                'pageSize' => 50, // 10 новостей на странице
             ],
         ]);
 
-        $this->load($params);
 
 //        if (!$this->validate()) {
 //            // uncomment the following line if you do not want to return any records when validation fails
