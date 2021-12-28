@@ -1,5 +1,6 @@
 <?php
 
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -37,13 +38,26 @@ $this->params['breadcrumbs'][] = $this->title;
             'count',
             [
                 'attribute' => 'type',
+                'filter' => Html::activeDropDownList($searchModel, 'type',$searchModel->typeStock ,['class'=>'form-control','prompt' => 'Выбирите тип']),
                 'value' => function($data){
                     return $data->typeStock[$data->type];
                 }
             ],
             'invoice',
             'repair_id',
-            'date:datetime',
+            [
+                'attribute' => 'date',
+                'filter' => DatePicker::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'dateString',
+                    'options' => ['placeholder' => 'Введите дату'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'dd-mm-yyyy'
+                    ]
+                ]),
+                'format' => 'datetime'
+            ],
 
             ['class' => 'yii\grid\ActionColumn',
                 'template' => '{delete}'

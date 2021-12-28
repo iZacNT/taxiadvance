@@ -12,6 +12,7 @@ use backend\models\Stock;
 class StockSearch extends Stock
 {
     public $partName;
+    public $dateString;
 
     /**
      * {@inheritdoc}
@@ -21,7 +22,7 @@ class StockSearch extends Stock
         return [
             [['id', 'count', 'type', 'date'], 'integer'],
             [['part_name', 'partName','invoice',
-                'repair_id'], 'safe'],
+                'repair_id', 'dateString'], 'safe'],
         ];
     }
 
@@ -81,12 +82,13 @@ class StockSearch extends Stock
             'id' => $this->id,
             'count' => $this->count,
             'type' => $this->type,
-            'date' => $this->date,
             'invoice' => $this->invoice,
             'repair_id' => $this->repair_id,
         ]);
 
         $query->andFilterWhere(['like', 'part_name', $this->part_name]);
+        $query->andFilterWhere(['>=', 'date',strtotime($this->dateString)]);
+        $query->andFilterWhere(['<', 'date',(!empty($this->dateString))? strtotime($this->dateString)+(24*60*60): null]);
 
         $query->joinWith(['partInfo' => function ($q) {
             $q->where('parts.name_part LIKE "%' .$this->partName. '%" OR parts.mark LIKE "%'.$this->partName.'%"');
