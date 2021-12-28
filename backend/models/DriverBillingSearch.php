@@ -11,6 +11,11 @@ use backend\models\DriverBilling;
  */
 class DriverBillingSearch extends DriverBilling
 {
+
+    public $startWorkDate;
+    public $endWorkDate;
+    public $shiftBilling;
+
     /**
      * {@inheritdoc}
      */
@@ -18,7 +23,7 @@ class DriverBillingSearch extends DriverBilling
     {
         return [
             [['type_day', 'plan', 'summ_driver', 'summ_park', 'percent_driver', 'percent_park', 'billing', 'hours', 'car_phone_summ', 'car_fuel_summ', 'car_wash', 'debt_from_shift', 'depo', 'input_amount', 'period', 'fuel', 'bonus_yandex', 'date_billing', 'driver_id', 'id', 'compensations', 'car_id', 'shift_id', 'verify'], 'integer'],
-            [['car_mark'], 'safe'],
+            [['car_mark', 'startWorkDate', 'endWorkDate', 'shiftBilling'], 'safe'],
             [['balance_yandex'], 'number'],
         ];
     }
@@ -55,9 +60,11 @@ class DriverBillingSearch extends DriverBilling
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
+            $query->joinWith("driverTabelShift");
             return $dataProvider;
         }
 
+        \Yii::debug($this->errors, __METHOD__);
         // grid filtering conditions
         $query->andFilterWhere([
             'type_day' => $this->type_day,
@@ -88,6 +95,21 @@ class DriverBillingSearch extends DriverBilling
         ]);
 
         $query->andFilterWhere(['like', 'car_mark', $this->car_mark]);
+
+        $query->joinWith(['driverTabelShift' => function ($q) {
+            $start = 1609459200;
+            $end = time();
+            if(!empty($this->startWorkDate)){
+                $start = strtotime($this->startWorkDate);
+            }
+            if(!empty($this->startWorkDate)){
+                $end = strtotime($this->endWorkDate)+86400;
+            }
+
+            \Yii::debug($start);
+            \Yii::debug($end);
+            $q->where('driver_tabel.work_date >= "' .$start. '" and driver_tabel.work_date < "'.$end.'"');
+        }]);
 
         return $dataProvider;
     }

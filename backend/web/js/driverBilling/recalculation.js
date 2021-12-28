@@ -1,5 +1,9 @@
 $("#recalculation").on("click", function (){
-    console.log(getData());
+    let resultAjax;
+    sendAjax('/admin/driver-billing/recalculation', getData(), 'json').done(function (data){
+        resultAjax=data;
+    });
+    console.log(resultAjax);
 });
 
 function getData()

@@ -146,7 +146,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         echo GridView::widget([
                             'dataProvider' => $debtDataProvider,
                             'columns' => [
-                                'id',
+//                                'id',
+                                'regulation',
                                 'dette:currency',
                                 'back:currency',
                                 'date_reason:date',
@@ -154,7 +155,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'attribute' => 'reason',
                                     'format' => 'raw',
                                     'value' => function($data){
-//                                            return  ($data->debtReasons[$data->reason])?? $data->debtReasons[$data->reason];
+                                            return  (!empty($data->debtReasons[$data->reason]))? $data->debtReasons[$data->reason]: "-";
                                     }
                                 ],
                                 'car.fullNameMark',

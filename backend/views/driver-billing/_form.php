@@ -36,18 +36,26 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="row">
         <div class="col-md-6">
+            <?= $form->field($model, 'hours')->dropDownList(['12' => "12 Часов", '16' => "16 Часов"]) ?>
+        </div>
+        <div class="col-md-6">
+            <?= $form->field($model, 'plan',[
+                'template' => '{label}<div class="input-group input-group">
+                  {input}
+                  <span class="input-group-append">
+                    <button type="button" class="btn btn-info btn-flat">Получить</button>
+                  </span>
+                </div>{error}{hint}'
+            ])->textInput()->label("План") ?>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-6">
             <?= $form->field($model, 'input_amount')->textInput() ?>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'compensations')->textInput() ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <?= $form->field($model, 'plan')->textInput() ?>
-        </div>
-        <div class="col-md-6">
-            <?= $form->field($model, 'hours')->dropDownList(['12' => "12 Часов", '16' => "16 Часов"]) ?>
         </div>
     </div>
     <div class="row">

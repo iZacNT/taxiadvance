@@ -78,7 +78,7 @@ class Debt extends \yii\db\ActiveRecord
             'date_dtp' => 'Датат ДТП',
             'payable' => 'Оплачено',
             'date_pay' => 'Дата платежа',
-            'stringDateReason' => 'Дата происшествия',
+            'stringDateReason' => 'Дата нарушения',
             'stringDateDtp' => 'Дата ДТП',
             'stringDatePay' => 'Дата платежа',
         ];

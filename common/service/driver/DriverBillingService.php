@@ -35,6 +35,7 @@ class DriverBillingService
     private $summDriver;
     private $compensation;
     private $car_id;
+    private $rolling;
     private $shift_id;
 
     public function __construct($requestPost)
@@ -43,6 +44,7 @@ class DriverBillingService
         $this->balanceYandex = $requestPost['balanceYandex'];
         $this->bonusYandex = $requestPost['bonusYandex'];
         $this->carMark = $requestPost['carMark'];
+        $this->rolling = $requestPost['rolling'];
         $this->fuel = $requestPost['fuel'];
         $this->period = $requestPost['period'];
         $this->typeDay = $requestPost['typeDay'];
@@ -184,6 +186,7 @@ class DriverBillingService
                 'message' => 'Смена уже сохранена, у Вас нет прав для ее изменения!'
             ]);
         }
+
         return $resultAnswer;
     }
 
@@ -213,6 +216,7 @@ class DriverBillingService
             $driverBilling->plan = $this->plan;
             $driverBilling->compensations = $this->compensation;
             $driverBilling->car_id = $this->car_id;
+            $driverBilling->rolling = $this->rolling;
             $driverBilling->shift_id = $this->shift_id;
             $driverBilling->save();
         return $driverBilling;

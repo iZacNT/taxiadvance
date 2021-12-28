@@ -60,6 +60,7 @@ class DriverBilling extends \yii\db\ActiveRecord
                 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing',
                 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations',
                 'shift_id', 'verify', 'rolling'], 'integer'],
+            [['rolling'], 'default', 'value' => 0],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],
         ];
@@ -96,7 +97,8 @@ class DriverBilling extends \yii\db\ActiveRecord
             'compensations' => 'Компенсация',
             'car_id' => 'Автомобиль',
             'verify' => 'Проверена',
-            'rolling' => 'Накат за смену'
+            'rolling' => 'Накат за смену',
+            'shiftBilling' => 'Дата смены'
         ];
     }
 

@@ -6,6 +6,7 @@ $(".resultData").on("click", "#saveDataButton", function (){
     sendAjax( '/admin/driver/save-billing',resultObject).done(function (data){
         resultAjax = data;
     })
+
     if(resultAjax){
         $.each(resultAjax, function (key,data){
                 if(data['result'] === 'true'){
@@ -16,7 +17,7 @@ $(".resultData").on("click", "#saveDataButton", function (){
                     console.log(data['message'])
                 }
         })
-         location.reload();
+        location.reload();
     }
 });
 
@@ -28,6 +29,7 @@ function getData()
         bonusYandex: getYaBonus(),
         depo: depo,
         car_id: car_id,
+        rolling: getRollingCar(),
         shift_id: shift_id,
         carMark: getCarMark(),
         fuel: getFuel(),
@@ -99,6 +101,11 @@ $("#calculateShift").on("click",function (){
     console.log("% Водителя: "+resultAjax.percentDriver);
     console.log(">>>>>>>>>>Расчитали");
 });
+
+function getRollingCar()
+{
+    return validateData($('#rollingCar').val(), "Введите правильный пробег автомобиля!");
+}
 
 function getYaBonus()
 {

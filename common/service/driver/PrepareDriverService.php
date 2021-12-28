@@ -203,6 +203,14 @@ class PrepareDriverService
                                         </div>
                                     </td>
                                 </tr>
+                                <tr class="odd">
+                                    <td class="dtr-control sorting_1" tabindex="0">
+                                    Пробег автомобиля:
+                                    </td>
+                                    <td>
+                                        <input type="text" id="rollingCar" class="form-control" value="0">
+                                    </td>
+                                </tr>
                                 </tbody>
                                 <tfoot>
                                 <tr>

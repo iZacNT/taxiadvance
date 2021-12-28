@@ -57,6 +57,13 @@ class DebtController extends Controller
             return $this->redirect(['driver/view', 'id' => $debt->driver_id]);
         }
 
+        foreach ($cars as $car){
+            if ($car['id'] == $debt->car_id){
+                $debt->stringNameCar = $car['label'];
+                \Yii::debug($debt->stringNameCar, __METHOD__);
+            }
+        }
+
         return $this->render('update', [
             'debt' => $debt,
             'cars' => $cars

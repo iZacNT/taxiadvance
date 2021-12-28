@@ -72,7 +72,7 @@ class DebtFines extends \yii\db\ActiveRecord
             'date_pay' => 'Дата платежа',
             'stringDateReason' => 'Дата нарушения',
             'stringNameCar' => 'Автомобиль',
-            'stringDateDtp' => 'Дата нарушения',
+            'stringDateDtp' => 'Дата постановления',
             'stringDatePay' => 'Дата оплаты',
             'carFullName' => 'Автомобиль',
             'driverFullName' => 'Водитель'

@@ -320,7 +320,9 @@ class DriverController extends Controller
     public function actionSaveBilling()
     {
         $billingService = new DriverBillingService(Yii::$app->request->post());
-        return json_encode($billingService->saveAmount());
+        $res = $billingService->saveAmount();
+        Yii::debug($res, __METHOD__);
+        return json_encode($res);
     }
 
     public function actionVerifyBilling(): bool

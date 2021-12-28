@@ -1,5 +1,7 @@
 <?php
 
+use kartik\date\DatePicker;
+use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -18,15 +20,40 @@ use yii\widgets\ActiveForm;
         ],
     ]); ?>
 
-    <?= $form->field($model, 'type_day') ?>
+    <div class="row">
+        <div class="col-md-2">
+            <?php  echo $form->field($model, 'period')->dropDownList(\common\service\constants\Constants::getPeriod(),['prompt' => 'Выбирите период']) ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'startWorkDate')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Enter event time ...'],
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd M yyyy'
+                ]
+            ])->label("С даты") ?>
+        </div>
+        <div class="col-md-2">
+            <?= $form->field($model, 'endWorkDate')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Enter event time ...'],
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'dd M yyyy'
+                ]
+            ])->label("По дату") ?>
+        </div>
+    </div>
+    <?//= $form->field($model, 'type_day') ?>
 
-    <?= $form->field($model, 'plan') ?>
 
-    <?= $form->field($model, 'summ_driver') ?>
 
-    <?= $form->field($model, 'summ_park') ?>
+    <?//= $form->field($model, 'plan') ?>
 
-    <?= $form->field($model, 'percent_driver') ?>
+    <?//= $form->field($model, 'summ_driver') ?>
+
+    <?//= $form->field($model, 'summ_park') ?>
+
+    <?//= $form->field($model, 'percent_driver') ?>
 
     <?php // echo $form->field($model, 'percent_park') ?>
 
@@ -71,8 +98,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'verify') ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+        <?= Html::submitButton('Фильтровать', ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton('Сброс', ['class' => 'btn btn-outline-secondary', 'onclick' => 'window.location.replace(window.location.pathname);']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

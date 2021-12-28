@@ -25,11 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'name_part',
+            [
+                    'attribute' => 'name_part',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a($data->name_part,['parts/update', 'id' => $data->id], ['style' => 'font-size:18px; font-weight: bold']);
+                }
+            ],
             'mark',
             'sumPartsOnStock',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 

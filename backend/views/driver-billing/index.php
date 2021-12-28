@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="driver-billing-index">
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -55,6 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'format' => 'raw',
                                     'value' => function($data){
                                         return "<strong>Общая:</strong> ".Yii::$app->formatter->asCurrency($data->input_amount)."<br>".
+                                            "&ensp;<span style='font-size: 14px; font-weight: lighter'>+ Бонус:</span> ".Yii::$app->formatter->asCurrency($data->input_amount+$data->bonus_yandex)."<br>".
                                             "<strong>План:</strong> ".Yii::$app->formatter->asCurrency($data->plan);
                                     }
                                 ],
