@@ -340,8 +340,8 @@ class PrepareDriverService
     {
         $fullTimeShift = $shift->work_date + (9*60*60);
         \Yii::debug($shift->car_id, __METHOD__);
-        array_push($driverShift,[
-            'id_shift' =>$shift->id,
+        $driverShift[] = [
+            'id_shift' => $shift->id,
             'car_id' => $shift->car_id,
             'car_full_name' => $shift->carInfo->fullNameMark,
             'car_mark' => $shift->carInfo->mark,
@@ -356,7 +356,7 @@ class PrepareDriverService
             'status_shift' => DriverTabel::labelStatusShift()[$shift->status_day_shift],
             'date_close_shift' => $shift->date_close_day_shift,
             'comment' => $shift->comment_day,
-        ]);
+        ];
         return $driverShift;
     }
 
@@ -364,8 +364,8 @@ class PrepareDriverService
     {
         $fullTimeShift = $shift->work_date + (21*60*60);
 
-        array_push($driverShift,[
-            'id_shift' =>$shift->id,
+        $driverShift[] = [
+            'id_shift' => $shift->id,
             'car_id' => $shift->car_id,
             'car_full_name' => $shift->carInfo->fullNameMark,
             'car_mark' => $shift->carInfo->mark,
@@ -380,7 +380,7 @@ class PrepareDriverService
             'status_shift' => DriverTabel::labelStatusShift()[$shift->status_night_shift],
             'date_close_shift' => $shift->date_close_night_shift,
             'comment' => $shift->comment_night,
-        ]);
+        ];
 
         return $driverShift;
     }

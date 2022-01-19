@@ -11,6 +11,7 @@ use backend\models\Settings;
 use backend\models\DriverSearch;
 use common\models\User;
 use common\service\constants\Constants;
+use common\service\driver\BillingDeleteService;
 use common\service\driver\CalculationShiftParams;
 use common\service\driver\DriverAllShiftsService;
 use common\service\driver\DriverBillingService;
@@ -257,8 +258,6 @@ class DriverController extends Controller
     public function actionDelete(int $id): Response
     {
         $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
     }
 
     /**

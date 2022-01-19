@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\jui\DatePicker;
@@ -23,20 +24,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <div class="row">
+        <!-- ./col -->
         <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-                <div class="inner">
-                    <h3><?= Yii::$app->formatter->asCurrency($cashRegistry);?></h3>
-
-                    <p>В кассе. </p>
-                </div>
-                <div class="icon">
-                    <i class="fas fa-cash-register"></i>
-                </div>
-            </div>
-        </div>
-        <!-- ./col --> <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-success">
                 <div class="inner">
@@ -53,7 +42,15 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]);
+    $actionColimn = [];
+
+    if(User::isSuperUser() || User::isManager())
+        $actionColimn =  [[
+                'class' => 'yii\grid\ActionColumn',
+                'template' => '{delete}'
+            ]];
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -64,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             }
             return [];
         },
-        'columns' => [
+        'columns' => array_merge([
 
             [
                 'attribute' => 'type_cash',
@@ -102,13 +99,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]
                             ]),
                 'format' => 'datetime'
-           ],
+           ]
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template' => '{delete}'
-            ],
         ],
+           $actionColimn),
         'pager' => [
             'maxButtonCount' => 5,
             'options' => ['class' => 'pagination pagination-sm'],
@@ -123,7 +117,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 $js = <<< JS
-let cashRegister = $cashRegistry;
+let cashRegister = $cashRegistryWithDolg;
 JS;
 
 $this->registerJs( $js, $position = yii\web\View::POS_END, $key = null );

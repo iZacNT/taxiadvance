@@ -41,6 +41,11 @@ use yii\widgets\ActiveForm;
                 ]
             ])->label("По дату") ?>
         </div>
+        <div class="col-md-4">
+            <strong>В День: </strong><?= $calculation['dayWorks'];?><br>
+            <strong>В Ночь: </strong><?= $calculation['nightWorks'];?><br>
+            <strong>Сумма: </strong><?= Yii::$app->formatter->asCurrency($calculation['amount']);?>
+        </div>
     </div>
     <?//= $form->field($model, 'type_day') ?>
 

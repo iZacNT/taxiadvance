@@ -144,7 +144,7 @@ class CashRegisterController extends Controller
 
         $cashRegister = new CashRegister();
         $cashRegister->type_cash = \Yii::$app->request->post("type_cash");
-        $cashRegister->cash = $cashNal;
+        $cashRegister->cash = $cashInRegister;
         $cashRegister->comment = $this->getComment($cashNal, $amount);
         $cashRegister->date_time = time();
 

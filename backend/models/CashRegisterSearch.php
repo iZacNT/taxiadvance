@@ -47,6 +47,9 @@ class CashRegisterSearch extends CashRegister
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 50,
+            ],
             'sort'=> ['defaultOrder' => ['date_time' => SORT_DESC]],
         ]);
 

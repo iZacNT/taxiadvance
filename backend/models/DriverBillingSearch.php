@@ -2,9 +2,9 @@
 
 namespace backend\models;
 
+use common\service\constants\Constants;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\DriverBilling;
 
 /**
  * DriverBillingSearch represents the model behind the search form of `backend\models\DriverBilling`.
@@ -42,7 +42,7 @@ class DriverBillingSearch extends DriverBilling
      *
      * @param array $params
      *
-     * @return ActiveDataProvider
+     * @return array
      */
     public function search($params)
     {
@@ -111,6 +111,25 @@ class DriverBillingSearch extends DriverBilling
             $q->where('driver_tabel.work_date >= "' .$start. '" and driver_tabel.work_date < "'.$end.'"');
         }]);
 
-        return $dataProvider;
+        return ['dataProvider' =>$dataProvider, 'calculation' => $this->calculateAmount($query->all())];
+    }
+
+
+    public function calculateAmount($query)
+    {
+        $dayWorks = 0;
+        $nightWorks = 0;
+        $amount = 0;
+        foreach($query as $q){
+            if ($q->period == Constants::PERIOD_DAY){
+                $dayWorks += 1;
+            }
+            if ($q->period == Constants::PERIOD_NIGHT){
+                $nightWorks += 1;
+            }
+            $amount+=$q->summ_park;
+        }
+
+        return ['dayWorks' => $dayWorks, 'nightWorks' => $nightWorks, 'amount' => $amount];
     }
 }

@@ -87,6 +87,7 @@ class User extends ActiveRecord implements IdentityInterface
     const MANAGER = 2;
     const DRIVER = 3;
     const OPERATOR = 4;
+    const MECHANIC = 5;
 
     public function getStatusLabel(): array
     {
@@ -104,6 +105,7 @@ class User extends ActiveRecord implements IdentityInterface
             self::OPERATOR => 'Оператор',
             self::DRIVER => 'Водитель',
             self::SUPER_ADMIN => 'Супер пользователь',
+            self::MECHANIC => 'Механик'
         ];
     }
 
@@ -302,6 +304,16 @@ class User extends ActiveRecord implements IdentityInterface
     public static function isDriver(): bool
     {
         return self::DRIVER == Yii::$app->user->identity->role;
+    }
+
+    public static function isOperator(): bool
+    {
+        return self::OPERATOR == Yii::$app->user->identity->role;
+    }
+
+    public static function isMechanic(): bool
+    {
+        return self::MECHANIC == Yii::$app->user->identity->role;
     }
 
     /**

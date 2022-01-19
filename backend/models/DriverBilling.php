@@ -39,6 +39,9 @@ use common\models\User;
  * @property int $shift_id [int]  № Смены
  * @property int $verify [int]  Проверена
  * @property int $rolling [int]  Накат за смену
+ * @property int $deposit_id [int]  Депозит
+ * @property int $cash_registry_id [int]  ID Касса
+ * @property int $cash_registry_debt_id [int]  ID Долг в кассе
  */
 class DriverBilling extends \yii\db\ActiveRecord
 {
@@ -59,7 +62,9 @@ class DriverBilling extends \yii\db\ActiveRecord
             [['driver_id', 'car_id', 'date_billing', 'bonus_yandex', 'fuel', 'period', 'type_day', 'input_amount',
                 'depo', 'debt_from_shift', 'car_wash', 'car_fuel_summ', 'car_phone_summ', 'hours', 'billing',
                 'percent_park', 'percent_driver', 'summ_park', 'summ_driver', 'plan', 'compensations',
-                'shift_id', 'verify', 'rolling'], 'integer'],
+                'shift_id', 'verify', 'rolling', 'deposit_id', 'cash_registry_id', 'cash_registry_debt_id'], 'integer'],
+            [['deposit_id'], 'default', 'value' => 0],
+            [['cash_registry_debt_id'], 'default', 'value' => 0],
             [['rolling'], 'default', 'value' => 0],
             [['balance_yandex'], 'number'],
             [['car_mark'], 'string', 'max' => 255],

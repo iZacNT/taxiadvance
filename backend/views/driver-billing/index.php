@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="driver-billing-index">
 
     <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <?php echo $this->render('_search', ['model' => $searchModel, 'calculation' => $calculation]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

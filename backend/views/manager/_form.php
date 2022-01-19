@@ -19,7 +19,6 @@ use yii\widgets\ActiveForm;
 
             <?= $form->field($managerForm, 'phone')->textInput(['maxlength' => true]) ?>
 
-            <?= $form->field($managerForm, 'filial')->textInput() ?>
         </div>
         <div class="col-md-6">
             <?= $form->field($managerForm, 'username')->textInput(['maxlength' => true]) ?>

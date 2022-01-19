@@ -25,6 +25,5 @@ return [
                 'js' => ['chart.js/Chart.js']
             ],
         ]
-    ]
-
+    ],
 ];

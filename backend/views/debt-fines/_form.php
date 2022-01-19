@@ -23,22 +23,32 @@ use yii\widgets\ActiveForm;
 
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-4">
-                <?= $form->field($debtFines, 'stringDateReason')->widget(\yii\jui\DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'yyyy-MM-dd',
-                    'options' => [
-                        'placeholder' => Yii::$app->formatter->asDate(
-                            (!empty($debtFines->date_reason))? $debtFines->date_reason : time(), "yyyy-MM-dd"
-                        ),
-                        'class'=> 'form-control',
-                    ],
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '2020:2050',
-                    ],
-                ]) ?>
+            <div class="col-md-5">
+
+                <?php
+                echo $form->field($debtFines, 'stringDateReason')->widget(DateTimePicker::classname(), [
+                    'options' => ['placeholder' => 'Enter event time ...'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd hh:ss'
+                    ]
+                ]);
+                ?>
+<!--                --><?//= $form->field($debtFines, 'stringDateReason')->widget(\yii\jui\DatePicker::classname(), [
+//                    'language' => 'ru',
+//                    'dateFormat' => 'yyyy-MM-dd',
+//                    'options' => [
+//                        'placeholder' => Yii::$app->formatter->asDate(
+//                            (!empty($debtFines->date_reason))? $debtFines->date_reason : time(), "yyyy-MM-dd"
+//                        ),
+//                        'class'=> 'form-control',
+//                    ],
+//                    'clientOptions' => [
+//                        'changeMonth' => true,
+//                        'changeYear' => true,
+//                        'yearRange' => '2020:2050',
+//                    ],
+//                ]) ?>
             </div>
             <div class="col-md-4">
                 <?
@@ -61,7 +71,7 @@ use yii\widgets\ActiveForm;
                     ]);
                 ?>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <?
                     echo Html::button('Найти водителя', ['class' => 'btn btn-primary', 'style' => ' margin-top: 15%', 'id' => 'findDriver'])
                 ?>
@@ -86,7 +96,7 @@ use yii\widgets\ActiveForm;
                             'placeholder' => 'Водитель',
                         ],
 
-                    ]);
+                    ])->label("Водитель");
                 ?>
             </div>
             <div class="col-md-4">
@@ -119,16 +129,21 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($debtFines, 'geo_dtp')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?
-                echo $form->field($debtFines, 'stringDateDtp')->widget(DateTimePicker::classname(), [
-                    'options' => ['placeholder' => 'Enter event time ...'],
-                    'pluginOptions' => [
-                        'autoclose' => true,
-                        'todayBtn' => true,
-                        'format' => 'dd-mm-yyyy hh:ii'
-                    ]
-                ]);
-                ?>
+                <?= $form->field($debtFines, 'stringDateDtp')->widget(\yii\jui\DatePicker::classname(), [
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                    'options' => [
+                        'placeholder' => Yii::$app->formatter->asDate(
+                            (!empty($debtFines->date_reason))? $debtFines->date_reason : time(), "yyyy-MM-dd"
+                        ),
+                        'class'=> 'form-control',
+                    ],
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        'yearRange' => '2020:2050',
+                    ],
+                ]) ?>
             </div>
         </div>
 
@@ -181,8 +196,10 @@ $js = <<< JS
     
     function findDriverData()
     {
-        let date = new Date(verifyData($("#debtfines-stringdatereason").val(), 'Введите дату.'))/1000;
-        console.log(date);
+        let dateVerify = verifyData($("#debtfines-stringdatereason").val(), 'Введите дату.');
+        console.log(dateVerify)
+        let date = new Date(dateVerify)/1000;
+        console.log("..."+date);
         let carId = verifyData($("#debtfines-car_id").val(), 'Выберите автомобиль');
         console.log(carId);
         data = {

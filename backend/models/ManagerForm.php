@@ -60,7 +60,7 @@ class ManagerForm extends Model
     {
         return [
             'id' => '#',
-            'user_id' => 'User ID',
+            'user_id' => '# Пользователя',
             'first_name' => 'Имя',
             'last_name' => 'Фамилия',
             'password' => 'Пароль',

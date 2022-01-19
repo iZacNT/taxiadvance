@@ -43,11 +43,11 @@ class Manager extends \yii\db\ActiveRecord
     {
         return [
             'id' => '#',
-            'user_id' => 'User ID',
-            'first_name' => 'Name',
-            'last_name' => 'Last Name',
-            'phone' => 'Phone',
-            'filial' => 'Filial',
+            'user_id' => '№ Пользователя',
+            'first_name' => 'Имя',
+            'last_name' => 'Фамилия',
+            'phone' => 'Телефон',
+            'filial' => 'Филиал',
         ];
     }
 

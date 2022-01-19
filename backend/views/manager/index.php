@@ -25,19 +25,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'user_id',
             'first_name',
             'last_name',
             'phone',
-            'user.email',
+            'user.email:raw:E-mail',
             [
                 'attribute' => 'status',
+                'label' => 'Статус',
                 'value' => function($data){
                     return $data->statusArray[$data->user->status];
                 }
             ],
             [
                 'attribute' => 'role',
+                'label' => 'Роль    ',
                 'value' => function($data){
                     return $data->roleArray[$data->user->role];
                 }

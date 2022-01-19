@@ -43,12 +43,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'attribute' => 'adress',
-                'label' => 'Адрес',
+                'class' => \common\service\columns\DepositDebtColumn::className(),
+                'attribute' => 'deposit',
+                'label' => 'Деозит-Долг',
+                'format' => 'raw',
                 'value' => function($data){
-                        return $data->getAdress();
+
                 }
             ],
+//            [
+//                'attribute' => 'adress',
+//                'label' => 'Адрес',
+//                'value' => function($data){
+//                        return $data->getAdress();
+//                }
+//            ],
             //'commens:ntext',
             //'passport',
             //'date_of_issue',
@@ -59,9 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'corpus',
             //'appartament',
 
-            ['class' => 'yii\grid\ActionColumn',
-                'template' => '{delete}'
-            ],
+//            ['class' => 'yii\grid\ActionColumn',
+//                'template' => '{delete}'
+//            ],
         ],
         'pager' => [
             'maxButtonCount' => 5,

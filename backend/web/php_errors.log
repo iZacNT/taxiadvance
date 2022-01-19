@@ -1541,3 +1541,162 @@ $_SERVER = [
 [28-Dec-2021 09:59:01 Asia/Yekaterinburg] PHP Fatal error:  Constant expression contains invalid operations in /var/www/taxiadvance.loc/public_html/backend/models/DriverBillingSearch.php on line 16
 [28-Dec-2021 16:01:14 Asia/Yekaterinburg] PHP Fatal error:  Can't use function return value in write context in /var/www/taxiadvance.loc/public_html/backend/models/PartsSearch.php on line 53
 [28-Dec-2021 16:01:14 Asia/Yekaterinburg] PHP Fatal error:  Can't use function return value in write context in /var/www/taxiadvance.loc/public_html/backend/models/PartsSearch.php on line 53
+[29-Dec-2021 11:53:06 Asia/Yekaterinburg] An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverBillingController.php on line 42. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#3 [internal function]: yii\base\ErrorHandler->handleException()
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverBillingController.php on line 42. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_REFERER' => 'http://taxiadvance.loc/admin/',
+    'HTTP_COOKIE' => '_identity=f30307c752962cd98aa98de2c7663a4b1a53e47e76669d1a7350091e8a247823a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D; _csrf-frontend=61f80fc0d818d46a38d99e9283a1e25e382c56eff424a44a254958b6c9de7241a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22L-eIzTlknOh_lA4WG_GeeBL_Vz5haCEV%22%3B%7D; _csrf-backend=1c6623ba3650d9193119fe7792402447105894e3031bc73572e33e89c59728f4a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22WOGWcHflu0j54Jq7ktvY1xrRJKkwEtTG%22%3B%7D; advanced=80p91s0h2o483pen81gm9746de',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '57788',
+    'REDIRECT_URL' => '/admin/driver-billing/index',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/driver-billing/index',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1640760786.126,
+    'REQUEST_TIME' => 1640760786,
+]
+[29-Dec-2021 11:54:01 Asia/Yekaterinburg] An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverBillingController.php on line 42. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#3 [internal function]: yii\base\ErrorHandler->handleException()
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverBillingController.php on line 42. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_REFERER' => 'http://taxiadvance.loc/admin/',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_identity=f30307c752962cd98aa98de2c7663a4b1a53e47e76669d1a7350091e8a247823a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D; _csrf-frontend=61f80fc0d818d46a38d99e9283a1e25e382c56eff424a44a254958b6c9de7241a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22L-eIzTlknOh_lA4WG_GeeBL_Vz5haCEV%22%3B%7D; _csrf-backend=1c6623ba3650d9193119fe7792402447105894e3031bc73572e33e89c59728f4a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22WOGWcHflu0j54Jq7ktvY1xrRJKkwEtTG%22%3B%7D; advanced=80p91s0h2o483pen81gm9746de',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '57820',
+    'REDIRECT_URL' => '/admin/driver-billing/index',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/driver-billing/index',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1640760841.239,
+    'REQUEST_TIME' => 1640760841,
+]
+[29-Dec-2021 11:55:10 Asia/Yekaterinburg] An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverBillingController.php on line 42. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException()
+#3 [internal function]: yii\base\ErrorHandler->handleException()
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/taxiadvance.loc/public_html/backend/controllers/DriverBillingController.php on line 42. in /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/taxiadvance.loc/public_html/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/taxiadvance.loc/public_html/backend/web/index.php(18): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'REDIRECT_STATUS' => '200',
+    'HTTP_HOST' => 'taxiadvance.loc',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate',
+    'HTTP_REFERER' => 'http://taxiadvance.loc/admin/',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_COOKIE' => '_identity=f30307c752962cd98aa98de2c7663a4b1a53e47e76669d1a7350091e8a247823a%3A2%3A%7Bi%3A0%3Bs%3A9%3A%22_identity%22%3Bi%3A1%3Bs%3A46%3A%22%5B1%2C%22Z4ZatgnTWkU0QOVzXoMum0vzlYZc-1Z7%22%2C2592000%5D%22%3B%7D; _csrf-frontend=61f80fc0d818d46a38d99e9283a1e25e382c56eff424a44a254958b6c9de7241a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22L-eIzTlknOh_lA4WG_GeeBL_Vz5haCEV%22%3B%7D; _csrf-backend=1c6623ba3650d9193119fe7792402447105894e3031bc73572e33e89c59728f4a%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22WOGWcHflu0j54Jq7ktvY1xrRJKkwEtTG%22%3B%7D; advanced=80p91s0h2o483pen81gm9746de',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'max-age=0',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin',
+    'SERVER_SIGNATURE' => '<address>Apache/2.4.41 (Ubuntu) Server at taxiadvance.loc Port 80</address>
+',
+    'SERVER_SOFTWARE' => 'Apache/2.4.41 (Ubuntu)',
+    'SERVER_NAME' => 'taxiadvance.loc',
+    'SERVER_ADDR' => '127.0.0.1',
+    'SERVER_PORT' => '80',
+    'REMOTE_ADDR' => '127.0.0.1',
+    'DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'REQUEST_SCHEME' => 'http',
+    'CONTEXT_PREFIX' => '',
+    'CONTEXT_DOCUMENT_ROOT' => '/var/www/taxiadvance.loc/public_html',
+    'SERVER_ADMIN' => 'webmaster@localhost',
+    'SCRIPT_FILENAME' => '/var/www/taxiadvance.loc/public_html/backend/web/index.php',
+    'REMOTE_PORT' => '57824',
+    'REDIRECT_URL' => '/admin/driver-billing/index',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => '',
+    'REQUEST_URI' => '/admin/driver-billing/index',
+    'SCRIPT_NAME' => '/backend/web/index.php',
+    'PHP_SELF' => '/backend/web/index.php',
+    'REQUEST_TIME_FLOAT' => 1640760910.206,
+    'REQUEST_TIME' => 1640760910,
+]
+[18-Jan-2022 13:51:07 Asia/Karachi] PHP Parse error:  syntax error, unexpected '=', expecting ']' in /var/www/taxiadvance.loc/public_html/common/config/main-local.php on line 23

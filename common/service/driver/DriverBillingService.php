@@ -7,8 +7,9 @@ use backend\models\DriverBilling;
 use backend\models\DriverTabel;
 use backend\models\Deposit;
 use backend\models\Driver;
+use common\service\constants\Constants;
+use Exception;
 use Yii;
-use yii\db\Exception;
 
 class DriverBillingService
 {
@@ -38,6 +39,10 @@ class DriverBillingService
     private $rolling;
     private $shift_id;
 
+    private $depositId;
+    private $cashRegistryID;
+    private $cashRegistryDebtID;
+
     public function __construct($requestPost)
     {
         $this->driverId = $requestPost['driverId'];
@@ -66,9 +71,7 @@ class DriverBillingService
         $this->shift_id = $requestPost['shift_id'];
     }
 
-    /**
-     * @throws \yii\base\InvalidConfigException
-     */
+
     public function saveAmount(): array
     {
         $searchShift = DriverBilling::find()
@@ -81,21 +84,22 @@ class DriverBillingService
             try {
                 $billing = $this->saveDriverBilling();
                 Yii::debug("Сохранение Биллинга: Успешно.", __METHOD__);
-                array_push($resultAnswer, [
+                $resultAnswer[] = [
                     'result' => 'true',
                     'message' => 'Сохранение Биллинга: Успешно.'
-                ]);
-            }catch (\Exception $exception){
+                ];
+            }catch (Exception $exception){
                 Yii::debug("Сохранение Биллинга: Успешно. ".$exception->getMessage(), __METHOD__);
-                array_push($resultAnswer, [
+                $resultAnswer[] = [
                     'result' => 'false',
                     'message' => 'Сохранение Биллинга: Не успешно!'
-                ]);
+                ];
             }
 
 
             $driver = Driver::find()->where(['id' => $this->driverId])->one();
             $this->saveDriverShiftTime($driver);
+
             if(!empty($this->depo)){
                 try {
                     $this->saveDeposit(
@@ -105,33 +109,35 @@ class DriverBillingService
                         "Внесение от смены ".Yii::$app->formatter->asDatetime(time())
                     );
                     Yii::debug("Сохранение Депозита: ".$this->depo, __METHOD__);
-                    array_push($resultAnswer, [
+                    $resultAnswer[] = [
                         'result' => 'true',
-                        'message' => 'Депозит сохранен: '.$this->depo."руб."
-                    ]);
-                }catch (\Exception $exception){
+                        'message' => 'Депозит сохранен: ' . $this->depo . "руб."
+                    ];
+                }catch (Exception $exception){
                     Yii::debug("Депозит не сохранен! ".$exception->getMessage(), __METHOD__);
-                    array_push($resultAnswer, [
+                    $resultAnswer[] = [
                         'result' => 'false',
                         'message' => 'Депозит не сохранен сохранен!'
-                    ]);
+                    ];
                 }
+            }else{
+                $this->depositId = 0;
             }
 
             $driverShift = DriverTabel::find()->where(['id' => $this->shift_id])->one();
             if ($driverShift){
                 try {
                     $this->saveShiftData($driverShift, $billing->id);
-                    array_push($resultAnswer, [
+                    $resultAnswer[] = [
                         'result' => 'true',
                         'message' => 'Данные в Табеле сохранены!'
-                    ]);
-                }catch (\Exception $exception){
+                    ];
+                }catch (Exception $exception){
                     Yii::debug('Данные в Табеле не сохранены! '.$exception->getMessage(), __METHOD__);
-                    array_push($resultAnswer, [
+                    $resultAnswer[] = [
                         'result' => 'false',
-                        'message' => 'Данные в Табеле не сохранены! '.$exception->getMessage()
-                    ]);
+                        'message' => 'Данные в Табеле не сохранены! ' . $exception->getMessage()
+                    ];
                 }
 
             }
@@ -144,16 +150,16 @@ class DriverBillingService
                     ($this->isPrihod()) ? $this->billing : $this->billing * (-1),
                     "Расчет водителя: ".$driver->fullName
                 );
-                array_push($resultAnswer, [
+                $resultAnswer[] = [
                     'result' => 'true',
                     'message' => 'Данные в Кассе сохранены! Приход/Расход.'
-                ]);
-            }catch(\Exception $exception){
+                ];
+            }catch(Exception $exception){
                 Yii::debug('Данные в Кассе не сохранены! '.$exception->getMessage(), __METHOD__);
-                array_push($resultAnswer, [
+                $resultAnswer[] = [
                     'result' => 'false',
                     'message' => 'Данные в Кассе не сохранены!'
-                ]);
+                ];
             }
 
             if ($this->debtFromShift > 0 ) {
@@ -165,26 +171,33 @@ class DriverBillingService
                         $this->debtFromShift,
                         "Водитель: ".$driver->fullName
                     );
-                    array_push($resultAnswer, [
+                    $resultAnswer[] = [
                         'result' => 'true',
                         'message' => 'Данные в Кассе сохранены! Долг по смене.'
-                    ]);
-                }catch (\Exception $exception){
+                    ];
+                }catch (Exception $exception){
                     Yii::debug('Данные в Кассе не сохранены! Долг по смене. '.$exception->getMessage(), __METHOD__);
-                    array_push($resultAnswer, [
+                    $resultAnswer[] = [
                         'result' => 'false',
                         'message' => 'Данные в Кассе не сохранены! Долг по смене.'
-                    ]);
+                    ];
                 }
 
             }
 
+            $this->saveResultDataID(
+                $billing,
+                $this->depositId,
+                $this->cashRegistryID,
+                $this->cashRegistryDebtID
+            );
+
         }else{
             Yii::debug('Расчет уже произведен!', __METHOD__);
-            array_push($resultAnswer, [
+            $resultAnswer[] = [
                 'result' => 'false',
                 'message' => 'Смена уже сохранена, у Вас нет прав для ее изменения!'
-            ]);
+            ];
         }
 
         return $resultAnswer;
@@ -229,7 +242,18 @@ class DriverBillingService
         $cashRegistry->type_cash = $type;
         $cashRegistry->cash = $cash;
         $cashRegistry->comment = $comment;
-        Yii::debug("Сохранение В кассу: ".$cashRegistry->save()."; Тип: ".CashRegister::getTypeCash()[$type], __METHOD__);
+        $cashRegistry->save();
+        $cashRegistry->refresh();
+
+        if ($type == CashRegister::TYPE_DOLG_PO_SMENE){
+            $this->cashRegistryDebtID = $cashRegistry->id;
+        }else{
+            $this->cashRegistryID = $cashRegistry->id;
+            $this->cashRegistryDebtID = 0;
+
+        }
+        Yii::debug("Сохранение В кассу. Тип: ".CashRegister::getTypeCash()[$type], __METHOD__);
+
     }
 
     public function isPrihod(): bool
@@ -244,18 +268,20 @@ class DriverBillingService
 
     }
 
-    private function saveDeposit(int $driverid,int $depo,int $time,string $comment): bool
+    private function saveDeposit(int $driverid,int $depo,int $time,string $comment): void
     {
         $deposit = new Deposit();
         $deposit->driver_id = $driverid;
         $deposit->contributed = $depo;
         $deposit->created_at = $time;
         $deposit->comment = $comment;
+        $deposit->save();
+        $deposit->refresh();
+        $this->depositId = $deposit->id;
 
-        return $deposit->save();
     }
 
-    private function saveShiftData(DriverTabel $driverShift,int $idBilling):bool
+    private function saveShiftData(DriverTabel $driverShift,int $idBilling): void
     {
         if($driverShift->driver_id_day == $this->driverId) {
             $driverShift->status_day_shift = $driverShift::STATUS_SHIFT_CLOSE;
@@ -263,7 +289,7 @@ class DriverBillingService
             $driverShift->date_close_day_shift = time();
 
             Yii::debug("Дневная смена", __METHOD__);
-            return $driverShift->save();
+
         }
         if($driverShift->driver_id_night == $this->driverId) {
             $driverShift->status_night_shift = $driverShift::STATUS_SHIFT_CLOSE;
@@ -271,8 +297,25 @@ class DriverBillingService
             $driverShift->date_close_night_shift = time();
 
             Yii::debug("Ночная смена", __METHOD__);
-            return $driverShift->save();
         }
-        return false;
+
+        $driverShift->save();
+        $this->tabelShiftID = $driverShift->id;
+
     }
+
+    private function saveResultDataID(DriverBilling $billing,int $depositId ,int $cashRegistryID,int $cashRegistryDebtID):void
+    {
+        $billing->deposit_id = $depositId;
+        $billing->cash_registry_id = $cashRegistryID;
+        if ($cashRegistryDebtID) $billing->cash_registry_debt_id = $cashRegistryDebtID;
+
+        Yii::debug([
+            'Deposit ID' => $billing->deposit_id,
+            'Cash Registry ID' => $billing->cash_registry_id,
+            'Cash Registry Debt ID' => $billing->cash_registry_debt_id
+        ],__METHOD__);
+        $billing->save();
+    }
+
 }

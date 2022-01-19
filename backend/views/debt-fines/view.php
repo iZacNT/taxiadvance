@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }],
             'comment:ntext',
             'carInfo.fullNameMark',
-            'date_reason:date',
+            'date_reason:datetime',
             'regulation',
             'geo_dtp',
             'date_dtp:date',

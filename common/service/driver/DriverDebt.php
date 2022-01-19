@@ -49,6 +49,7 @@ class DriverDebt
             $debt->driver_id = $this->idDriver;
 
             if (!empty($debt->stringDateReason)) {
+//                $debt->date_reason = strtotime($debt->stringDateReason);
                 $debt->date_reason = Yii::$app->formatter->asTimestamp($debt->stringDateReason);
             }
             if (!empty($debt->stringDateDtp)) {

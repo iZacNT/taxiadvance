@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use backend\models\DriverBilling;
 use backend\models\DriverBillingSearch;
+use common\service\driver\BillingDeleteService;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,11 +39,12 @@ class DriverBillingController extends Controller
     public function actionIndex()
     {
         $searchModel = new DriverBillingSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
+        $result = $searchModel->search($this->request->queryParams);
+        $dataProvider = $result['dataProvider'];
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'calculation' => $result['calculation']
         ]);
     }
 
@@ -88,7 +90,8 @@ class DriverBillingController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+//        $this->findModel($id)->delete();
+        (new BillingDeleteService())->deleteBilling($id);
 
         return $this->redirect(['index']);
     }
