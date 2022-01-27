@@ -5,6 +5,7 @@ namespace common\service\driver;
 
 
 use backend\models\TransactionTypes;
+use yii\helpers\ArrayHelper;
 
 class PrepareTransactionService
 {
@@ -31,12 +32,10 @@ class PrepareTransactionService
     public function getAmountTransactionType(): array
     {
         $types = $this->getNeedType();
-        \Yii::debug(serialize($types));
         $arrSumType = [];
         foreach ($types as $type){
-            array_push($arrSumType, ['name' => $type->type, 'amount' => $this->getSummationByType($type->type)]);
+            $arrSumType[] = ['name' => $type->type, 'amount' => $this->getSummationByType($type->type)];
         }
-        \Yii::debug($arrSumType,__METHOD__);
 
         return $arrSumType;
     }
@@ -54,7 +53,6 @@ class PrepareTransactionService
                 $amount += $transaction['amount'];
             }
         }
-        \Yii::debug($type." = ".$amount);
 
         return $amount;
     }
@@ -69,7 +67,6 @@ class PrepareTransactionService
         foreach($this->getAmountTransactionType() as $arr){
             $amount += $arr['amount'];
         }
-        \Yii::debug("Сумма всех типов транзакций: ".$amount, __METHOD__);
         return $amount;
     }
 
@@ -104,7 +101,7 @@ class PrepareTransactionService
         {
             $sum = $this->getSummationByType($item['type']);
             $item['amount'] = $sum;
-            array_push($withAmount, $item);
+            $withAmount[] = $item;
         }
 
         return  $withAmount;
@@ -117,12 +114,14 @@ class PrepareTransactionService
     public function amountAllCategoriesInTransaction(): array
     {
         $categories = $this->getAllCategoryTransaction();
-        \Yii::debug($categories,__METHOD__);
         $typeByCategories = [];
         foreach($categories as $category){
-            array_push($typeByCategories,['group' => $category['group_type'], 'name_group' => $category['name_group'], 'withAmount' => $this->getAllTypesByCategory($category['group_type'])]);
+            $typeByCategories[] =
+                [
+                    'group' => $category['group_type'],
+                    'name_group' => $category['name_group'],
+                    'withAmount' => $this->getAllTypesByCategory($category['group_type'])];
         }
-        \Yii::debug($typeByCategories,__METHOD__);
 
         return $typeByCategories;
     }
@@ -131,6 +130,7 @@ class PrepareTransactionService
     {
         $html = '<div class="col-md-6">';
         $allCategoriesWithAmount = $this->amountAllCategoriesInTransaction();
+
         foreach ($allCategoriesWithAmount as $item)
         {
             $html .= '<div class="col-md-12"><div class="card card-widget widget-user-2">
@@ -174,29 +174,32 @@ class PrepareTransactionService
 
     public function prepareTableTransaction()
     {
-        $html = '<div class="col-md-6"><h3>Все транзакции за период:</h3><table class="table table-bordered">
+
+        $html = '<div class="col-md-6"><h3>Все транзакции за период:</h3><table class="table table-bordered" style="font-size: small">
                   <thead>
                     <tr>
-                      <th style="width: 10px">Адрес</th>
-                      <th>Тип</th>
+                      <th>Адрес</th>
                       <th>Название</th>
-                      <th style="width: 40px">Сумма</th>
+                      <th style="width: 100px">Сумма</th>
                     </tr>
                   </thead>
                   <tbody>';
         if ($this->transactions){
+
+            $styleRow = '';
             foreach($this->transactions as $transaction){
                 $html .='<tr>
                           <td>'.$transaction['description'].'</td>
-                          <td>'.$transaction['category_id'].'</td>
                           <td>
+                          '.$transaction['category_id'].'
+                          <br>
                             '.$transaction['category_name'].'
                           </td>
                           <td>'.\Yii::$app->formatter->asCurrency($transaction['amount']).'</td>
                         </tr>';
             }
         }else{
-            $html .= '<tr><td colspan="4">Ни чего не найдено.</td></tr>';
+            $html .= '<tr><td colspan="3">Ни чего не найдено.</td></tr>';
         }
         $html .= '</tbody>
                 </table></div>';

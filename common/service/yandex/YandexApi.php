@@ -52,12 +52,16 @@ class YandexApi
                     "query" => $this->query->getParams(),
                 ])
                 ->send();
+            usleep(600000);
 //
 //            var_dump($response->data);
 //            die;
             if ($response->isOk) {
+                \Yii::debug($response->getData(), __METHOD__);
                 return $response->getData();
             }
+        \Yii::debug($response, __METHOD__);
 
-        }
+
+    }
 }

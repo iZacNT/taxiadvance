@@ -191,13 +191,15 @@ $js = <<< JS
 
     function verifyData(value, message)
     {
-        return Boolean(value)?  value : alert(message);
+        var splitString = value.split(' ');
+        return Boolean(splitString[0])?  splitString[0] : alert(message);
     }
     
     function findDriverData()
     {
         let dateVerify = verifyData($("#debtfines-stringdatereason").val(), 'Введите дату.');
         console.log(dateVerify)
+        if (Boolean(dateVerify)){
         let date = new Date(dateVerify)/1000;
         console.log("..."+date);
         let carId = verifyData($("#debtfines-car_id").val(), 'Выберите автомобиль');
@@ -207,6 +209,7 @@ $js = <<< JS
             carId: carId
         }
         sendAjax('search-driver-by-date-and-car',data);
+        }
     }
     
     function sendAjax(url,data)

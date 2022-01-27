@@ -29,22 +29,31 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($debt, 'back')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-4">
+                <?php
+                echo $form->field($debt, 'stringDateReason')->widget(DateTimePicker::classname(), [
+                    'options' => ['placeholder' => 'Enter event time ...'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'format' => 'yyyy-mm-dd hh:ss'
+                    ]
+                ]);
+                ?>
 
-                <?= $form->field($debt, 'stringDateReason')->widget(\yii\jui\DatePicker::classname(), [
-                    'language' => 'ru',
-                    'dateFormat' => 'yyyy-MM-dd',
-                    'options' => [
-                        'placeholder' => Yii::$app->formatter->asDate(
-                            (!empty($debt->date_reason))? $debt->date_reason : time(), "yyyy-MM-dd"
-                        ),
-                        'class'=> 'form-control',
-                    ],
-                    'clientOptions' => [
-                        'changeMonth' => true,
-                        'changeYear' => true,
-                        'yearRange' => '2020:2050',
-                    ],
-                ]) ?>
+<!--                --><?//= $form->field($debt, 'stringDateReason')->widget(\yii\jui\DatePicker::classname(), [
+//                    'language' => 'ru',
+//                    'dateFormat' => 'yyyy-MM-dd',
+//                    'options' => [
+//                        'placeholder' => Yii::$app->formatter->asDate(
+//                            (!empty($debt->date_reason))? $debt->date_reason : time(), "yyyy-MM-dd"
+//                        ),
+//                        'class'=> 'form-control',
+//                    ],
+//                    'clientOptions' => [
+//                        'changeMonth' => true,
+//                        'changeYear' => true,
+//                        'yearRange' => '2020:2050',
+//                    ],
+//                ]) ?>
             </div>
         </div>
 
@@ -92,16 +101,21 @@ use yii\widgets\ActiveForm;
                 <?= $form->field($debt, 'geo_dtp')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-md-6">
-                <?
-                echo $form->field($debt, 'stringDateDtp')->widget(DateTimePicker::classname(), [
-                    'options' => ['placeholder' => 'Enter event time ...'],
-                    'pluginOptions' => [
-                        'autoclose' => true,
-                        'todayBtn' => true,
-                        'format' => 'dd-mm-yyyy hh:ii'
-                    ]
-                ]);
-                ?>
+                <?= $form->field($debt, 'stringDateDtp')->widget(\yii\jui\DatePicker::classname(), [
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                    'options' => [
+                        'placeholder' => Yii::$app->formatter->asDate(
+                            (!empty($debtFines->date_reason))? $debtFines->date_reason : time(), "yyyy-MM-dd"
+                        ),
+                        'class'=> 'form-control',
+                    ],
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        'yearRange' => '2020:2050',
+                    ],
+                ]) ?>
             </div>
         </div>
         <div class="row">
