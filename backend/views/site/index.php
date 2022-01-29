@@ -47,7 +47,7 @@ $statistic = $widGetData['statistic'];
             </div>
             <!-- /.widget-user -->
         </div>
-
+        <?= $widGetData['cashRegistry'];?>
         <div class="col-md-6">
             <!-- AREA CHART -->
             <div class="card card-primary">

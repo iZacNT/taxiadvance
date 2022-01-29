@@ -105,11 +105,21 @@ class CashRegister extends \yii\db\ActiveRecord
                 $result -= $row->cash;
             }
         }
+        Yii::debug("Сумма: ".$result);
         return $result;
     }
 
-    public function isCloseCashRegistry()
+    public function isCloseCashRegistry(): bool
     {
         return $this->type_cash == self::TYPE_CLOSED;
+    }
+
+    public function getLastCloseCashRegistryData(): array
+    {
+        return self::find()
+            ->where(['type_cash' => self::TYPE_CLOSED])
+            ->limit(4)
+            ->orderBy(['date_time' => SORT_DESC])
+            ->all();
     }
 }

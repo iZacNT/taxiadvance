@@ -6,6 +6,7 @@ use backend\models\CashRegister;
 use common\models\User;
 use common\models\LoginForm;
 use common\service\cars\CarsReportService;
+use common\service\cash_registry\CashRegistryService;
 use common\service\driverTabel\StatistycDriverTabel;
 use Yii;
 use yii\filters\VerbFilter;
@@ -67,11 +68,13 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $carsReportService = new CarsReportService();
+        $statisticCasheRegistry = new CashRegistryService();
         $statistic =  (new StatistycDriverTabel())->generateStatisticByDayForDashboard(Yii::$app->formatter->asTimestamp(date('Y-m-d')));
 
         $widGetData = [
             'donutChatAllCars' => $carsReportService->getStatusesCars(),
-            'statistic' => $statistic
+            'statistic' => $statistic,
+            'cashRegistry' => $statisticCasheRegistry->getStatisticCashRegistry()
         ];
 
         return $this->render('index',[
