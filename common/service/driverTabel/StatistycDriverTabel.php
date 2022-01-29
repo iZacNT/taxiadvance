@@ -4,8 +4,10 @@ namespace common\service\driverTabel;
 
 use backend\models\CarRepairs;
 use backend\models\CarSharing;
+use backend\models\DriverBilling;
 use backend\models\DriverTabel;
 use backend\models\Cars;
+use common\service\driver\BillingDeleteService;
 use yii\helpers\ArrayHelper;
 
 class StatistycDriverTabel
@@ -46,7 +48,6 @@ class StatistycDriverTabel
             ->asArray()
             ->all();
         $driverAtShift = $this->driverAtShift($tabel);
-        \Yii::debug($driverAtShift, __METHOD__);
 
         $driverGetOnFuelDay = $this->driverGetOnFuel($driverAtShift['day_drivers']);
         $driverGetOnFuelNight = $this->driverGetOnFuel($driverAtShift['night_drivers']);
@@ -305,7 +306,6 @@ class StatistycDriverTabel
         $result['inRepair'] = $this->inRepair($car, $date, $result['inRepair']);
         $result['inShared'] = $this->inShared($car, $date, $result['inShared']);
         $mergeCars = array_merge($result['inRepair'], $result['inShared']);
-        \Yii::debug($mergeCars, __METHOD__);
         $result['inEmpty'] = $this->inEmpty($car, $mergeCars, $result['inEmpty']);
 
         return $result;
@@ -445,7 +445,6 @@ class StatistycDriverTabel
 
     private function prepareHtmlForDashboard($driverData, $carsData): array
     {
-        \Yii::debug($carsData);
         return [
             'driversData' => $this->prepareHtmlForDashboardDrivers($driverData),
             'carsData' => $this->prepareHtmlForDashboardCars($carsData)
@@ -500,6 +499,81 @@ class StatistycDriverTabel
                 <td align="center">'.count($carsData["inShared"]["dayShared"]).'</td>
                 <td align="center">'.count($carsData["inShared"]["nightShared"]).'</td>
             </tr>';
+    }
+
+    /**
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getStatisticCurrentMonth(): array
+    {
+        $driverByDay = $this->getDriversByDay();
+        return $this->preparedArrForBarChart($driverByDay);
+    }
+
+    public function getDriversByDay(): array
+    {
+        $firstDayCurrentMonth = \Yii::$app->formatter->asTimestamp(date('Y-m-01'));
+        $lastDayCurrentMonth = \Yii::$app->formatter->asTimestamp(date('Y-m-t'));
+        $arrDriverAtShiftByDate = [];
+        for($i=$firstDayCurrentMonth; $i<=$lastDayCurrentMonth; $i+=(24*60*60)){
+            $beginDay = $i;
+            $endDay = $i+(24*60*60);
+
+            $tabel = DriverTabel::find()
+                ->where(['>=','work_date', $beginDay])
+                ->andWhere(['<', 'work_date', $endDay])
+                ->asArray()
+                ->all();
+
+            $summFromBilling = $this->getSummFromBilling($this->driverAtShift($tabel));
+
+            $arrDriverAtShiftByDate[] = [ $i => $this->driverAtShift($tabel), 'sumFromBillingAtDay' => $summFromBilling];
+        }
+        return $arrDriverAtShiftByDate;
+    }
+
+    private function getSummFromBilling(array $driverAtShift): array
+    {
+        $sumDay = 0;
+        $sumNight = 0;
+        if($driverAtShift['count_day']){
+            foreach($driverAtShift['day_drivers'] as $driver){
+                $sum = DriverBilling::find()->where(['id' => $driver['billing']])->one();
+                $sumDay+= ($sum) ? $sum->summ_park : 0;
+            }
+        }
+        if($driverAtShift['count_night']){
+            foreach($driverAtShift['night_drivers'] as $driver){
+                $sum = DriverBilling::find()->where(['id' => $driver['billing']])->one();
+                $sumNight+=($sum) ? $sum->summ_park : 0;
+            }
+        }
+
+        return ['sumDay' => $sumDay, 'sumNight' => $sumNight];
+    }
+
+    private function preparedArrForBarChart(array $driverByDay): array
+    {
+        $day = 0;
+        $countDay = [];
+        $dayBarChart = [];
+        $nightBarChart = [];
+        $sumByDayBarChart = [];
+\Yii::debug("Вотэто");
+\Yii::debug(count($driverByDay));
+        for($i=0; $i<count($driverByDay); $i++){
+            $countDay[] = $i+1  ;
+            $dayBarChart[] = $driverByDay[$i]['sumFromBillingAtDay']['sumDay'];
+            $nightBarChart[] = $driverByDay[$i]['sumFromBillingAtDay']['sumNight'];
+            $sumByDayBarChart[] = $driverByDay[$i]['sumFromBillingAtDay']['sumDay']+$driverByDay[$i]['sumFromBillingAtDay']['sumNight'];
+        }
+        \Yii::debug($countDay);
+        return [
+            'countDay' =>  $countDay,
+            'dayBarCart' => $dayBarChart,
+            'nightBarChart' => $nightBarChart,
+            'sumByDayBarChart' => $sumByDayBarChart
+        ];
     }
 
 }

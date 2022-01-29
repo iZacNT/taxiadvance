@@ -64,17 +64,21 @@ class SiteController extends Controller
      * Displays homepage.
      *
      * @return string
+     * @throws \yii\base\InvalidConfigException
      */
     public function actionIndex()
     {
         $carsReportService = new CarsReportService();
         $statisticCasheRegistry = new CashRegistryService();
-        $statistic =  (new StatistycDriverTabel())->generateStatisticByDayForDashboard(Yii::$app->formatter->asTimestamp(date('Y-m-d')));
-
+        $statisticDriverTabel = new StatistycDriverTabel();
+        $statistic =  $statisticDriverTabel->generateStatisticByDayForDashboard(Yii::$app->formatter->asTimestamp(date('Y-m-d')));
+        $ddd = $statisticDriverTabel->getStatisticCurrentMonth();
+        Yii::debug($ddd);
         $widGetData = [
             'donutChatAllCars' => $carsReportService->getStatusesCars(),
             'statistic' => $statistic,
-            'cashRegistry' => $statisticCasheRegistry->getStatisticCashRegistry()
+            'cashRegistry' => $statisticCasheRegistry->getStatisticCashRegistry(),
+            'statisticCashByDay' => $ddd
         ];
 
         return $this->render('index',[

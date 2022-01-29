@@ -4,6 +4,12 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 $donutChatAll = $widGetData['donutChatAllCars']['allCars'];
 $donutChatRepair = count($widGetData['donutChatAllCars']['inRepair']);
 $statistic = $widGetData['statistic'];
+$daysLabelsForBarChart = json_encode($widGetData['statisticCashByDay']['countDay']);
+Yii::debug("Отоно");
+Yii::debug($daysLabelsForBarChart);
+$dayDataForBarChart = json_encode($widGetData['statisticCashByDay']['dayBarCart']);
+$nightDataForBarChart = json_encode($widGetData['statisticCashByDay']['nightBarChart']);
+$sumDataForBarChart = json_encode($widGetData['statisticCashByDay']['sumByDayBarChart']);
 ?>
 <div class="container-fluid">
     <div class="row">
@@ -48,92 +54,13 @@ $statistic = $widGetData['statistic'];
             <!-- /.widget-user -->
         </div>
         <?= $widGetData['cashRegistry'];?>
-        <div class="col-md-6">
-            <!-- AREA CHART -->
-            <div class="card card-primary">
-                <div class="card-header">
-                    <h3 class="card-title">Area Chart</h3>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="areaChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- DONUT CHART -->
-            <div class="card card-danger">
-                <div class="card-header">
-                    <h3 class="card-title">Автомобилей: Общее: <?= $donutChatAll?>, В ремонте <?= $donutChatRepair?> </h3>
-                </div>
-                <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-            <!-- PIE CHART -->
-            <div class="card card-danger">
-                <div class="card-header">
-                    <h3 class="card-title">Pie Chart</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                    <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-
-        </div>
-        <div class="col-md-6">
-            <!-- LINE CHART -->
-            <div class="card card-info">
-                <div class="card-header">
-                    <h3 class="card-title">Line Chart</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
+        <div class="col-md-12">
 
             <!-- BAR CHART -->
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Bar Chart</h3>
+                    <h3 class="card-title">Суммы парка по периодам за текущий месяц в рублях:</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -153,10 +80,14 @@ $statistic = $widGetData['statistic'];
             </div>
             <!-- /.card -->
 
-            <!-- STACKED BAR CHART -->
+        </div>
+
+        <div class="col-md-12">
+
+            <!-- BAR CHART -->
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Stacked Bar Chart</h3>
+                    <h3 class="card-title">Общая суммы парка за текущий месяц в рублях:</h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -169,7 +100,7 @@ $statistic = $widGetData['statistic'];
                 </div>
                 <div class="card-body">
                     <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                        <canvas id="stackedBarChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
+                        <canvas id="barChartSumm" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -182,9 +113,11 @@ $statistic = $widGetData['statistic'];
 
 
 <?php
+Yii::debug(gettype($daysLabelsForBarChart),__METHOD__);
 $jsRaschet = <<< JS
 let workCars = $donutChatAll-$donutChatRepair;
 let inRepair = $donutChatRepair;
+let daysLabelsForBarChart = $daysLabelsForBarChart;
   $(function () {
     /* ChartJS
      * -------
@@ -195,14 +128,11 @@ let inRepair = $donutChatRepair;
     //- AREA CHART -
     //--------------
 
-    // Get context with jQuery - using jQuery's .get() method.
-    var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-    var areaChartData = {
-      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+     var areaChartData = {
+      labels  : daysLabelsForBarChart,
       datasets: [
         {
-          label               : 'Digital Goods',
+          label               : 'Дневная',
           backgroundColor     : 'rgba(60,141,188,0.9)',
           borderColor         : 'rgba(60,141,188,0.8)',
           pointRadius          : false,
@@ -210,10 +140,10 @@ let inRepair = $donutChatRepair;
           pointStrokeColor    : 'rgba(60,141,188,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : [28, 48, 40, 19, 86, 27, 90]
+          data                : $dayDataForBarChart
         },
         {
-          label               : 'Electronics',
+          label               : 'Ночная',
           backgroundColor     : 'rgba(210, 214, 222, 1)',
           borderColor         : 'rgba(210, 214, 222, 1)',
           pointRadius         : false,
@@ -221,10 +151,28 @@ let inRepair = $donutChatRepair;
           pointStrokeColor    : '#c1c7d1',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [65, 59, 80, 81, 56, 55, 40]
+          data                : $nightDataForBarChart
         },
       ]
     }
+    
+    var areaChartDataSum = {
+      labels  : daysLabelsForBarChart,
+      datasets: [
+        {
+          label               : 'Общая сумма',
+          backgroundColor     : 'rgba(60,141,188,0.9)',
+          borderColor         : 'rgba(60,141,188,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(60,141,188,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(60,141,188,1)',
+          data                : $sumDataForBarChart
+        },
+      ]
+    }
+    
 
     var areaChartOptions = {
       maintainAspectRatio : false,
@@ -245,77 +193,7 @@ let inRepair = $donutChatRepair;
         }]
       }
     }
-
-    // This will get the first returned node in the jQuery collection.
-    new Chart(areaChartCanvas, {
-      type: 'line',
-      data: areaChartData,
-      options: areaChartOptions
-    })
-
-    //-------------
-    //- LINE CHART -
-    //--------------
-    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
-    var lineChartOptions = $.extend(true, {}, areaChartOptions)
-    var lineChartData = $.extend(true, {}, areaChartData)
-    lineChartData.datasets[0].fill = false;
-    lineChartData.datasets[1].fill = false;
-    lineChartOptions.datasetFill = false
-
-    var lineChart = new Chart(lineChartCanvas, {
-      type: 'line',
-      data: lineChartData,
-      options: lineChartOptions
-    })
-
-    //-------------
-    //- DONUT CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
-    var donutData        = {
-      labels: [
-          'Работающих',
-          'В Ремонте',
-      ],
-      datasets: [
-        {
-          data: [workCars, inRepair],
-          backgroundColor : ['#00a65a', '#f56954'],
-        }
-      ]
-    }
-    var donutOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(donutChartCanvas, {
-      type: 'doughnut',
-      data: donutData,
-      options: donutOptions
-    })
-
-    //-------------
-    //- PIE CHART -
-    //-------------
-    // Get context with jQuery - using jQuery's .get() method.
-    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
-    var pieData        = donutData;
-    var pieOptions     = {
-      maintainAspectRatio : false,
-      responsive : true,
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    new Chart(pieChartCanvas, {
-      type: 'pie',
-      data: pieData,
-      options: pieOptions
-    })
-
+    
     //-------------
     //- BAR CHART -
     //-------------
@@ -337,32 +215,32 @@ let inRepair = $donutChatRepair;
       data: barChartData,
       options: barChartOptions
     })
+    
+    //-------------
+    //- BAR CHART -
+    //-------------
+    var barChartCanvas = $('#barChartSumm').get(0).getContext('2d')
+    var barChartData = $.extend(true, {}, areaChartDataSum)
+    var temp0 = areaChartDataSum.datasets[0]
+    // var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp0
+    // barChartData.datasets[1] = temp0
 
-    //---------------------
-    //- STACKED BAR CHART -
-    //---------------------
-    var stackedBarChartCanvas = $('#stackedBarChart').get(0).getContext('2d')
-    var stackedBarChartData = $.extend(true, {}, barChartData)
-
-    var stackedBarChartOptions = {
+    var barChartOptions = {
       responsive              : true,
       maintainAspectRatio     : false,
-      scales: {
-        xAxes: [{
-          stacked: true,
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      }
+      datasetFill             : false
     }
 
-    new Chart(stackedBarChartCanvas, {
+    new Chart(barChartCanvas, {
       type: 'bar',
-      data: stackedBarChartData,
-      options: stackedBarChartOptions
+      data: barChartData,
+      options: barChartOptions
     })
+
   })
+  
+ 
 
 JS;
 
