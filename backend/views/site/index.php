@@ -1,9 +1,36 @@
 <?php
 $this->title = 'Starter Page';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
+$donutChatAll = $widGetData['donutChatAllCars']['allCars'];
+$donutChatRepair = count($widGetData['donutChatAllCars']['inRepair']);
 ?>
 <div class="container-fluid">
     <div class="row">
+    <div class="col-md-3">
+        <div class="info-box bg-gradient-danger">
+            <span class="info-box-icon"><i class="fas fa-car-side"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Автомобили:</span>
+                <span class="info-box-number">Всего: <?= $donutChatAll?></span>
+                <span class="info-box-number">В ремонте: <?= $donutChatRepair?></span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </div>
+
+        <div class="col-md-3">
+            <div class="info-box bg-gradient-danger">
+                <span class="info-box-icon"><i class="fas fa-car-side"></i></span>
+
+                <div class="info-box-content">
+                    <span class="info-box-text">Автомобили:</span>
+                    <span class="info-box-number">Всего: <?= $donutChatAll?></span>
+                    <span class="info-box-number">В ремонте: <?= $donutChatRepair?></span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
         <div class="col-md-6">
             <!-- AREA CHART -->
             <div class="card card-primary">
@@ -31,16 +58,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
             <!-- DONUT CHART -->
             <div class="card card-danger">
                 <div class="card-header">
-                    <h3 class="card-title">Donut Chart</h3>
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+                    <h3 class="card-title">Автомобилей: Общее: <?= $donutChatAll?>, В ремонте <?= $donutChatRepair?> </h3>
                 </div>
                 <div class="card-body"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
                     <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 405px;" class="chartjs-render-monitor" width="405" height="250"></canvas>
@@ -148,7 +166,8 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
 <?php
 $jsRaschet = <<< JS
-
+let workCars = $donutChatAll-$donutChatRepair;
+let inRepair = $donutChatRepair;
   $(function () {
     /* ChartJS
      * -------
@@ -240,17 +259,13 @@ $jsRaschet = <<< JS
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
     var donutData        = {
       labels: [
-          'Chrome',
-          'IE',
-          'FireFox',
-          'Safari',
-          'Opera',
-          'Navigator',
+          'Работающих',
+          'В Ремонте',
       ],
       datasets: [
         {
-          data: [700,500,400,600,300,100],
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#d2d6de'],
+          data: [workCars, inRepair],
+          backgroundColor : ['#00a65a', '#f56954'],
         }
       ]
     }

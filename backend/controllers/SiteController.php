@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\User;
 use common\models\LoginForm;
+use common\service\cars\CarsReportService;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -63,7 +64,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $carsReportService = new CarsReportService();
+        $widGetData = [
+            'donutChatAllCars' => $carsReportService->getStatusesCars()
+        ];
+        return $this->render('index',[
+            'widGetData' => $widGetData
+        ]);
     }
 
     public function actionManager()

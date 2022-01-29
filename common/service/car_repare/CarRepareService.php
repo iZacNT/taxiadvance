@@ -116,6 +116,10 @@ class CarRepareService
         ]);
     }
 
+    /**
+     * Возвращаем в ремонте ли автомобиль или нет
+     * @return bool
+     */
     public function hasActiveRepair(): bool
     {
         $activeRepair = CarRepairs::find()->where(['car_id' => $this->car_id])->andWhere(['status' => CarRepairs::STATUS_OPEN_REPAIR])->one();
