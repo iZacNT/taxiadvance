@@ -23,7 +23,7 @@ class StatistycDriverTabel
 
     public function generateStatisticByDayForDashboard($date): array
     {
-        $arrData = $this->getArrStatisticByDay($date);
+        $arrData = $this->getArrStatisticByDay($date-(5*60*60));
         return $this->prepareHtmlForDashboard($arrData['driverData'],$arrData['carsData']);
     }
 
