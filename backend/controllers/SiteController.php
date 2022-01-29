@@ -2,9 +2,11 @@
 
 namespace backend\controllers;
 
+use backend\models\CashRegister;
 use common\models\User;
 use common\models\LoginForm;
 use common\service\cars\CarsReportService;
+use common\service\driverTabel\StatistycDriverTabel;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -65,11 +67,15 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $carsReportService = new CarsReportService();
+        $statistic =  (new StatistycDriverTabel())->generateStatisticByDayForDashboard(Yii::$app->formatter->asTimestamp(date('Y-m-d')));
+
         $widGetData = [
-            'donutChatAllCars' => $carsReportService->getStatusesCars()
+            'donutChatAllCars' => $carsReportService->getStatusesCars(),
+            'statistic' => $statistic
         ];
+
         return $this->render('index',[
-            'widGetData' => $widGetData
+            'widGetData' => $widGetData,
         ]);
     }
 

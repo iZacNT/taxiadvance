@@ -11,14 +11,27 @@ use yii\helpers\ArrayHelper;
 class StatistycDriverTabel
 {
 
-    public function generateStatisticByDay($date)
+    public function generateStatisticByDay($date): string
+    {
+        $arrData = $this->getArrStatisticByDay($date);
+        $html = $this->prepareHtmlForCars($arrData['driverData'],$arrData['carsData']);
+
+        return $html;
+    }
+
+    public function generateStatisticByDayForDashboard($date): array
+    {
+        $arrData = $this->getArrStatisticByDay($date);
+        return $this->prepareHtmlForDashboard($arrData['driverData'],$arrData['carsData']);
+    }
+
+    public function getArrStatisticByDay($date): array
     {
         $driversData = $this->generateDriverStatistic($date);
         $carsData = $this->generateCarsStatistic($date);
 
-        $html = $this->prepareHtmlForCars($driversData,$carsData);
 
-        return $html;
+        return ['driverData' => $driversData,'carsData' => $carsData];
     }
 
     private function generateDriverStatistic($date): array
@@ -60,7 +73,7 @@ class StatistycDriverTabel
 
         foreach($tabel as $item){
             if (!empty($item['driver_id_day'])){
-                array_push($dayPeriod,[
+                $dayPeriod[] = [
                     'driver_id' => $item['driver_id_day'],
                     'card' => $item['card_day'],
                     'phone' => $item['phone_day'],
@@ -69,10 +82,10 @@ class StatistycDriverTabel
                     'status' => $item['status_day_shift'],
                     'date_close' => $item['date_close_day_shift'],
                     'billing' => $item['billing_id_day'],
-                ]);
+                ];
             }
             if (!empty($item['driver_id_night'])){
-                array_push($nightPeriod,[
+                $nightPeriod[] = [
                     'driver_id' => $item['driver_id_night'],
                     'card' => $item['card_night'],
                     'phone' => $item['phone_night'],
@@ -81,7 +94,7 @@ class StatistycDriverTabel
                     'status' => $item['status_night_shift'],
                     'date_close' => $item['date_close_night_shift'],
                     'billing' => $item['billing_id_night'],
-                ]);
+                ];
             }
         }
 
@@ -99,7 +112,7 @@ class StatistycDriverTabel
         foreach($driverAtShift as $item)
         {
             if(!empty($item['sum_card'])){
-                array_push($drivers, $item['driver_id']);
+                $drivers[] = $item['driver_id'];
             }
         }
 
@@ -112,7 +125,7 @@ class StatistycDriverTabel
         foreach($driverAtShift as $item)
         {
             if(!empty($item['phone'])){
-                array_push($drivers, $item['driver_id']);
+                $drivers[] = $item['driver_id'];
             }
         }
 
@@ -125,7 +138,7 @@ class StatistycDriverTabel
         foreach($driverAtShift as $item)
         {
             if(!empty($item['date_close'])){
-                array_push($drivers, $item['driver_id']);
+                $drivers[] = $item['driver_id'];
             }
         }
 
@@ -180,16 +193,16 @@ class StatistycDriverTabel
             }
 
         foreach($emptyFullDay['inRepair'] as $repairCarId){
-            array_push($empty['inRepair']['dayRepare'], $repairCarId);
-            array_push($empty['inRepair']['nightRepare'], $repairCarId);
+            $empty['inRepair']['dayRepare'][] = $repairCarId;
+            $empty['inRepair']['nightRepare'][] = $repairCarId;
         }
         foreach($emptyFullDay['inShared'] as $sharedCarId){
-            array_push($empty['inShared']['dayShared'], $sharedCarId);
-            array_push($empty['inShared']['nightShared'], $sharedCarId);
+            $empty['inShared']['dayShared'][] = $sharedCarId;
+            $empty['inShared']['nightShared'][] = $sharedCarId;
         }
         foreach($emptyFullDay['inEmpty'] as $emptyCarId){
-            array_push($empty['inEmpty']['dayEmpty'], $emptyCarId);
-            array_push($empty['inEmpty']['nightEmpty'], $emptyCarId);
+            $empty['inEmpty']['dayEmpty'][] = $emptyCarId;
+            $empty['inEmpty']['nightEmpty'][] = $emptyCarId;
         }
 
         return $empty;
@@ -204,7 +217,7 @@ class StatistycDriverTabel
     public function seeDriver(DriverTabel $shift, $driver, $result): array
     {
         if(!empty($driver)){
-            array_push($result,$shift->car_id);
+            $result[] = $shift->car_id;
         }
 
         return $result;
@@ -237,8 +250,8 @@ class StatistycDriverTabel
 
     /**
      * Проверяем в Ремонте ли авто
-     * @param DriverTabel $shift Смена
-     * @param $date //Дата смены
+     * @param int $car_id
+     * @param int $date //Дата смены
      * @param array $result Массив куда вернуть данные
      * @return array $result
      */
@@ -248,7 +261,7 @@ class StatistycDriverTabel
         foreach($repairs as $repair)
         {
             if($repair->date_open_repair <= $date && (empty($repair->date_close_repare) || $date < $repair->date_close_repare)){
-                array_push($result, $repair->car_id);
+                $result[] = $repair->car_id;
             }
         }
         return $result;
@@ -256,7 +269,7 @@ class StatistycDriverTabel
 
     /**
      * Проверяем в Аренде ли авто
-     * @param DriverTabel $shift Смена
+     * @param int $car_id
      * @param $date //Дата смены
      * @param array $result Массив куда вернуть данные
      * @return array $result
@@ -267,7 +280,7 @@ class StatistycDriverTabel
         foreach($sharings as $sharing)
         {
             if($sharing->date_start <= $date && (empty($sharing->date_stop) || $date < $sharing->date_stop)){
-                array_push($result, $sharing->car_id);
+                $result[] = $sharing->car_id;
             }
         }
         return $result;
@@ -282,7 +295,7 @@ class StatistycDriverTabel
     {
         if(in_array($car_id, $mergeCars)==false)
         {
-            array_push($result, $car_id);
+            $result[] = $car_id;
         }
         return $result;
     }
@@ -428,6 +441,65 @@ class StatistycDriverTabel
                     </div>
                   </div>
                 </div>';
+    }
+
+    private function prepareHtmlForDashboard($driverData, $carsData): array
+    {
+        \Yii::debug($carsData);
+        return [
+            'driversData' => $this->prepareHtmlForDashboardDrivers($driverData),
+            'carsData' => $this->prepareHtmlForDashboardCars($carsData)
+        ];
+    }
+
+    private function prepareHtmlForDashboardDrivers($driverData): string
+    {
+        return '
+            <tr>
+                <td>На смене</td>
+                <td align="center">'.$driverData["driverAtShift"]["count_day"].'</td>
+                <td align="center">'.$driverData["driverAtShift"]["count_night"].'</td>
+            </tr>
+            <tr>
+                <td>Взяли на топливо</td>
+                <td align="center">'.$driverData["driverFuelDay"]["count"].'</td>
+                <td align="center">'.$driverData["driverFuelNight"]["count"].'</td>
+            </tr>
+            <tr>
+                <td>Взяли на телефон</td>
+                <td align="center">'.$driverData["driverPhoneDay"]["count"].'</td>
+                <td align="center">'.$driverData["driverPhoneNight"]["count"].'</td>
+            </tr>
+            <tr>
+                <td>Закрытых смен</td>
+                <td align="center">'.$driverData["driverCloseShiftDay"]["count"].'</td>
+                <td align="center">'.$driverData["driverCloseShiftNight"]["count"].'</td>
+            </tr>';
+    }
+
+    private function prepareHtmlForDashboardCars($carsData)
+    {
+        return '
+            <tr>
+                <td>На смене</td>
+                <td align="center">'.count($carsData["busyDay"]).'</td>
+                <td align="center">'.count($carsData["busyNight"]).'</td>
+            </tr>
+            <tr>
+                <td>Свободные</td>
+                <td align="center">'.count($carsData["inEmpty"]["dayEmpty"]).'</td>
+                <td align="center">'.count($carsData["inEmpty"]["nightEmpty"]).'</td>
+            </tr>
+            <tr>
+                <td>В ремонте</td>
+                <td align="center">'.count($carsData["inRepair"]["dayRepare"]).'</td>
+                <td align="center">'.count($carsData["inRepair"]["dayRepare"]).'</td>
+            </tr>
+            <tr>
+                <td>В аренде</td>
+                <td align="center">'.count($carsData["inShared"]["dayShared"]).'</td>
+                <td align="center">'.count($carsData["inShared"]["nightShared"]).'</td>
+            </tr>';
     }
 
 }

@@ -1,36 +1,53 @@
 <?php
-$this->title = 'Starter Page';
+$this->title = 'DashBoard';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 $donutChatAll = $widGetData['donutChatAllCars']['allCars'];
 $donutChatRepair = count($widGetData['donutChatAllCars']['inRepair']);
+$statistic = $widGetData['statistic'];
 ?>
 <div class="container-fluid">
     <div class="row">
-    <div class="col-md-3">
-        <div class="info-box bg-gradient-danger">
-            <span class="info-box-icon"><i class="fas fa-car-side"></i></span>
-
-            <div class="info-box-content">
-                <span class="info-box-text">Автомобили:</span>
-                <span class="info-box-number">Всего: <?= $donutChatAll?></span>
-                <span class="info-box-number">В ремонте: <?= $donutChatRepair?></span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-    </div>
-
-        <div class="col-md-3">
-            <div class="info-box bg-gradient-danger">
-                <span class="info-box-icon"><i class="fas fa-car-side"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Автомобили:</span>
-                    <span class="info-box-number">Всего: <?= $donutChatAll?></span>
-                    <span class="info-box-number">В ремонте: <?= $donutChatRepair?></span>
+        <div class="col-md-4">
+            <!-- Widget: user widget style 2 -->
+            <div class="card card-widget widget-user-2 shadow-sm">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-warning">
+                    <h2 class="widget-user-username">Статистика по водителям</h2>
                 </div>
-                <!-- /.info-box-content -->
+                <div class="card-footer p-0">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th style="width: 80%">Наименование</th>
+                            <th>День</th>
+                            <th>Ночь</th>
+                        </tr>
+                        <?= $statistic['driversData'];?>
+                    </table>
+                </div>
             </div>
+            <!-- /.widget-user -->
         </div>
+        <div class="col-md-4">
+            <!-- Widget: user widget style 2 -->
+            <div class="card card-widget widget-user-2 shadow-sm">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-warning">
+                    <h2 class="widget-user-username">Статистика по Автомобилям</h2>
+                </div>
+                <div class="card-footer p-0">
+                    <table class="table table-responsive">
+                        <tr>
+                            <th style="width: 80%">Наименование</th>
+                            <th>День</th>
+                            <th>Ночь</th>
+                        </tr>
+                        <?= $statistic['carsData'];?>
+                    </table>
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        </div>
+
         <div class="col-md-6">
             <!-- AREA CHART -->
             <div class="card card-primary">
