@@ -164,7 +164,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                                 'dette:currency',
                                 'back:currency',
-                                'date_reason:date',
+//                                'date_reason:date',
 
                                 'car.fullNameMark',
                                 'comment:ntext',
