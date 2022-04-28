@@ -91,10 +91,15 @@ class ComposerStaticInit2b25349c865b3c9170e896d772f400f0
             'Psr\\EventDispatcher\\' => 20,
             'Psr\\Container\\' => 14,
             'Prophecy\\' => 9,
+            'PhpOffice\\PhpWord\\' => 18,
         ),
         'O' => 
         array (
             'Opis\\Closure\\' => 13,
+        ),
+        'L' => 
+        array (
+            'Laminas\\Escaper\\' => 16,
         ),
         'G' => 
         array (
@@ -290,9 +295,17 @@ class ComposerStaticInit2b25349c865b3c9170e896d772f400f0
         array (
             0 => __DIR__ . '/..' . '/phpspec/prophecy/src/Prophecy',
         ),
+        'PhpOffice\\PhpWord\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpword/src/PhpWord',
+        ),
         'Opis\\Closure\\' => 
         array (
             0 => __DIR__ . '/..' . '/opis/closure/src',
+        ),
+        'Laminas\\Escaper\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laminas/laminas-escaper/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

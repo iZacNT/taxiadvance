@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '89c3762b021b03d0fe4ae1ff4c5513ec025ceb34',
+    'reference' => '6fa1b41b667f3e5e58525a93cc6eaa8fc2e83fc8',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -275,6 +275,15 @@
       ),
       'reference' => '881985a5e482a4e37d1901c7857912ba5af3f298',
     ),
+    'laminas/laminas-escaper' => 
+    array (
+      'pretty_version' => '2.10.0',
+      'version' => '2.10.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '58af67282db37d24e584a837a94ee55b9c7552be',
+    ),
     'myclabs/deep-copy' => 
     array (
       'pretty_version' => '1.10.2',
@@ -359,6 +368,15 @@
       array (
       ),
       'reference' => '6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0',
+    ),
+    'phpoffice/phpword' => 
+    array (
+      'pretty_version' => '0.18.3',
+      'version' => '0.18.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'be0190cd5d8f95b4be08d5853b107aa4e352759a',
     ),
     'phpspec/php-diff' => 
     array (
@@ -843,7 +861,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '89c3762b021b03d0fe4ae1ff4c5513ec025ceb34',
+      'reference' => '6fa1b41b667f3e5e58525a93cc6eaa8fc2e83fc8',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (

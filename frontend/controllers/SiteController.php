@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use app\models\MessagesFromSite;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -75,7 +76,23 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new MessagesFromSite();
+
+        return $this->render('index', ['model' => $model]);
+    }
+
+    public function actionSendMessageFromSite(): string
+    {
+        $model = new MessagesFromSite();
+        if(\Yii::$app->request->isAjax ){
+            $model->load(\Yii::$app->request->post());
+            $model->save();
+            \Yii::debug($model->errors, __METHOD__);
+
+            return 'Запрос принят!';
+        }
+
+        return $this->render('index', compact('model'));
     }
 
     /**

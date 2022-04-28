@@ -104,6 +104,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-widget-datetimepicker" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-date-range" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/kartik-v/yii2-widget-datepicker" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/phpoffice/phpword" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/laminas/laminas-escaper" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
