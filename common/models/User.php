@@ -316,6 +316,17 @@ class User extends ActiveRecord implements IdentityInterface
         return self::MECHANIC == Yii::$app->user->identity->role;
     }
 
+    public static function templateEditRuls(): string
+    {
+        $templateEditRuls = '{update}&nbsp;&nbsp;{delete}';
+
+        if(Yii::$app->user->identity->isOperator() || Yii::$app->user->identity->isMechanic()) {
+            $templateEditRuls = ' - ';
+        }
+
+        return $templateEditRuls;
+    }
+
     /**
      * @return int|mixed|null
      */

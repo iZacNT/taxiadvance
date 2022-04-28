@@ -18,7 +18,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -51,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'date_pay',
 
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{delete}'],
+                'template' => Yii::$app->user->identity->templateEditRuls()],
         ],
         'pager' => [
             'maxButtonCount' => 10,

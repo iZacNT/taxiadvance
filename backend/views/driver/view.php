@@ -123,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'comment:ntext',
                                     ['class' => \yii\grid\ActionColumn::className(),
                                         'controller' => 'deposit',
-                                        'template' => '{update} &nbsp;&nbsp;{delete}']
+                                        'template' => Yii::$app->user->identity->templateEditRuls()]
                                 ],
                                 'pager' => [
                                     'maxButtonCount' => 5,
@@ -170,7 +170,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'comment:ntext',
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'debt',
-                                    'template' => '{update} &nbsp;&nbsp;{delete}']
+                                    'template' => Yii::$app->user->identity->templateEditRuls()]
                             ],
                             'pager' => [
                                 'maxButtonCount' => 5,
@@ -340,7 +340,7 @@ HTML;
                                 'comment:raw:Комментарий',
                                 ['class' => \yii\grid\ActionColumn::className(),
                                     'controller' => 'driver-tabel',
-                                    'template' => '{update} &nbsp;&nbsp;{delete}']
+                                    'template' => Yii::$app->user->identity->templateEditRuls()]
                             ],
                             'pager' => [
                                 'maxButtonCount' => 5,
