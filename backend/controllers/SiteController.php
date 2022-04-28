@@ -53,7 +53,7 @@ class SiteController extends Controller
             if(User::isManager() || User::isOperator()){
                 $this->redirect('/admin/site/manager');
             }
-            if(User::isManager() || User::isMechanic()){
+            if(User::isMechanic()){
                 $this->redirect('/admin/site/mechanic');
             }
         }
@@ -66,19 +66,18 @@ class SiteController extends Controller
      * @return string
      * @throws \yii\base\InvalidConfigException
      */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $carsReportService = new CarsReportService();
         $statisticCasheRegistry = new CashRegistryService();
         $statisticDriverTabel = new StatistycDriverTabel();
         $statistic =  $statisticDriverTabel->generateStatisticByDayForDashboard(Yii::$app->formatter->asTimestamp(date('Y-m-d')));
-        $ddd = $statisticDriverTabel->getStatisticCurrentMonth();
-        Yii::debug($ddd);
+
         $widGetData = [
             'donutChatAllCars' => $carsReportService->getStatusesCars(),
             'statistic' => $statistic,
             'cashRegistry' => $statisticCasheRegistry->getStatisticCashRegistry(),
-            'statisticCashByDay' => $ddd
+            'statisticCashByDay' => $statisticDriverTabel->getStatisticCurrentMonth()
         ];
 
         return $this->render('index',[
@@ -86,12 +85,27 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionManager()
+    public function actionManager(): string
     {
-        return $this->render('manager');
+
+        $carsReportService = new CarsReportService();
+        $statisticCasheRegistry = new CashRegistryService();
+        $statisticDriverTabel = new StatistycDriverTabel();
+        $statistic =  $statisticDriverTabel->generateStatisticByDayForDashboard(Yii::$app->formatter->asTimestamp(date('Y-m-d')));
+
+        $widGetData = [
+            'donutChatAllCars' => $carsReportService->getStatusesCars(),
+            'statistic' => $statistic,
+            'cashRegistry' => $statisticCasheRegistry->getStatisticCashRegistry(),
+            'statisticCashByDay' => $statisticDriverTabel->getStatisticCurrentMonth()
+        ];
+
+        return $this->render('manager', [
+            'widGetData' => $widGetData,
+        ]);
     }
 
-    public function actionMechanic()
+    public function actionMechanic(): string
     {
         return $this->render('mechanic');
     }

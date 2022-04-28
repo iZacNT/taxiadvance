@@ -18,7 +18,7 @@ $sumDataForBarChart = json_encode($widGetData['statisticCashByDay']['sumByDayBar
             <div class="card card-widget widget-user-2 shadow-sm">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-warning">
-                    <h2 class="widget-user-username">Статистика по водителям</h2>
+                    <h2  style="font-size: 26px; font-weight: bold">Статистика по водителям</h2>
                 </div>
                 <div class="card-footer p-0">
                     <table class="table table-responsive">
@@ -38,7 +38,7 @@ $sumDataForBarChart = json_encode($widGetData['statisticCashByDay']['sumByDayBar
             <div class="card card-widget widget-user-2 shadow-sm">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-warning">
-                    <h2 class="widget-user-username">Статистика по Автомобилям</h2>
+                    <h2 style="font-size: 26px; font-weight: bold">Статистика по Автомобилям</h2>
                 </div>
                 <div class="card-footer p-0">
                     <table class="table table-responsive">
@@ -60,16 +60,8 @@ $sumDataForBarChart = json_encode($widGetData['statisticCashByDay']['sumByDayBar
             <!-- BAR CHART -->
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Суммы парка по периодам за текущий месяц в рублях:</h3>
+                    <h3 class="card-title">Суммы парка по периодам за текущий месяц в рублях: День = <?= Yii::$app->formatter->asCurrency($widGetData['statisticCashByDay']['dayBarCartAmount']);?> | Ночь = <?= Yii::$app->formatter->asCurrency($widGetData['statisticCashByDay']['nightBarChartAmount']);?></h3>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
@@ -87,16 +79,8 @@ $sumDataForBarChart = json_encode($widGetData['statisticCashByDay']['sumByDayBar
             <!-- BAR CHART -->
             <div class="card card-success">
                 <div class="card-header">
-                    <h3 class="card-title">Общая суммы парка за текущий месяц в рублях:</h3>
+                    <h3 class="card-title">Общая суммы парка за текущий месяц в рублях: <?= Yii::$app->formatter->asCurrency($widGetData['statisticCashByDay']['sumByDayBarChartAmount']);?></h3>
 
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <button type="button" class="btn btn-tool" data-card-widget="remove">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
                 </div>
                 <div class="card-body">
                     <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>

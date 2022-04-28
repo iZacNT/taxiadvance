@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function($data){
                     return (!empty($data->regulation)) ? $data->regulation."<br>
-                                               <span style='font-size: 13px; font-weight: lighter'>".Yii::$app->formatter->asDateTime($data->date_reason)."</span>" : "-";
+                                               <span style='font-size: 13px; font-weight: lighter'>".Yii::$app->formatter->asDateTime($data->date_reason-(5*60*60))."</span>" : "-";
                 }
             ],
             'dette:currency',

@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '728d2de46e10938836853cae4294a3b139f37c20',
+    'reference' => '89c3762b021b03d0fe4ae1ff4c5513ec025ceb34',
     'name' => 'yiisoft/yii2-app-advanced',
   ),
   'versions' => 
@@ -869,7 +869,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '728d2de46e10938836853cae4294a3b139f37c20',
+      'reference' => '89c3762b021b03d0fe4ae1ff4c5513ec025ceb34',
     ),
     'yiisoft/yii2-bootstrap4' => 
     array (

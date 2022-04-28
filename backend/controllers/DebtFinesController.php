@@ -117,7 +117,8 @@ class DebtFinesController extends Controller
             return $this->redirect(['view', 'id' => $debtFines->id]);
         }
 
-        $debtFines->stringDateReason = date('Y-m-d H:i', $debtFines->date_reason);
+        $debtFines->stringDateReason = date('Y-m-d', $debtFines->date_reason);
+        $debtFines->timeDateReason = date('H:i', $debtFines->date_reason);
 
         $debtFines->stringDateDtp = (!empty($debtFines->date_dtp))? date('d-m-Y h:i', $debtFines->date_dtp) : "";
 

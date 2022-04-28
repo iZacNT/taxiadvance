@@ -4,6 +4,7 @@ use kartik\datetime\DateTimePicker;
 use yii\helpers\Html;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
+use yii\widgets\MaskedInput;
 
 /* @var $this yii\web\View */
 /* @var $debtFines backend\models\DebtFines */
@@ -23,32 +24,34 @@ use yii\widgets\ActiveForm;
 
     <div class="col-md-6">
         <div class="row">
-            <div class="col-md-5">
+            <div class="col-md-3">
 
-                <?php
-                echo $form->field($debtFines, 'stringDateReason')->widget(DateTimePicker::classname(), [
-                    'options' => ['placeholder' => 'Enter event time ...'],
-                    'pluginOptions' => [
-                        'autoclose' => true,
-                        'format' => 'yyyy-mm-dd hh:ss'
+                <?= $form->field($debtFines, 'stringDateReason')->widget(\yii\jui\DatePicker::classname(), [
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                    'options' => [
+                        'placeholder' => Yii::$app->formatter->asDate(
+                            (!empty($debtFines->date_reason))? $debtFines->date_reason : time(), "yyyy-MM-dd"
+                        ),
+                        'class'=> 'form-control',
+                    ],
+                    'clientOptions' => [
+                        'changeMonth' => true,
+                        'changeYear' => true,
+                        'yearRange' => '2020:2050',
+                    ],
+                ]) ?>
+            </div>
+            <div class="col-md-2">
+                <?= $form->field($debtFines, 'timeDateReason')->widget(\yii\widgets\MaskedInput::class, [
+                    'mask' => '99:99',
+                    'value' => '00:00',
+                    'options' => [
+                        'class' => 'form-control',
+                        'id' => 'timeDateReason',
+                        'placeholder' => 'Время'
                     ]
-                ]);
-                ?>
-<!--                --><?//= $form->field($debtFines, 'stringDateReason')->widget(\yii\jui\DatePicker::classname(), [
-//                    'language' => 'ru',
-//                    'dateFormat' => 'yyyy-MM-dd',
-//                    'options' => [
-//                        'placeholder' => Yii::$app->formatter->asDate(
-//                            (!empty($debtFines->date_reason))? $debtFines->date_reason : time(), "yyyy-MM-dd"
-//                        ),
-//                        'class'=> 'form-control',
-//                    ],
-//                    'clientOptions' => [
-//                        'changeMonth' => true,
-//                        'changeYear' => true,
-//                        'yearRange' => '2020:2050',
-//                    ],
-//                ]) ?>
+                ]) ?>
             </div>
             <div class="col-md-4">
                 <?

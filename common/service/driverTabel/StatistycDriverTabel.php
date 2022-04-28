@@ -559,21 +559,32 @@ class StatistycDriverTabel
         $dayBarChart = [];
         $nightBarChart = [];
         $sumByDayBarChart = [];
-\Yii::debug("Вотэто");
-\Yii::debug(count($driverByDay));
         for($i=0; $i<count($driverByDay); $i++){
             $countDay[] = $i+1  ;
             $dayBarChart[] = $driverByDay[$i]['sumFromBillingAtDay']['sumDay'];
             $nightBarChart[] = $driverByDay[$i]['sumFromBillingAtDay']['sumNight'];
             $sumByDayBarChart[] = $driverByDay[$i]['sumFromBillingAtDay']['sumDay']+$driverByDay[$i]['sumFromBillingAtDay']['sumNight'];
         }
-        \Yii::debug($countDay);
+
         return [
             'countDay' =>  $countDay,
             'dayBarCart' => $dayBarChart,
             'nightBarChart' => $nightBarChart,
-            'sumByDayBarChart' => $sumByDayBarChart
+            'sumByDayBarChart' => $sumByDayBarChart,
+            'dayBarCartAmount' => $this->calculateAmount($dayBarChart),
+            'nightBarChartAmount' => $this->calculateAmount($nightBarChart),
+            'sumByDayBarChartAmount' => $this->calculateAmount($sumByDayBarChart)
         ];
+    }
+
+    private function calculateAmount($array)
+    {
+        $amount = 0;
+        foreach($array as $item){
+            $amount+=$item;
+        }
+
+        return $amount;
     }
 
 }

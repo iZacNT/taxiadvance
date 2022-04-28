@@ -35,6 +35,7 @@ class Debt extends \yii\db\ActiveRecord
     ];
 
     public $stringDateReason;
+    public $timeDateReason;
     public $stringDateDtp;
     public $stringDatePay;
     public $stringNameCar;
@@ -54,7 +55,7 @@ class Debt extends \yii\db\ActiveRecord
     {
         return [
             [['driver_id', 'dette', 'back', 'reason', 'car_id', 'date_reason', 'date_dtp', 'payable', 'date_pay'], 'integer'],
-            [['comment', 'stringDateReason', 'stringDateDtp', 'stringDatePay'], 'string'],
+            [['comment', 'stringDateReason', 'timeDateReason', 'stringDateDtp', 'stringDatePay'], 'string'],
             [['regulation', 'geo_dtp'], 'string', 'max' => 255],
         ];
     }
@@ -81,6 +82,8 @@ class Debt extends \yii\db\ActiveRecord
             'stringDateReason' => 'Дата нарушения',
             'stringDateDtp' => 'Дата постановления',
             'stringDatePay' => 'Дата платежа',
+            'timeDateReason' => "Время"
+
         ];
     }
 

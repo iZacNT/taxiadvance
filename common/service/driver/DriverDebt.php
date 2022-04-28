@@ -50,7 +50,7 @@ class DriverDebt
 
             if (!empty($debt->stringDateReason)) {
 //                $debt->date_reason = strtotime($debt->stringDateReason);
-                $debt->date_reason = Yii::$app->formatter->asTimestamp($debt->stringDateReason);
+                $debt->date_reason = Yii::$app->formatter->asTimestamp($debt->stringDateReason." ".$debt->timeDateReason);
             }
             if (!empty($debt->stringDateDtp)) {
                 $debt->date_dtp = Yii::$app->formatter->asTimestamp($debt->stringDateDtp);
@@ -68,7 +68,7 @@ class DriverDebt
     {
         try {
             if (!empty($debt->stringDateReason)) {
-                $debt->date_reason = Yii::$app->formatter->asTimestamp($debt->stringDateReason);
+                $debt->date_reason = Yii::$app->formatter->asTimestamp($debt->stringDateReason." ".$debt->timeDateReason);
             }
             if (!empty($debt->stringDateDtp)) {
                 $debt->date_dtp = Yii::$app->formatter->asTimestamp($debt->stringDateDtp);
